@@ -118,11 +118,6 @@ public class TextDisplay : MonoBehaviour
             _displayString = string.Empty;
             _displayText.text = _displayString;
             _state = State.Idle;
-
-            if (game.getIfFinished())
-            {
-                game.showDialogueScreen(false);
-            }
         }
     }
 }

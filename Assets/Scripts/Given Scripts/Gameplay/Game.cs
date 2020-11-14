@@ -32,16 +32,10 @@ public class Game : MonoBehaviour
 
     bool dialogueFinished = false;
 
-    private void Awake()
-    {
-        showDialogueScreen(false);
-    }
-
     private void OnEnable()
     {
         _currentBeat = null;
         _wait = new WaitForSeconds(0.5f);
-        showDialogueScreen(false);
     }
 
     private void Update()
@@ -63,7 +57,7 @@ public class Game : MonoBehaviour
     //Start the dialogue with the given character
     public void startNewDialogue(StoryData d)
     {
-        showDialogueScreen(true);
+        dialogueScreen.GetComponent<Animator>().SetBool("Open", true);
         dialogueFinished = false;
         _data = d;
         startDialogue = true;
@@ -147,11 +141,6 @@ public class Game : MonoBehaviour
         BeatData data = _data.GetBeatById(id);
         StartCoroutine(DoDisplay(data));
         _currentBeat = data;
-
-        if(data.getChoiceList().Count == 0)
-        {
-            closeDialogue.gameObject.SetActive(true);
-        }
     }
 
     private IEnumerator DoDisplay(BeatData data)
@@ -179,6 +168,8 @@ public class Game : MonoBehaviour
         _currentBeat = null;
         dialogueFinished = true;
         _output.Clear();
+
+        dialogueScreen.GetComponent<Animator>().SetBool("Open", false);
     }
 
     public void showDialogueScreen(bool set)
