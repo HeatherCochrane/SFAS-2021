@@ -23,7 +23,6 @@ public class DialogueChoice : MonoBehaviour
 
     public void setChoice()
     {
-        Debug.Log("Button clicked!");
         dialogue.pickOption(choice);
     }
 }

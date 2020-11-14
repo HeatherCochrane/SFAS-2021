@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
 
     void beginConversation()
     {
-        Debug.Log(character.getData().getName());
+        //Pass in the characters dialogue data to begin the conversation
         dialogue.startNewDialogue(character.getData().getDialogue());
     }
 

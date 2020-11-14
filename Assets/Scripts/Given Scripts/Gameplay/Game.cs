@@ -7,9 +7,13 @@ using TMPro;
 
 public class Game : MonoBehaviour
 {
-    [SerializeField] private StoryData _data;
+    [SerializeField]
+    GameObject dialogueScreen;
 
-    private TextDisplay _output;
+    StoryData _data;
+
+    [SerializeField]
+    TextDisplay _output;
     private BeatData _currentBeat;
     private WaitForSeconds _wait;
 
@@ -23,11 +27,21 @@ public class Game : MonoBehaviour
 
     bool spawnedChoices = false;
 
+    [SerializeField]
+    Button closeDialogue;
+
+    bool dialogueFinished = false;
+
     private void Awake()
     {
-        _output = GetComponentInChildren<TextDisplay>();
+        showDialogueScreen(false);
+    }
+
+    private void OnEnable()
+    {
         _currentBeat = null;
         _wait = new WaitForSeconds(0.5f);
+        showDialogueScreen(false);
     }
 
     private void Update()
@@ -49,6 +63,8 @@ public class Game : MonoBehaviour
     //Start the dialogue with the given character
     public void startNewDialogue(StoryData d)
     {
+        showDialogueScreen(true);
+        dialogueFinished = false;
         _data = d;
         startDialogue = true;
     }
@@ -94,6 +110,7 @@ public class Game : MonoBehaviour
 
     void setUpChoiceButtons()
     {
+        //Set up the correct amount of buttons as there is choices
         for(int i = 0; i < _currentBeat.Decision.Count; i++)
         {
             Button newChoice = Instantiate(choicePrefab);
@@ -109,11 +126,13 @@ public class Game : MonoBehaviour
 
         List<GameObject> b = new List<GameObject>();
         
+        //Grab references to all spawned buttons
         for(int i =0; i < choiceParent.transform.childCount; i++)
         {
             b.Add(choiceParent.transform.GetChild(i).gameObject);
         }
 
+        //Delete all buttons
         for(int i =0; i < b.Count; i++)
         {
             Destroy(b[i]);
@@ -122,11 +141,17 @@ public class Game : MonoBehaviour
         b.Clear();
         spawnedChoices = false;
     }
+
     private void DisplayBeat(int id)
     {
         BeatData data = _data.GetBeatById(id);
         StartCoroutine(DoDisplay(data));
         _currentBeat = data;
+
+        if(data.getChoiceList().Count == 0)
+        {
+            closeDialogue.gameObject.SetActive(true);
+        }
     }
 
     private IEnumerator DoDisplay(BeatData data)
@@ -147,4 +172,22 @@ public class Game : MonoBehaviour
 
     }
 
+    public void leaveDialogue()
+    {
+        startDialogue = false;
+        _output.setIdle();
+        _currentBeat = null;
+        dialogueFinished = true;
+        _output.Clear();
+    }
+
+    public void showDialogueScreen(bool set)
+    {
+        dialogueScreen.SetActive(set);
+    }
+
+    public bool getIfFinished()
+    {
+        return dialogueFinished;
+    }
 }

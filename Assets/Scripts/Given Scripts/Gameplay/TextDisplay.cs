@@ -12,8 +12,15 @@ public class TextDisplay : MonoBehaviour
     private WaitForSeconds _longWait;
     private State _state = State.Initialising;
 
+    Game game;
+
     public bool IsIdle { get { return _state == State.Idle; } }
     public bool IsBusy { get { return _state != State.Idle; } }
+
+    public void setIdle()
+    {
+        _state = State.Idle;
+    }
 
     private void Awake()
     {
@@ -23,6 +30,8 @@ public class TextDisplay : MonoBehaviour
 
         _displayText.text = string.Empty;
         _state = State.Idle;
+
+        game = GameObject.FindObjectOfType<Game>();
     }
 
     private IEnumerator DoShowText(string text)
@@ -99,13 +108,21 @@ public class TextDisplay : MonoBehaviour
         }
     }
 
+    
     public void Clear()
     {
         if (_state == State.Idle)
         {
             StopAllCoroutines();
-            _state = State.Busy;
-            StartCoroutine(DoClearText());
+
+            _displayString = string.Empty;
+            _displayText.text = _displayString;
+            _state = State.Idle;
+
+            if (game.getIfFinished())
+            {
+                game.showDialogueScreen(false);
+            }
         }
     }
 }

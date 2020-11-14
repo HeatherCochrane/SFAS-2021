@@ -35,6 +35,10 @@ public class StoryData : ScriptableObject
         return AssetDatabase.GetAssetPath(this);
     }
 
+    public int getBeatSize()
+    {
+        return _beats.Count;
+    }
 
 #endif
 }
