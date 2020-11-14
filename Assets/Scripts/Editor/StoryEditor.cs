@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using UnityEditor.UIElements;
+using UnityEngine.UIElements;
+
 
 public class StoryEditor : EditorWindow
 {
@@ -9,6 +12,9 @@ public class StoryEditor : EditorWindow
     private int _currentIndex = -1;
     private View _view;
 
+    private string storyToLoad = "Story";
+
+
     [MenuItem("SFAS/Show Story Editor")]
     public static void ShowStoryEditor()
     {
@@ -17,11 +23,39 @@ public class StoryEditor : EditorWindow
 
     void OnGUI()
     {
-        StoryData data = StoryData.LoadData();
+        loadSpecificStoryData();
+    }
+
+    
+    private void OnEnable()
+    {
+        GenerateToolbar();
+    }
+
+    private void GenerateToolbar()
+    {
+        var toolbar = new Toolbar();
+
+        toolbar.Add(new Button(() => loadSpecificStoryData()) { text = "Load Data" });
+        rootVisualElement.Add(toolbar);
+    }
+
+    private void loadSpecificStoryData()
+    {
+        string path = "Assets/Data/" + storyToLoad + ".asset";
+
+        if(!AssetDatabase.LoadAssetAtPath<StoryData>(path))
+        {
+            path = "Assets/Data/Story.asset";
+        }
+
+        StoryData data = StoryData.LoadData(path);
         SerializedObject dataObj = new SerializedObject(data);
         SerializedProperty beatList = dataObj.FindProperty("_beats");
 
+
         EditorGUILayout.BeginVertical();
+
         _scroll = EditorGUILayout.BeginScrollView(_scroll);
 
         if (_view == View.Beat && _currentIndex != -1)
@@ -42,6 +76,9 @@ public class StoryEditor : EditorWindow
     private void OnGUI_ListView(SerializedProperty beatList)
     {
         EditorGUILayout.BeginVertical();
+
+        EditorGUILayout.Space(20, true);
+        storyToLoad = EditorGUILayout.TextField("Story name:", storyToLoad);
 
         if (beatList.arraySize == 0)
         {
@@ -139,6 +176,11 @@ public class StoryEditor : EditorWindow
             _currentIndex = FindIndexOfBeatId(beatList, beatId.intValue);
             GUI.FocusControl(null);
             Repaint();
+        }
+
+        if (GUILayout.Button("Delete"))
+        {
+            choiceList.DeleteArrayElementAtIndex(index);
         }
 
         EditorGUILayout.EndVertical();
