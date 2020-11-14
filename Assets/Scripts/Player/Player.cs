@@ -6,6 +6,12 @@ public class Player : MonoBehaviour
 {
     public static Player instance;
 
+    [SerializeField]
+    GameObject cam;
+    public float smoothing = 2f;
+    Vector3 offset;
+    Vector3 camPos;
+
     //Level and XP handler
     public PlayerLevel levels;
 
@@ -13,6 +19,13 @@ public class Player : MonoBehaviour
     PlayerWeapons weapons;
     Weapon meleeWeapon;
     Weapon longRangeWeapon;
+    bool holding = false;
+    Vector2 direction;
+
+    //Longe Range variables
+    Vector2 mousePos;
+    [SerializeField]
+    LineRenderer rangeIndicator;
 
     //Movement values
     float speed = 0.2f;
@@ -48,6 +61,10 @@ public class Player : MonoBehaviour
 
         meleeWeapon = weapons.getMeleeWeapon();
         longRangeWeapon = weapons.getRangedWeapon();
+
+
+        offset = cam.transform.position - this.transform.position;
+        camPos = cam.transform.position;
     }
 
     // Update is called once per frame
@@ -68,10 +85,18 @@ public class Player : MonoBehaviour
             Attack(meleeWeapon.distance, meleeWeapon.damage);
         }
 
-        //Long Range Attack
-        if(Input.GetMouseButtonDown(0))
+        //Long Range Attack, hold down then release to fire
+        if(Input.GetMouseButton(0))
+        {
+            holding = true;
+            drawRange();
+            rangeIndicator.gameObject.SetActive(true);
+        }
+        if(Input.GetMouseButtonUp(0) && holding)
         {
             Attack(longRangeWeapon.distance, longRangeWeapon.damage);
+            holding = false;
+            rangeIndicator.gameObject.SetActive(false);
         }
     }
 
@@ -97,6 +122,7 @@ public class Player : MonoBehaviour
             }
         }
 
+        //Apply force when the player is falling 
         if (rb.velocity.y < 0)
         {
             rb.velocity += Vector2.up * (fallMult - 1) * Physics2D.gravity.y * Time.deltaTime;
@@ -104,6 +130,13 @@ public class Player : MonoBehaviour
 
         //Prevent the play from picking up too much speed
         rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -speedCap, speedCap), rb.velocity.y);
+    }
+
+    void LateUpdate()
+    {
+        Vector3 targetCamPos = new Vector3(this.transform.position.x + offset.x, cam.transform.position.y, this.transform.position.z + offset.z);
+        cam.transform.position = Vector3.Lerp(cam.transform.position, targetCamPos, smoothing * Time.deltaTime);
+        cam.transform.position = new Vector3(Mathf.Clamp(cam.transform.position.x, -262, 255), cam.transform.position.y, cam.transform.position.z);
     }
 
     void beginConversation()
@@ -117,14 +150,8 @@ public class Player : MonoBehaviour
         RaycastHit2D hit;
 
         //Attack which way the player is facing
-        if (facingLeft)
-        {
-            hit = Physics2D.Raycast(transform.position, -Vector2.right, dist);
-        }
-        else
-        {
-            hit = Physics2D.Raycast(transform.position, Vector2.right, dist);
-        }
+
+        hit = Physics2D.Raycast(transform.position, direction.normalized, dist);
 
         if (hit.collider)
         {
@@ -132,6 +159,41 @@ public class Player : MonoBehaviour
             {
                 hit.collider.gameObject.GetComponent<Killable>().takeDamage(facingLeft, damage);
             }
+        }
+    }
+
+    void drawRange()
+    {
+        mousePos = Input.mousePosition;
+        mousePos = Camera.main.ScreenToWorldPoint(mousePos);    
+
+        Vector2 length = mousePos - (Vector2)transform.position;
+        length = length.normalized * longRangeWeapon.distance;
+
+        rangeIndicator.SetPosition(0, new Vector2(0, 0));
+
+        rangeIndicator.SetPosition(1, new Vector3(length.x, length.y));
+        direction = rangeIndicator.GetPosition(1) - rangeIndicator.GetPosition(0);
+
+        if(mousePos.x < transform.position.x)
+        {
+            facingLeft = true;
+        }
+        else
+        {
+            facingLeft = false;
+        }
+    }
+
+    public string getIfHolding()
+    {
+        if(holding)
+        {
+            return "Loaded!";
+        }
+        else
+        {
+            return "Released!";
         }
     }
    

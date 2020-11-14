@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: StarterRanged
   m_EditorClassIdentifier: 
   damage: 1
-  distance: 5
+  distance: 3

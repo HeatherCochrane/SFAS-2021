@@ -19,6 +19,9 @@ public class PlayerLevel : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI playerLevel;
 
+    [SerializeField]
+    TextMeshProUGUI loadedLongRange;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +34,10 @@ public class PlayerLevel : MonoBehaviour
         
     }
 
+    private void FixedUpdate()
+    {
+        loadedLongRange.text = Player.instance.getIfHolding();
+    }
     public void addXP(float x)
     {
         XP += x;
