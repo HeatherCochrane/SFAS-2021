@@ -25,7 +25,9 @@ MonoBehaviour:
     _text: "You choose to go the first way and this is an ok choice, the story plays
       out. You are happy. \n\nTHE END"
     _id: 2
-  - _choices: []
+  - _choices:
+    - _text: New Beat Choice
+      _beatId: 4
     _text: 'The alternative choice is where you want to go, it is a fine choice.
       The story plays out and you are happy.
 

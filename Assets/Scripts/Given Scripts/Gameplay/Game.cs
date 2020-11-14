@@ -1,5 +1,9 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
 
 public class Game : MonoBehaviour
 {
@@ -8,6 +12,16 @@ public class Game : MonoBehaviour
     private TextDisplay _output;
     private BeatData _currentBeat;
     private WaitForSeconds _wait;
+
+    bool startDialogue = false;
+
+    [SerializeField]
+    Button choicePrefab;
+
+    [SerializeField]
+    GameObject choiceParent;
+
+    bool spawnedChoices = false;
 
     private void Awake()
     {
@@ -18,17 +32,25 @@ public class Game : MonoBehaviour
 
     private void Update()
     {
-        if(_output.IsIdle)
+        if(_output.IsIdle && startDialogue)
         {
             if (_currentBeat == null)
             {
                 DisplayBeat(1);
             }
-            else
+            else if(!spawnedChoices)
             {
-                UpdateInput();
+                setUpChoiceButtons();
+                spawnedChoices = true;
             }
         }
+    }
+
+    //Start the dialogue with the given character
+    public void startNewDialogue(StoryData d)
+    {
+        _data = d;
+        startDialogue = true;
     }
 
     private void UpdateInput()
@@ -70,6 +92,36 @@ public class Game : MonoBehaviour
         }
     }
 
+    void setUpChoiceButtons()
+    {
+        for(int i = 0; i < _currentBeat.Decision.Count; i++)
+        {
+            Button newChoice = Instantiate(choicePrefab);
+            newChoice.GetComponent<DialogueChoice>().setChoiceNum(i);
+            newChoice.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _currentBeat.Decision[i].DisplayText;
+            newChoice.transform.SetParent(choiceParent.transform);
+        }
+    }
+    public void pickOption(int p)
+    {
+        ChoiceData choice = _currentBeat.Decision[p];
+        DisplayBeat(choice.NextID);
+
+        List<GameObject> b = new List<GameObject>();
+        
+        for(int i =0; i < choiceParent.transform.childCount; i++)
+        {
+            b.Add(choiceParent.transform.GetChild(i).gameObject);
+        }
+
+        for(int i =0; i < b.Count; i++)
+        {
+            Destroy(b[i]);
+        }
+
+        b.Clear();
+        spawnedChoices = false;
+    }
     private void DisplayBeat(int id)
     {
         BeatData data = _data.GetBeatById(id);
@@ -92,21 +144,7 @@ public class Game : MonoBehaviour
         {
             yield return null;
         }
-        
-        for (int count = 0; count < data.Decision.Count; ++count)
-        {
-            ChoiceData choice = data.Decision[count];
-            _output.Display(string.Format("{0}: {1}", (count + 1), choice.DisplayText));
 
-            while (_output.IsBusy)
-            {
-                yield return null;
-            }
-        }
-
-        if(data.Decision.Count > 0)
-        {
-            _output.ShowWaitingForInput();
-        }
     }
+
 }

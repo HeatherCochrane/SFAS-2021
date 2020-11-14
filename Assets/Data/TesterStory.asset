@@ -12,4 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf5d5e33bab057c43929a11bc8f25f44, type: 3}
   m_Name: TesterStory
   m_EditorClassIdentifier: 
-  _beats: []
+  _beats:
+  - _choices: []
+    _text: First Story Beat
+    _id: 1
+  - _choices: []
+    _text: First Story Beat
+    _id: 1
+  - _choices: []
+    _text: First Story Beat
+    _id: 1
+  - _choices: []
+    _text: First Story Beat
+    _id: 1
