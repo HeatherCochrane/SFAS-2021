@@ -30,12 +30,6 @@ public class Player : MonoBehaviour
     bool holding = false;
     Vector2 direction;
 
-    //Tester Weapons
-    [SerializeField]
-    Weapon test1;
-    [SerializeField]
-    Weapon test2;
-
     //Longe Range variables
     Vector2 mousePos;
     [SerializeField]
@@ -80,9 +74,6 @@ public class Player : MonoBehaviour
         inventory.addWeapon(meleeWeapon);
         inventory.addWeapon(longRangeWeapon);
 
-        inventory.addWeapon(test1);
-        inventory.addWeapon(test2);
-
         offset = cam.transform.position - this.transform.position;
         camPos = cam.transform.position;
     }
@@ -90,6 +81,19 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            bool open = inventory.showInventory();
+            if (open)
+            {
+                stopMovement = true;
+            }
+            else
+            {
+                stopMovement = false;
+            }
+        }
+
         if (!stopMovement)
         {
             //Interaction Key
@@ -100,7 +104,6 @@ public class Player : MonoBehaviour
                     beginConversation();
                 }
             }
-
 
             //Melee attack
             if (Input.GetMouseButtonDown(1))

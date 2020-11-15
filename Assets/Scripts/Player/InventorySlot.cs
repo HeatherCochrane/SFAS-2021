@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
@@ -30,10 +31,13 @@ public class InventorySlot : MonoBehaviour
 
     public void getItemData()
     {
-        if (slotData.GetType() == typeof(Weapon))
+        if (slotData != null)
         {
-            weapon = slotData as Weapon;
-            setEquipMenu(true);
+            if (slotData.GetType() == typeof(Weapon))
+            {
+                weapon = slotData as Weapon;
+                setEquipMenu(true);
+            }
         }
     }
 
@@ -64,6 +68,8 @@ public class InventorySlot : MonoBehaviour
             slotData.worldObject.SetActive(true);
             slotData.worldObject.transform.position += new Vector3(5, 2, 0);
             Player.instance.inventory.removeItem(slotData);
+
+            slotData = null;
         }
 
         setEquipMenu(false);

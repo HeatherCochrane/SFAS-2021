@@ -44,11 +44,21 @@ public class PlayerInventory : MonoBehaviour
             spawnedInventory = true;
         }
 
+        inventoryParent.SetActive(false);
     }
 
-    public void showInventory(bool set)
+    public bool showInventory()
     {
-        inventoryParent.SetActive(set);
+        if (inventoryParent.activeSelf)
+        {
+            inventoryParent.SetActive(false);
+            return false;
+        }
+        else
+        {
+            inventoryParent.SetActive(true);
+            return true;
+        }
     }
 
     void updateUI(Item item)
@@ -77,6 +87,7 @@ public class PlayerInventory : MonoBehaviour
             newSlot = slots[i];
             newSlot.slotObject.GetComponent<Image>().sprite = null;
             newSlot.isTaken = false;
+            newSlot.objectData = null;
             slots[i] = newSlot;
         }
 

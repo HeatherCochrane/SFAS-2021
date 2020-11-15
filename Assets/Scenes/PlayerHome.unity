@@ -1317,8 +1317,6 @@ MonoBehaviour:
   weapons: {fileID: 728822379}
   cam: {fileID: 1415918723}
   smoothing: 2
-  test1: {fileID: 11400000, guid: c36189d52d66dac4a8a41a0f65f08184, type: 2}
-  test2: {fileID: 11400000, guid: 940dadf39bd900141846bf17198bd406, type: 2}
   rangeIndicator: {fileID: 94738964}
   dialogue: {fileID: 419569629}
 --- !u!114 &728822378
