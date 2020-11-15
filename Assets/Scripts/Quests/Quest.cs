@@ -30,16 +30,25 @@ public class Quest : ScriptableObject
     {
         if (k.Count > 0 && totalKillsNeeded.Count > 0)
         {
+            int totalTrue = 0;
+
             for (int i = 0; i < k.Count; i++)
             {
-                if (i < totalKillsNeeded.Count)
+                for(int j =0; j < totalKillsNeeded.Count;  j++)
                 {
-                    if (k[i].number == totalKillsNeeded[i].number && k[i].species == totalKillsNeeded[i].species)
+                    if (k[i].number == totalKillsNeeded[j].number && k[i].species == totalKillsNeeded[j].species)
                     {
-                        return true;
+                        totalTrue += 1;
                     }
                 }
             }
+
+            if(totalTrue == totalKillsNeeded.Count)
+            {
+                return true;
+            }
+
+
         }
         else
         {
@@ -52,17 +61,24 @@ public class Quest : ScriptableObject
     public bool checkCompletedQuests(List<Quest> q)
     {
         if (q.Count > 0 && questsCompleted.Count > 0)
-        {         
+        {
+            int totalTrue = 0;
+
             for (int i = 0; i < q.Count; i++)
             {
                 for (int j = 0; j < questsCompleted.Count; j++)
                 {
                     if (q[i] == questsCompleted[j])
                     {
-                        return true;
+                        totalTrue += 1;
                     }
                 }
                 
+            }
+
+            if(totalTrue == questsCompleted.Count)
+            {
+                return true;
             }
         }
         else
