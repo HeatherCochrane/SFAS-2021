@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f660969ab37e654b8eda9cc1fe76641, type: 3}
-  m_Name: StarterMelee
+  m_Name: TesterMelee
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: -757630189579833598, guid: d45db9505338b204697980f275189884, type: 3}
+  itemSprite: {fileID: 5584417047514563031, guid: d45db9505338b204697980f275189884, type: 3}
   price: 0
-  damage: 1
+  damage: 2
   distance: 1
   weaponType: 0

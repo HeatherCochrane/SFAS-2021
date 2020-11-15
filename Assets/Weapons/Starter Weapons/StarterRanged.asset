@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f660969ab37e654b8eda9cc1fe76641, type: 3}
   m_Name: StarterRanged
   m_EditorClassIdentifier: 
+  itemSprite: {fileID: -8780990375042858886, guid: d45db9505338b204697980f275189884, type: 3}
+  price: 0
   damage: 1
   distance: 3
+  weaponType: 1

@@ -31,6 +31,7 @@ public class PlayerWeapons : MonoBehaviour
     {
         longRangeWeapon = r;
     }
+
     public Weapon getMeleeWeapon()
     {
         return meleeWeapon;
@@ -38,5 +39,17 @@ public class PlayerWeapons : MonoBehaviour
     public Weapon getRangedWeapon()
     {
         return longRangeWeapon;
+    }
+
+    public void equipRangedWeapon(Weapon w)
+    {
+        longRangeWeapon = w;
+        player.setRangedWeapon(longRangeWeapon);
+    }
+
+    public void equipMeleeWeapon(Weapon w)
+    {
+        meleeWeapon = w;
+        player.setMeleeWeapon(meleeWeapon);
     }
 }

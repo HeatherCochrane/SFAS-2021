@@ -9,21 +9,32 @@ public class Player : MonoBehaviour
     //Quests
     public PlayerQuests playerQuests;
 
+    //Level and XP handler
+    public PlayerLevel levels;
+
+    //Inventory
+    public PlayerInventory inventory;
+
+    //Weapons
+    public PlayerWeapons weapons;
+
     [SerializeField]
     GameObject cam;
     public float smoothing = 2f;
     Vector3 offset;
     Vector3 camPos;
 
-    //Level and XP handler
-    public PlayerLevel levels;
-
     //Player weapons
-    PlayerWeapons weapons;
     Weapon meleeWeapon;
     Weapon longRangeWeapon;
     bool holding = false;
     Vector2 direction;
+
+    //Tester Weapons
+    [SerializeField]
+    Weapon test1;
+    [SerializeField]
+    Weapon test2;
 
     //Longe Range variables
     Vector2 mousePos;
@@ -66,6 +77,11 @@ public class Player : MonoBehaviour
         meleeWeapon = weapons.getMeleeWeapon();
         longRangeWeapon = weapons.getRangedWeapon();
 
+        inventory.addWeapon(meleeWeapon);
+        inventory.addWeapon(longRangeWeapon);
+
+        inventory.addWeapon(test1);
+        inventory.addWeapon(test2);
 
         offset = cam.transform.position - this.transform.position;
         camPos = cam.transform.position;
@@ -213,11 +229,30 @@ public class Player : MonoBehaviour
         }
     }
    
+    public void setRangedWeapon(Weapon w)
+    {
+        longRangeWeapon = w;
+        Debug.Log("LONG RANGE EQUIPED!");
+    }
+
+    public void setMeleeWeapon(Weapon m)
+    {
+        meleeWeapon = m;
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.transform.tag == "Ground")
         {
             isFalling = false;
+        }
+        if (collision.gameObject.tag == "Pickup")
+        {
+            if (inventory.checkInventorySpace())
+            {
+                inventory.addWeapon(collision.gameObject.GetComponent<WorldItem>().getItemData());
+                collision.transform.SetParent(this.transform);
+                collision.transform.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -227,6 +262,7 @@ public class Player : MonoBehaviour
         {
             character = collision.GetComponent<Character>();
         }
+       
     }
 
     private void OnTriggerExit2D(Collider2D collision)
