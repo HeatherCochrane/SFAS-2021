@@ -10,7 +10,9 @@ using UnityEditor;
 [CreateAssetMenu(fileName = "StoryData", menuName = "New story data/StoryData", order = 1)]
 public class StoryData : ScriptableObject
 {
+    [SerializeField] Quest completeThisQuest;
     [SerializeField] private List<BeatData> _beats;
+
     public BeatData GetBeatById( int id )
     {
         return _beats.Find(b => b.ID == id);
@@ -38,6 +40,11 @@ public class StoryData : ScriptableObject
     public int getBeatSize()
     {
         return _beats.Count;
+    }
+
+    public Quest getQuestToComplete()
+    {
+        return completeThisQuest;
     }
 
 #endif

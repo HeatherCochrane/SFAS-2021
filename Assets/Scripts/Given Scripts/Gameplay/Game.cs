@@ -62,6 +62,11 @@ public class Game : MonoBehaviour
         _data = d;
         startDialogue = true;
         spawnedChoices = false;
+
+        if(d.getQuestToComplete() != null)
+        {
+            Player.instance.playerQuests.questCompleted(d.getQuestToComplete());
+        }
     }
 
     private void UpdateInput()
