@@ -6,6 +6,9 @@ public class Player : MonoBehaviour
 {
     public static Player instance;
 
+    //Quests
+    public PlayerQuests playerQuests;
+
     [SerializeField]
     GameObject cam;
     public float smoothing = 2f;
@@ -57,6 +60,7 @@ public class Player : MonoBehaviour
 
         levels = GetComponent<PlayerLevel>();
         weapons = GetComponent<PlayerWeapons>();
+        playerQuests = GetComponent<PlayerQuests>();
 
 
         meleeWeapon = weapons.getMeleeWeapon();
@@ -70,33 +74,37 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Interaction Key
-        if(Input.GetKeyDown(KeyCode.E))
+        if (!stopMovement)
         {
-            if(character != null)
+            //Interaction Key
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                beginConversation();
+                if (character != null)
+                {
+                    beginConversation();
+                }
             }
-        }
 
-        //Melee attack
-        if(Input.GetMouseButtonDown(1))
-        {
-            Attack(meleeWeapon.distance, meleeWeapon.damage);
-        }
 
-        //Long Range Attack, hold down then release to fire
-        if(Input.GetMouseButton(0))
-        {
-            holding = true;
-            drawRange();
-            rangeIndicator.gameObject.SetActive(true);
-        }
-        if(Input.GetMouseButtonUp(0) && holding)
-        {
-            Attack(longRangeWeapon.distance, longRangeWeapon.damage);
-            holding = false;
-            rangeIndicator.gameObject.SetActive(false);
+            //Melee attack
+            if (Input.GetMouseButtonDown(1))
+            {
+                Attack(meleeWeapon.distance, meleeWeapon.damage);
+            }
+
+            //Long Range Attack, hold down then release to fire
+            if (Input.GetMouseButton(0))
+            {
+                holding = true;
+                drawRange();
+                rangeIndicator.gameObject.SetActive(true);
+            }
+            if (Input.GetMouseButtonUp(0) && holding)
+            {
+                Attack(longRangeWeapon.distance, longRangeWeapon.damage);
+                holding = false;
+                rangeIndicator.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -143,6 +151,14 @@ public class Player : MonoBehaviour
     {
         //Pass in the characters dialogue data to begin the conversation
         dialogue.startNewDialogue(character.getData().getDialogue());
+        stopMovement = true;
+        holding = false;
+        rangeIndicator.gameObject.SetActive(false);
+    }
+
+    public void endConversation()
+    {
+        stopMovement = false;
     }
 
     void Attack(float dist, int damage)

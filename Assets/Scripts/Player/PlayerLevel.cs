@@ -10,7 +10,7 @@ public class PlayerLevel : MonoBehaviour
     float XP = 0;
 
     //Level
-    int level = 0;
+    public int level = 0;
 
     //XP needed to advance to the next level
     float XpNeeded = 0;

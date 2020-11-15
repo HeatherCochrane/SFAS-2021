@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Killable : MonoBehaviour
 {
+    //Enums for keeping track of which enemy was killed
+    public enum Species { ENEMY, SHEEP};
+
     [SerializeField]
     KillableData data;
 
     PlayerLevel player;
-
+    PlayerQuests quests;
 
     int health = 2;
 
@@ -21,6 +24,7 @@ public class Killable : MonoBehaviour
         rb = this.GetComponent<Rigidbody2D>();
         health = data.health;
         player = Player.instance.levels;
+        quests = Player.instance.playerQuests;
     }
 
     // Update is called once per frame
@@ -63,6 +67,8 @@ public class Killable : MonoBehaviour
         }
 
         player.addXP(data.XP);
+
+        quests.speciesKilled(data.species);
 
         Destroy(this.gameObject);
     }

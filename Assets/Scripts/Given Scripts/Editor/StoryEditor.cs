@@ -253,4 +253,9 @@ public class StoryEditor : EditorWindow
         text.stringValue = initialText;
         nextId.intValue = beatId;
     }
+
+    private void addQuest()
+    {
+
+    }
 }

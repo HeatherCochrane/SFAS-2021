@@ -8,4 +8,5 @@ public class KillableData : ScriptableObject
     public int health;
     public GameObject drop;
     public float XP;
+    public Killable.Species species;
 }

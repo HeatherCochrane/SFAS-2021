@@ -7,5 +7,6 @@ public class Weapon : ScriptableObject
 {
     public int damage;
     public int distance;
+    public int price;
 
 }

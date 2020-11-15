@@ -61,6 +61,7 @@ public class Game : MonoBehaviour
         dialogueFinished = false;
         _data = d;
         startDialogue = true;
+        spawnedChoices = false;
     }
 
     private void UpdateInput()
@@ -117,6 +118,12 @@ public class Game : MonoBehaviour
     {
         ChoiceData choice = _currentBeat.Decision[p];
         DisplayBeat(choice.NextID);
+
+        if(choice.quest != null)
+        {
+            Debug.Log("Quest Started!: " + choice.quest);
+            Player.instance.playerQuests.addNewQuest(choice.quest);
+        }
 
         List<GameObject> b = new List<GameObject>();
         
