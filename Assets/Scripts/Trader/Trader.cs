@@ -51,7 +51,7 @@ public class Trader : MonoBehaviour
                 newSlot.slotObject = slotParent.transform.GetChild(i).transform.gameObject;
                 newSlot.slotObject.GetComponent<Image>().sprite = stock[i].itemSprite;
                 newSlot.slotObject.GetComponent<TraderSlot>().setButtonData(stock[i]);
-                newSlot.price = stock[i].price;
+                newSlot.price = stock[i].buyPrice;
                 slots.Add(newSlot);
             }
 
@@ -74,6 +74,7 @@ public class Trader : MonoBehaviour
         Player.instance.setMovement(false);
         Player.instance.inventory.setTrader(null);
         Player.instance.inventory.setInventory(false);
+        Player.instance.setInventoryToggle(false);
         traderInventory.SetActive(false);
     }
 
@@ -99,14 +100,18 @@ public class Trader : MonoBehaviour
 
     public void buyItem()
     {
-        if (checkTraderFunds(activeItem.price) && Player.instance.inventory.checkInventorySpace())
+        if (activeItem != null)
         {
-            Player.instance.inventory.setTrader(this);
-            Debug.Log("Enough funds");
-
-            if (activeItem.GetType() == typeof(Weapon))
+            if (Player.instance.inventory.checkFunds(activeItem.buyPrice) && Player.instance.inventory.checkInventorySpace())
             {
-                Player.instance.inventory.addWeapon(activeItem);
+                Player.instance.inventory.setTrader(this);
+
+                if (activeItem.GetType() == typeof(Weapon))
+                {
+                    Player.instance.inventory.addWeapon(activeItem);
+                    Player.instance.inventory.adjustFunds(-activeItem.buyPrice);
+                    emptyInfoBox();
+                }
             }
         }
     }
@@ -123,4 +128,17 @@ public class Trader : MonoBehaviour
         activeSlot = slot;
         activeItem = active;
     }
+
+    public void emptyInfoBox()
+    {
+        infoBox.transform.GetChild(0).gameObject.SetActive(false);
+        infoBox.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "";
+        infoBox.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "";
+        infoBox.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "";
+        infoBox.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "";
+
+        activeSlot = null;
+        activeItem = null;
+    }
+
 }

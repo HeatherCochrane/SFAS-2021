@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
 
     //Trader that can be interacted with
     Trader trader;
+    bool stopInventoryToggle = false;
 
     [SerializeField]
     Game dialogue;
@@ -84,9 +85,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && !stopInventoryToggle)
         {
             bool open = inventory.showInventory();
+
             if (open)
             {
                 stopMovement = true;
@@ -113,19 +115,19 @@ public class Player : MonoBehaviour
             }
 
             //Melee attack
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) && meleeWeapon != null)
             {
                 Attack(meleeWeapon.distance, meleeWeapon.damage);
             }
 
             //Long Range Attack, hold down then release to fire
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && longRangeWeapon != null)
             {
                 holding = true;
                 drawRange();
                 rangeIndicator.gameObject.SetActive(true);
             }
-            if (Input.GetMouseButtonUp(0) && holding)
+            if (Input.GetMouseButtonUp(0) && holding && longRangeWeapon != null)
             {
                 Attack(longRangeWeapon.distance, longRangeWeapon.damage);
                 holding = false;
@@ -180,6 +182,7 @@ public class Player : MonoBehaviour
         stopMovement = true;
         holding = false;
         rangeIndicator.gameObject.SetActive(false);
+        stopInventoryToggle = true;
     }
 
     void beginTrading()
@@ -187,17 +190,25 @@ public class Player : MonoBehaviour
         trader.startTrading();
         inventory.setInventory(true);
         setMovement(true);
+        stopInventoryToggle = true;
     }
 
     public void endConversation()
     {
         stopMovement = false;
+        stopInventoryToggle = false;
     }
 
     public void setMovement(bool set)
     {
         stopMovement = set;
     }
+
+    public void setInventoryToggle(bool set)
+    {
+        stopInventoryToggle = set;
+    }
+
     void Attack(float dist, int damage)
     {
         RaycastHit2D hit;
@@ -253,13 +264,13 @@ public class Player : MonoBehaviour
     public void setRangedWeapon(Weapon w)
     {
         longRangeWeapon = w;
-        Debug.Log("LONG RANGE EQUIPED!");
     }
 
     public void setMeleeWeapon(Weapon m)
     {
         meleeWeapon = m;
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.tag == "Ground")

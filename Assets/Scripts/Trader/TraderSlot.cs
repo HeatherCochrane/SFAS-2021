@@ -33,7 +33,6 @@ public class TraderSlot : MonoBehaviour
     {
         if (slotItem != null)
         {
-            Debug.Log(slotItem);
             if (slotItem.GetType() == typeof(Weapon))
             {
                 weapon = slotItem as Weapon;
@@ -44,6 +43,6 @@ public class TraderSlot : MonoBehaviour
 
     void setInfoMenu()
     {
-        trader.showWeaponInfoBox(weapon.itemSprite, weapon.name, weapon.damage.ToString(), weapon.distance.ToString(), weapon.price.ToString(), this, weapon);
+        trader.showWeaponInfoBox(weapon.itemSprite, weapon.name, weapon.damage.ToString(), weapon.distance.ToString(), weapon.buyPrice.ToString(), this, weapon);
     }
 }

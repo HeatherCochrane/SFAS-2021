@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: TesterMelee
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 5584417047514563031, guid: d45db9505338b204697980f275189884, type: 3}
-  price: 0
+  price: 20
+  worldObject: {fileID: 0}
   damage: 2
   distance: 1
   weaponType: 0

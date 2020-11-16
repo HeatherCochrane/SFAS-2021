@@ -47,9 +47,48 @@ public class PlayerWeapons : MonoBehaviour
         player.setRangedWeapon(longRangeWeapon);
     }
 
+    public void unequipRangedWeapon()
+    {
+        longRangeWeapon = null;
+        player.setRangedWeapon(null);
+    }
+
     public void equipMeleeWeapon(Weapon w)
     {
         meleeWeapon = w;
         player.setMeleeWeapon(meleeWeapon);
+    }
+
+    public void unequipMeleeWeapon()
+    {
+        meleeWeapon = null;
+        player.setMeleeWeapon(null);
+    }
+
+
+    public void checkWeapon(List<Item> items)
+    {
+        bool meleeSafe = false;
+        bool rangedSafe = false;
+        for(int i =0; i < items.Count; i++)
+        {
+            if(items[i] == meleeWeapon)
+            {
+                meleeSafe = true;
+            }
+            if(items[i] == longRangeWeapon)
+            {
+                rangedSafe = true;
+            }
+        }
+
+        if(!meleeSafe)
+        {
+            unequipMeleeWeapon();
+        }
+        if(!rangedSafe)
+        {
+            unequipRangedWeapon();
+        }
     }
 }

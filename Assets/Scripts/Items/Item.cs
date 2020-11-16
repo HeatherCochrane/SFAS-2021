@@ -8,7 +8,9 @@ public class Item : ScriptableObject
     [SerializeField]
     public Sprite itemSprite;
     [SerializeField]
-    public int price;
+    public int buyPrice;
+    [SerializeField]
+    public int sellPrice;
     [SerializeField]
     public GameObject worldObject;
 
