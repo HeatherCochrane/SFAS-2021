@@ -7,15 +7,12 @@ public class InventorySlot : MonoBehaviour
 {
     Item slotData;
 
-    [SerializeField]
-    GameObject equipMenu;
-
     Weapon weapon;
 
+    
     // Start is called before the first frame update
     void Start()
     {
-        setEquipMenu(false);
     }
 
     // Update is called once per frame
@@ -36,7 +33,7 @@ public class InventorySlot : MonoBehaviour
             if (slotData.GetType() == typeof(Weapon))
             {
                 weapon = slotData as Weapon;
-                setEquipMenu(true);
+                setEquipMenu();
             }
         }
     }
@@ -53,12 +50,11 @@ public class InventorySlot : MonoBehaviour
             Player.instance.weapons.equipRangedWeapon(weapon);
         }
 
-        setEquipMenu(false);
     }
 
-    public void setEquipMenu(bool set)
+    public void setEquipMenu()
     {
-        equipMenu.SetActive(set);
+        Player.instance.inventory.showWeaponInfoBox(weapon.itemSprite, weapon.name, weapon.damage.ToString(), weapon.distance.ToString(), this);
     }
 
     public void dropItem()
@@ -72,6 +68,6 @@ public class InventorySlot : MonoBehaviour
             slotData = null;
         }
 
-        setEquipMenu(false);
-    }
+        Player.instance.inventory.showInfoBox(false);
+;    }
 }

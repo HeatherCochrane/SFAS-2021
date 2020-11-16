@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -26,6 +27,11 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField]
     GameObject inventoryParent;
 
+    [SerializeField]
+    GameObject infoBox;
+
+    InventorySlot activeSlot;
+
     bool spawnedInventory = false;
 
     private void Start()
@@ -35,8 +41,7 @@ public class PlayerInventory : MonoBehaviour
             for(int i =0; i < 9; i++)
             {
                 Slot newSlot = new Slot();
-                newSlot.slotObject = Instantiate(itemSlotPrefab);
-                newSlot.slotObject.transform.SetParent(inventoryParent.transform);
+                newSlot.slotObject = inventoryParent.transform.GetChild(i).transform.gameObject;
                 newSlot.isTaken = false;
                 slots.Add(newSlot);
             }
@@ -45,6 +50,7 @@ public class PlayerInventory : MonoBehaviour
         }
 
         inventoryParent.SetActive(false);
+        infoBox.SetActive(false);
     }
 
     public bool showInventory()
@@ -52,11 +58,14 @@ public class PlayerInventory : MonoBehaviour
         if (inventoryParent.activeSelf)
         {
             inventoryParent.SetActive(false);
+            infoBox.SetActive(false);
             return false;
         }
         else
         {
             inventoryParent.SetActive(true);
+            infoBox.SetActive(true);
+            emptyInfoBox();
             return true;
         }
     }
@@ -123,6 +132,52 @@ public class PlayerInventory : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+
+    public void showWeaponInfoBox(Sprite s, string name, string damage, string range, InventorySlot slot)
+    {
+        infoBox.transform.GetChild(0).gameObject.SetActive(true);
+        infoBox.transform.GetChild(0).GetComponent<Image>().sprite = s;
+        infoBox.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = name;
+        infoBox.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Damage: " + damage;
+        infoBox.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Range: " + range;
+        infoBox.transform.GetChild(4).gameObject.SetActive(true);
+        infoBox.transform.GetChild(5).gameObject.SetActive(true);
+
+        activeSlot = slot;
+        showInfoBox(true);
+    }
+
+    public void showInfoBox(bool set)
+    {
+        infoBox.SetActive(set);
+    }
+
+    public void emptyInfoBox()
+    {
+        infoBox.transform.GetChild(0).gameObject.SetActive(false);
+        infoBox.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "";
+        infoBox.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "";
+        infoBox.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "";
+        infoBox.transform.GetChild(4).gameObject.SetActive(false);
+        infoBox.transform.GetChild(5).gameObject.SetActive(false);
+        activeSlot = null;
+    }
+
+    public void dropItem()
+    {
+        if(activeSlot != null)
+        {
+            activeSlot.dropItem();
+        }
+    }
+
+    public void equipItem()
+    {
+        if(activeSlot != null)
+        {
+            activeSlot.equipItem();
         }
     }
 }

@@ -244,9 +244,12 @@ public class Player : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.transform.tag == "Ground")
+        if (collision.transform.tag == "Ground")
         {
-            isFalling = false;
+            if (collision.contacts[0].normal == new Vector2(0, 1))
+            {
+                isFalling = false;
+            }
         }
         if (collision.gameObject.tag == "Pickup")
         {
@@ -264,8 +267,7 @@ public class Player : MonoBehaviour
         if(collision.tag == "Character")
         {
             character = collision.GetComponent<Character>();
-        }
-       
+        }      
     }
 
     private void OnTriggerExit2D(Collider2D collision)
