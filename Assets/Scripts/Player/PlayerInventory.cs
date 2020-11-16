@@ -22,10 +22,10 @@ public class PlayerInventory : MonoBehaviour
     List<Item> inventoryItems = new List<Item>();
 
     [SerializeField]
-    GameObject itemSlotPrefab;
+    GameObject inventory;
 
     [SerializeField]
-    GameObject inventoryParent;
+    GameObject slotParent;
 
     [SerializeField]
     GameObject infoBox;
@@ -34,6 +34,9 @@ public class PlayerInventory : MonoBehaviour
 
     bool spawnedInventory = false;
 
+    public int playerFunds = 100;
+
+    Trader currentTrader;
     private void Start()
     {
         if(!spawnedInventory)
@@ -41,7 +44,7 @@ public class PlayerInventory : MonoBehaviour
             for(int i =0; i < 9; i++)
             {
                 Slot newSlot = new Slot();
-                newSlot.slotObject = inventoryParent.transform.GetChild(i).transform.gameObject;
+                newSlot.slotObject = slotParent.transform.GetChild(i).transform.gameObject;
                 newSlot.isTaken = false;
                 slots.Add(newSlot);
             }
@@ -49,25 +52,27 @@ public class PlayerInventory : MonoBehaviour
             spawnedInventory = true;
         }
 
-        inventoryParent.SetActive(false);
-        infoBox.SetActive(false);
+        inventory.SetActive(false);
     }
 
     public bool showInventory()
     {
-        if (inventoryParent.activeSelf)
+        if (inventory.activeSelf)
         {
-            inventoryParent.SetActive(false);
-            infoBox.SetActive(false);
+            inventory.SetActive(false);
             return false;
         }
         else
         {
-            inventoryParent.SetActive(true);
-            infoBox.SetActive(true);
+            inventory.SetActive(true);
             emptyInfoBox();
             return true;
         }
+    }
+
+    public void setInventory(bool set)
+    {
+        inventory.SetActive(set);
     }
 
     void updateUI(Item item)
@@ -115,6 +120,8 @@ public class PlayerInventory : MonoBehaviour
     {   
         inventoryItems.Add(t);
         updateUI(t);
+
+        Debug.Log("Weapon bought!");
     }
 
     public void removeItem(Item t)
@@ -145,13 +152,12 @@ public class PlayerInventory : MonoBehaviour
         infoBox.transform.GetChild(4).gameObject.SetActive(true);
         infoBox.transform.GetChild(5).gameObject.SetActive(true);
 
-        activeSlot = slot;
-        showInfoBox(true);
-    }
+        if (currentTrader != null)
+        {
+            infoBox.transform.GetChild(6).gameObject.SetActive(true);
+        }
 
-    public void showInfoBox(bool set)
-    {
-        infoBox.SetActive(set);
+        activeSlot = slot;
     }
 
     public void emptyInfoBox()
@@ -162,6 +168,7 @@ public class PlayerInventory : MonoBehaviour
         infoBox.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "";
         infoBox.transform.GetChild(4).gameObject.SetActive(false);
         infoBox.transform.GetChild(5).gameObject.SetActive(false);
+        infoBox.transform.GetChild(6).gameObject.SetActive(false);
         activeSlot = null;
     }
 
@@ -178,6 +185,23 @@ public class PlayerInventory : MonoBehaviour
         if(activeSlot != null)
         {
             activeSlot.equipItem();
+            emptyInfoBox();
+        }
+    }
+
+    public void setTrader(Trader t)
+    {
+        currentTrader = t;
+    }
+
+    public void sellItem()
+    {
+        if(currentTrader != null && activeSlot != null)
+        {
+            playerFunds += activeSlot.getItem().price;
+            removeItem(activeSlot.getItem());
+            Debug.Log("Sold Item!");
+            Debug.Log(playerFunds);
         }
     }
 }

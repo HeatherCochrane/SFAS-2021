@@ -38,9 +38,13 @@ public class InventorySlot : MonoBehaviour
         }
     }
 
-    public void equipItem()
+    public Item getItem()
     {
-        
+        return slotData;
+    }
+
+    public void equipItem()
+    {       
         if (weapon.weaponType == Weapon.WeaponType.MELEE)
         {
             Player.instance.weapons.equipMeleeWeapon(weapon);
@@ -67,7 +71,5 @@ public class InventorySlot : MonoBehaviour
 
             slotData = null;
         }
-
-        Player.instance.inventory.showInfoBox(false);
 ;    }
 }

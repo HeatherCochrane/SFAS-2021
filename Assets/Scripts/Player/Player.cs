@@ -52,6 +52,9 @@ public class Player : MonoBehaviour
     //Character that can be talked to
     Character character;
 
+    //Trader that can be interacted with
+    Trader trader;
+
     [SerializeField]
     Game dialogue;
 
@@ -102,6 +105,10 @@ public class Player : MonoBehaviour
                 if (character != null)
                 {
                     beginConversation();
+                }
+                else if(trader != null)
+                {
+                    beginTrading();
                 }
             }
 
@@ -175,11 +182,22 @@ public class Player : MonoBehaviour
         rangeIndicator.gameObject.SetActive(false);
     }
 
+    void beginTrading()
+    {
+        trader.startTrading();
+        inventory.setInventory(true);
+        setMovement(true);
+    }
+
     public void endConversation()
     {
         stopMovement = false;
     }
 
+    public void setMovement(bool set)
+    {
+        stopMovement = set;
+    }
     void Attack(float dist, int damage)
     {
         RaycastHit2D hit;
@@ -267,7 +285,11 @@ public class Player : MonoBehaviour
         if(collision.tag == "Character")
         {
             character = collision.GetComponent<Character>();
-        }      
+        }
+        if (collision.tag == "Trader")
+        {
+            trader = collision.GetComponent<Trader>();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -275,6 +297,10 @@ public class Player : MonoBehaviour
         if (collision.tag == "Character")
         {
             character = null;
+        }
+        if(collision.tag == "Trader")
+        {
+            trader = null;
         }
     }
 }

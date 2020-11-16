@@ -8,6 +8,7 @@ TagManager:
   - Character
   - Killable
   - Pickup
+  - Trader
   layers:
   - Default
   - TransparentFX
