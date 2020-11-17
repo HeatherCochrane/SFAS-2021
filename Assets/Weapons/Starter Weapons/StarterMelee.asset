@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: StarterMelee
   m_EditorClassIdentifier: 
   itemSprite: {fileID: -757630189579833598, guid: d45db9505338b204697980f275189884, type: 3}
-  price: 10
+  buyPrice: 10
+  sellPrice: 5
   worldObject: {fileID: 0}
   damage: 1
   distance: 1
