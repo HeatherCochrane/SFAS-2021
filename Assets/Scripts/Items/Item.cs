@@ -13,5 +13,19 @@ public class Item : ScriptableObject
     public int sellPrice;
     [SerializeField]
     public GameObject worldObject;
+    [SerializeField]
+    public bool stackable;
+
+    int slotPos;
+
+    public void setSlotPos(int p)
+    {
+        slotPos = p;
+    }
+
+    public int getSlotPos()
+    {
+        return slotPos;
+    }
 
 }

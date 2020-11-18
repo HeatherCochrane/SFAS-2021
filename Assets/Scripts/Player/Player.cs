@@ -294,15 +294,7 @@ public class Player : MonoBehaviour
         {
             isFalling = false;
         }
-        if (collision.gameObject.tag == "Pickup")
-        {
-            if (inventory.checkInventorySpace())
-            {
-                inventory.addWeapon(collision.gameObject.GetComponent<WorldItem>().getItemData());
-                collision.transform.SetParent(this.transform);
-                collision.transform.gameObject.SetActive(false);
-            }
-        }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -314,6 +306,36 @@ public class Player : MonoBehaviour
         if (collision.tag == "Trader")
         {
             trader = collision.GetComponent<Trader>();
+        }
+
+        if (collision.gameObject.tag == "Pickup")
+        {
+            Debug.Log("PICK UP!");
+
+            if (!collision.gameObject.GetComponent<WorldItem>().getItemData().stackable)
+            {
+                if (inventory.checkInventorySpace())
+                {
+                    inventory.addWeapon(collision.gameObject.GetComponent<WorldItem>().getItemData());
+                    collision.transform.SetParent(this.transform);
+                    collision.transform.gameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                if (inventory.checkIfStackable(collision.gameObject.GetComponent<WorldItem>().getItemData()))
+                {
+                    inventory.addStackable(collision.gameObject.GetComponent<WorldItem>().getItemData());
+                    collision.transform.SetParent(this.transform);
+                    collision.transform.gameObject.SetActive(false);
+                }
+                else
+                {
+                    inventory.addWeapon(collision.gameObject.GetComponent<WorldItem>().getItemData());
+                    collision.transform.SetParent(this.transform);
+                    collision.transform.gameObject.SetActive(false);
+                }
+            }
         }
     }
 

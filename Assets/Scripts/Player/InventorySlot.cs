@@ -8,8 +8,9 @@ public class InventorySlot : MonoBehaviour
     Item slotData;
 
     Weapon weapon;
+    Item item;
 
-    
+    public int amount;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +36,12 @@ public class InventorySlot : MonoBehaviour
                 weapon = slotData as Weapon;
                 setEquipMenu();
             }
+
+            if (slotData.GetType() == typeof(Item))
+            {
+                item = slotData as Item;
+                setItemMenu();
+            }
         }
     }
 
@@ -58,7 +65,12 @@ public class InventorySlot : MonoBehaviour
 
     public void setEquipMenu()
     {
-        Player.instance.inventory.showWeaponInfoBox(weapon.itemSprite, weapon.name, weapon.damage.ToString(), weapon.distance.ToString(), weapon.sellPrice.ToString(), this);
+        Player.instance.inventory.showWeaponInfoBox(weapon.itemSprite, weapon.name, "Damage: " +  weapon.damage.ToString(), "Distance: " + weapon.distance.ToString(), weapon.sellPrice.ToString(), this);
+    }
+
+    public void setItemMenu()
+    {
+        Player.instance.inventory.showWeaponInfoBox(item.itemSprite, item.name, "", "", item.sellPrice.ToString(), this);
     }
 
     public void dropItem()
@@ -72,4 +84,15 @@ public class InventorySlot : MonoBehaviour
             slotData = null;
         }
 ;    }
+
+    public void setSlotPos(int p)
+    {
+        slotData.setSlotPos(p);
+    }
+
+    public int getSlotPos()
+    {
+        Debug.Log(slotData.getSlotPos());
+        return slotData.getSlotPos();
+    }
 }

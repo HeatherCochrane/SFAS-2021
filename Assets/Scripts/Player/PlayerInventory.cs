@@ -12,7 +12,7 @@ public class PlayerInventory : MonoBehaviour
         public bool isTaken;
         public GameObject slotObject;
         public ScriptableObject objectData;
-       
+        public int amount;
     }
 
     [SerializeField]
@@ -49,6 +49,7 @@ public class PlayerInventory : MonoBehaviour
                 Slot newSlot = new Slot();
                 newSlot.slotObject = slotParent.transform.GetChild(i).transform.gameObject;
                 newSlot.isTaken = false;
+                newSlot.amount = 0;
                 slots.Add(newSlot);
             }
 
@@ -113,6 +114,7 @@ public class PlayerInventory : MonoBehaviour
                 newSlot.slotObject.GetComponent<Image>().sprite = item.itemSprite;
                 newSlot.isTaken = true;
                 newSlot.slotObject.GetComponent<InventorySlot>().setButtonData(item);
+                newSlot.slotObject.GetComponent<InventorySlot>().setSlotPos(i);
                 slots[i] = newSlot;
 
                 break;
@@ -129,6 +131,8 @@ public class PlayerInventory : MonoBehaviour
             newSlot.slotObject.GetComponent<Image>().sprite = null;
             newSlot.isTaken = false;
             newSlot.objectData = null;
+            newSlot.amount = 0;
+            newSlot.slotObject.GetComponent<InventorySlot>().setSlotPos(0);
             slots[i] = newSlot;
         }
 
@@ -139,6 +143,8 @@ public class PlayerInventory : MonoBehaviour
             newSlot.slotObject.GetComponent<Image>().sprite = inventoryItems[i].itemSprite;
             newSlot.isTaken = true;
             newSlot.slotObject.GetComponent<InventorySlot>().setButtonData(inventoryItems[i]);
+            newSlot.slotObject.GetComponent<InventorySlot>().setSlotPos(i);
+            newSlot.amount = slots[i].amount;
             slots[i] = newSlot;
         }
     }
@@ -167,13 +173,43 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    public bool checkIfStackable(Item i)
+    {
+        foreach(Item item in inventoryItems)
+        {
+            if(item == i)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void addStackable(Item i)
+    {
+        foreach (Item item in inventoryItems)
+        {
+            if (item == i)
+            {
+                Debug.Log(item + " " + i);
+
+                Slot newSlot = slots[item.getSlotPos()];
+                newSlot.amount += 1;
+                slots[item.getSlotPos()] = newSlot;
+
+                Debug.Log("Position: " + item.getSlotPos());
+            }
+        }
+    }
+
     public void showWeaponInfoBox(Sprite s, string name, string damage, string range, string price, InventorySlot slot)
     {
         infoBox.transform.GetChild(0).gameObject.SetActive(true);
         infoBox.transform.GetChild(0).GetComponent<Image>().sprite = s;
         infoBox.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = name;
-        infoBox.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Damage: " + damage;
-        infoBox.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Range: " + range;
+        infoBox.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = damage;
+        infoBox.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = range;
         infoBox.transform.GetChild(4).gameObject.SetActive(true);
         infoBox.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "Sell Price: " + price;
 
@@ -209,6 +245,7 @@ public class PlayerInventory : MonoBehaviour
     {
         if(activeSlot != null)
         {
+            
             activeSlot.dropItem();
         }
     }
