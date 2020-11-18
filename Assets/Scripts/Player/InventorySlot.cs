@@ -80,16 +80,24 @@ public class InventorySlot : MonoBehaviour
         Player.instance.inventory.showWeaponInfoBox(item.itemSprite, item.name, "", "", item.sellPrice.ToString(), this);
     }
 
-    public bool dropItem()
-    {
-        if(amount > 0)
-        {
-            GameObject o = Instantiate(slotData.worldObject);
 
-            o.SetActive(true);
-            o.transform.position += new Vector3(5, 2, 0);
+    public bool removeInventory(string interaction)
+    {
+        if (amount > 0)
+        {
+            GameObject o = default;
+
+            if (interaction == "Drop")
+            {
+                o = Instantiate(slotData.worldObject);
+                o.SetActive(true);
+                o.transform.position += new Vector3(5, 2, 0);
+            }
+
+           
             amount -= 1;
             stacked.text = amount.ToString();
+
             return true;
         }
 

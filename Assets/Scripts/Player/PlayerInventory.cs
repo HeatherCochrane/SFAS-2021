@@ -188,9 +188,7 @@ public class PlayerInventory : MonoBehaviour
     public void removeItem(Item t)
     {
         int blah = inventoryItems.FindIndex(x => x.item == t);
-
         inventoryItems.RemoveAt(blah);
-
     }
 
     public void addItem(Item t)
@@ -285,31 +283,58 @@ public class PlayerInventory : MonoBehaviour
         activeSlot = null;
     }
 
-    public void dropItem()
-    {    
+    public void RemoveItemFromInventory(string interaction)
+    {
+        int pos = 0;
         if (activeSlot != null)
-        {          
+        {
             for (int i = 0; i < inventoryItems.Count; i++)
-            {             
+            {
                 if (inventoryItems[i].item == activeSlot.getItem())
                 {
-                    if (activeSlot.dropItem())
+                    pos = i;
+                    break;
+                }
+            }
+
+
+            if (interaction == "Drop")
+            {
+                if (activeSlot.removeInventory(interaction))
+                {
+                    Debug.Log("DROPPED");
+
+                    InventoryItem o = inventoryItems[pos];
+                    o.amount -= 1;
+                    inventoryItems[pos] = o;
+
+                    if (inventoryItems[pos].amount == 0)
                     {
-                        Debug.Log("DROPPED");
-
-                        InventoryItem o = inventoryItems[i];
-                        o.amount -= 1;
-                        inventoryItems[i] = o;
-
-                        if (inventoryItems[i].amount == 0)
-                        {
-                            removeItem(inventoryItems[i].item);
-                        }
-                        break;
+                        removeItem(inventoryItems[pos].item);
                     }
                 }
             }
-            
+            else if (interaction == "Sell")
+            {
+                if (activeSlot.removeInventory(interaction))
+                {
+                    playerFunds += activeSlot.getItem().sellPrice;
+
+                    //Check to see if the player has sold their equipped item
+                    Player.instance.weapons.checkWeapon(inventoryItems);
+
+                    if (activeSlot.amount > 0)
+                    {
+                        InventoryItem i = inventoryItems[pos];
+                        i.amount = activeSlot.amount;
+                        inventoryItems[pos] = i;
+                    }
+                    else
+                    {
+                        removeItem(inventoryItems[pos].item);
+                    }
+                }
+            }
         }
 
         refreshUI();
@@ -332,25 +357,4 @@ public class PlayerInventory : MonoBehaviour
         currentTrader = t;
     }
 
-    public void sellItem()
-    {
-        if(currentTrader != null && activeSlot != null)
-        {
-            if (activeSlot.getItem().stackable)
-            {
-                if (activeSlot.amount > 0)
-                {
-                    activeSlot.amount -= 1;
-                }
-
-            }
-
-            playerFunds += activeSlot.getItem().sellPrice;
-            removeItem(activeSlot.getItem());
-            Debug.Log(playerFunds);
-
-            //Check to see if the player has sold their equipped item
-            Player.instance.weapons.checkWeapon(inventoryItems);
-        }
-    }
 }
