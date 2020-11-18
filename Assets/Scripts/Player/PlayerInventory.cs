@@ -137,10 +137,10 @@ public class PlayerInventory : MonoBehaviour
 
     void refreshUI()
     {
+        resetSlots();
+
         if (inventoryItems.Count > 0)
         {
-            resetSlots();
-  
             for (int i = 0; i < inventoryItems.Count; i++)
             {
                 Slot newSlot;
@@ -320,9 +320,6 @@ public class PlayerInventory : MonoBehaviour
                 {
                     playerFunds += activeSlot.getItem().sellPrice;
 
-                    //Check to see if the player has sold their equipped item
-                    Player.instance.weapons.checkWeapon(inventoryItems);
-
                     if (activeSlot.amount > 0)
                     {
                         InventoryItem i = inventoryItems[pos];
@@ -333,6 +330,9 @@ public class PlayerInventory : MonoBehaviour
                     {
                         removeItem(inventoryItems[pos].item);
                     }
+
+                    //Check to see if the player has sold their equipped item
+                    Player.instance.weapons.checkWeapon(inventoryItems);
                 }
             }
         }
