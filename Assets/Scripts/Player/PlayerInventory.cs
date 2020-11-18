@@ -12,6 +12,12 @@ public class PlayerInventory : MonoBehaviour
         public bool isTaken;
         public GameObject slotObject;
         public ScriptableObject objectData;
+    }
+
+    [System.Serializable]
+    public struct InventoryItem
+    {
+        public Item item;
         public int amount;
     }
 
@@ -19,7 +25,7 @@ public class PlayerInventory : MonoBehaviour
     List<Slot> slots = new List<Slot>();
 
     [SerializeField]
-    List<Item> inventoryItems = new List<Item>();
+    List<InventoryItem> inventoryItems = new List<InventoryItem>();
 
     [SerializeField]
     GameObject inventory;
@@ -49,7 +55,6 @@ public class PlayerInventory : MonoBehaviour
                 Slot newSlot = new Slot();
                 newSlot.slotObject = slotParent.transform.GetChild(i).transform.gameObject;
                 newSlot.isTaken = false;
-                newSlot.amount = 0;
                 slots.Add(newSlot);
             }
 
@@ -78,6 +83,12 @@ public class PlayerInventory : MonoBehaviour
 
         return false;
     }
+
+    public void setActiveSlot(InventorySlot s)
+    {
+        activeSlot = s;
+    }
+
     public bool showInventory()
     {
         if (inventory.activeSelf)
@@ -115,6 +126,8 @@ public class PlayerInventory : MonoBehaviour
                 newSlot.isTaken = true;
                 newSlot.slotObject.GetComponent<InventorySlot>().setButtonData(item);
                 newSlot.slotObject.GetComponent<InventorySlot>().setSlotPos(i);
+                newSlot.slotObject.GetComponent<InventorySlot>().amount = inventoryItems[i].amount;
+                newSlot.slotObject.GetComponent<InventorySlot>().updateStackedUI();
                 slots[i] = newSlot;
 
                 break;
@@ -124,43 +137,71 @@ public class PlayerInventory : MonoBehaviour
 
     void refreshUI()
     {
+        if (inventoryItems.Count > 0)
+        {
+            resetSlots();
+  
+            for (int i = 0; i < inventoryItems.Count; i++)
+            {
+                Slot newSlot;
+                newSlot = slots[i];
+                newSlot.slotObject.GetComponent<Image>().sprite = inventoryItems[i].item.itemSprite;
+                newSlot.isTaken = true;
+                newSlot.slotObject.GetComponent<InventorySlot>().setButtonData(inventoryItems[i].item);
+                newSlot.slotObject.GetComponent<InventorySlot>().setSlotPos(i);
+                newSlot.slotObject.GetComponent<InventorySlot>().amount = inventoryItems[i].amount;
+                newSlot.slotObject.GetComponent<InventorySlot>().updateStackedUI();
+                slots[i] = newSlot;
+            }
+        }
+    }
+
+    void resetSlots()
+    {
         for (int i = 0; i < slots.Count; i++)
         {
             Slot newSlot;
             newSlot = slots[i];
-            newSlot.slotObject.GetComponent<Image>().sprite = null;
+            newSlot.image = null;
             newSlot.isTaken = false;
             newSlot.objectData = null;
-            newSlot.amount = 0;
-            newSlot.slotObject.GetComponent<InventorySlot>().setSlotPos(0);
+            newSlot.slotObject = slots[i].slotObject;
+            newSlot.slotObject.GetComponent<Image>().sprite = null;
+            newSlot.slotObject.GetComponent<InventorySlot>().amount = 0;
+            newSlot.slotObject.GetComponent<InventorySlot>().updateStackedUI();
+            newSlot.slotObject.GetComponent<InventorySlot>().setButtonData(null);
             slots[i] = newSlot;
         }
 
-        for(int i =0; i < inventoryItems.Count; i++)
-        {
-            Slot newSlot;
-            newSlot = slots[i];
-            newSlot.slotObject.GetComponent<Image>().sprite = inventoryItems[i].itemSprite;
-            newSlot.isTaken = true;
-            newSlot.slotObject.GetComponent<InventorySlot>().setButtonData(inventoryItems[i]);
-            newSlot.slotObject.GetComponent<InventorySlot>().setSlotPos(i);
-            newSlot.amount = slots[i].amount;
-            slots[i] = newSlot;
-        }
     }
 
     public void addWeapon(Item t)
-    {   
-        inventoryItems.Add(t);
+    {
+        Debug.Log(t);
+        InventoryItem newInventory = new InventoryItem();
+        newInventory.item = t;
+        newInventory.amount = 1;
+        inventoryItems.Add(newInventory);
         updateUI(t);
     }
 
     public void removeItem(Item t)
     {
-        inventoryItems.Remove(t);
-        refreshUI();
+        int blah = inventoryItems.FindIndex(x => x.item == t);
+
+        inventoryItems.RemoveAt(blah);
+
     }
-    
+
+    public void addItem(Item t)
+    {
+        InventoryItem newInventory = new InventoryItem();
+        newInventory.item = t;
+        newInventory.amount = 1;
+        inventoryItems.Add(newInventory);
+        updateUI(t);
+    }
+
     public bool checkInventorySpace()
     {
         if(!slots[slots.Count - 1].isTaken)
@@ -175,9 +216,9 @@ public class PlayerInventory : MonoBehaviour
 
     public bool checkIfStackable(Item i)
     {
-        foreach(Item item in inventoryItems)
+        foreach(InventoryItem item in inventoryItems)
         {
-            if(item == i)
+            if(item.item == i)
             {
                 return true;
             }
@@ -186,19 +227,22 @@ public class PlayerInventory : MonoBehaviour
         return false;
     }
 
-    public void addStackable(Item i)
+    public void addStackable(Item j)
     {
-        foreach (Item item in inventoryItems)
+      
+        for(int i = 0; i < inventoryItems.Count; i++)
         {
-            if (item == i)
+            if (inventoryItems[i].item == j)
             {
-                Debug.Log(item + " " + i);
+                Slot newSlot = slots[inventoryItems[i].item.getSlotPos()];
+                InventoryItem t = inventoryItems[i];
+                t.amount += 1;
+                inventoryItems[i] = t;
+                newSlot.slotObject.GetComponent<InventorySlot>().amount = inventoryItems[i].amount;
+                newSlot.slotObject.GetComponent<InventorySlot>().updateStackedUI();
+                slots[inventoryItems[i].item.getSlotPos()] = newSlot;
 
-                Slot newSlot = slots[item.getSlotPos()];
-                newSlot.amount += 1;
-                slots[item.getSlotPos()] = newSlot;
-
-                Debug.Log("Position: " + item.getSlotPos());
+                break;
             }
         }
     }
@@ -242,12 +286,34 @@ public class PlayerInventory : MonoBehaviour
     }
 
     public void dropItem()
-    {
-        if(activeSlot != null)
-        {
+    {    
+        if (activeSlot != null)
+        {          
+            for (int i = 0; i < inventoryItems.Count; i++)
+            {             
+                if (inventoryItems[i].item == activeSlot.getItem())
+                {
+                    if (activeSlot.dropItem())
+                    {
+                        Debug.Log("DROPPED");
+
+                        InventoryItem o = inventoryItems[i];
+                        o.amount -= 1;
+                        inventoryItems[i] = o;
+
+                        if (inventoryItems[i].amount == 0)
+                        {
+                            removeItem(inventoryItems[i].item);
+                        }
+                        break;
+                    }
+                }
+            }
             
-            activeSlot.dropItem();
         }
+
+        refreshUI();
+        emptyInfoBox();
     }
 
     public void equipItem()
@@ -255,8 +321,10 @@ public class PlayerInventory : MonoBehaviour
         if(activeSlot != null)
         {
             activeSlot.equipItem();
-            emptyInfoBox();
         }
+
+        refreshUI();
+        emptyInfoBox();
     }
 
     public void setTrader(Trader t)
@@ -268,10 +336,18 @@ public class PlayerInventory : MonoBehaviour
     {
         if(currentTrader != null && activeSlot != null)
         {
+            if (activeSlot.getItem().stackable)
+            {
+                if (activeSlot.amount > 0)
+                {
+                    activeSlot.amount -= 1;
+                }
+
+            }
+
             playerFunds += activeSlot.getItem().sellPrice;
             removeItem(activeSlot.getItem());
             Debug.Log(playerFunds);
-            emptyInfoBox();
 
             //Check to see if the player has sold their equipped item
             Player.instance.weapons.checkWeapon(inventoryItems);

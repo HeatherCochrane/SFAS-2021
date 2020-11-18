@@ -317,8 +317,7 @@ public class Player : MonoBehaviour
                 if (inventory.checkInventorySpace())
                 {
                     inventory.addWeapon(collision.gameObject.GetComponent<WorldItem>().getItemData());
-                    collision.transform.SetParent(this.transform);
-                    collision.transform.gameObject.SetActive(false);
+                    Destroy(collision.transform.gameObject);
                 }
             }
             else
@@ -326,14 +325,12 @@ public class Player : MonoBehaviour
                 if (inventory.checkIfStackable(collision.gameObject.GetComponent<WorldItem>().getItemData()))
                 {
                     inventory.addStackable(collision.gameObject.GetComponent<WorldItem>().getItemData());
-                    collision.transform.SetParent(this.transform);
-                    collision.transform.gameObject.SetActive(false);
+                    Destroy(collision.transform.gameObject);
                 }
                 else
                 {
                     inventory.addWeapon(collision.gameObject.GetComponent<WorldItem>().getItemData());
-                    collision.transform.SetParent(this.transform);
-                    collision.transform.gameObject.SetActive(false);
+                    Destroy(collision.transform.gameObject);
                 }
             }
         }

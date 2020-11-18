@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f660969ab37e654b8eda9cc1fe76641, type: 3}
   m_Name: StarterMelee
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: -757630189579833598, guid: d45db9505338b204697980f275189884, type: 3}
+  itemSprite: {fileID: -8126202283999678777, guid: d45db9505338b204697980f275189884, type: 3}
   buyPrice: 10
   sellPrice: 5
-  worldObject: {fileID: 0}
+  worldObject: {fileID: 1874821832968600517, guid: 6c492e938e0dc2b449f58b915dda3dcf, type: 3}
+  stackable: 0
   damage: 1
   distance: 1
   weaponType: 0

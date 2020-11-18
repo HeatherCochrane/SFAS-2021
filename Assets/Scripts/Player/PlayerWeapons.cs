@@ -66,17 +66,17 @@ public class PlayerWeapons : MonoBehaviour
     }
 
 
-    public void checkWeapon(List<Item> items)
+    public void checkWeapon(List<PlayerInventory.InventoryItem> items)
     {
         bool meleeSafe = false;
         bool rangedSafe = false;
         for(int i =0; i < items.Count; i++)
         {
-            if(items[i] == meleeWeapon)
+            if(items[i].item == meleeWeapon)
             {
                 meleeSafe = true;
             }
-            if(items[i] == longRangeWeapon)
+            if(items[i].item == longRangeWeapon)
             {
                 rangedSafe = true;
             }

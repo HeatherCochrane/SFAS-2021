@@ -10,7 +10,7 @@ public class WorldItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        data.worldObject = this.gameObject;
+
         this.GetComponent<SpriteRenderer>().sprite = data.itemSprite;
     }
 

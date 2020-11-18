@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InventorySlot : MonoBehaviour
 {
@@ -10,10 +11,14 @@ public class InventorySlot : MonoBehaviour
     Weapon weapon;
     Item item;
 
-    public int amount;
+    public int amount = 1;
+
+    public TextMeshProUGUI stacked;
+
     // Start is called before the first frame update
     void Start()
     {
+        stacked.text = amount.ToString();
     }
 
     // Update is called once per frame
@@ -42,6 +47,8 @@ public class InventorySlot : MonoBehaviour
                 item = slotData as Item;
                 setItemMenu();
             }
+
+            Player.instance.inventory.setActiveSlot(this);
         }
     }
 
@@ -73,17 +80,26 @@ public class InventorySlot : MonoBehaviour
         Player.instance.inventory.showWeaponInfoBox(item.itemSprite, item.name, "", "", item.sellPrice.ToString(), this);
     }
 
-    public void dropItem()
+    public bool dropItem()
     {
-        if (slotData.worldObject != null)
+        if(amount > 0)
         {
-            slotData.worldObject.SetActive(true);
-            slotData.worldObject.transform.position += new Vector3(5, 2, 0);
-            Player.instance.inventory.removeItem(slotData);
+            GameObject o = Instantiate(slotData.worldObject);
 
-            slotData = null;
+            o.SetActive(true);
+            o.transform.position += new Vector3(5, 2, 0);
+            amount -= 1;
+            stacked.text = amount.ToString();
+            return true;
         }
-;    }
+
+        return false;
+    }
+
+    public void updateStackedUI()
+    {
+        stacked.text = amount.ToString();
+    }
 
     public void setSlotPos(int p)
     {
@@ -92,7 +108,6 @@ public class InventorySlot : MonoBehaviour
 
     public int getSlotPos()
     {
-        Debug.Log(slotData.getSlotPos());
         return slotData.getSlotPos();
     }
 }

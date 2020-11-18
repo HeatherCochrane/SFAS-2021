@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e914754d79403544911296c2ed8987b, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 0}
-  buyPrice: 0
-  sellPrice: 0
-  worldObject: {fileID: 0}
-  stackable: 0
+  itemSprite: {fileID: 3457211282796719415, guid: d45db9505338b204697980f275189884, type: 3}
+  buyPrice: 10
+  sellPrice: 5
+  worldObject: {fileID: 1537513270091848440, guid: d44fb8d7b3062f947a2422f45ee62fed, type: 3}
+  stackable: 1
