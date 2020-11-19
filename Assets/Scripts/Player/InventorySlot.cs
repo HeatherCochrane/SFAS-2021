@@ -77,7 +77,7 @@ public class InventorySlot : MonoBehaviour
 
     public void setItemMenu()
     {
-        Player.instance.inventory.showWeaponInfoBox(item.itemSprite, item.name, "", "", item.sellPrice.ToString(), this);
+        Player.instance.inventory.showItemInfoBox(item.itemSprite, item.name, "", "", item.sellPrice.ToString(), this);
     }
 
 
@@ -94,7 +94,6 @@ public class InventorySlot : MonoBehaviour
                 o.transform.position += new Vector3(5, 2, 0);
             }
 
-           
             amount -= 1;
             stacked.text = amount.ToString();
 

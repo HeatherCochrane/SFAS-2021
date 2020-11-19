@@ -59,11 +59,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     Game dialogue;
 
-    //Sprites and animations
     [SerializeField]
-    Sprite fallSprite;
-    [SerializeField]
-    Sprite standSprite;
+    GameObject playerSprites;
 
     // Start is called before the first frame update
     void Start()
@@ -150,13 +147,13 @@ public class Player : MonoBehaviour
             {
                 rb.velocity += new Vector2(speed, 0);
                 facingLeft = false;
-                this.GetComponent<SpriteRenderer>().flipX = true;
+                playerSprites.transform.localScale = new Vector2(-0.3f, 0.3f);
             }
             else if (Input.GetKey(KeyCode.A))
             {
                 rb.velocity -= new Vector2(speed, 0);
                 facingLeft = true;
-                this.GetComponent<SpriteRenderer>().flipX = false;
+                playerSprites.transform.localScale = new Vector2(0.3f, 0.3f);
             }
 
             if (Input.GetKey(KeyCode.Space) && !isFalling)
@@ -164,15 +161,6 @@ public class Player : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jump);
                 isFalling = true;
             }
-        }
-
-        if(isFalling)
-        {
-            this.GetComponent<SpriteRenderer>().sprite = fallSprite;
-        }
-        else
-        {
-            this.GetComponent<SpriteRenderer>().sprite = standSprite;
         }
 
         //Apply force when the player is falling 
@@ -310,7 +298,6 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.tag == "Pickup")
         {
-            Debug.Log("PICK UP!");
 
             if (!collision.gameObject.GetComponent<WorldItem>().getItemData().stackable)
             {

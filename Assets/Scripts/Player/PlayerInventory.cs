@@ -177,7 +177,6 @@ public class PlayerInventory : MonoBehaviour
 
     public void addWeapon(Item t)
     {
-        Debug.Log(t);
         InventoryItem newInventory = new InventoryItem();
         newInventory.item = t;
         newInventory.amount = 1;
@@ -264,6 +263,32 @@ public class PlayerInventory : MonoBehaviour
         else
         {
             infoBox.transform.GetChild(5).gameObject.SetActive(true);
+            infoBox.transform.GetChild(6).gameObject.SetActive(true);
+            infoBox.transform.GetChild(7).gameObject.SetActive(false);
+        }
+
+        activeSlot = slot;
+    }
+
+    public void showItemInfoBox(Sprite s, string name, string damage, string range, string price, InventorySlot slot)
+    {
+        infoBox.transform.GetChild(0).gameObject.SetActive(true);
+        infoBox.transform.GetChild(0).GetComponent<Image>().sprite = s;
+        infoBox.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = name;
+        infoBox.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = damage;
+        infoBox.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = range;
+        infoBox.transform.GetChild(4).gameObject.SetActive(true);
+        infoBox.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "Sell Price: " + price;
+
+        if (currentTrader != null)
+        {
+            infoBox.transform.GetChild(5).gameObject.SetActive(false);
+            infoBox.transform.GetChild(6).gameObject.SetActive(false);
+            infoBox.transform.GetChild(7).gameObject.SetActive(true);
+        }
+        else
+        {
+            infoBox.transform.GetChild(5).gameObject.SetActive(false);
             infoBox.transform.GetChild(6).gameObject.SetActive(true);
             infoBox.transform.GetChild(7).gameObject.SetActive(false);
         }
