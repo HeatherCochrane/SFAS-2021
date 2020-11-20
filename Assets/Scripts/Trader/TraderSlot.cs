@@ -11,6 +11,7 @@ public class TraderSlot : MonoBehaviour
 
 
     Weapon weapon;
+    Item item;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,13 +37,22 @@ public class TraderSlot : MonoBehaviour
             if (slotItem.GetType() == typeof(Weapon))
             {
                 weapon = slotItem as Weapon;
+                setWeaponInfoMenu();
+            }
+            if (slotItem.GetType() == typeof(Item))
+            {
+                item = slotItem as Item;
                 setInfoMenu();
             }
         }
     }
 
+    void setWeaponInfoMenu()
+    {
+        trader.showItemInfoBox(weapon.itemSprite, weapon.name, weapon.damage.ToString(), weapon.distance.ToString(), weapon.buyPrice.ToString(), this, weapon);
+    }
     void setInfoMenu()
     {
-        trader.showWeaponInfoBox(weapon.itemSprite, weapon.name, weapon.damage.ToString(), weapon.distance.ToString(), weapon.buyPrice.ToString(), this, weapon);
+        trader.showItemInfoBox(item.itemSprite, item.name, "", "", item.buyPrice.ToString(), this, item);
     }
 }

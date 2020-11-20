@@ -195,11 +195,18 @@ public class PlayerInventory : MonoBehaviour
 
     public void addItem(Item t)
     {
-        InventoryItem newInventory = new InventoryItem();
-        newInventory.item = t;
-        newInventory.amount = 1;
-        inventoryItems.Add(newInventory);
-        updateUI(t);
+        if (checkIfStackable(t))
+        {
+            addStackable(t);
+        }
+        else
+        {
+            InventoryItem newInventory = new InventoryItem();
+            newInventory.item = t;
+            newInventory.amount = 1;
+            inventoryItems.Add(newInventory);
+            updateUI(t);
+        }
     }
 
     public bool checkInventorySpace()
@@ -228,8 +235,7 @@ public class PlayerInventory : MonoBehaviour
     }
 
     public void addStackable(Item j)
-    {
-      
+    {    
         for(int i = 0; i < inventoryItems.Count; i++)
         {
             if (inventoryItems[i].item == j)
@@ -353,9 +359,10 @@ public class PlayerInventory : MonoBehaviour
             }
             else if (interaction == "SellAll")
             {
+                playerFunds += (activeSlot.getItem().sellPrice * activeSlot.amount);
+
                 activeSlot.removeInventory(interaction);
 
-                playerFunds += (activeSlot.getItem().sellPrice * activeSlot.amount);
 
                 activeSlot.amount = 0;
 

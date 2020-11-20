@@ -59,6 +59,7 @@ public class Trader : MonoBehaviour
         }
 
         traderInventory.SetActive(false);
+        emptyInfoBox();
 
     }
 
@@ -110,13 +111,17 @@ public class Trader : MonoBehaviour
                 {
                     Player.instance.inventory.addWeapon(activeItem);
                     Player.instance.inventory.adjustFunds(-activeItem.buyPrice);
-                    emptyInfoBox();
+                }
+                else if(activeItem.GetType() == typeof(Item))
+                {
+                    Player.instance.inventory.addItem(activeItem);
+                    Player.instance.inventory.adjustFunds(-activeItem.buyPrice);
                 }
             }
         }
     }
 
-    public void showWeaponInfoBox(Sprite s, string name, string damage, string range, string price, TraderSlot slot, Item active)
+    public void showItemInfoBox(Sprite s, string name, string damage, string range, string price, TraderSlot slot, Item active)
     {
         infoBox.transform.GetChild(0).gameObject.SetActive(true);
         infoBox.transform.GetChild(0).GetComponent<Image>().sprite = s;
@@ -124,6 +129,7 @@ public class Trader : MonoBehaviour
         infoBox.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Damage: " + damage;
         infoBox.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Range: " + range;
         infoBox.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "Price: " + price;
+        infoBox.transform.GetChild(5).transform.gameObject.SetActive(true);
 
         activeSlot = slot;
         activeItem = active;
@@ -136,6 +142,7 @@ public class Trader : MonoBehaviour
         infoBox.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "";
         infoBox.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "";
         infoBox.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "";
+        infoBox.transform.GetChild(5).transform.gameObject.SetActive(false);
 
         activeSlot = null;
         activeItem = null;
