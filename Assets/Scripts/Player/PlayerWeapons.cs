@@ -9,6 +9,9 @@ public class PlayerWeapons : MonoBehaviour
     [SerializeField]
     Weapon longRangeWeapon;
 
+    [SerializeField]
+    Weapon standardMeleeWeapon;
+
     Player player;
     // Start is called before the first frame update
     void Start()
@@ -61,8 +64,8 @@ public class PlayerWeapons : MonoBehaviour
 
     public void unequipMeleeWeapon()
     {
-        meleeWeapon = null;
-        player.setMeleeWeapon(null);
+        meleeWeapon = standardMeleeWeapon;
+        player.setMeleeWeapon(meleeWeapon);
     }
 
 

@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     //Weapons
     public PlayerWeapons weapons;
 
+
     [SerializeField]
     GameObject cam;
     public float smoothing = 2f;
@@ -29,6 +30,9 @@ public class Player : MonoBehaviour
     Weapon longRangeWeapon;
     bool holding = false;
     Vector2 direction;
+
+    [SerializeField]
+    LayerMask killables;
 
     //Longe Range variables
     Vector2 mousePos;
@@ -76,8 +80,7 @@ public class Player : MonoBehaviour
         levels = GetComponent<PlayerLevel>();
         weapons = GetComponent<PlayerWeapons>();
         playerQuests = GetComponent<PlayerQuests>();
-
-
+      
         meleeWeapon = weapons.getMeleeWeapon();
         longRangeWeapon = weapons.getRangedWeapon();
 
@@ -223,7 +226,19 @@ public class Player : MonoBehaviour
 
         //Attack which way the player is facing
 
-        hit = Physics2D.Raycast(transform.position, direction.normalized, dist);
+        if(direction == new Vector2(0, 0))
+        {
+            if (facingLeft)
+            {
+                direction = new Vector2(-1, 0);
+            }
+            else
+            {
+                direction = new Vector2(1, 0);
+            }
+        }
+
+        hit = Physics2D.Raycast(transform.position, direction.normalized, dist, killables);
 
         if (hit.collider)
         {
@@ -231,6 +246,14 @@ public class Player : MonoBehaviour
             {
                 hit.collider.gameObject.GetComponent<Killable>().takeDamage(facingLeft, damage);
             }
+            else
+            {
+                Debug.Log("Hit not killable");
+            }
+        }
+        else
+        {
+            Debug.Log("Collider null");
         }
     }
 

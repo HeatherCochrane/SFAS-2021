@@ -34,7 +34,7 @@ public class StationaryEnemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (canAttack)
+        if (!canAttack)
         {
             dist = Vector2.Distance(this.transform.position, player.transform.position);
 
