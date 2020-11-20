@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
     //Weapons
     public PlayerWeapons weapons;
 
+    //Melee animation
+    [SerializeField]
+    GameObject attackAnim;
 
     [SerializeField]
     GameObject cam;
@@ -89,6 +92,8 @@ public class Player : MonoBehaviour
 
         offset = cam.transform.position - this.transform.position;
         camPos = cam.transform.position;
+
+        attackAnim.SetActive(false);
     }
 
     // Update is called once per frame
@@ -126,6 +131,8 @@ public class Player : MonoBehaviour
             //Melee attack
             if (Input.GetMouseButtonDown(1) && meleeWeapon != null)
             {
+                setRandomAngle();
+                attackAnim.SetActive(true);
                 Attack(meleeWeapon.distance, meleeWeapon.damage);
             }
 
@@ -179,12 +186,30 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -speedCap, speedCap), rb.velocity.y);
     }
 
+  
     void LateUpdate()
     {
         Vector3 targetCamPos = new Vector3(this.transform.position.x + offset.x, cam.transform.position.y, this.transform.position.z + offset.z);
         cam.transform.position = Vector3.Lerp(cam.transform.position, targetCamPos, smoothing * Time.deltaTime);
         cam.transform.position = new Vector3(Mathf.Clamp(cam.transform.position.x, -262, 255), cam.transform.position.y, cam.transform.position.z);
     }
+
+    void setRandomAngle()
+    {
+        if (attackAnim.transform.rotation == Quaternion.Euler(0, 0, -20))
+        {
+            attackAnim.transform.rotation = Quaternion.Euler(0, 0, 20);
+        }
+        else
+        {
+            attackAnim.transform.rotation = Quaternion.Euler(0, 0, -20);
+        }
+    }
+    void hideAttackAnim()
+    {
+        attackAnim.SetActive(false);
+    }
+
 
     void beginConversation()
     {
@@ -255,6 +280,8 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Collider null");
         }
+
+        Invoke("hideAttackAnim", 0.2f);
     }
 
     void drawRange()
