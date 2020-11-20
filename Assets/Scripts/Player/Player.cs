@@ -37,9 +37,12 @@ public class Player : MonoBehaviour
 
     //Movement values
     float speed = 0.2f;
-    float speedCap = 3f;
+    float speedCap = 2.5f;
     bool stopMovement = false;
     bool facingLeft = false;
+
+    //Health
+    int health = 5;
 
     //Rigidbody
     Rigidbody2D rb;
@@ -276,6 +279,27 @@ public class Player : MonoBehaviour
         meleeWeapon = m;
     }
 
+    public void takeDamage(int amount, bool left, int force)
+    {
+        health -= amount;
+
+        rb.velocity = new Vector2(0, 0);
+
+        if(left)
+        {
+            
+            rb.velocity = new Vector2(force, force);
+        }
+        else
+        {
+            rb.velocity = new Vector2(-force, force);
+        }
+
+        if(health <= 0)
+        {
+            Debug.Log("Died!");
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.tag == "Ground")
