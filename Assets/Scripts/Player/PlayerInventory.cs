@@ -36,6 +36,9 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField]
     GameObject infoBox;
 
+    [SerializeField]
+    GameObject infoBoxButtons;
+
     InventorySlot activeSlot;
 
     [SerializeField]
@@ -244,32 +247,6 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    public void showWeaponInfoBox(Sprite s, string name, string damage, string range, string price, InventorySlot slot)
-    {
-        infoBox.transform.GetChild(0).gameObject.SetActive(true);
-        infoBox.transform.GetChild(0).GetComponent<Image>().sprite = s;
-        infoBox.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = name;
-        infoBox.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = damage;
-        infoBox.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = range;
-        infoBox.transform.GetChild(4).gameObject.SetActive(true);
-        infoBox.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "Sell Price: " + price;
-
-        if (currentTrader != null)
-        {
-            infoBox.transform.GetChild(5).gameObject.SetActive(false);
-            infoBox.transform.GetChild(6).gameObject.SetActive(false);
-            infoBox.transform.GetChild(7).gameObject.SetActive(true);
-        }
-        else
-        {
-            infoBox.transform.GetChild(5).gameObject.SetActive(true);
-            infoBox.transform.GetChild(6).gameObject.SetActive(true);
-            infoBox.transform.GetChild(7).gameObject.SetActive(false);
-        }
-
-        activeSlot = slot;
-    }
-
     public void showItemInfoBox(Sprite s, string name, string damage, string range, string price, InventorySlot slot)
     {
         infoBox.transform.GetChild(0).gameObject.SetActive(true);
@@ -282,15 +259,25 @@ public class PlayerInventory : MonoBehaviour
 
         if (currentTrader != null)
         {
-            infoBox.transform.GetChild(5).gameObject.SetActive(false);
-            infoBox.transform.GetChild(6).gameObject.SetActive(false);
-            infoBox.transform.GetChild(7).gameObject.SetActive(true);
+            infoBoxButtons.transform.GetChild(0).gameObject.SetActive(false);
+            infoBoxButtons.transform.GetChild(1).gameObject.SetActive(false);
+            infoBoxButtons.transform.GetChild(2).gameObject.SetActive(true);
+
+            if(slot.amount > 1)
+            {
+                infoBoxButtons.transform.GetChild(3).gameObject.SetActive(true);
+            }
+            else
+            {
+                infoBoxButtons.transform.GetChild(3).gameObject.SetActive(false);
+            }
         }
         else
         {
-            infoBox.transform.GetChild(5).gameObject.SetActive(false);
-            infoBox.transform.GetChild(6).gameObject.SetActive(true);
-            infoBox.transform.GetChild(7).gameObject.SetActive(false);
+            infoBoxButtons.transform.GetChild(0).gameObject.SetActive(false);
+            infoBoxButtons.transform.GetChild(1).gameObject.SetActive(true);
+            infoBoxButtons.transform.GetChild(2).gameObject.SetActive(false);
+            infoBoxButtons.transform.GetChild(3).gameObject.SetActive(false);
         }
 
         activeSlot = slot;
@@ -303,14 +290,18 @@ public class PlayerInventory : MonoBehaviour
         infoBox.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "";
         infoBox.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "";
         infoBox.transform.GetChild(4).gameObject.SetActive(false);
-        infoBox.transform.GetChild(5).gameObject.SetActive(false);
-        infoBox.transform.GetChild(6).gameObject.SetActive(false);
+        infoBoxButtons.transform.GetChild(0).gameObject.SetActive(false);
+        infoBoxButtons.transform.GetChild(1).gameObject.SetActive(false);
+        infoBoxButtons.transform.GetChild(2).gameObject.SetActive(false);
+        infoBoxButtons.transform.GetChild(3).gameObject.SetActive(false);
+
         activeSlot = null;
     }
 
     public void RemoveItemFromInventory(string interaction)
     {
         int pos = 0;
+
         if (activeSlot != null)
         {
             for (int i = 0; i < inventoryItems.Count; i++)
@@ -360,10 +351,32 @@ public class PlayerInventory : MonoBehaviour
                     Player.instance.weapons.checkWeapon(inventoryItems);
                 }
             }
+            else if (interaction == "SellAll")
+            {
+                activeSlot.removeInventory(interaction);
+
+                playerFunds += (activeSlot.getItem().sellPrice * activeSlot.amount);
+
+                activeSlot.amount = 0;
+
+                InventoryItem i = inventoryItems[pos];
+                i.amount = activeSlot.amount;
+                inventoryItems[pos] = i;
+
+
+                removeItem(inventoryItems[pos].item);
+
+                //Check to see if the player has sold their equipped item
+                Player.instance.weapons.checkWeapon(inventoryItems);
+
+            }
         }
 
         refreshUI();
-        emptyInfoBox();
+        if (activeSlot.amount <= 0)
+        {
+            emptyInfoBox();
+        }
     }
 
     public void equipItem()

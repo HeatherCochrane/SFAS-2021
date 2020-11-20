@@ -72,7 +72,7 @@ public class InventorySlot : MonoBehaviour
 
     public void setEquipMenu()
     {
-        Player.instance.inventory.showWeaponInfoBox(weapon.itemSprite, weapon.name, "Damage: " +  weapon.damage.ToString(), "Distance: " + weapon.distance.ToString(), weapon.sellPrice.ToString(), this);
+        Player.instance.inventory.showItemInfoBox(weapon.itemSprite, weapon.name, "Damage: " +  weapon.damage.ToString(), "Distance: " + weapon.distance.ToString(), weapon.sellPrice.ToString(), this);
     }
 
     public void setItemMenu()
@@ -93,7 +93,7 @@ public class InventorySlot : MonoBehaviour
                 o.SetActive(true);
                 o.transform.position += new Vector3(5, 2, 0);
             }
-
+            
             amount -= 1;
             stacked.text = amount.ToString();
 
