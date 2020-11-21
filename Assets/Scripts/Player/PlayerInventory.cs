@@ -353,8 +353,6 @@ public class PlayerInventory : MonoBehaviour
                         removeItem(inventoryItems[pos].item);
                     }
 
-                    //Check to see if the player has sold their equipped item
-                    Player.instance.weapons.checkWeapon(inventoryItems);
                 }
             }
             else if (interaction == "SellAll")
@@ -373,13 +371,14 @@ public class PlayerInventory : MonoBehaviour
 
                 removeItem(inventoryItems[pos].item);
 
-                //Check to see if the player has sold their equipped item
-                Player.instance.weapons.checkWeapon(inventoryItems);
-
             }
         }
 
+        //Check to see if the player has sold their equipped item
+        Player.instance.weapons.checkWeapon(inventoryItems);
+
         refreshUI();
+
         if (activeSlot.amount <= 0)
         {
             emptyInfoBox();

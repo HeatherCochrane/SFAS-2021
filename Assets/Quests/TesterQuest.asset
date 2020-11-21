@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   XPGained: 100
   levelRequirement: 0
-  questsCompleted: []
+  questsCompleted:
+  - {fileID: 11400000, guid: cb4a02d8a237d5448a55f3191fd04001, type: 2}
   totalKillsNeeded:
   - species: 0
-    number: 1
+    number: 3
   - species: 1
     number: 1

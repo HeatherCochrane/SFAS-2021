@@ -15,6 +15,9 @@ public class PlayerQuests : MonoBehaviour
     //The total 
     List<Quest.Kills> totalKills = new List<Quest.Kills>();
 
+    [SerializeField]
+    QuestScreen questScreen;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +33,7 @@ public class PlayerQuests : MonoBehaviour
     public void addNewQuest(Quest n)
     {
         questsStarted.Add(n);
+        questScreen.addActiveQuest(n);
     }
 
     public void questCompleted(Quest c)
