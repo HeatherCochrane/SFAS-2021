@@ -46,11 +46,13 @@ public class QuestScreen : MonoBehaviour
         if(questScreen.activeSelf)
         {
             questScreen.SetActive(false);
+            Player.instance.setMovement(false);
         }
         else
         {
             questScreen.SetActive(true);
             clearInfoBox();
+            Player.instance.setMovement(true);
         }
     }
 
@@ -59,6 +61,7 @@ public class QuestScreen : MonoBehaviour
         newButton = Instantiate(questButtonPrefab);
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = data.name;
         newButton.transform.SetParent(questParent.transform);
+        newButton.transform.SetSiblingIndex(0);
         newButton.GetComponent<QuestButton>().setData(data, this);
     }
 
@@ -99,16 +102,16 @@ public class QuestScreen : MonoBehaviour
 
         if (currentQuestToggled.questsCompleted.Count > 0)
         {
+            string questToComplete = "Quest needed: ";
+
             for (int i = 0; i < currentQuestToggled.questsCompleted.Count; i++)
             {
-                string questToComplete = "Quest needed: " + currentQuestToggled.questsCompleted[i].name;
+                questToComplete += currentQuestToggled.questsCompleted[i].name + "\n";
                 TextMeshProUGUI newString = Instantiate(stringPrefab);
                 newString.text = questToComplete;
                 newString.transform.SetParent(infoBox.transform);
             }
         }
-
-     
     }
 
     void clearInfoBox()
