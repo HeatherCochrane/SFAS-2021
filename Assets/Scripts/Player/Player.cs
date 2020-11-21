@@ -116,6 +116,21 @@ public class Player : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (!uiHandler.getInMenu(UIHandler.Menus.QUESTS))
+            {
+                uiHandler.changeMenu(UIHandler.Menus.QUESTS);
+                setMovement(true);
+            }
+            else
+            {
+                uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
+                setMovement(false);
+            }
+        }
+
+
         if (!stopMovement)
         {
             //Interaction Key
