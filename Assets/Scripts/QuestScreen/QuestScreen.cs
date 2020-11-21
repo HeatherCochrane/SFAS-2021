@@ -6,6 +6,10 @@ using TMPro;
 public class QuestScreen : MonoBehaviour
 {
     [SerializeField]
+    GameObject questScreen;
+
+
+    [SerializeField]
     GameObject questButtonPrefab;
 
     GameObject newButton;
@@ -25,13 +29,29 @@ public class QuestScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        questScreen.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            toggleQuestScreen();
+        }
+    }
+
+    public void toggleQuestScreen()
+    {
+        if(questScreen.activeSelf)
+        {
+            questScreen.SetActive(false);
+        }
+        else
+        {
+            questScreen.SetActive(true);
+            clearInfoBox();
+        }
     }
 
     public void addActiveQuest(Quest data)
@@ -44,6 +64,8 @@ public class QuestScreen : MonoBehaviour
 
     public void showQuestData(Quest data)
     {
+        clearInfoBox();
+
         currentQuestToggled = data;
 
         getQuestRequirements();
@@ -59,7 +81,7 @@ public class QuestScreen : MonoBehaviour
                 if(currentQuestToggled.totalKillsNeeded[i].species == Killable.Species.ENEMY)
                 {
                     
-                    string enemyString = "Enemies to kill: " + currentQuestToggled.totalKillsNeeded[i].number.ToString();
+                    string enemyString = "Enemies to kill: " + Player.instance.playerQuests.getTotalKills(currentQuestToggled.totalKillsNeeded[i]) + "/" + currentQuestToggled.totalKillsNeeded[i].number.ToString();
                     TextMeshProUGUI newString = Instantiate(stringPrefab);
                     newString.text = enemyString;
                     newString.transform.SetParent(infoBox.transform);
@@ -67,7 +89,7 @@ public class QuestScreen : MonoBehaviour
                 }
                 else if(currentQuestToggled.totalKillsNeeded[i].species == Killable.Species.SHEEP)
                 {
-                    string sheepString = "Sheep to kill: " + currentQuestToggled.totalKillsNeeded[i].number.ToString();
+                    string sheepString = "Sheep to kill: " + Player.instance.playerQuests.getTotalKills(currentQuestToggled.totalKillsNeeded[i]) + "/" + currentQuestToggled.totalKillsNeeded[i].number.ToString();
                     TextMeshProUGUI newString = Instantiate(stringPrefab);
                     newString.text = sheepString;
                     newString.transform.SetParent(infoBox.transform);
@@ -87,6 +109,14 @@ public class QuestScreen : MonoBehaviour
         }
 
      
+    }
+
+    void clearInfoBox()
+    {
+        for(int i =0; i < infoBox.transform.childCount; i++)
+        {
+            Destroy(infoBox.transform.GetChild(i).gameObject);
+        }
     }
 
 }

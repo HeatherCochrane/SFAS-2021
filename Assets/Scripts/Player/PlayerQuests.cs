@@ -93,4 +93,17 @@ public class PlayerQuests : MonoBehaviour
         }
         
     }
+
+    public int getTotalKills(Quest.Kills k)
+    {
+        for(int i =0; i < totalKills.Count; i++)
+        {
+            if(totalKills[i].species == k.species)
+            {
+                return totalKills[i].number;
+            }
+        }
+
+        return 0;
+    }
 }
