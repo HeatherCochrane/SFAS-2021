@@ -7,7 +7,6 @@ using TMPro;
 
 public class Game : MonoBehaviour
 {
-    [SerializeField]
     GameObject dialogueScreen;
 
     StoryData _data;
@@ -55,8 +54,10 @@ public class Game : MonoBehaviour
     }
 
     //Start the dialogue with the given character
-    public void startNewDialogue(StoryData d)
+    public void startNewDialogue(StoryData d, GameObject screen)
     {
+        dialogueScreen = screen;
+
         dialogueScreen.GetComponent<Animator>().SetBool("Open", true);
         dialogueFinished = false;
         _data = d;
@@ -175,6 +176,8 @@ public class Game : MonoBehaviour
 
     public void leaveDialogue()
     {
+        Debug.Log("Called");
+
         startDialogue = false;
         _output.setIdle();
         _currentBeat = null;
@@ -182,15 +185,11 @@ public class Game : MonoBehaviour
         _output.Clear();
 
         dialogueScreen.GetComponent<Animator>().SetBool("Open", false);
+        Invoke("closeDialogueScreen", 0.5f);
     }
 
-    public void showDialogueScreen(bool set)
+    public void closeDialogueScreen()
     {
-        dialogueScreen.SetActive(set);
-    }
-
-    public bool getIfFinished()
-    {
-        return dialogueFinished;
+        Player.instance.uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
     }
 }

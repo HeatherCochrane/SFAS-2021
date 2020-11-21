@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
     //Weapons
     public PlayerWeapons weapons;
 
+    //UI
+    public UIHandler uiHandler;
+
     //Melee animation
     [SerializeField]
     GameObject attackAnim;
@@ -101,15 +104,15 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q) && !stopInventoryToggle)
         {
-            bool open = inventory.showInventory();
-
-            if (open)
+            if(uiHandler.getInMenu(UIHandler.Menus.INVENTORY))
             {
-                stopMovement = true;
+                uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
+                stopMovement = false;
             }
             else
             {
-                stopMovement = false;
+                uiHandler.changeMenu(UIHandler.Menus.INVENTORY);
+                stopMovement = true;
             }
         }
 
@@ -120,10 +123,12 @@ public class Player : MonoBehaviour
             {
                 if (character != null)
                 {
+                    uiHandler.changeMenu(UIHandler.Menus.DIALOGUE);
                     beginConversation();
                 }
                 else if(trader != null)
                 {
+                    uiHandler.changeMenu(UIHandler.Menus.TRADER);
                     beginTrading();
                 }
             }
@@ -214,7 +219,8 @@ public class Player : MonoBehaviour
     void beginConversation()
     {
         //Pass in the characters dialogue data to begin the conversation
-        dialogue.startNewDialogue(character.getData().getDialogue());
+        uiHandler.changeMenu(UIHandler.Menus.DIALOGUE);
+        dialogue.startNewDialogue(character.getData().getDialogue(), uiHandler.getMenuObject(UIHandler.Menus.DIALOGUE));
         stopMovement = true;
         holding = false;
         rangeIndicator.gameObject.SetActive(false);
@@ -223,8 +229,8 @@ public class Player : MonoBehaviour
 
     void beginTrading()
     {
-        trader.startTrading();
-        inventory.setInventory(true);
+        trader.setTraderCanvas(uiHandler.getMenuObject(UIHandler.Menus.TRADER));
+        uiHandler.changeDoubleMenu(UIHandler.Menus.TRADER, UIHandler.Menus.INVENTORY);
         setMovement(true);
         stopInventoryToggle = true;
     }

@@ -63,6 +63,30 @@ public class Trader : MonoBehaviour
 
     }
 
+    public void setTraderCanvas(GameObject c)
+    {
+        traderInventory = c;
+
+        if (!spawnedInventory)
+        {
+            for (int i = 0; i < stock.Count; i++)
+            {
+                Slot newSlot = new Slot();
+                newSlot.slotObject = slotParent.transform.GetChild(i).transform.gameObject;
+                newSlot.slotObject.GetComponent<Image>().sprite = stock[i].itemSprite;
+                newSlot.slotObject.GetComponent<TraderSlot>().setButtonData(stock[i]);
+                newSlot.price = stock[i].buyPrice;
+                slots.Add(newSlot);
+            }
+
+            spawnedInventory = true;
+        }
+
+        traderInventory.SetActive(false);
+        emptyInfoBox();
+
+        startTrading();
+    }
     public void startTrading()
     {
         Player.instance.setMovement(true);

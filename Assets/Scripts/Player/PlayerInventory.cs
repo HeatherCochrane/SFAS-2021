@@ -64,9 +64,13 @@ public class PlayerInventory : MonoBehaviour
             spawnedInventory = true;
         }
 
-        inventory.SetActive(false);
+
     }
 
+    private void OnEnable()
+    {
+        emptyInfoBox();
+    }
     private void FixedUpdate()
     {
         funds.text = playerFunds.ToString();
@@ -90,21 +94,6 @@ public class PlayerInventory : MonoBehaviour
     public void setActiveSlot(InventorySlot s)
     {
         activeSlot = s;
-    }
-
-    public bool showInventory()
-    {
-        if (inventory.activeSelf)
-        {
-            inventory.SetActive(false);
-            return false;
-        }
-        else
-        {
-            inventory.SetActive(true);
-            emptyInfoBox();
-            return true;
-        }
     }
 
     public void setInventory(bool set)
