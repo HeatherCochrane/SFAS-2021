@@ -49,6 +49,8 @@ public class PlayerQuests : MonoBehaviour
 
         //Check the requirements again, now looking for completed quests
         checkQuestRequirements();
+
+        questScreen.addCompletedQuest(c);
     }
 
     public void speciesKilled(Killable.Species s)

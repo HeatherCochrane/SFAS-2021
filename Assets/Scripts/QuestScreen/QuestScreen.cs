@@ -19,12 +19,16 @@ public class QuestScreen : MonoBehaviour
     [SerializeField]
     GameObject questParent;
 
+    [SerializeField]
+    GameObject finishedQuestParent;
 
     [SerializeField]
     GameObject infoBox;
 
     [SerializeField]
     TextMeshProUGUI stringPrefab;
+
+    List<GameObject> startedQuests = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -63,6 +67,32 @@ public class QuestScreen : MonoBehaviour
         newButton.transform.SetParent(questParent.transform);
         newButton.transform.SetSiblingIndex(0);
         newButton.GetComponent<QuestButton>().setData(data, this);
+
+        startedQuests.Add(newButton);
+    }
+
+    public void addCompletedQuest(Quest data)
+    {
+        removeQuest(data);
+
+        newButton = Instantiate(questButtonPrefab);
+        newButton.GetComponentInChildren<TextMeshProUGUI>().text = data.name;
+        newButton.transform.SetParent(finishedQuestParent.transform);
+        newButton.GetComponent<QuestButton>().setData(data, this);
+    }
+
+    void removeQuest(Quest data)
+    {
+        for(int i =0; i < startedQuests.Count; i++)
+        {
+            if(startedQuests[i].GetComponent<QuestButton>().getData() == data)
+            {
+                GameObject b = startedQuests[i];
+                startedQuests.RemoveAt(i);
+                Destroy(b);
+                break;
+            }
+        }
     }
 
     public void showQuestData(Quest data)

@@ -25,6 +25,11 @@ public class QuestButton : MonoBehaviour
         screen = s;
     }
 
+    public Quest getData()
+    {
+        return questData;
+    }
+
     public void showQuest()
     {
         screen.showQuestData(questData);
