@@ -43,6 +43,11 @@ public class SceneLoader : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (GameObject.FindObjectOfType<SceneLoader>() != this)
+        {
+            Destroy(GameObject.FindObjectOfType<SceneLoader>().gameObject);
+        }
+
         instance = this;
         anim = this.GetComponent<Animator>();
         currentScene.text = "Player Home";
@@ -72,6 +77,11 @@ public class SceneLoader : MonoBehaviour
         currentScene.text = sceneToLoad;
     }
 
+    public void returnHome()
+    {
+        sceneToLoad = "PlayerHome";
+        anim.SetTrigger("FadeOut");
+    }
     public void loadScene()
     {
         anim.SetTrigger("FadeOut");

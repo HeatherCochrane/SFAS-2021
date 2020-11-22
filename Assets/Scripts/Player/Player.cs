@@ -80,6 +80,7 @@ public class Player : MonoBehaviour
     SceneLoader sceneLoader;
 
     bool canLoadScene = false;
+    bool canReturnHome = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -141,28 +142,33 @@ public class Player : MonoBehaviour
             //Interaction Key
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("E pressed!");
-
                 if (character != null)
                 {
                     uiHandler.changeMenu(UIHandler.Menus.DIALOGUE);
                     beginConversation();
+                    character = null;
                 }
                 else if(trader != null)
                 {
                     uiHandler.changeMenu(UIHandler.Menus.TRADER);
                     beginTrading();
+                    trader = null;
                 }
                 else if(canLoadScene)
                 {
-                    Debug.Log("Trying to load scene!");
                     sceneLoader.switchSceneToLoad();
+                }
+                else if(canReturnHome)
+                {
+                    sceneLoader.returnHome();
+                    canReturnHome = false;
                 }
             }
 
             if(Input.GetKeyDown(KeyCode.Return) && sceneLoader != null)
             {
                 sceneLoader.loadScene();
+                canLoadScene = false;
             }
 
             //Melee attack
@@ -417,6 +423,11 @@ public class Player : MonoBehaviour
             canLoadScene = true;
         }
 
+        if(collision.tag == "ReturnHome")
+        {
+            canReturnHome = true;
+        }
+
         if (collision.gameObject.tag == "Pickup")
         {
 
@@ -457,6 +468,10 @@ public class Player : MonoBehaviour
         if (collision.tag == "SceneSwitcher")
         {
             canLoadScene = false;
+        }
+        if (collision.tag == "ReturnHome")
+        {
+            canReturnHome = false;
         }
     }
 }

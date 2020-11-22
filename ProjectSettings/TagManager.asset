@@ -10,6 +10,7 @@ TagManager:
   - Pickup
   - Trader
   - SceneSwitcher
+  - ReturnHome
   layers:
   - Default
   - TransparentFX
