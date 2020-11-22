@@ -20,8 +20,7 @@ public class PlayerLevel : MonoBehaviour
     TextMeshProUGUI playerLevel;
 
     [SerializeField]
-    TextMeshProUGUI loadedLongRange;
-
+    TextMeshProUGUI experience;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,15 +33,13 @@ public class PlayerLevel : MonoBehaviour
         
     }
 
-    private void FixedUpdate()
-    {
-        loadedLongRange.text = Player.instance.getIfHolding();
-    }
     public void addXP(float x)
     {
         XP += x;
 
-        if(XP >= XpNeeded)
+        experience.text = "XP: " + XP.ToString() + " / " + XpNeeded.ToString();
+
+        if (XP >= XpNeeded)
         {
             levelUp();
         }
@@ -50,9 +47,13 @@ public class PlayerLevel : MonoBehaviour
 
     public void levelUp()
     {
+        XP = XP - XpNeeded;
+        XP = Mathf.Clamp(XP, 0, Mathf.Infinity);
+
         level += 1;
         playerLevel.text = level.ToString();
 
         XpNeeded = level * 100;
+        experience.text = "XP: " + XP.ToString() + " / " + XpNeeded.ToString();
     }
 }

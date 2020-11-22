@@ -34,6 +34,7 @@ public class StationaryEnemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //change to canAttack to allow attacking
         if (!canAttack)
         {
             dist = Vector2.Distance(this.transform.position, player.transform.position);
@@ -47,8 +48,6 @@ public class StationaryEnemy : MonoBehaviour
 
     public void attack()
     {
-        Debug.Log("ATTACKED");
-
         canAttack = false;
 
         RaycastHit2D hit;

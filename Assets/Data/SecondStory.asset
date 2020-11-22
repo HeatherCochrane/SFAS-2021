@@ -12,13 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf5d5e33bab057c43929a11bc8f25f44, type: 3}
   m_Name: SecondStory
   m_EditorClassIdentifier: 
+  completeThisQuest: {fileID: 0}
   _beats:
   - _choices:
-    - _text: Pick this one!
+    - _text: Next...
       _beatId: 2
-      quest: {fileID: 11400000, guid: cb4a02d8a237d5448a55f3191fd04001, type: 2}
-    _text: First Story Beat
+      quest: {fileID: 0}
+    _text: Eyyyyy wassup!!!
     _id: 1
+  - _choices:
+    - _text: thank you!
+      _beatId: 3
+      quest: {fileID: 0}
+    _text: Ah okay, heres a quest!
+    _id: 2
   - _choices: []
     _text: Goodbye!
-    _id: 2
+    _id: 3

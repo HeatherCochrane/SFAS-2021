@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Test 2
   m_EditorClassIdentifier: 
   dialogue: {fileID: 11400000, guid: b381edf2eca50de46ba86cafd0f923f2, type: 2}
-  Name: Second
+  characterName: Bitch
+  characterSprite: {fileID: 21300000, guid: 92148dec5e1c74a48a9ff053afc25c0b, type: 3}

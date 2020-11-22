@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     //UI
     public UIHandler uiHandler;
 
+
     //Melee animation
     [SerializeField]
     GameObject attackAnim;
@@ -75,6 +76,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     GameObject playerSprites;
 
+    [SerializeField]
+    SceneLoader sceneLoader;
+
+    bool canLoadScene = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -136,6 +141,8 @@ public class Player : MonoBehaviour
             //Interaction Key
             if (Input.GetKeyDown(KeyCode.E))
             {
+                Debug.Log("E pressed!");
+
                 if (character != null)
                 {
                     uiHandler.changeMenu(UIHandler.Menus.DIALOGUE);
@@ -146,6 +153,16 @@ public class Player : MonoBehaviour
                     uiHandler.changeMenu(UIHandler.Menus.TRADER);
                     beginTrading();
                 }
+                else if(canLoadScene)
+                {
+                    Debug.Log("Trying to load scene!");
+                    sceneLoader.switchSceneToLoad();
+                }
+            }
+
+            if(Input.GetKeyDown(KeyCode.Return) && sceneLoader != null)
+            {
+                sceneLoader.loadScene();
             }
 
             //Melee attack
@@ -209,7 +226,7 @@ public class Player : MonoBehaviour
   
     void LateUpdate()
     {
-        Vector3 targetCamPos = new Vector3(this.transform.position.x + offset.x, cam.transform.position.y, this.transform.position.z + offset.z);
+        Vector3 targetCamPos = new Vector3(this.transform.position.x + offset.x, this.transform.position.y + offset.y, this.transform.position.z + offset.z);
         cam.transform.position = Vector3.Lerp(cam.transform.position, targetCamPos, smoothing * Time.deltaTime);
         cam.transform.position = new Vector3(Mathf.Clamp(cam.transform.position.x, -262, 255), cam.transform.position.y, cam.transform.position.z);
     }
@@ -235,7 +252,7 @@ public class Player : MonoBehaviour
     {
         //Pass in the characters dialogue data to begin the conversation
         uiHandler.changeMenu(UIHandler.Menus.DIALOGUE);
-        dialogue.startNewDialogue(character.getData().getDialogue(), uiHandler.getMenuObject(UIHandler.Menus.DIALOGUE));
+        dialogue.startNewDialogue(character.getData().getDialogue(), character.getData().getCharacterSprite(), character.getData().getName(), uiHandler.getMenuObject(UIHandler.Menus.DIALOGUE));
         stopMovement = true;
         holding = false;
         rangeIndicator.gameObject.SetActive(false);
@@ -245,6 +262,8 @@ public class Player : MonoBehaviour
     void beginTrading()
     {
         trader.setTraderCanvas(uiHandler.getMenuObject(UIHandler.Menus.TRADER));
+        SceneLoader.instance.traderButton.GetComponent<TraderButton>().setTrader(trader);
+        SceneLoader.instance.leaveButton.GetComponent<TraderButton>().setTrader(trader);
         uiHandler.changeDoubleMenu(UIHandler.Menus.TRADER, UIHandler.Menus.INVENTORY);
         setMovement(true);
         stopInventoryToggle = true;
@@ -393,6 +412,11 @@ public class Player : MonoBehaviour
             trader = collision.GetComponent<Trader>();
         }
 
+        if(collision.tag == "SceneSwitcher")
+        {
+            canLoadScene = true;
+        }
+
         if (collision.gameObject.tag == "Pickup")
         {
 
@@ -429,6 +453,10 @@ public class Player : MonoBehaviour
         if(collision.tag == "Trader")
         {
             trader = null;
+        }
+        if (collision.tag == "SceneSwitcher")
+        {
+            canLoadScene = false;
         }
     }
 }

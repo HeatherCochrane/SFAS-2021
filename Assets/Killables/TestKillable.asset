@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 2
   drop: {fileID: 0}
-  XP: 100
+  XP: 105
+  species: 0

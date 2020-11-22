@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TraderSlot : MonoBehaviour
 {
-    [SerializeField]
     Trader trader;
 
     Item slotItem;
@@ -22,6 +21,11 @@ public class TraderSlot : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void setTrader(Trader t)
+    {
+        trader = t;
     }
 
     public void setButtonData(Item t)

@@ -28,39 +28,23 @@ public class Trader : MonoBehaviour
     List<Item> stock = new List<Item>();
 
 
-    [SerializeField]
     GameObject traderInventory;
 
-    [SerializeField]
     GameObject slotParent;
 
-    [SerializeField]
+
     GameObject infoBox;
 
     Item activeItem;
+
     TraderSlot activeSlot;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (!spawnedInventory)
-        {
-            for (int i = 0; i < stock.Count; i++)
-            {
-                Slot newSlot = new Slot();
-                newSlot.slotObject = slotParent.transform.GetChild(i).transform.gameObject;
-                newSlot.slotObject.GetComponent<Image>().sprite = stock[i].itemSprite;
-                newSlot.slotObject.GetComponent<TraderSlot>().setButtonData(stock[i]);
-                newSlot.price = stock[i].buyPrice;
-                slots.Add(newSlot);
-            }
-
-            spawnedInventory = true;
-        }
-
-        traderInventory.SetActive(false);
-        emptyInfoBox();
-
+        slotParent = SceneLoader.instance.traderSlotParent;
+        infoBox = SceneLoader.instance.traderInfoBox;
+        
     }
 
     public void setTraderCanvas(GameObject c)
@@ -74,6 +58,7 @@ public class Trader : MonoBehaviour
                 Slot newSlot = new Slot();
                 newSlot.slotObject = slotParent.transform.GetChild(i).transform.gameObject;
                 newSlot.slotObject.GetComponent<Image>().sprite = stock[i].itemSprite;
+                newSlot.slotObject.GetComponent<TraderSlot>().setTrader(this);
                 newSlot.slotObject.GetComponent<TraderSlot>().setButtonData(stock[i]);
                 newSlot.price = stock[i].buyPrice;
                 slots.Add(newSlot);
@@ -100,7 +85,7 @@ public class Trader : MonoBehaviour
         Player.instance.inventory.setTrader(null);
         Player.instance.inventory.setInventory(false);
         Player.instance.setInventoryToggle(false);
-        traderInventory.SetActive(false);
+        Player.instance.uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
     }
 
     public void addMoney(int amount)
@@ -125,6 +110,7 @@ public class Trader : MonoBehaviour
 
     public void buyItem()
     {
+
         if (activeItem != null)
         {
             if (Player.instance.inventory.checkFunds(activeItem.buyPrice) && Player.instance.inventory.checkInventorySpace())
@@ -144,6 +130,7 @@ public class Trader : MonoBehaviour
             }
         }
     }
+
 
     public void showItemInfoBox(Sprite s, string name, string damage, string range, string price, TraderSlot slot, Item active)
     {

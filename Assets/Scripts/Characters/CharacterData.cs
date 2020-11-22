@@ -8,16 +8,24 @@ public class CharacterData : ScriptableObject
     [SerializeField]
     StoryData dialogue;
 
+    [SerializeField]
+    string characterName;
+
+    [SerializeField]
+    Sprite characterSprite;
+
     public StoryData getDialogue()
     {
         return dialogue;
     }
 
-    [SerializeField]
-    string Name;
-
     public string getName()
     {
-        return Name;
+        return characterName;
+    }
+
+    public Sprite getCharacterSprite()
+    {
+        return characterSprite;
     }
 }

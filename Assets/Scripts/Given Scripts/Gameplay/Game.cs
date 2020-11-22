@@ -31,6 +31,11 @@ public class Game : MonoBehaviour
 
     bool dialogueFinished = false;
 
+    [SerializeField]
+    Image characterImage;
+
+    [SerializeField]
+    TextMeshProUGUI characterName;
     private void OnEnable()
     {
         _currentBeat = null;
@@ -54,11 +59,13 @@ public class Game : MonoBehaviour
     }
 
     //Start the dialogue with the given character
-    public void startNewDialogue(StoryData d, GameObject screen)
+    public void startNewDialogue(StoryData d, Sprite s, string n, GameObject screen)
     {
         dialogueScreen = screen;
 
         dialogueScreen.GetComponent<Animator>().SetBool("Open", true);
+        characterImage.sprite = s;
+        characterName.text = n;
         dialogueFinished = false;
         _data = d;
         startDialogue = true;
@@ -176,7 +183,7 @@ public class Game : MonoBehaviour
 
     public void leaveDialogue()
     {
-        Debug.Log("Called");
+        dialogueScreen.GetComponent<Animator>().SetBool("Open", false);
 
         startDialogue = false;
         _output.setIdle();
@@ -184,8 +191,7 @@ public class Game : MonoBehaviour
         dialogueFinished = true;
         _output.Clear();
 
-        dialogueScreen.GetComponent<Animator>().SetBool("Open", false);
-        Invoke("closeDialogueScreen", 0.5f);
+        Invoke("closeDialogueScreen", 1f);
     }
 
     public void closeDialogueScreen()

@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Test
   m_EditorClassIdentifier: 
   dialogue: {fileID: 11400000, guid: 03cbbe32d42b96d45b61c384a692dc19, type: 2}
-  Name: Test
+  characterName: Bastard Child
+  characterSprite: {fileID: 21300000, guid: 98eedb0a03c7942459c5e7ecc1ef9f9a, type: 3}
