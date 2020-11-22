@@ -50,7 +50,11 @@ public class SceneLoader : MonoBehaviour
 
         instance = this;
         anim = this.GetComponent<Animator>();
-        currentScene.text = "Player Home";
+
+        if (currentScene != null)
+        {
+            currentScene.text = "Player Home";
+        }
     }
 
 
@@ -59,8 +63,10 @@ public class SceneLoader : MonoBehaviour
         SceneData d = AllSceneData.Find(x => x.scenePath == sceneToLoad);
 
         SceneManager.LoadScene(sceneToLoad);
-        player.transform.position = d.spawnPoint;
-
+        if (player != null)
+        {
+            player.transform.position = d.spawnPoint;
+        }
         anim.SetTrigger("FadeIn");
     }
 
@@ -80,8 +86,10 @@ public class SceneLoader : MonoBehaviour
     public void returnHome()
     {
         sceneToLoad = "PlayerHome";
+        currentScene.text = "Player Home";
         anim.SetTrigger("FadeOut");
     }
+
     public void loadScene()
     {
         anim.SetTrigger("FadeOut");
