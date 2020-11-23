@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     //UI
     public UIHandler uiHandler;
 
+    //Event System
+    public UnityEngine.EventSystems.EventSystem system;
 
     //Melee animation
     [SerializeField]
@@ -81,6 +83,8 @@ public class Player : MonoBehaviour
 
     bool canLoadScene = false;
     bool canReturnHome = false;
+
+    bool trackInput = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -103,101 +107,113 @@ public class Player : MonoBehaviour
         camPos = cam.transform.position;
 
         attackAnim.SetActive(false);
+
+        UnityEngine.EventSystems.EventSystem.current = system;
+
+    }
+
+
+    public void setInput(bool set)
+    {
+        trackInput = set;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && !stopInventoryToggle)
+        if (trackInput)
         {
-            if(uiHandler.getInMenu(UIHandler.Menus.INVENTORY))
+            if (Input.GetKeyDown(KeyCode.Q) && !stopInventoryToggle)
             {
-                uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
-                stopMovement = false;
-            }
-            else
-            {
-                uiHandler.changeMenu(UIHandler.Menus.INVENTORY);
-                stopMovement = true;
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (!uiHandler.getInMenu(UIHandler.Menus.QUESTS))
-            {
-                uiHandler.changeMenu(UIHandler.Menus.QUESTS);
-                setMovement(true);
-            }
-            else
-            {
-                uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
-                setMovement(false);
-            }
-        }
-
-
-        if (!stopMovement)
-        {
-            //Interaction Key
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                if (character != null)
+                if (uiHandler.getInMenu(UIHandler.Menus.INVENTORY))
                 {
-                    uiHandler.changeMenu(UIHandler.Menus.DIALOGUE);
-                    beginConversation();
-                    character = null;
+                    uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
+                    stopMovement = false;
                 }
-                else if(trader != null)
+                else
                 {
-                    uiHandler.changeMenu(UIHandler.Menus.TRADER);
-                    beginTrading();
-                    trader = null;
-                }
-                else if(canLoadScene)
-                {
-                    sceneLoader.switchSceneToLoad();
-                }
-                else if(canReturnHome)
-                {
-                    sceneLoader.returnHome();
-                    canReturnHome = false;
+                    uiHandler.changeMenu(UIHandler.Menus.INVENTORY);
+                    stopMovement = true;
                 }
             }
 
-            if(Input.GetKeyDown(KeyCode.Return) && sceneLoader != null)
+            if (Input.GetKeyDown(KeyCode.P))
             {
-                sceneLoader.loadScene();
-                canLoadScene = false;
+                if (!uiHandler.getInMenu(UIHandler.Menus.QUESTS))
+                {
+                    uiHandler.changeMenu(UIHandler.Menus.QUESTS);
+                    setMovement(true);
+                }
+                else
+                {
+                    uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
+                    setMovement(false);
+                }
             }
 
-            //Melee attack
-            if (Input.GetMouseButtonDown(1) && meleeWeapon != null)
-            {
-                setRandomAngle();
-                attackAnim.SetActive(true);
-                Attack(meleeWeapon.distance, meleeWeapon.damage);
-            }
 
-            //Long Range Attack, hold down then release to fire
-            if (Input.GetMouseButton(0) && longRangeWeapon != null)
+            if (!stopMovement)
             {
-                holding = true;
-                drawRange();
-                rangeIndicator.gameObject.SetActive(true);
-            }
-            if (Input.GetMouseButtonUp(0) && holding && longRangeWeapon != null)
-            {
-                Attack(longRangeWeapon.distance, longRangeWeapon.damage);
-                holding = false;
-                rangeIndicator.gameObject.SetActive(false);
+                //Interaction Key
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    if (character != null)
+                    {
+                        uiHandler.changeMenu(UIHandler.Menus.DIALOGUE);
+                        beginConversation();
+                        character = null;
+                    }
+                    else if (trader != null)
+                    {
+                        uiHandler.changeMenu(UIHandler.Menus.TRADER);
+                        beginTrading();
+                        trader = null;
+                    }
+                    else if (canLoadScene)
+                    {
+                        sceneLoader.switchSceneToLoad();
+                    }
+                    else if (canReturnHome)
+                    {
+                        sceneLoader.returnHome();
+                        canReturnHome = false;
+                    }
+                }
+
+                if (Input.GetKeyDown(KeyCode.Return) && sceneLoader != null)
+                {
+                    sceneLoader.loadScene();
+                    canLoadScene = false;
+                }
+
+                //Melee attack
+                if (Input.GetMouseButtonDown(1) && meleeWeapon != null)
+                {
+                    setRandomAngle();
+                    attackAnim.SetActive(true);
+                    Attack(meleeWeapon.distance, meleeWeapon.damage);
+                }
+
+                //Long Range Attack, hold down then release to fire
+                if (Input.GetMouseButton(0) && longRangeWeapon != null)
+                {
+                    holding = true;
+                    drawRange();
+                    rangeIndicator.gameObject.SetActive(true);
+                }
+                if (Input.GetMouseButtonUp(0) && holding && longRangeWeapon != null)
+                {
+                    Attack(longRangeWeapon.distance, longRangeWeapon.damage);
+                    holding = false;
+                    rangeIndicator.gameObject.SetActive(false);
+                }
             }
         }
     }
 
     private void FixedUpdate()
     {
-        if (!stopMovement)
+        if (!stopMovement && trackInput)
         {
             if (Input.GetKey(KeyCode.D))
             {

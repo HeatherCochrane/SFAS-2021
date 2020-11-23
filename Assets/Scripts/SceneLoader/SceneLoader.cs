@@ -67,6 +67,9 @@ public class SceneLoader : MonoBehaviour
         {
             player.transform.position = d.spawnPoint;
         }
+
+        UnityEngine.EventSystems.EventSystem.current = Player.instance.system;
+
         anim.SetTrigger("FadeIn");
     }
 
@@ -81,6 +84,7 @@ public class SceneLoader : MonoBehaviour
 
         sceneToLoad = AllSceneData[sceneSelected].scenePath;
         currentScene.text = sceneToLoad;
+
     }
 
     public void returnHome()

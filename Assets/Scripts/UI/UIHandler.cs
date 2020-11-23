@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIHandler : MonoBehaviour
 {
-    public enum Menus { PLAYERUI, INVENTORY, QUESTS, TRADER, DIALOGUE};
+    public enum Menus { PLAYERUI, INVENTORY, QUESTS, TRADER, DIALOGUE, START};
     [System.Serializable]
     public struct Menu
     {
@@ -22,7 +22,7 @@ public class UIHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        changeMenu(Menus.PLAYERUI);
+        changeMenu(Menus.START);
     }
 
     // Update is called once per frame
@@ -31,20 +31,28 @@ public class UIHandler : MonoBehaviour
         
     }
 
+    public void InGame()
+    {
+        changeMenu(Menus.PLAYERUI);
+    }
+
     public void changeMenu(Menus n)
     {
         currentMenu2 = n;
 
         for(int i =0; i < allActiveMenus.Count; i++)
         {
-            if (allActiveMenus[i].name == n)
+            if (allActiveMenus[i].obj != null)
             {
-                allActiveMenus[i].obj.SetActive(true);
-                currentMenu = n;
-            }
-            else
-            {
-                allActiveMenus[i].obj.SetActive(false);
+                if (allActiveMenus[i].name == n)
+                {
+                    allActiveMenus[i].obj.SetActive(true);
+                    currentMenu = n;
+                }
+                else
+                {
+                    allActiveMenus[i].obj.SetActive(false);
+                }
             }
         }
     }
@@ -53,15 +61,18 @@ public class UIHandler : MonoBehaviour
     {
         for (int i = 0; i < allActiveMenus.Count; i++)
         {
-            if (allActiveMenus[i].name == n || allActiveMenus[i].name == m)
+            if (allActiveMenus[i].obj != null)
             {
-                allActiveMenus[i].obj.SetActive(true);
-                currentMenu = n;
-                currentMenu2 = m;
-            }
-            else
-            {
-                allActiveMenus[i].obj.SetActive(false);
+                if (allActiveMenus[i].name == n || allActiveMenus[i].name == m)
+                {
+                    allActiveMenus[i].obj.SetActive(true);
+                    currentMenu = n;
+                    currentMenu2 = m;
+                }
+                else
+                {
+                    allActiveMenus[i].obj.SetActive(false);
+                }
             }
         }
     }
