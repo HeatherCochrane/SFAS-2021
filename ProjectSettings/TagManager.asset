@@ -48,3 +48,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Player
+    uniqueID: 3946922793
+    locked: 0
+  - name: Foliage
+    uniqueID: 2093998475
+    locked: 0
