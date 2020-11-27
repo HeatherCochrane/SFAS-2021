@@ -72,12 +72,12 @@ public class InventorySlot : MonoBehaviour
 
     public void setEquipMenu()
     {
-        Player.instance.inventory.showItemInfoBox(weapon.itemSprite, weapon.name, "Damage: " +  weapon.damage.ToString(), "Distance: " + weapon.distance.ToString(), weapon.sellPrice.ToString(), this);
+        Player.instance.inventory.showItemInfoBox(weapon.itemSprite, weapon.name, "Damage: " +  weapon.damage.ToString(), "Distance: " + weapon.distance.ToString(), weapon.sellPrice.ToString(), this, true);
     }
 
     public void setItemMenu()
     {
-        Player.instance.inventory.showItemInfoBox(item.itemSprite, item.name, "", "", item.sellPrice.ToString(), this);
+        Player.instance.inventory.showItemInfoBox(item.itemSprite, item.name, "", "", item.sellPrice.ToString(), this, false);
     }
 
 

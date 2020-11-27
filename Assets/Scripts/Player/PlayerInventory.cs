@@ -242,7 +242,7 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    public void showItemInfoBox(Sprite s, string name, string damage, string range, string price, InventorySlot slot)
+    public void showItemInfoBox(Sprite s, string name, string damage, string range, string price, InventorySlot slot, bool weapon)
     {
         infoBox.transform.GetChild(0).gameObject.SetActive(true);
         infoBox.transform.GetChild(0).GetComponent<Image>().sprite = s;
@@ -258,6 +258,7 @@ public class PlayerInventory : MonoBehaviour
             infoBoxButtons.transform.GetChild(1).gameObject.SetActive(false);
             infoBoxButtons.transform.GetChild(2).gameObject.SetActive(true);
 
+            
             if(slot.amount > 1)
             {
                 infoBoxButtons.transform.GetChild(3).gameObject.SetActive(true);
@@ -269,7 +270,14 @@ public class PlayerInventory : MonoBehaviour
         }
         else
         {
-            infoBoxButtons.transform.GetChild(0).gameObject.SetActive(false);
+            if (weapon)
+            {
+                infoBoxButtons.transform.GetChild(0).gameObject.SetActive(true);
+            }
+            else
+            {
+                infoBoxButtons.transform.GetChild(0).gameObject.SetActive(false);
+            }
             infoBoxButtons.transform.GetChild(1).gameObject.SetActive(true);
             infoBoxButtons.transform.GetChild(2).gameObject.SetActive(false);
             infoBoxButtons.transform.GetChild(3).gameObject.SetActive(false);
