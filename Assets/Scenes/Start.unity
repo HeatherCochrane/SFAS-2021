@@ -826,7 +826,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 17.07, y: 1.32}
+  m_Size: {x: 17.07, y: 6.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1435,6 +1435,50 @@ PrefabInstance:
     - target: {fileID: 5995031976308650337, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031976361068588, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: gateSprites.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031976361068588, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: AllSceneData.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031976361068588, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: gateSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 5be570450070b594788c0cc9efeeda74, type: 3}
+    - target: {fileID: 5995031976361068588, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: gateSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: cd0c370fdb850c0459a287c859e3d9bf, type: 3}
+    - target: {fileID: 5995031976361068588, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: gateSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 228d8c3c7b923264b8fc1e5943a4ea93, type: 3}
+    - target: {fileID: 5995031976361068588, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: AllSceneData.Array.data[3].scenePath
+      value: PlayerHome
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031976361068588, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: AllSceneData.Array.data[4].scenePath
+      value: PlayerHome
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031976361068588, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: AllSceneData.Array.data[4].spawnPoint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031976361068588, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: AllSceneData.Array.data[2].scenePath
+      value: Area2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031976361068588, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: AllSceneData.Array.data[3].spawnPoint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031976361068588, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: AllSceneData.Array.data[1].scenePath
+      value: Town
       objectReference: {fileID: 0}
     - target: {fileID: 5995031976361069010, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_LocalPosition.x

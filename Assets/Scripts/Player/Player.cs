@@ -80,6 +80,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     SceneLoader sceneLoader;
+    GameObject currentSceneObj;
 
     bool canLoadScene = false;
     bool canReturnHome = false;
@@ -171,7 +172,7 @@ public class Player : MonoBehaviour
                     }
                     else if (canLoadScene)
                     {
-                        sceneLoader.switchSceneToLoad();
+                        sceneLoader.switchSceneToLoad(currentSceneObj.transform.GetChild(0).gameObject);
                     }
                     else if (canReturnHome)
                     {
@@ -437,6 +438,7 @@ public class Player : MonoBehaviour
         if(collision.tag == "SceneSwitcher")
         {
             canLoadScene = true;
+            currentSceneObj = collision.gameObject;
         }
 
         if(collision.tag == "ReturnHome")
@@ -484,6 +486,7 @@ public class Player : MonoBehaviour
         if (collision.tag == "SceneSwitcher")
         {
             canLoadScene = false;
+            currentSceneObj = null;
         }
         if (collision.tag == "ReturnHome")
         {

@@ -20,7 +20,7 @@ public class SceneLoader : MonoBehaviour
 
     string sceneToLoad;
 
-    int sceneSelected = 0;
+    int sceneSelected = 1;
 
     [SerializeField]
     GameObject player;
@@ -40,6 +40,9 @@ public class SceneLoader : MonoBehaviour
 
     public GameObject leaveButton;
 
+    [SerializeField]
+    List<Sprite> gateSprites = new List<Sprite>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +58,7 @@ public class SceneLoader : MonoBehaviour
         {
             currentScene.text = "Player Home";
         }
+
     }
 
 
@@ -63,9 +67,17 @@ public class SceneLoader : MonoBehaviour
         SceneData d = AllSceneData.Find(x => x.scenePath == sceneToLoad);
 
         SceneManager.LoadScene(sceneToLoad);
+
         if (player != null)
         {
-            player.transform.position = d.spawnPoint;
+            if (d.spawnPoint != null)
+            {
+                player.transform.position = d.spawnPoint;
+            }
+            else
+            {
+                player.transform.position = new Vector2(0, 0);
+            }
         }
 
         UnityEngine.EventSystems.EventSystem.current = Player.instance.system;
@@ -73,15 +85,18 @@ public class SceneLoader : MonoBehaviour
         anim.SetTrigger("FadeIn");
     }
 
-    public void switchSceneToLoad()
+    public void switchSceneToLoad(GameObject g)
     {
         sceneSelected += 1;
-
         if(sceneSelected > AllSceneData.Count - 1)
         {
             sceneSelected = 0;
         }
-
+        if (sceneSelected < gateSprites.Count)
+        {
+            g.GetComponent<SpriteRenderer>().sprite = gateSprites[sceneSelected];
+        }
+        Debug.Log(sceneSelected);
         sceneToLoad = AllSceneData[sceneSelected].scenePath;
         currentScene.text = sceneToLoad;
 
