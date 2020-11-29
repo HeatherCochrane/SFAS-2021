@@ -28,14 +28,14 @@ public class StationaryEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        player = Player.instance;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         //change to canAttack to allow attacking
-        if (!canAttack)
+        if (canAttack && !Player.instance.getIfHidden())
         {
             dist = Vector2.Distance(this.transform.position, player.transform.position);
 

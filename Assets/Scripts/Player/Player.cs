@@ -89,6 +89,12 @@ public class Player : MonoBehaviour
 
     float maxLeftCam = 0;
     float maxRightCam = 0;
+
+    bool isHidden = false;
+
+    bool canHide = true;
+    float cooldown = 10f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -211,6 +217,11 @@ public class Player : MonoBehaviour
                     holding = false;
                     rangeIndicator.gameObject.SetActive(false);
                 }
+
+                if(Input.GetMouseButton(2) && canHide)
+                {
+                    startHiding();
+                }
             }
         }
     }
@@ -280,6 +291,23 @@ public class Player : MonoBehaviour
         attackAnim.SetActive(false);
     }
 
+    void startHiding()
+    {
+        canHide = false;
+        isHidden = true;
+        Invoke("stopHiding", 3);
+    }
+
+    void stopHiding()
+    {
+        isHidden = false;
+        Invoke("stopCooldown", cooldown);
+    }
+
+    void stopCooldown()
+    {
+        canHide = true;
+    }
 
     void beginConversation()
     {
@@ -316,6 +344,11 @@ public class Player : MonoBehaviour
     public void setInventoryToggle(bool set)
     {
         stopInventoryToggle = set;
+    }
+
+    public bool getIfHidden()
+    {
+        return isHidden;
     }
 
     void Attack(float dist, int damage)
