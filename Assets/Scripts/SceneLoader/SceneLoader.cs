@@ -13,6 +13,8 @@ public class SceneLoader : MonoBehaviour
     {
         public string scenePath;
         public Vector3 spawnPoint;
+        public float left;
+        public float right;
     }
 
     [SerializeField]
@@ -54,11 +56,6 @@ public class SceneLoader : MonoBehaviour
         instance = this;
         anim = this.GetComponent<Animator>();
 
-        if (currentScene != null)
-        {
-            currentScene.text = "Player Home";
-        }
-
     }
 
 
@@ -67,18 +64,22 @@ public class SceneLoader : MonoBehaviour
         SceneData d = AllSceneData.Find(x => x.scenePath == sceneToLoad);
 
         SceneManager.LoadScene(sceneToLoad);
+        Debug.Log(sceneToLoad);
 
-        if (player != null)
+        if (sceneToLoad != "PlayerHome")
         {
-            if (d.spawnPoint != null)
-            {
-                player.transform.position = d.spawnPoint;
-            }
-            else
-            {
-                player.transform.position = new Vector2(0, 0);
-            }
+            player.transform.position = d.spawnPoint;
+            Player.instance.setCamBounds(d.left, d.right);
         }
+        else
+        {
+            player.transform.position = new Vector2(15, 0);
+            Player.instance.setCamBounds(-10f, 10);
+
+            sceneSelected = 1;
+            sceneToLoad = AllSceneData[1].scenePath;
+        }
+
 
         UnityEngine.EventSystems.EventSystem.current = Player.instance.system;
 
@@ -98,13 +99,11 @@ public class SceneLoader : MonoBehaviour
         }
 
         sceneToLoad = AllSceneData[sceneSelected].scenePath;
-        currentScene.text = sceneToLoad;
     }
 
     public void returnHome()
     {
         sceneToLoad = "PlayerHome";
-        currentScene.text = "Player Home";
         anim.SetTrigger("FadeOut");
     }
 

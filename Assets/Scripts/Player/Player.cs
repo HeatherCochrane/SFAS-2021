@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     GameObject attackAnim;
 
     [SerializeField]
-    GameObject cam;
+    public GameObject cam;
     public float smoothing = 2f;
     Vector3 offset;
     Vector3 camPos;
@@ -86,6 +86,9 @@ public class Player : MonoBehaviour
     bool canReturnHome = false;
 
     bool trackInput = false;
+
+    float maxLeftCam = 0;
+    float maxRightCam = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -251,7 +254,14 @@ public class Player : MonoBehaviour
     {
         Vector3 targetCamPos = new Vector3(this.transform.position.x + offset.x, this.transform.position.y + offset.y, this.transform.position.z + offset.z);
         cam.transform.position = Vector3.Lerp(cam.transform.position, targetCamPos, smoothing * Time.deltaTime);
-        cam.transform.position = new Vector3(Mathf.Clamp(cam.transform.position.x, -262, 255), cam.transform.position.y, cam.transform.position.z);
+
+        cam.transform.position = new Vector3(Mathf.Clamp(cam.transform.position.x, maxLeftCam, maxRightCam), cam.transform.position.y, cam.transform.position.z);
+    }
+
+    public void setCamBounds(float l, float r)
+    {
+        maxLeftCam = l;
+        maxRightCam = r;
     }
 
     void setRandomAngle()
