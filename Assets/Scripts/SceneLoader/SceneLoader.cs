@@ -20,7 +20,7 @@ public class SceneLoader : MonoBehaviour
 
     string sceneToLoad;
 
-    int sceneSelected = 1;
+    int sceneSelected = 0;
 
     [SerializeField]
     GameObject player;
@@ -96,10 +96,9 @@ public class SceneLoader : MonoBehaviour
         {
             g.GetComponent<SpriteRenderer>().sprite = gateSprites[sceneSelected];
         }
-        Debug.Log(sceneSelected);
+
         sceneToLoad = AllSceneData[sceneSelected].scenePath;
         currentScene.text = sceneToLoad;
-
     }
 
     public void returnHome()
