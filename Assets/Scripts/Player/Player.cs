@@ -43,13 +43,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     LayerMask killables;
 
-    //Longe Range variables
-    Vector2 mousePos;
-    [SerializeField]
-    LineRenderer rangeIndicator;
-
     //Movement values
+    [SerializeField]
     float speed = 0.2f;
+    [SerializeField]
     float speedCap = 2.5f;
     bool stopMovement = false;
     bool facingLeft = false;
@@ -61,7 +58,9 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
 
     //Fall multiplier
+    [SerializeField]
     float fallMult = 2f;
+    [SerializeField]
     float jump = 5f;
     bool isFalling = false;
 
@@ -83,7 +82,6 @@ public class Player : MonoBehaviour
     GameObject currentSceneObj;
 
     bool canLoadScene = false;
-    bool canReturnHome = false;
 
     bool trackInput = false;
 
@@ -95,6 +93,7 @@ public class Player : MonoBehaviour
     bool canHide = true;
     float cooldown = 10f;
 
+    bool canReturnTown = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -183,10 +182,9 @@ public class Player : MonoBehaviour
                     {
                         sceneLoader.switchSceneToLoad(currentSceneObj.transform.GetChild(0).gameObject);
                     }
-                    else if (canReturnHome)
+                    else if(canReturnTown)
                     {
-                        sceneLoader.returnHome();
-                        canReturnHome = false;
+                        sceneLoader.switchScene("Town");
                     }
                 }
 
@@ -208,14 +206,11 @@ public class Player : MonoBehaviour
                 if (Input.GetMouseButton(0) && longRangeWeapon != null)
                 {
                     holding = true;
-                    drawRange();
-                    rangeIndicator.gameObject.SetActive(true);
                 }
                 if (Input.GetMouseButtonUp(0) && holding && longRangeWeapon != null)
                 {
                     Attack(longRangeWeapon.distance, longRangeWeapon.damage);
                     holding = false;
-                    rangeIndicator.gameObject.SetActive(false);
                 }
 
                 if(Input.GetMouseButton(2) && canHide)
@@ -242,6 +237,10 @@ public class Player : MonoBehaviour
                 facingLeft = true;
                 playerSprites.transform.localScale = new Vector2(0.3f, 0.3f);
             }
+            else if(!isFalling)
+            {
+                rb.velocity = new Vector2(0, rb.velocity.y);
+            }
 
             if (Input.GetKey(KeyCode.Space) && !isFalling)
             {
@@ -251,7 +250,7 @@ public class Player : MonoBehaviour
         }
 
         //Apply force when the player is falling 
-        if (rb.velocity.y < 0)
+        if (rb.velocity.y <= 0)
         {
             rb.velocity += Vector2.up * (fallMult - 1) * Physics2D.gravity.y * Time.deltaTime;
         }
@@ -316,7 +315,6 @@ public class Player : MonoBehaviour
         dialogue.startNewDialogue(character.getData().getDialogue(), character.getData().getCharacterSprite(), character.getData().getName(), uiHandler.getMenuObject(UIHandler.Menus.DIALOGUE));
         stopMovement = true;
         holding = false;
-        rangeIndicator.gameObject.SetActive(false);
         stopInventoryToggle = true;
     }
 
@@ -390,29 +388,7 @@ public class Player : MonoBehaviour
         Invoke("hideAttackAnim", 0.2f);
     }
 
-    void drawRange()
-    {
-        mousePos = Input.mousePosition;
-        mousePos = Camera.main.ScreenToWorldPoint(mousePos);    
-
-        Vector2 length = mousePos - (Vector2)transform.position;
-        length = length.normalized * longRangeWeapon.distance;
-
-        rangeIndicator.SetPosition(0, new Vector2(0, 0));
-
-        rangeIndicator.SetPosition(1, new Vector3(length.x, length.y));
-        direction = rangeIndicator.GetPosition(1) - rangeIndicator.GetPosition(0);
-
-        if(mousePos.x < transform.position.x)
-        {
-            facingLeft = true;
-        }
-        else
-        {
-            facingLeft = false;
-        }
-    }
-
+   
     public string getIfHolding()
     {
         if(holding)
@@ -460,13 +436,20 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.tag == "Ground")
+        if (collision.transform.tag == "Ground" && collision.contacts[0].normal == new Vector2(0, 1))
         {
             isFalling = false;
         }
         
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.transform.tag == "Ground" && collision.contacts[0].normal == new Vector2(0, 1))
+        {
+            isFalling = false;
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Character")
@@ -486,7 +469,7 @@ public class Player : MonoBehaviour
 
         if(collision.tag == "ReturnHome")
         {
-            canReturnHome = true;
+            canReturnTown = true;
         }
 
         if (collision.gameObject.tag == "Pickup")
@@ -531,9 +514,11 @@ public class Player : MonoBehaviour
             canLoadScene = false;
             currentSceneObj = null;
         }
+
         if (collision.tag == "ReturnHome")
         {
-            canReturnHome = false;
+            canReturnTown = false;
         }
+
     }
 }

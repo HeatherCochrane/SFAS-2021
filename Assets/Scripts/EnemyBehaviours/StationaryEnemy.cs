@@ -25,6 +25,7 @@ public class StationaryEnemy : MonoBehaviour
 
     [SerializeField]
     LayerMask playerLayer;
+
     // Start is called before the first frame update
     void Start()
     {

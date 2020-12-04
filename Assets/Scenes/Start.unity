@@ -219,14 +219,14 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 9164810879392111200}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: returnHome
-        m_Mode: 1
+        m_MethodName: switchScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Town
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &195335244
@@ -1259,7 +1259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4604873719378099761, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00073820347
+      value: -0.0009855102
       objectReference: {fileID: 0}
     - target: {fileID: 4604873719403116843, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_AnchorMin.y
@@ -1669,6 +1669,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5995031975629062056, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: orthographic size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5995031975629062059, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
@@ -1815,7 +1819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5995031976361068588, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: AllSceneData.Array.data[0].right
-      value: 5
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 5995031976361068588, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: AllSceneData.Array.data[2].right
@@ -1871,7 +1875,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5995031976520394895, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0000076293945
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5995031976599006867, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_AnchorMin.y
@@ -1988,6 +1992,26 @@ PrefabInstance:
     - target: {fileID: 5995031976805943594, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031976819538244, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: speed
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031976819538244, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: speedCap
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031976819538244, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: jump
+      value: 9.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031976819538244, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: fallMult
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031976819538244, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: smoothing
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5995031976819538245, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_LocalPosition.x

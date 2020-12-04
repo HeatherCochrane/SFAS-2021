@@ -101,10 +101,10 @@ public class SceneLoader : MonoBehaviour
         sceneToLoad = AllSceneData[sceneSelected].scenePath;
     }
 
-    public void returnHome()
+    public void switchScene(string scene)
     {
-        sceneToLoad = "PlayerHome";
-        anim.SetTrigger("FadeOut");
+        sceneToLoad = scene;
+        loadScene();
     }
 
     public void loadScene()
