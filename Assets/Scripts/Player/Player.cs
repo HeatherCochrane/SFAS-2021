@@ -94,6 +94,11 @@ public class Player : MonoBehaviour
     float cooldown = 10f;
 
     bool canReturnTown = false;
+
+    //Double Jump Variables
+    bool canDoubleJump = true;
+    int jumpNum = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -163,6 +168,29 @@ public class Player : MonoBehaviour
 
             if (!stopMovement)
             {
+
+                if (Input.GetKeyDown(KeyCode.Space) && !isFalling)
+                {
+                    if (canDoubleJump)
+                    {
+                        jumpNum += 1;
+                        rb.velocity = new Vector2(rb.velocity.x, jump);
+
+                        if (jumpNum == 1)
+                        {
+                            isFalling = true;
+                            jumpNum = 0;
+                        }
+                    }
+                    else
+                    {
+                        rb.velocity = new Vector2(rb.velocity.x, jump);
+                        isFalling = true;
+                    }
+
+                    Debug.Log(jumpNum);
+                }
+
                 //Interaction Key
                 if (Input.GetKeyDown(KeyCode.E))
                 {
@@ -241,12 +269,6 @@ public class Player : MonoBehaviour
             {
                 rb.velocity = new Vector2(0, rb.velocity.y);
             }
-
-            if (Input.GetKey(KeyCode.Space) && !isFalling)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, jump);
-                isFalling = true;
-            }
         }
 
         //Apply force when the player is falling 
@@ -255,7 +277,7 @@ public class Player : MonoBehaviour
             rb.velocity += Vector2.up * (fallMult - 1) * Physics2D.gravity.y * Time.deltaTime;
         }
 
-        //Prevent the play from picking up too much speed
+        //Prevent the player from picking up too much speed
         rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -speedCap, speedCap), rb.velocity.y);
     }
 
@@ -433,12 +455,17 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void setDoubleJump(bool set)
+    {
+        canDoubleJump = set;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.tag == "Ground" && collision.contacts[0].normal == new Vector2(0, 1))
         {
             isFalling = false;
+            jumpNum = 0;
         }
         
     }
@@ -448,6 +475,7 @@ public class Player : MonoBehaviour
         if (collision.transform.tag == "Ground" && collision.contacts[0].normal == new Vector2(0, 1))
         {
             isFalling = false;
+            jumpNum = 0;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
