@@ -72,8 +72,6 @@ public class PlayerInventory : MonoBehaviour
 
             spawnedInventory = true;
         }
-
-
     }
 
     private void OnEnable()
@@ -123,7 +121,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 Slot newSlot;
                 newSlot = slots[i];
-                newSlot.slotObject.transform.GetChild(2).GetComponent<Image>().sprite = item.itemSprite;
+                newSlot.slotObject.transform.GetChild(1).GetComponent<Image>().sprite = item.itemSprite;
                 newSlot.isTaken = true;
                 newSlot.slotObject.GetComponent<InventorySlot>().setButtonData(item);
                 newSlot.slotObject.GetComponent<InventorySlot>().setSlotPos(i);
@@ -156,7 +154,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 Slot newSlot;
                 newSlot = slots[i];
-                newSlot.slotObject.transform.GetChild(2).GetComponent<Image>().sprite = inventoryItems[i].item.itemSprite;
+                newSlot.slotObject.transform.GetChild(1).GetComponent<Image>().sprite = inventoryItems[i].item.itemSprite;
                 newSlot.isTaken = true;
                 newSlot.slotObject.GetComponent<InventorySlot>().setButtonData(inventoryItems[i].item);
                 newSlot.slotObject.GetComponent<InventorySlot>().setSlotPos(i);
@@ -187,7 +185,7 @@ public class PlayerInventory : MonoBehaviour
             newSlot.isTaken = false;
             newSlot.objectData = null;
             newSlot.slotObject = slots[i].slotObject;
-            newSlot.slotObject.transform.GetChild(2).GetComponent<Image>().sprite = emptySlotImage;
+            newSlot.slotObject.transform.GetChild(1).GetComponent<Image>().sprite = emptySlotImage;
             newSlot.slotObject.GetComponent<InventorySlot>().amount = 0;
             newSlot.slotObject.GetComponent<InventorySlot>().updateStackedUI();
             newSlot.slotObject.GetComponent<InventorySlot>().setButtonData(null);

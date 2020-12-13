@@ -11,7 +11,7 @@ public class InventorySlot : MonoBehaviour
     Weapon weapon;
     Item item;
 
-    public int amount = 1;
+    public int amount = 0;
 
     public TextMeshProUGUI stacked;
 

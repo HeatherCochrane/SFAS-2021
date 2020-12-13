@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
 
     //Dash Variables
     bool canDash = true;
-    float dashAmount = 0.5f;
+    float dashAmount = 50f;
     bool isDashing = false;
     bool dashCooldown = false;
     int dir = 1;
@@ -205,7 +205,7 @@ public class Player : MonoBehaviour
                 {
                     isDashing = true;
                     dashCooldown = true;
-                    Debug.Log("Called");
+                    speedCap = 30;
                 }
 
               
@@ -293,11 +293,11 @@ public class Player : MonoBehaviour
             {
                 if (dir == 1)
                 {
-                    transform.position += new Vector3(dashAmount, 0, 0);
+                    rb.velocity += new Vector2(dashAmount, 0);
                 }
                 else
                 {
-                    transform.position -= new Vector3(dashAmount, 0, 0);
+                    rb.velocity -= new Vector2(dashAmount, 0);
                 }
 
                 dashTime -= Time.deltaTime;
@@ -375,6 +375,7 @@ public class Player : MonoBehaviour
     void stopDashing()
     {
         dashCooldown = false;
+        speedCap = 5;
     }
     void beginConversation()
     {
