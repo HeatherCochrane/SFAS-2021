@@ -96,8 +96,17 @@ public class Player : MonoBehaviour
     bool canReturnTown = false;
 
     //Double Jump Variables
-    bool canDoubleJump = true;
+    bool canDoubleJump = false;
     int jumpNum = 0;
+
+    //Dash Variables
+    bool canDash = true;
+    float dashAmount = 0.5f;
+    bool isDashing = false;
+    bool dashCooldown = false;
+    int dir = 1;
+    float startDashTime = 0.2f;
+    float dashTime = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -123,6 +132,8 @@ public class Player : MonoBehaviour
         attackAnim.SetActive(false);
 
         UnityEngine.EventSystems.EventSystem.current = system;
+
+        dashTime = startDashTime;
 
     }
 
@@ -188,9 +199,16 @@ public class Player : MonoBehaviour
                         isFalling = true;
                     }
 
-                    Debug.Log(jumpNum);
                 }
 
+                if(Input.GetKeyDown(KeyCode.F) && canDash && !isDashing && !dashCooldown)
+                {
+                    isDashing = true;
+                    dashCooldown = true;
+                    Debug.Log("Called");
+                }
+
+              
                 //Interaction Key
                 if (Input.GetKeyDown(KeyCode.E))
                 {
@@ -251,25 +269,49 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!stopMovement && trackInput)
+        if (!stopMovement && trackInput && !isDashing)
         {
             if (Input.GetKey(KeyCode.D))
             {
                 rb.velocity += new Vector2(speed, 0);
                 facingLeft = false;
+                dir = 1;
                 playerSprites.transform.localScale = new Vector2(-0.3f, 0.3f);
             }
             else if (Input.GetKey(KeyCode.A))
             {
                 rb.velocity -= new Vector2(speed, 0);
                 facingLeft = true;
+                dir = -1;
                 playerSprites.transform.localScale = new Vector2(0.3f, 0.3f);
             }
-            else if(!isFalling)
+        }
+
+        if (isDashing)
+        {
+            if (dashTime > 0)
             {
+                if (dir == 1)
+                {
+                    transform.position += new Vector3(dashAmount, 0, 0);
+                }
+                else
+                {
+                    transform.position -= new Vector3(dashAmount, 0, 0);
+                }
+
+                dashTime -= Time.deltaTime;
+            }
+            else
+            {
+                Invoke("stopDashing", 1);
+                isDashing = false;
+                dashTime = startDashTime;
                 rb.velocity = new Vector2(0, rb.velocity.y);
             }
         }
+
+
 
         //Apply force when the player is falling 
         if (rb.velocity.y <= 0)
@@ -330,6 +372,10 @@ public class Player : MonoBehaviour
         canHide = true;
     }
 
+    void stopDashing()
+    {
+        dashCooldown = false;
+    }
     void beginConversation()
     {
         //Pass in the characters dialogue data to begin the conversation
@@ -458,6 +504,11 @@ public class Player : MonoBehaviour
     public void setDoubleJump(bool set)
     {
         canDoubleJump = set;
+    }
+
+    public void setDash(bool set)
+    {
+        canDash = set;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
