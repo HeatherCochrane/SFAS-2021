@@ -49,6 +49,15 @@ public class PlayerInventory : MonoBehaviour
     public int playerFunds = 100;
 
     Trader currentTrader;
+
+    [SerializeField]
+    Sprite emptySlotImage;
+
+    [SerializeField]
+    Color weaponColour;
+
+    [SerializeField]
+    Color itemColour;
     private void Start()
     {
         if(!spawnedInventory)
@@ -114,12 +123,22 @@ public class PlayerInventory : MonoBehaviour
             {
                 Slot newSlot;
                 newSlot = slots[i];
-                newSlot.slotObject.GetComponent<Image>().sprite = item.itemSprite;
+                newSlot.slotObject.transform.GetChild(2).GetComponent<Image>().sprite = item.itemSprite;
                 newSlot.isTaken = true;
                 newSlot.slotObject.GetComponent<InventorySlot>().setButtonData(item);
                 newSlot.slotObject.GetComponent<InventorySlot>().setSlotPos(i);
                 newSlot.slotObject.GetComponent<InventorySlot>().amount = inventoryItems[i].amount;
                 newSlot.slotObject.GetComponent<InventorySlot>().updateStackedUI();
+
+                if(item.GetType() == typeof(Weapon))
+                {
+                    newSlot.slotObject.GetComponent<Image>().color = weaponColour;
+                }
+                else
+                {
+                    newSlot.slotObject.GetComponent<Image>().color = itemColour;
+                }
+
                 slots[i] = newSlot;
 
                 break;
@@ -137,12 +156,22 @@ public class PlayerInventory : MonoBehaviour
             {
                 Slot newSlot;
                 newSlot = slots[i];
-                newSlot.slotObject.GetComponent<Image>().sprite = inventoryItems[i].item.itemSprite;
+                newSlot.slotObject.transform.GetChild(2).GetComponent<Image>().sprite = inventoryItems[i].item.itemSprite;
                 newSlot.isTaken = true;
                 newSlot.slotObject.GetComponent<InventorySlot>().setButtonData(inventoryItems[i].item);
                 newSlot.slotObject.GetComponent<InventorySlot>().setSlotPos(i);
                 newSlot.slotObject.GetComponent<InventorySlot>().amount = inventoryItems[i].amount;
                 newSlot.slotObject.GetComponent<InventorySlot>().updateStackedUI();
+
+                if (newSlot.slotObject.GetComponent<InventorySlot>().getItem().GetType() == typeof(Weapon))
+                {
+                    newSlot.slotObject.GetComponent<Image>().color = weaponColour;
+                }
+                else
+                {
+                    newSlot.slotObject.GetComponent<Image>().color = itemColour;
+                }
+
                 slots[i] = newSlot;
             }
         }
@@ -158,10 +187,11 @@ public class PlayerInventory : MonoBehaviour
             newSlot.isTaken = false;
             newSlot.objectData = null;
             newSlot.slotObject = slots[i].slotObject;
-            newSlot.slotObject.GetComponent<Image>().sprite = null;
+            newSlot.slotObject.transform.GetChild(2).GetComponent<Image>().sprite = emptySlotImage;
             newSlot.slotObject.GetComponent<InventorySlot>().amount = 0;
             newSlot.slotObject.GetComponent<InventorySlot>().updateStackedUI();
             newSlot.slotObject.GetComponent<InventorySlot>().setButtonData(null);
+            newSlot.slotObject.GetComponent<Image>().color = Color.white;
             slots[i] = newSlot;
         }
 
