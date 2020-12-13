@@ -307,6 +307,7 @@ public class Player : MonoBehaviour
                 Invoke("stopDashing", 1);
                 isDashing = false;
                 dashTime = startDashTime;
+                speedCap = 5;
                 rb.velocity = new Vector2(0, rb.velocity.y);
             }
         }
@@ -375,7 +376,6 @@ public class Player : MonoBehaviour
     void stopDashing()
     {
         dashCooldown = false;
-        speedCap = 5;
     }
     void beginConversation()
     {
