@@ -60,8 +60,9 @@ public class Player : MonoBehaviour
     float fallMult = 2f;
     [SerializeField]
     float jump = 5f;
-    bool isFalling = false;
     bool isGrounded = false;
+    int jumpNum = 0;
+    bool hasDoubleJumped = false;
 
     //Character that can be talked to
     Character character;
@@ -175,11 +176,19 @@ public class Player : MonoBehaviour
 
             if (!stopMovement)
             {
-                if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+                if (Input.GetKeyDown(KeyCode.Space) && (isGrounded || !hasDoubleJumped))
                 {
                     rb.velocity = new Vector2(rb.velocity.x, jump);
                     isGrounded = false;
                     switchAnimation(AnimationStates.JUMP);
+                    jumpNum += 1;
+
+                    if(jumpNum == 2)
+                    {
+                        hasDoubleJumped = true;
+                        isGrounded = false;
+                        jumpNum = 0;
+                    }
                 }
 
                 if (Input.GetKeyDown(KeyCode.F) && canDash && !isDashing && !dashCooldown)
@@ -521,6 +530,7 @@ public class Player : MonoBehaviour
         {
             isGrounded = true;
             switchAnimation(AnimationStates.IDLE);
+            hasDoubleJumped = false;
         }
         
     }
@@ -530,6 +540,7 @@ public class Player : MonoBehaviour
         if (collision.transform.tag == "Ground" && collision.contacts[0].normal == new Vector2(0, 1))
         {
             isGrounded = true;
+            hasDoubleJumped = false;
         }
     }
 
@@ -539,6 +550,7 @@ public class Player : MonoBehaviour
         {
             isGrounded = false;
             switchAnimation(AnimationStates.JUMP);
+            
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
