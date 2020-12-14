@@ -109,10 +109,11 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Physics2D.queriesStartInColliders = false;
+
         instance = this;
 
         rb = GetComponent<Rigidbody2D>();
-        Physics2D.queriesStartInColliders = false;
 
         levels = GetComponent<PlayerLevel>();
         weapons = GetComponent<PlayerWeapons>();

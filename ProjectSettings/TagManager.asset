@@ -13,6 +13,7 @@ TagManager:
   - ReturnHome
   - Area1
   - Area2
+  - Obstacle
   layers:
   - Default
   - TransparentFX

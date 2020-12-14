@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa2b106edb01b9478863c1848ea3a3f, type: 3}
   m_Name: SecondTestKillable
   m_EditorClassIdentifier: 
-  health: 1
+  health: 2
   drop: {fileID: 0}
   XP: 50
-  species: 1
+  species: 0
