@@ -81,8 +81,6 @@ public class Player : MonoBehaviour
     SceneLoader sceneLoader;
     GameObject currentSceneObj;
 
-    bool canLoadScene = false;
-
     bool trackInput = false;
 
     float maxLeftCam = 0;
@@ -93,7 +91,6 @@ public class Player : MonoBehaviour
     bool canHide = true;
     float cooldown = 10f;
 
-    bool canReturnTown = false;
 
     //Double Jump Variables
     bool canDoubleJump = false;
@@ -224,20 +221,6 @@ public class Player : MonoBehaviour
                         beginTrading();
                         trader = null;
                     }
-                    else if (canLoadScene)
-                    {
-                        sceneLoader.switchSceneToLoad(currentSceneObj.transform.GetChild(0).gameObject);
-                    }
-                    else if(canReturnTown)
-                    {
-                        sceneLoader.switchScene("Town");
-                    }
-                }
-
-                if (Input.GetKeyDown(KeyCode.Return) && sceneLoader != null)
-                {
-                    sceneLoader.loadScene();
-                    canLoadScene = false;
                 }
 
                 //Melee attack
@@ -457,19 +440,6 @@ public class Player : MonoBehaviour
         Invoke("hideAttackAnim", 0.2f);
     }
 
-   
-    public string getIfHolding()
-    {
-        if(holding)
-        {
-            return "Loaded!";
-        }
-        else
-        {
-            return "Released!";
-        }
-    }
-   
     public void setRangedWeapon(Weapon w)
     {
         longRangeWeapon = w;
@@ -541,15 +511,19 @@ public class Player : MonoBehaviour
             trader = collision.GetComponent<Trader>();
         }
 
-        if(collision.tag == "SceneSwitcher")
+        if(collision.tag == "Area1")
         {
-            canLoadScene = true;
-            currentSceneObj = collision.gameObject;
+            sceneLoader.switchScene("Area1");
         }
 
-        if(collision.tag == "ReturnHome")
+        if (collision.tag == "Area2")
         {
-            canReturnTown = true;
+            sceneLoader.switchScene("Area2");
+        }
+
+        if (collision.tag == "ReturnHome")
+        {
+            sceneLoader.switchScene("Town");
         }
 
         if (collision.gameObject.tag == "Pickup")
@@ -589,16 +563,5 @@ public class Player : MonoBehaviour
         {
             trader = null;
         }
-        if (collision.tag == "SceneSwitcher")
-        {
-            canLoadScene = false;
-            currentSceneObj = null;
-        }
-
-        if (collision.tag == "ReturnHome")
-        {
-            canReturnTown = false;
-        }
-
     }
 }

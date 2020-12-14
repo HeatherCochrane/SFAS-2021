@@ -11,6 +11,8 @@ TagManager:
   - Trader
   - SceneSwitcher
   - ReturnHome
+  - Area1
+  - Area2
   layers:
   - Default
   - TransparentFX

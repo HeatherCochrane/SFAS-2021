@@ -1657,7 +1657,7 @@ GameObject:
   - component: {fileID: 1201763986}
   m_Layer: 9
   m_Name: Gate
-  m_TagString: SceneSwitcher
+  m_TagString: Area1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
