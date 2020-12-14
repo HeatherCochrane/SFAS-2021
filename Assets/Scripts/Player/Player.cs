@@ -275,7 +275,7 @@ public class Player : MonoBehaviour
                 switchAnimation(AnimationStates.IDLE);
             }
 
-            if(rb.velocity.y > 3f || rb.velocity.y < -3f && !isGrounded)
+            if(rb.velocity.y > 3.5f || rb.velocity.y < -3.5f && !isGrounded)
             {
                 switchAnimation(AnimationStates.JUMP);
             }
@@ -522,7 +522,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.transform.tag == "Ground" && collision.contacts[0].normal == new Vector2(0, 1))
+        if (collision.transform.tag == "Ground")
         {
             isGrounded = true;
             hasDoubleJumped = false;
