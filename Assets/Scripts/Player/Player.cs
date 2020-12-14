@@ -172,8 +172,6 @@ public class Player : MonoBehaviour
                 }
             }
 
-            
-
             if (!stopMovement)
             {
                 if (Input.GetKeyDown(KeyCode.Space) && (isGrounded || !hasDoubleJumped))
@@ -199,11 +197,6 @@ public class Player : MonoBehaviour
                     switchAnimation(AnimationStates.DASH);
                 }
 
-                if(!isRunning && !isAttacking && !isDashing && isGrounded)
-                {
-                    switchAnimation(AnimationStates.IDLE);
-                }
-              
                 //Interaction Key
                 if (Input.GetKeyDown(KeyCode.E))
                 {
@@ -257,17 +250,6 @@ public class Player : MonoBehaviour
                 facingLeft = false;
                 dir = 1;
                 playerSprites.transform.localScale = new Vector2(-0.3f, 0.3f);
-
-                if (isGrounded)
-                {
-                    switchAnimation(AnimationStates.RUN);
-                    isRunning = true;
-                }
-                else
-                {
-                    isRunning = false;
-                }
-
             }
             else if (Input.GetKey(KeyCode.A))
             {
@@ -276,22 +258,27 @@ public class Player : MonoBehaviour
                 dir = -1;
                 playerSprites.transform.localScale = new Vector2(0.3f, 0.3f);
 
-                if (isGrounded)
-                {
-                    switchAnimation(AnimationStates.RUN);
-                    isRunning = true;
-                }
-                else
-                {
-                    isRunning = false;
-                }
-
             }
             else
             {
                 isRunning = false;
             }
-            
+
+
+            if(!isRunning && isGrounded)
+            {
+                switchAnimation(AnimationStates.RUN);
+            }
+
+            if(rb.velocity.x == 0 && rb.velocity.y == 0 && isGrounded)
+            {
+                switchAnimation(AnimationStates.IDLE);
+            }
+
+            if(rb.velocity.y > 3f || rb.velocity.y < -3f && !isGrounded)
+            {
+                switchAnimation(AnimationStates.JUMP);
+            }
         }
 
         if (isDashing)
@@ -529,7 +516,6 @@ public class Player : MonoBehaviour
         if (collision.transform.tag == "Ground" && collision.contacts[0].normal == new Vector2(0, 1))
         {
             isGrounded = true;
-            switchAnimation(AnimationStates.IDLE);
             hasDoubleJumped = false;
         }
         
@@ -549,8 +535,15 @@ public class Player : MonoBehaviour
         if (collision.transform.tag == "Ground")
         {
             isGrounded = false;
+            Invoke("checkGrounded", 0.5f);
+        }
+    }
+
+    void checkGrounded()
+    {
+        if(!isGrounded)
+        {
             switchAnimation(AnimationStates.JUMP);
-            
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
