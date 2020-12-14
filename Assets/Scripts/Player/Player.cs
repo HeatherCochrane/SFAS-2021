@@ -24,10 +24,6 @@ public class Player : MonoBehaviour
     //Event System
     public UnityEngine.EventSystems.EventSystem system;
 
-    //Melee animation
-    [SerializeField]
-    GameObject attackAnim;
-
     [SerializeField]
     public GameObject cam;
     public float smoothing = 2f;
@@ -39,6 +35,7 @@ public class Player : MonoBehaviour
     Weapon longRangeWeapon;
     bool holding = false;
     Vector2 direction;
+    bool isAttacking = false;
 
     [SerializeField]
     LayerMask killables;
@@ -56,6 +53,7 @@ public class Player : MonoBehaviour
 
     //Rigidbody
     Rigidbody2D rb;
+    bool isRunning = false;
 
     //Fall multiplier
     [SerializeField]
@@ -63,6 +61,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     float jump = 5f;
     bool isFalling = false;
+    bool isGrounded = false;
 
     //Character that can be talked to
     Character character;
@@ -91,11 +90,6 @@ public class Player : MonoBehaviour
     bool canHide = true;
     float cooldown = 10f;
 
-
-    //Double Jump Variables
-    bool canDoubleJump = false;
-    int jumpNum = 0;
-
     //Dash Variables
     bool canDash = true;
     float dashAmount = 50f;
@@ -105,6 +99,12 @@ public class Player : MonoBehaviour
     float startDashTime = 0.2f;
     float dashTime = 0;
 
+    [SerializeField]
+    Animator anim;
+
+    public enum AnimationStates { RUN, JUMP, DASH, IDLE, MELEEDOWN, MELEEUP}
+
+    AnimationStates previous;
     // Start is called before the first frame update
     void Start()
     {
@@ -125,8 +125,6 @@ public class Player : MonoBehaviour
 
         offset = cam.transform.position - this.transform.position;
         camPos = cam.transform.position;
-
-        attackAnim.SetActive(false);
 
         UnityEngine.EventSystems.EventSystem.current = system;
 
@@ -173,38 +171,29 @@ public class Player : MonoBehaviour
                 }
             }
 
+            
 
             if (!stopMovement)
             {
-
-                if (Input.GetKeyDown(KeyCode.Space) && !isFalling)
+                if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
                 {
-                    if (canDoubleJump)
-                    {
-                        jumpNum += 1;
-                        rb.velocity = new Vector2(rb.velocity.x, jump);
-
-                        if (jumpNum == 1)
-                        {
-                            isFalling = true;
-                            jumpNum = 0;
-                        }
-                    }
-                    else
-                    {
-                        rb.velocity = new Vector2(rb.velocity.x, jump);
-                        isFalling = true;
-                    }
-
+                    rb.velocity = new Vector2(rb.velocity.x, jump);
+                    isGrounded = false;
+                    switchAnimation(AnimationStates.JUMP);
                 }
 
-                if(Input.GetKeyDown(KeyCode.F) && canDash && !isDashing && !dashCooldown)
+                if (Input.GetKeyDown(KeyCode.F) && canDash && !isDashing && !dashCooldown)
                 {
                     isDashing = true;
                     dashCooldown = true;
                     speedCap = 30;
+                    switchAnimation(AnimationStates.DASH);
                 }
 
+                if(!isRunning && !isAttacking && !isDashing && isGrounded)
+                {
+                    switchAnimation(AnimationStates.IDLE);
+                }
               
                 //Interaction Key
                 if (Input.GetKeyDown(KeyCode.E))
@@ -227,7 +216,6 @@ public class Player : MonoBehaviour
                 if (Input.GetMouseButtonDown(1) && meleeWeapon != null)
                 {
                     setRandomAngle();
-                    attackAnim.SetActive(true);
                     Attack(meleeWeapon.distance, meleeWeapon.damage);
                 }
 
@@ -260,6 +248,17 @@ public class Player : MonoBehaviour
                 facingLeft = false;
                 dir = 1;
                 playerSprites.transform.localScale = new Vector2(-0.3f, 0.3f);
+
+                if (isGrounded)
+                {
+                    switchAnimation(AnimationStates.RUN);
+                    isRunning = true;
+                }
+                else
+                {
+                    isRunning = false;
+                }
+
             }
             else if (Input.GetKey(KeyCode.A))
             {
@@ -267,7 +266,23 @@ public class Player : MonoBehaviour
                 facingLeft = true;
                 dir = -1;
                 playerSprites.transform.localScale = new Vector2(0.3f, 0.3f);
+
+                if (isGrounded)
+                {
+                    switchAnimation(AnimationStates.RUN);
+                    isRunning = true;
+                }
+                else
+                {
+                    isRunning = false;
+                }
+
             }
+            else
+            {
+                isRunning = false;
+            }
+            
         }
 
         if (isDashing)
@@ -292,10 +307,9 @@ public class Player : MonoBehaviour
                 dashTime = startDashTime;
                 speedCap = 5;
                 rb.velocity = new Vector2(0, rb.velocity.y);
+                switchAnimation(AnimationStates.RUN);
             }
         }
-
-
 
         //Apply force when the player is falling 
         if (rb.velocity.y <= 0)
@@ -316,6 +330,52 @@ public class Player : MonoBehaviour
         cam.transform.position = new Vector3(Mathf.Clamp(cam.transform.position.x, maxLeftCam, maxRightCam), cam.transform.position.y, cam.transform.position.z);
     }
 
+    void resetAnimations()
+    {
+        foreach (AnimatorControllerParameter parameter in anim.parameters)
+        {
+            if (parameter.type == AnimatorControllerParameterType.Bool)
+            {
+                anim.SetBool(parameter.name, false);
+            }
+        }
+    }
+
+    void switchAnimation(AnimationStates a)
+    {     
+        if (a != previous)
+        {
+            resetAnimations();
+
+            switch (a)
+            {
+                case AnimationStates.RUN:
+                    anim.SetBool("Run", true);
+                    break;
+                case AnimationStates.JUMP:
+                    anim.SetBool("Jump", true);
+                    break;
+                case AnimationStates.DASH:
+                    anim.SetBool("Dash", true);
+                    break;
+                case AnimationStates.MELEEUP:
+                    anim.SetBool("MeleeUp", true);
+                    break;
+                case AnimationStates.MELEEDOWN:
+                    anim.SetBool("MeleeDown", true);
+                    break;
+                case AnimationStates.IDLE:
+                    anim.SetBool("Idle", true);
+                    break;
+                default:
+                    anim.SetBool("Run", true);
+                    break;
+            }
+
+            previous = a;
+        }
+    }
+
     public void setCamBounds(float l, float r)
     {
         maxLeftCam = l;
@@ -324,18 +384,13 @@ public class Player : MonoBehaviour
 
     void setRandomAngle()
     {
-        if (attackAnim.transform.rotation == Quaternion.Euler(0, 0, -20))
-        {
-            attackAnim.transform.rotation = Quaternion.Euler(0, 0, 20);
-        }
-        else
-        {
-            attackAnim.transform.rotation = Quaternion.Euler(0, 0, -20);
-        }
+        //if (attackAnim.transform.rotation == Quaternion.Euler(0, 0, -20))
+
+        switchAnimation(AnimationStates.MELEEUP);
     }
     void hideAttackAnim()
     {
-        attackAnim.SetActive(false);
+        isAttacking = false;
     }
 
     void startHiding()
@@ -403,23 +458,10 @@ public class Player : MonoBehaviour
 
     void Attack(float dist, int damage)
     {
+        isAttacking = true;
         RaycastHit2D hit;
 
-        //Attack which way the player is facing
-
-        if(direction == new Vector2(0, 0))
-        {
-            if (facingLeft)
-            {
-                direction = new Vector2(-1, 0);
-            }
-            else
-            {
-                direction = new Vector2(1, 0);
-            }
-        }
-
-        hit = Physics2D.Raycast(transform.position, direction.normalized, dist, killables);
+        hit = Physics2D.Raycast(transform.position, new Vector2(dir, 0), dist, killables);
 
         if (hit.collider)
         {
@@ -427,17 +469,13 @@ public class Player : MonoBehaviour
             {
                 hit.collider.gameObject.GetComponent<Killable>().takeDamage(facingLeft, damage);
             }
-            else
-            {
-                Debug.Log("Hit not killable");
-            }
         }
         else
         {
             Debug.Log("Collider null");
         }
 
-        Invoke("hideAttackAnim", 0.2f);
+        Invoke("hideAttackAnim", 0.5f);
     }
 
     public void setRangedWeapon(Weapon w)
@@ -472,11 +510,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void setDoubleJump(bool set)
-    {
-        canDoubleJump = set;
-    }
-
     public void setDash(bool set)
     {
         canDash = set;
@@ -486,8 +519,8 @@ public class Player : MonoBehaviour
     {
         if (collision.transform.tag == "Ground" && collision.contacts[0].normal == new Vector2(0, 1))
         {
-            isFalling = false;
-            jumpNum = 0;
+            isGrounded = true;
+            switchAnimation(AnimationStates.IDLE);
         }
         
     }
@@ -496,8 +529,16 @@ public class Player : MonoBehaviour
     {
         if (collision.transform.tag == "Ground" && collision.contacts[0].normal == new Vector2(0, 1))
         {
-            isFalling = false;
-            jumpNum = 0;
+            isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.transform.tag == "Ground")
+        {
+            isGrounded = false;
+            switchAnimation(AnimationStates.JUMP);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
