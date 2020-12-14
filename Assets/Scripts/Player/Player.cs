@@ -381,7 +381,6 @@ public class Player : MonoBehaviour
     void setRandomAngle()
     {
         //if (attackAnim.transform.rotation == Quaternion.Euler(0, 0, -20))
-
         switchAnimation(AnimationStates.MELEEUP);
     }
     void hideAttackAnim()
