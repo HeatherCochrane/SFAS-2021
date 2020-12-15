@@ -103,6 +103,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     Animator anim;
 
+    GameObject pickUp;
 
     public enum AnimationStates { RUN, JUMP, DASH, IDLE, MELEEDOWN, MELEEUP}
 
@@ -214,6 +215,11 @@ public class Player : MonoBehaviour
                         beginTrading();
                         trader = null;
                     }
+                    else if(pickUp != null)
+                    {
+                        pickUpItem();
+                        pickUp = null;
+                    }
                 }
 
                 //Melee attack
@@ -239,6 +245,14 @@ public class Player : MonoBehaviour
                     startHiding();
                 }
             }
+            else
+            {
+                 switchAnimation(AnimationStates.IDLE);
+            }
+        }
+        else
+        {
+            switchAnimation(AnimationStates.IDLE);
         }
     }
 
@@ -281,6 +295,10 @@ public class Player : MonoBehaviour
             {
                 switchAnimation(AnimationStates.JUMP);
             }
+        }
+        else if(!isDashing)
+        {
+            switchAnimation(AnimationStates.IDLE);
         }
 
         if (isDashing)
@@ -542,6 +560,32 @@ public class Player : MonoBehaviour
             switchAnimation(AnimationStates.JUMP);
         }
     }
+
+    void pickUpItem()
+    {
+        if (!pickUp.gameObject.GetComponent<WorldItem>().getItemData().stackable)
+        {
+            if (inventory.checkInventorySpace())
+            {
+                inventory.addWeapon(pickUp.gameObject.GetComponent<WorldItem>().getItemData());
+                Destroy(pickUp.transform.gameObject);
+            }
+        }
+        else
+        {
+            if (inventory.checkIfStackable(pickUp.gameObject.GetComponent<WorldItem>().getItemData()))
+            {
+                inventory.addStackable(pickUp.gameObject.GetComponent<WorldItem>().getItemData());
+                Destroy(pickUp.transform.gameObject);
+            }
+            else
+            {
+                inventory.addWeapon(pickUp.gameObject.GetComponent<WorldItem>().getItemData());
+                Destroy(pickUp.transform.gameObject);
+            }
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Character")
@@ -570,28 +614,9 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.tag == "Pickup")
         {
+            Debug.Log("ON PICKUP");
 
-            if (!collision.gameObject.GetComponent<WorldItem>().getItemData().stackable)
-            {
-                if (inventory.checkInventorySpace())
-                {
-                    inventory.addWeapon(collision.gameObject.GetComponent<WorldItem>().getItemData());
-                    Destroy(collision.transform.gameObject);
-                }
-            }
-            else
-            {
-                if (inventory.checkIfStackable(collision.gameObject.GetComponent<WorldItem>().getItemData()))
-                {
-                    inventory.addStackable(collision.gameObject.GetComponent<WorldItem>().getItemData());
-                    Destroy(collision.transform.gameObject);
-                }
-                else
-                {
-                    inventory.addWeapon(collision.gameObject.GetComponent<WorldItem>().getItemData());
-                    Destroy(collision.transform.gameObject);
-                }
-            }
+            pickUp = collision.gameObject;
         }
     }
 
@@ -604,6 +629,10 @@ public class Player : MonoBehaviour
         if(collision.tag == "Trader")
         {
             trader = null;
+        }
+        if(collision.tag == "Pickup")
+        {
+            pickUp = null;
         }
     }
 }

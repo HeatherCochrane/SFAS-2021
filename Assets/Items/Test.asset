@@ -15,5 +15,5 @@ MonoBehaviour:
   itemSprite: {fileID: 3457211282796719415, guid: d45db9505338b204697980f275189884, type: 3}
   buyPrice: 10
   sellPrice: 5
-  worldObject: {fileID: 7569272670575479132, guid: c86ba77e64ec93946b782179d6eae97b, type: 3}
+  worldObject: {fileID: 1874821832968600517, guid: 6c492e938e0dc2b449f58b915dda3dcf, type: 3}
   stackable: 1

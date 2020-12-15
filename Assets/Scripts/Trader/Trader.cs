@@ -39,6 +39,7 @@ public class Trader : MonoBehaviour
 
     TraderSlot activeSlot;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,7 +58,7 @@ public class Trader : MonoBehaviour
             {
                 Slot newSlot = new Slot();
                 newSlot.slotObject = slotParent.transform.GetChild(i).transform.gameObject;
-                newSlot.slotObject.GetComponent<Image>().sprite = stock[i].itemSprite;
+                newSlot.slotObject.transform.GetChild(0).GetComponent<Image>().sprite = stock[i].itemSprite;
                 newSlot.slotObject.GetComponent<TraderSlot>().setTrader(this);
                 newSlot.slotObject.GetComponent<TraderSlot>().setButtonData(stock[i]);
                 newSlot.price = stock[i].buyPrice;
@@ -135,7 +136,6 @@ public class Trader : MonoBehaviour
     public void showItemInfoBox(Sprite s, string name, string damage, string range, string price, TraderSlot slot, Item active)
     {
         infoBox.transform.GetChild(0).gameObject.SetActive(true);
-        infoBox.transform.GetChild(0).GetComponent<Image>().sprite = s;
         infoBox.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = name;
         infoBox.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Damage: " + damage;
         infoBox.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Range: " + range;

@@ -90,8 +90,10 @@ public class InventorySlot : MonoBehaviour
             if (interaction == "Drop")
             {
                 o = Instantiate(slotData.worldObject);
+                o.GetComponent<SpriteRenderer>().sprite = slotData.itemSprite;
+                o.GetComponent<WorldItem>().setData(slotData);
                 o.SetActive(true);
-                o.transform.position += new Vector3(5, 2, 0);
+                o.transform.position = Player.instance.transform.position + new Vector3(0, 3, 0);
             }
             
             amount -= 1;
