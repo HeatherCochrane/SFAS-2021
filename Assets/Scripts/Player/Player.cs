@@ -105,6 +105,8 @@ public class Player : MonoBehaviour
 
     GameObject pickUp;
 
+    Building currentBuilding;
+
     public enum AnimationStates { RUN, JUMP, DASH, IDLE, MELEEDOWN, MELEEUP}
 
     AnimationStates previous;
@@ -219,6 +221,10 @@ public class Player : MonoBehaviour
                     {
                         pickUpItem();
                         pickUp = null;
+                    }
+                    else if(currentBuilding != null)
+                    {
+                        sceneLoader.switchScene(currentBuilding.getSceneName());
                     }
                 }
 
@@ -589,6 +595,12 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.transform.tag == "Building")
+        {
+            collision.GetComponent<Building>().showInteractIcon(true);
+            currentBuilding = collision.GetComponent<Building>();
+        }
+
         if(collision.tag == "Character")
         {
             character = collision.GetComponent<Character>();
@@ -635,5 +647,12 @@ public class Player : MonoBehaviour
         {
             pickUp = null;
         }
+
+        if (collision.transform.tag == "Building")
+        {
+            collision.GetComponent<Building>().showInteractIcon(false);
+            currentBuilding = null;
+        }
+
     }
 }
