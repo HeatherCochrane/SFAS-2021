@@ -47,6 +47,12 @@ public class ChargeEnemy : Enemy
     int walkingDir = 1;
     float walkingSpeed = 2;
 
+    [SerializeField]
+    int damage = 0;
+
+    [SerializeField]
+    int force = 0;
+
     private void Start()
     {
         player = Player.instance;
@@ -63,9 +69,9 @@ public class ChargeEnemy : Enemy
     {
         if (!isDead)
         {
-            if (!charging)
+            if (!charging || rb.velocity.x == 0)
             {
-                transform.position += new Vector3(walkingSpeed * walkingDir * Time.deltaTime, 0);
+                transform.position += new Vector3(walkingSpeed * dir * Time.deltaTime, 0);
             }
 
             if (distX <= 5 && distY <= 1 && !onCooldown && !isDead)
@@ -86,6 +92,20 @@ public class ChargeEnemy : Enemy
                     chargeTime = 5;
                     charging = false;
                     rb.velocity = new Vector2(0, rb.velocity.y);
+
+                    //do damage to the player when they are close
+                    if (distY < 0.5f)
+                    {
+                        if (dir == 1)
+                        {
+                            player.takeDamage(damage, true, force);
+                        }
+                        else
+                        {
+                            player.takeDamage(damage, false, force);
+                        }
+                    }
+                    
                 }
                 else if (chargeTime > 0)
                 {
@@ -95,7 +115,6 @@ public class ChargeEnemy : Enemy
                     }
                     else
                     {
-                        Debug.Log("MOVING LEFT!");
                         rb.velocity -= new Vector2(speed, 0);
                     }
 
@@ -117,7 +136,7 @@ public class ChargeEnemy : Enemy
     {
         if (collision.transform.tag == "Obstacle")
         {
-            walkingDir *= -1;
+            dir *= -1;
             charging = false;
         }
     }
