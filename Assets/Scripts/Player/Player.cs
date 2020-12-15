@@ -531,6 +531,7 @@ public class Player : MonoBehaviour
         {
             isGrounded = true;
             hasDoubleJumped = false;
+            GetComponentInChildren<GrassEffect>().spawnGrass();
         }
         
     }
