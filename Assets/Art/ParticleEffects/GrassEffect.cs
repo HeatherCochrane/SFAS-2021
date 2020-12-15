@@ -12,6 +12,7 @@ public class GrassEffect : MonoBehaviour
     public void spawnGrass()
     {
         newGrass = Instantiate(grassParticles);
+        newGrass.transform.SetParent(Player.instance.transform);
         newGrass.transform.position = Player.instance.transform.position - new Vector3(0, 1);
     }
 }
