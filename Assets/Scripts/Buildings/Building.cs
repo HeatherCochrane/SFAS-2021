@@ -9,15 +9,25 @@ public class Building : MonoBehaviour
 
     [SerializeField]
     GameObject interact;
+
+    Animator anim;
     // Start is called before the first frame update
     void Start()
     {
-        showInteractIcon(false);
+        anim = interact.GetComponentInChildren<Animator>();
+        anim.SetTrigger("Exit");
     }
 
     public void showInteractIcon(bool set)
     {
-        interact.SetActive(set);
+        if (set)
+        {
+            anim.SetTrigger("Enter");
+        }
+        else
+        {
+            anim.SetTrigger("Exit");
+        }
     }
 
     public string getSceneName()
