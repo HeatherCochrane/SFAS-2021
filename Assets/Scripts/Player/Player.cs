@@ -103,6 +103,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     Animator anim;
 
+
     public enum AnimationStates { RUN, JUMP, DASH, IDLE, MELEEDOWN, MELEEUP}
 
     AnimationStates previous;
@@ -216,22 +217,22 @@ public class Player : MonoBehaviour
                 }
 
                 //Melee attack
-                if (Input.GetMouseButtonDown(1) && meleeWeapon != null)
+                if (Input.GetMouseButtonDown(1) && meleeWeapon != null && !isAttacking)
                 {
-                    setRandomAngle();
+                    switchAnimation(AnimationStates.MELEEUP);
                     Attack(meleeWeapon.distance, meleeWeapon.damage);
                 }
 
-                //Long Range Attack, hold down then release to fire
-                if (Input.GetMouseButton(0) && longRangeWeapon != null)
-                {
-                    holding = true;
-                }
-                if (Input.GetMouseButtonUp(0) && holding && longRangeWeapon != null)
-                {
-                    Attack(longRangeWeapon.distance, longRangeWeapon.damage);
-                    holding = false;
-                }
+                ////Long Range Attack, hold down then release to fire
+                //if (Input.GetMouseButton(0) && longRangeWeapon != null)
+                //{
+                //    holding = true;
+                //}
+                //if (Input.GetMouseButtonUp(0) && holding && longRangeWeapon != null)
+                //{
+                //    Attack(longRangeWeapon.distance, longRangeWeapon.damage);
+                //    holding = false;
+                //}
 
                 if(Input.GetMouseButton(2) && canHide)
                 {
@@ -379,11 +380,6 @@ public class Player : MonoBehaviour
         maxRightCam = r;
     }
 
-    void setRandomAngle()
-    {
-        //if (attackAnim.transform.rotation == Quaternion.Euler(0, 0, -20))
-        switchAnimation(AnimationStates.MELEEUP);
-    }
     void hideAttackAnim()
     {
         isAttacking = false;

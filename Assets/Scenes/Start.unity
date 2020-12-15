@@ -1867,6 +1867,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1793415147 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5995031976246991401, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+  m_PrefabInstance: {fileID: 4668049940417186263}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1909277680
 GameObject:
   m_ObjectHideFlags: 0
@@ -2422,7 +2427,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4604873719378099761, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000048087746
+      value: 0.000011487804
       objectReference: {fileID: 0}
     - target: {fileID: 4604873719403116843, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_AnchorMin.y
@@ -3200,6 +3205,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5995031976246991401, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031976246991402, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.323
+      objectReference: {fileID: 0}
     - target: {fileID: 5995031976308650337, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -3290,7 +3303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5995031976520394895, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 120.00008
+      value: 120.00104
       objectReference: {fileID: 0}
     - target: {fileID: 5995031976599006867, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_AnchorMin.y
@@ -3424,6 +3437,14 @@ PrefabInstance:
       propertyPath: jump
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5995031976819538244, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: playerSlash
+      value: 
+      objectReference: {fileID: 1793415147}
+    - target: {fileID: 5995031976819538244, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: slashAnim
+      value: 
+      objectReference: {fileID: 1793415147}
     - target: {fileID: 5995031976819538248, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_Offset.y
       value: -0.293823
