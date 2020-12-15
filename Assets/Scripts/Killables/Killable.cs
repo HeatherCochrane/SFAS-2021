@@ -51,6 +51,7 @@ public class Killable : MonoBehaviour
 
             if (health <= 0)
             {
+                this.GetComponent<Enemy>().killEnemy();
                 Invoke("killEnemy", 1f);
                 isDead = true;
             }
@@ -60,6 +61,7 @@ public class Killable : MonoBehaviour
     public void killEnemy()
     {
         player = Player.instance.levels;
+
 
         if (data.drop != null)
         {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObliviousEnemy : MonoBehaviour
+public class ObliviousEnemy : Enemy
 {
 
     int dir = 1;
@@ -19,7 +19,10 @@ public class ObliviousEnemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.position += new Vector3(speed * dir * Time.deltaTime, 0);
+        if (!isDead)
+        {
+            transform.position += new Vector3(speed * dir * Time.deltaTime, 0);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

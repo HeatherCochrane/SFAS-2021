@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StationaryEnemy : MonoBehaviour
+public class StationaryEnemy : Enemy
 {
     bool canAttack = true;
 
@@ -36,13 +36,16 @@ public class StationaryEnemy : MonoBehaviour
     void FixedUpdate()
     {
         //change to canAttack to allow attacking
-        if (canAttack && !Player.instance.getIfHidden())
+        if (!isDead)
         {
-            dist = Vector2.Distance(this.transform.position, player.transform.position);
-
-            if (dist <= maxDistance)
+            if (canAttack && !Player.instance.getIfHidden())
             {
-                attack();
+                dist = Vector2.Distance(this.transform.position, player.transform.position);
+
+                if (dist <= maxDistance)
+                {
+                    attack();
+                }
             }
         }
     }
