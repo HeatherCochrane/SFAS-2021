@@ -636,6 +636,18 @@ MonoBehaviour:
           m_StringArgument: Town
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1243251052}
+        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
+        m_MethodName: InGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &195335244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1894,6 +1906,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1243251052 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9164810879819299802, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+  m_PrefabInstance: {fileID: 788360922165527161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 079b9c14729028644b2715de7faa5617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1485012911
 GameObject:
   m_ObjectHideFlags: 0
@@ -3207,7 +3230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: AllSceneData.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: AllSceneData.Array.data[3].scenePath
@@ -3228,6 +3251,30 @@ PrefabInstance:
     - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: AllSceneData.Array.data[3].right
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: AllSceneData.Array.data[1].right
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: AllSceneData.Array.data[4].scenePath
+      value: Trader
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: AllSceneData.Array.data[4].spawnPoint.x
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: AllSceneData.Array.data[4].spawnPoint.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: AllSceneData.Array.data[4].left
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: AllSceneData.Array.data[4].right
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9164810880446417784, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3375,7 +3422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9164810880857401893, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 120.000145
+      value: 120.01762
       objectReference: {fileID: 0}
     - target: {fileID: 9164810880885145206, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: m_AnchorMin.y

@@ -61,29 +61,23 @@ public class SceneLoader : MonoBehaviour
 
     void loadSetScene()
     {
-        SceneData d = AllSceneData.Find(x => x.scenePath == sceneToLoad);
-
         SceneManager.LoadScene(sceneToLoad);
         Debug.Log(sceneToLoad);
 
-        if (sceneToLoad != "PlayerHome")
+        foreach(SceneData scene in AllSceneData)
         {
-            player.transform.position = d.spawnPoint;
-            Player.instance.setCamBounds(d.left, d.right);
+            if(scene.scenePath == sceneToLoad)
+            {
+                Player.instance.transform.position = scene.spawnPoint;
+                Player.instance.setCamBounds(scene.left, scene.right);
+                break;
+            }
         }
-        else
-        {
-            player.transform.position = new Vector2(15, 0);
-            Player.instance.setCamBounds(-10f, 10);
-
-            sceneSelected = 1;
-            sceneToLoad = AllSceneData[1].scenePath;
-        }
-
 
         UnityEngine.EventSystems.EventSystem.current = Player.instance.system;
 
         anim.SetTrigger("FadeIn");
+        Player.instance.setInput(true);
     }
 
     public void switchSceneToLoad(GameObject g)
@@ -109,6 +103,7 @@ public class SceneLoader : MonoBehaviour
 
     public void loadScene()
     {
+        Player.instance.setInput(false);
         anim.SetTrigger("FadeOut");
     }
 
