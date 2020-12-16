@@ -24,6 +24,9 @@ public class Player : MonoBehaviour
     //Saved Data
     public DataToSave data;
 
+    //SceneLoader
+    public SceneLoader sceneLoader;
+
     //Event System
     public UnityEngine.EventSystems.EventSystem system;
 
@@ -79,10 +82,6 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     GameObject playerSprites;
-
-    [SerializeField]
-    SceneLoader sceneLoader;
-    GameObject currentSceneObj;
 
     bool trackInput = false;
 

@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TraderWeapons.unity
     guid: ac80d7e09cd1b554086f99a10d01c524
+  - enabled: 1
+    path: Assets/Scenes/Area3.unity
+    guid: e1452ded323a3c94486a51ab509f253a
   m_configObjects: {}

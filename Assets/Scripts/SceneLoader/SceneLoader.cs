@@ -15,8 +15,11 @@ public class SceneLoader : MonoBehaviour
         public Vector3 spawnPoint;
         public float left;
         public float right;
+        public Particle particleEffect;
+
     }
 
+    public enum Particle { GRASS, SNOW};
     [SerializeField]
     List<SceneData> AllSceneData = new List<SceneData>();
 
@@ -45,6 +48,8 @@ public class SceneLoader : MonoBehaviour
     [SerializeField]
     List<Sprite> gateSprites = new List<Sprite>();
 
+    SceneData current;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +61,7 @@ public class SceneLoader : MonoBehaviour
         instance = this;
         anim = this.GetComponent<Animator>();
 
+        current = AllSceneData[1];
     }
 
 
@@ -70,6 +76,7 @@ public class SceneLoader : MonoBehaviour
             {
                 Player.instance.transform.position = scene.spawnPoint;
                 Player.instance.setCamBounds(scene.left, scene.right);
+                current = scene;
                 break;
             }
         }
@@ -78,6 +85,7 @@ public class SceneLoader : MonoBehaviour
 
         anim.SetTrigger("FadeIn");
         Player.instance.setInput(true);
+        
     }
 
     public void switchSceneToLoad(GameObject g)
@@ -107,4 +115,8 @@ public class SceneLoader : MonoBehaviour
         anim.SetTrigger("FadeOut");
     }
 
+    public SceneData getCurrentScene()
+    {
+        return current;
+    }
 }
