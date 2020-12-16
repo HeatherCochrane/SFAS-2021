@@ -15,6 +15,7 @@ TagManager:
   - Area2
   - Obstacle
   - Building
+  - Area3
   layers:
   - Default
   - TransparentFX

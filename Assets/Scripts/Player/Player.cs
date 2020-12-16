@@ -545,7 +545,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.tag == "Ground" && collision.contacts[0].normal == new Vector2(0, 1))
+        if (collision.transform.tag == "Ground" && collision.contacts[0].normal.y >= 0.2f)
         {
             isGrounded = true;
             hasDoubleJumped = false;
@@ -556,7 +556,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.transform.tag == "Ground")
+        if (collision.transform.tag == "Ground" && collision.contacts[0].normal.y >= 0.2f)
         {
             isGrounded = true;
             hasDoubleJumped = false;
@@ -632,6 +632,11 @@ public class Player : MonoBehaviour
             sceneLoader.switchScene("Area2");
         }
 
+        if (collision.tag == "Area3")
+        {
+            sceneLoader.switchScene("Area3");
+        }
+
         if (collision.tag == "ReturnHome")
         {
             sceneLoader.switchScene("Town");
@@ -639,8 +644,6 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.tag == "Pickup")
         {
-            Debug.Log("ON PICKUP");
-
             pickUp = collision.gameObject;
         }
     }
