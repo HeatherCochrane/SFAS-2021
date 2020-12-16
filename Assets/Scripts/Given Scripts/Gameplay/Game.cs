@@ -70,8 +70,9 @@ public class Game : MonoBehaviour
         _data = d;
         startDialogue = true;
         spawnedChoices = false;
+        closeDialogue.gameObject.SetActive(true);
 
-        if(d.getQuestToComplete() != null)
+        if (d.getQuestToComplete() != null)
         {
             Player.instance.playerQuests.questCompleted(d.getQuestToComplete());
         }
@@ -161,6 +162,13 @@ public class Game : MonoBehaviour
         BeatData data = _data.GetBeatById(id);
         StartCoroutine(DoDisplay(data));
         _currentBeat = data;
+
+        if (data.getChoiceList().Count == 0)
+        {
+            closeDialogue.gameObject.SetActive(false);
+            Invoke("leaveDialogue", 1);
+        }
+
     }
 
     private IEnumerator DoDisplay(BeatData data)

@@ -21,6 +21,9 @@ public class Player : MonoBehaviour
     //UI
     public UIHandler uiHandler;
 
+    //Saved Data
+    public DataToSave data;
+
     //Event System
     public UnityEngine.EventSystems.EventSystem system;
 
@@ -208,7 +211,16 @@ public class Player : MonoBehaviour
                     if (character != null)
                     {
                         uiHandler.changeMenu(UIHandler.Menus.DIALOGUE);
-                        beginConversation();
+
+                        if (!data.hasBeenTalkedTo(character))
+                        {
+                            beginConversation(0);
+                        }
+                        else
+                        {
+                            beginConversation(-1);
+                        }
+                        data.addCharacter(character);
                         character = null;
                     }
                     else if (trader != null)
@@ -431,11 +443,11 @@ public class Player : MonoBehaviour
     {
         dashCooldown = false;
     }
-    void beginConversation()
+    void beginConversation(int index)
     {
         //Pass in the characters dialogue data to begin the conversation
         uiHandler.changeMenu(UIHandler.Menus.DIALOGUE);
-        dialogue.startNewDialogue(character.getData().getDialogue(), character.getData().getCharacterSprite(), character.getData().getName(), uiHandler.getMenuObject(UIHandler.Menus.DIALOGUE));
+        dialogue.startNewDialogue(character.getData().getDialogue(index), character.getData().getCharacterSprite(), character.getData().getName(), uiHandler.getMenuObject(UIHandler.Menus.DIALOGUE));
         stopMovement = true;
         holding = false;
         stopInventoryToggle = true;

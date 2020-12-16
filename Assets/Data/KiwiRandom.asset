@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf5d5e33bab057c43929a11bc8f25f44, type: 3}
+  m_Name: KiwiRandom
+  m_EditorClassIdentifier: 
+  completeThisQuest: {fileID: 0}
+  _beats:
+  - _choices:
+    - _text: What else do you know about this biome?
+      _beatId: 2
+      quest: {fileID: 0}
+    - _text: See yah!
+      _beatId: 3
+      quest: {fileID: 0}
+    _text: Any luck finding that biome? I hear its an intricate jungle thats home
+      to dangerous fauna that attack from the trees above.
+    _id: 1
+  - _choices:
+    - _text: Good bye!
+      _beatId: 4
+      quest: {fileID: 0}
+    _text: Many adventurers have spoken about it as a place to be feared but I believe
+      there may be treausre in there that they want to keep to themselves...maybe
+      not but its a nice thought right?
+    _id: 2
+  - _choices: []
+    _text: Good bye!
+    _id: 3
+  - _choices: []
+    _text: Good luck!
+    _id: 4

@@ -25,8 +25,8 @@ public class TextDisplay : MonoBehaviour
     private void Awake()
     {
         _displayText = GetComponent<TMP_Text>();
-        _shortWait = new WaitForSeconds(0.05f);
-        _longWait = new WaitForSeconds(0.2f);
+        _shortWait = new WaitForSeconds(0.03f);
+        _longWait = new WaitForSeconds(0.03f);
 
         _displayText.text = string.Empty;
         _state = State.Idle;

@@ -5,8 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Character", menuName = "New character/Character", order = 1)]
 public class CharacterData : ScriptableObject
 {
+    //List of all the dialogues the character will have, including opening and random
     [SerializeField]
-    StoryData dialogue;
+    List<StoryData> dialogue = new List<StoryData>();
 
     [SerializeField]
     string characterName;
@@ -14,9 +15,14 @@ public class CharacterData : ScriptableObject
     [SerializeField]
     Sprite characterSprite;
 
-    public StoryData getDialogue()
+    public StoryData getDialogue(int index)
     {
-        return dialogue;
+        if(index != 0)
+        {
+            int ran = Random.Range(1, dialogue.Count);
+            return dialogue[ran];
+        }
+        return dialogue[0];
     }
 
     public string getName()

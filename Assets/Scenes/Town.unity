@@ -4602,7 +4602,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.012, y: -1.793}
+  m_AnchoredPosition: {x: -2.012, y: -1.854}
   m_SizeDelta: {x: 5, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &848008999
@@ -4627,8 +4627,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Trader
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4744,11 +4744,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7569272670575479128, guid: c86ba77e64ec93946b782179d6eae97b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.63
+      value: -5.79
       objectReference: {fileID: 0}
     - target: {fileID: 7569272670575479128, guid: c86ba77e64ec93946b782179d6eae97b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.4677382
+      value: -2.47
       objectReference: {fileID: 0}
     - target: {fileID: 7569272670575479128, guid: c86ba77e64ec93946b782179d6eae97b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4786,9 +4786,61 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7569272670575479128, guid: c86ba77e64ec93946b782179d6eae97b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569272670575479128, guid: c86ba77e64ec93946b782179d6eae97b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569272670575479129, guid: c86ba77e64ec93946b782179d6eae97b, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: f4735ff45e07b7d428fc48ceed120fa5, type: 2}
+    - target: {fileID: 7569272670575479130, guid: c86ba77e64ec93946b782179d6eae97b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d728840e471ec494e9f281330412e385, type: 3}
+    - target: {fileID: 7569272670575479130, guid: c86ba77e64ec93946b782179d6eae97b, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8584906
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569272670575479130, guid: c86ba77e64ec93946b782179d6eae97b, type: 3}
+      propertyPath: m_Color.g
+      value: 0.22272164
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569272670575479130, guid: c86ba77e64ec93946b782179d6eae97b, type: 3}
+      propertyPath: m_Color.b
+      value: 0.22272164
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569272670575479131, guid: c86ba77e64ec93946b782179d6eae97b, type: 3}
+      propertyPath: m_Offset.y
+      value: -1.1904387
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569272670575479131, guid: c86ba77e64ec93946b782179d6eae97b, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569272670575479131, guid: c86ba77e64ec93946b782179d6eae97b, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569272670575479131, guid: c86ba77e64ec93946b782179d6eae97b, type: 3}
+      propertyPath: m_Size.y
+      value: 3.381073
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569272670575479131, guid: c86ba77e64ec93946b782179d6eae97b, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.009837627
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569272670575479131, guid: c86ba77e64ec93946b782179d6eae97b, type: 3}
+      propertyPath: m_Size.x
+      value: 2.5151033
+      objectReference: {fileID: 0}
     - target: {fileID: 7569272670575479132, guid: c86ba77e64ec93946b782179d6eae97b, type: 3}
       propertyPath: m_Name
-      value: TesterCharacter
+      value: Kiwi
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c86ba77e64ec93946b782179d6eae97b, type: 3}
