@@ -9,9 +9,6 @@ TagManager:
   - Killable
   - Pickup
   - Trader
-  - SceneSwitcher
-  - ReturnHome
-  - Area1
   - Obstacle
   - Building
   - TransitionGate

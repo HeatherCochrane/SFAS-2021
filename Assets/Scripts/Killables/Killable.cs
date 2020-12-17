@@ -19,6 +19,8 @@ public class Killable : MonoBehaviour
 
     public bool isDead = false;
 
+    GameObject drop;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,7 +67,8 @@ public class Killable : MonoBehaviour
 
         if (data.drop != null)
         {
-            Instantiate(data.drop, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+            drop = Instantiate(data.drop, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+            drop.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 3);
         }
 
         player.addXP(data.XP);
