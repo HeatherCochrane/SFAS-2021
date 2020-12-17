@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ChargeEnemy
   m_EditorClassIdentifier: 
   health: 2
-  drop: {fileID: 0}
+  drop: {fileID: 2579945575911357808, guid: 2e6f91c0b14b80c47a6aa67a680ae25a, type: 3}
   XP: 0
   species: 0

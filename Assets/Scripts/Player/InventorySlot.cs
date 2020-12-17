@@ -84,7 +84,6 @@ public class InventorySlot : MonoBehaviour
 
                 Healing i = item as Healing;
                 Player.instance.playerStatus.healPlayer(i.healingAmount);
-                Debug.Log("HEALING PLAYER!!");
             }
         }
 

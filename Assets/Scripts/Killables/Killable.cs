@@ -17,7 +17,8 @@ public class Killable : MonoBehaviour
 
     Rigidbody2D rb;
 
-    bool isDead = false;
+    public bool isDead = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,7 +52,6 @@ public class Killable : MonoBehaviour
 
             if (health <= 0)
             {
-                this.GetComponent<Enemy>().killEnemy();
                 Invoke("killEnemy", 1f);
                 isDead = true;
             }

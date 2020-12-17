@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObliviousEnemy : Enemy
+public class ObliviousEnemy : Killable
 {
 
     int dir = 1;

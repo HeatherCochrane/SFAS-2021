@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChargeEnemy : Enemy
+public class ChargeEnemy : Killable
 {
     Player player;
     float dir = 1;

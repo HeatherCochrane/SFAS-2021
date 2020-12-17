@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StationaryEnemy : Enemy
+public class StationaryEnemy : Killable
 {
     bool canAttack = true;
 

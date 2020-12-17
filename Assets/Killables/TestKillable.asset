@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TestKillable
   m_EditorClassIdentifier: 
   health: 2
-  drop: {fileID: 0}
+  drop: {fileID: 4842158553381770267, guid: 13ca59d0764d6754e8d3e4116e551caf, type: 3}
   XP: 105
   species: 0
