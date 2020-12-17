@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e914754d79403544911296c2ed8987b, type: 3}
-  m_Name: Test
+  m_Script: {fileID: 11500000, guid: 7ed6015595d24ee48a377765a52e70f9, type: 3}
+  m_Name: TestHealing
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 90e9428d5932999419a32743a3f284c9, type: 3}
-  buyPrice: 10
-  sellPrice: 5
-  worldObject: {fileID: 1874821832968600517, guid: 6c492e938e0dc2b449f58b915dda3dcf, type: 3}
+  itemSprite: {fileID: 21300000, guid: b100937681bf7f34ab004be49852a993, type: 3}
+  buyPrice: 5
+  sellPrice: 3
+  worldObject: {fileID: 0}
   stackable: 1
+  healingAmount: 10

@@ -48,6 +48,12 @@ public class InventorySlot : MonoBehaviour
                 setItemMenu();
             }
 
+            if (slotData.GetType() == typeof(Healing))
+            {
+                item = slotData as Healing;
+                setHealingMenu(item as Healing);
+            }
+
             Player.instance.inventory.setActiveSlot(this);
         }
     }
@@ -58,26 +64,42 @@ public class InventorySlot : MonoBehaviour
     }
 
     public void equipItem()
-    {       
-        if (weapon.weaponType == Weapon.WeaponType.MELEE)
+    {
+        if (weapon != null)
         {
-            Player.instance.weapons.equipMeleeWeapon(weapon);
+            if (weapon.weaponType == Weapon.WeaponType.MELEE)
+            {
+                Player.instance.weapons.equipMeleeWeapon(weapon);
+            }
+            else
+            {
+                Player.instance.weapons.equipRangedWeapon(weapon);
+            }
         }
-        else
+        else if(item != null)
         {
-            Player.instance.weapons.equipRangedWeapon(weapon);
+            if(item.GetType() == typeof(Healing))
+            {
+                Player.instance.inventory.RemoveItemFromInventory("Use");
+                Debug.Log("HEALING PLAYER!!");
+            }
         }
 
     }
 
     public void setEquipMenu()
     {
-        Player.instance.inventory.showItemInfoBox(weapon.itemSprite, weapon.name, "Damage: " +  weapon.damage.ToString(), "Distance: " + weapon.distance.ToString(), weapon.sellPrice.ToString(), this, true);
+        Player.instance.inventory.showItemInfoBox(weapon.itemSprite, weapon.name, "Damage: " +  weapon.damage.ToString(), "Distance: " + weapon.distance.ToString(), weapon.sellPrice.ToString(), this, true, true);
     }
 
     public void setItemMenu()
     {
-        Player.instance.inventory.showItemInfoBox(item.itemSprite, item.name, "", "", item.sellPrice.ToString(), this, false);
+        Player.instance.inventory.showItemInfoBox(item.itemSprite, item.name, "", "", item.sellPrice.ToString(), this, false, false);
+    }
+
+    public void setHealingMenu(Healing item)
+    {
+        Player.instance.inventory.showItemInfoBox(item.itemSprite, item.name, item.healingAmount.ToString(), "", item.sellPrice.ToString(), this, true, false);
     }
 
 

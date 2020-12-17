@@ -48,6 +48,11 @@ public class TraderSlot : MonoBehaviour
                 item = slotItem as Item;
                 setInfoMenu();
             }
+            if(slotItem.GetType() == typeof(Healing))
+            {
+                item = slotItem as Healing;
+                setHealingMenu(item as Healing);
+            }
         }
     }
 
@@ -58,5 +63,10 @@ public class TraderSlot : MonoBehaviour
     void setInfoMenu()
     {
         trader.showItemInfoBox(item.itemSprite, item.name, "", "", item.buyPrice.ToString(), this, item);
+    }
+
+    void setHealingMenu(Healing item)
+    {
+        trader.showItemInfoBox(item.itemSprite, item.name, item.healingAmount.ToString(), "", item.buyPrice.ToString(), this, item);
     }
 }

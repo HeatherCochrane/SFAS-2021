@@ -128,6 +128,11 @@ public class Trader : MonoBehaviour
                     Player.instance.inventory.addItem(activeItem);
                     Player.instance.inventory.adjustFunds(-activeItem.buyPrice);
                 }
+                else if (activeItem.GetType() == typeof(Healing))
+                {
+                    Player.instance.inventory.addItem(activeItem);
+                    Player.instance.inventory.adjustFunds(-activeItem.buyPrice);
+                }
             }
         }
     }
