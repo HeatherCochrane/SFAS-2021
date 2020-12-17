@@ -8321,7 +8321,7 @@ GameObject:
   - component: {fileID: 537757537}
   m_Layer: 9
   m_Name: GateFrame
-  m_TagString: Untagged
+  m_TagString: TransitionGate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9275,9 +9275,10 @@ GameObject:
   m_Component:
   - component: {fileID: 616726993}
   - component: {fileID: 616726992}
+  - component: {fileID: 616726994}
   m_Layer: 9
   m_Name: Gate
-  m_TagString: ReturnHome
+  m_TagString: TransitionGate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9323,6 +9324,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &616726994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616726991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe70fbae7e8d9b547af6a43bd98f2611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: Town
+  spawnPoint: {x: -7, y: -2}
 --- !u!1 &640932137
 GameObject:
   m_ObjectHideFlags: 0
@@ -14098,9 +14113,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1396524133}
   - component: {fileID: 1396524132}
+  - component: {fileID: 1396524134}
   m_Layer: 9
   m_Name: Gate (2)
-  m_TagString: Area2
+  m_TagString: TransitionGate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14146,6 +14162,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1396524134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396524131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe70fbae7e8d9b547af6a43bd98f2611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: Area2
+  spawnPoint: {x: -7, y: -2}
 --- !u!1 &1401177187
 GameObject:
   m_ObjectHideFlags: 0
@@ -16445,9 +16475,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1816349749}
   - component: {fileID: 1816349748}
+  - component: {fileID: 1816349750}
   m_Layer: 9
   m_Name: Gate (3)
-  m_TagString: Area3
+  m_TagString: TransitionGate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16493,6 +16524,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1816349750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816349747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe70fbae7e8d9b547af6a43bd98f2611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: Area3
+  spawnPoint: {x: 9, y: -2}
 --- !u!1 &1826729615
 GameObject:
   m_ObjectHideFlags: 0

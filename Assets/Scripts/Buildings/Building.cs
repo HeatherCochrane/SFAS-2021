@@ -11,6 +11,9 @@ public class Building : MonoBehaviour
     GameObject interact;
 
     Animator anim;
+
+    [SerializeField]
+    Vector2 spawnPoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,5 +36,9 @@ public class Building : MonoBehaviour
     public string getSceneName()
     {
         return scene;
+    }
+    public Vector2 getSpawnPoint()
+    {
+        return spawnPoint;
     }
 }

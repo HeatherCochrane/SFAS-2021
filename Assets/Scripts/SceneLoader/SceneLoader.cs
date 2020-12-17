@@ -12,7 +12,6 @@ public class SceneLoader : MonoBehaviour
     public struct SceneData
     {
         public string scenePath;
-        public Vector3 spawnPoint;
         public float left;
         public float right;
         public Particle particleEffect;
@@ -50,6 +49,8 @@ public class SceneLoader : MonoBehaviour
 
     SceneData current;
 
+    Vector2 newSpawnPoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,7 +75,7 @@ public class SceneLoader : MonoBehaviour
         {
             if(scene.scenePath == sceneToLoad)
             {
-                Player.instance.transform.position = scene.spawnPoint;
+                Player.instance.transform.position = newSpawnPoint;
                 Player.instance.setCamBounds(scene.left, scene.right);
                 current = scene;
                 break;
@@ -88,24 +89,17 @@ public class SceneLoader : MonoBehaviour
         
     }
 
-    public void switchSceneToLoad(GameObject g)
-    {
-        sceneSelected += 1;
-        if(sceneSelected > AllSceneData.Count - 1)
-        {
-            sceneSelected = 0;
-        }
-        if (sceneSelected < gateSprites.Count)
-        {
-            g.GetComponent<SpriteRenderer>().sprite = gateSprites[sceneSelected];
-        }
-
-        sceneToLoad = AllSceneData[sceneSelected].scenePath;
-    }
-
-    public void switchScene(string scene)
+    public void switchScene(string scene, Vector2 newSpawn)
     {
         sceneToLoad = scene;
+        newSpawnPoint = newSpawn;
+        loadScene();
+    }
+
+    public void startGame(string scene)
+    {
+        sceneToLoad = scene;
+        newSpawnPoint = new Vector2(-6, -2);
         loadScene();
     }
 

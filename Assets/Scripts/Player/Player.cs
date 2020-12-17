@@ -235,7 +235,7 @@ public class Player : MonoBehaviour
                     }
                     else if(currentBuilding != null)
                     {
-                        sceneLoader.switchScene(currentBuilding.getSceneName());
+                        sceneLoader.switchScene(currentBuilding.getSceneName(), currentBuilding.getSpawnPoint());
                     }
                 }
 
@@ -283,6 +283,7 @@ public class Player : MonoBehaviour
                 facingLeft = false;
                 dir = 1;
                 playerSprites.transform.localScale = new Vector2(-0.3f, 0.3f);
+                isRunning = true;
             }
             else if (Input.GetKey(KeyCode.A))
             {
@@ -290,6 +291,7 @@ public class Player : MonoBehaviour
                 facingLeft = true;
                 dir = -1;
                 playerSprites.transform.localScale = new Vector2(0.3f, 0.3f);
+                isRunning = true;
 
             }
             else
@@ -298,7 +300,7 @@ public class Player : MonoBehaviour
             }
 
 
-            if(!isRunning && isGrounded)
+            if(isRunning && isGrounded)
             {
                 switchAnimation(AnimationStates.RUN);
             }
@@ -599,24 +601,9 @@ public class Player : MonoBehaviour
             trader = collision.GetComponent<Trader>();
         }
 
-        if(collision.tag == "Area1")
+        if(collision.tag == "TransitionGate")
         {
-            sceneLoader.switchScene("Area1");
-        }
-
-        if (collision.tag == "Area2")
-        {
-            sceneLoader.switchScene("Area2");
-        }
-
-        if (collision.tag == "Area3")
-        {
-            sceneLoader.switchScene("Area3");
-        }
-
-        if (collision.tag == "ReturnHome")
-        {
-            sceneLoader.switchScene("Town");
+            sceneLoader.switchScene(collision.GetComponent<TransitionGate>().getScene(), collision.GetComponent<TransitionGate>().getSpawnPoint());
         }
 
         if (collision.gameObject.tag == "Pickup")

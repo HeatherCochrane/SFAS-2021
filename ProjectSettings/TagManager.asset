@@ -12,10 +12,9 @@ TagManager:
   - SceneSwitcher
   - ReturnHome
   - Area1
-  - Area2
   - Obstacle
   - Building
-  - Area3
+  - TransitionGate
   layers:
   - Default
   - TransparentFX
