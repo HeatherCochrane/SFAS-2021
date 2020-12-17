@@ -81,6 +81,9 @@ public class InventorySlot : MonoBehaviour
             if(item.GetType() == typeof(Healing))
             {
                 Player.instance.inventory.RemoveItemFromInventory("Use");
+
+                Healing i = item as Healing;
+                Player.instance.playerStatus.healPlayer(i.healingAmount);
                 Debug.Log("HEALING PLAYER!!");
             }
         }

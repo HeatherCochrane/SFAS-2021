@@ -98,11 +98,11 @@ public class ChargeEnemy : Enemy
                     {
                         if (dir == 1)
                         {
-                            player.takeDamage(damage, true, force);
+                            Player.instance.playerStatus.takeDamage(damage, true, force);
                         }
                         else
                         {
-                            player.takeDamage(damage, false, force);
+                            Player.instance.playerStatus.takeDamage(damage, false, force);
                         }
                     }
                     

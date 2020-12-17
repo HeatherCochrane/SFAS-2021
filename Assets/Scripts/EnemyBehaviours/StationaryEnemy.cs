@@ -67,11 +67,11 @@ public class StationaryEnemy : Enemy
         {
             if (this.transform.position.x < player.gameObject.transform.position.x)
             {
-                player.takeDamage(damage, true, force);
+                Player.instance.playerStatus.takeDamage(damage, true, force);
             }
             else
             {
-                player.takeDamage(damage, false, force);
+                Player.instance.playerStatus.takeDamage(damage, false, force);
             }
         }
         else if (hit.collider)
@@ -80,11 +80,11 @@ public class StationaryEnemy : Enemy
             {
                 if (this.transform.position.x < player.gameObject.transform.position.x)
                 {
-                    player.takeDamage(damage, true, force);
+                    Player.instance.playerStatus.takeDamage(damage, true, force);
                 }
                 else
                 {
-                    player.takeDamage(damage, false, force);
+                    Player.instance.playerStatus.takeDamage(damage, false, force);
                 }
             }
             else

@@ -27,6 +27,9 @@ public class Player : MonoBehaviour
     //SceneLoader
     public SceneLoader sceneLoader;
 
+    //Player Status effects
+    public PlayerStatus playerStatus;
+
     //Event System
     public UnityEngine.EventSystems.EventSystem system;
 
@@ -53,9 +56,6 @@ public class Player : MonoBehaviour
     float speedCap = 2.5f;
     bool stopMovement = false;
     bool facingLeft = false;
-
-    //Health
-    int health = 5;
 
     //Rigidbody
     Rigidbody2D rb;
@@ -160,7 +160,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    uiHandler.changeMenu(UIHandler.Menus.INVENTORY);
+                    uiHandler.changeDoubleMenu(UIHandler.Menus.PLAYERUI, UIHandler.Menus.INVENTORY);
                     stopMovement = true;
                 }
             }
@@ -513,28 +513,6 @@ public class Player : MonoBehaviour
     public void setMeleeWeapon(Weapon m)
     {
         meleeWeapon = m;
-    }
-
-    public void takeDamage(int amount, bool left, int force)
-    {
-        health -= amount;
-
-        rb.velocity = new Vector2(0, 0);
-
-        if(left)
-        {
-            
-            rb.velocity = new Vector2(force, force);
-        }
-        else
-        {
-            rb.velocity = new Vector2(-force, force);
-        }
-
-        if(health <= 0)
-        {
-            Debug.Log("Died!");
-        }
     }
 
     public void setDash(bool set)
