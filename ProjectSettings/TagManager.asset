@@ -12,6 +12,8 @@ TagManager:
   - Obstacle
   - Building
   - TransitionGate
+  - ReturnHome
+  - Hazard
   layers:
   - Default
   - TransparentFX
@@ -26,7 +28,7 @@ TagManager:
   - Enemy
   - Character
   - WorldItem
-  - 
+  - Collider
   - 
   - 
   - 
@@ -48,6 +50,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Collider
+    uniqueID: 1379487767
     locked: 0
   - name: Player
     uniqueID: 3946922793

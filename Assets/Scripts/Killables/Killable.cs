@@ -10,23 +10,28 @@ public class Killable : MonoBehaviour
     [SerializeField]
     KillableData data;
 
-    PlayerLevel player;
+    public Player player;
+    PlayerLevel playerLevel;
     PlayerQuests quests;
 
     int health = 2;
 
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
 
     public bool isDead = false;
 
     GameObject drop;
+
+    public int damage = 0;
+    public int force;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
         health = data.health;
-        player = Player.instance.levels;
+        player = Player.instance;
+        playerLevel = Player.instance.levels;
         quests = Player.instance.playerQuests;
     }
 
@@ -34,6 +39,18 @@ public class Killable : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void attackPlayer()
+    {
+        if (Player.instance.transform.position.x < transform.position.x)
+        {
+            Player.instance.playerStatus.takeDamage(damage, false, force);
+        }
+        else
+        {
+            Player.instance.playerStatus.takeDamage(damage, true, force);
+        }
     }
 
     public void takeDamage(bool dir, int dam)
@@ -55,6 +72,7 @@ public class Killable : MonoBehaviour
             if (health <= 0)
             {
                 Invoke("killEnemy", 1f);
+                StopAllCoroutines();
                 isDead = true;
             }
         }
@@ -62,16 +80,13 @@ public class Killable : MonoBehaviour
 
     public void killEnemy()
     {
-        player = Player.instance.levels;
-
-
         if (data.drop != null)
         {
             drop = Instantiate(data.drop, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-            drop.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 3);
+            //drop.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 3);
         }
 
-        player.addXP(data.XP);
+        playerLevel.addXP(data.XP);
 
         quests.speciesKilled(data.species);
 

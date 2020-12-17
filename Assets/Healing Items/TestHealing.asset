@@ -17,4 +17,4 @@ MonoBehaviour:
   sellPrice: 3
   worldObject: {fileID: 0}
   stackable: 1
-  healingAmount: 10
+  healingAmount: 1

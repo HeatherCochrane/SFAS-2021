@@ -47,12 +47,6 @@ public class ChargeEnemy : Killable
     int walkingDir = 1;
     float walkingSpeed = 2;
 
-    [SerializeField]
-    int damage = 0;
-
-    [SerializeField]
-    int force = 0;
-
     private void Start()
     {
         player = Player.instance;
@@ -94,15 +88,17 @@ public class ChargeEnemy : Killable
                     rb.velocity = new Vector2(0, rb.velocity.y);
 
                     //do damage to the player when they are close
-                    if (distY < 0.5f)
+                    if (distY <= 1f)
                     {
                         if (dir == 1)
                         {
                             Player.instance.playerStatus.takeDamage(damage, true, force);
+                            Debug.Log("CALLED");
                         }
                         else
                         {
                             Player.instance.playerStatus.takeDamage(damage, false, force);
+                            Debug.Log("CALLED");
                         }
                     }
                     

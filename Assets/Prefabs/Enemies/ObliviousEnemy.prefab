@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2891589388254338923}
   m_Layer: 10
   m_Name: ObliviousEnemy
-  m_TagString: Killable
+  m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,6 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: bfadcfcfe16f1194fbbaea82220903a4, type: 2}
+  isDead: 0
+  damage: 0
+  force: 0
 --- !u!212 &3233293759340122745
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -95,7 +98,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1.0001953}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &3233293759340122742
@@ -131,4 +134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 201a17528b4778b4e92f4ea98bb271c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  isDead: 0
+  damage: 0
+  force: 0
   speed: 1

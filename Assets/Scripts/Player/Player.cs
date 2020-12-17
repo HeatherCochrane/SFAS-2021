@@ -610,6 +610,11 @@ public class Player : MonoBehaviour
         {
             pickUp = collision.gameObject;
         }
+
+        if(collision.gameObject.tag == "Hazard")
+        {
+            collision.GetComponentInParent<Killable>().attackPlayer();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

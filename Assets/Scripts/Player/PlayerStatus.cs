@@ -9,13 +9,19 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI playerHealth;
 
-    int health = 0;
+    int health = 5;
 
     Rigidbody2D rb;
+
+    [SerializeField]
+    ParticleSystem healingEffect;
+
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerHealth.text = health.ToString();
     }
 
     // Update is called once per frame
@@ -29,6 +35,7 @@ public class PlayerStatus : MonoBehaviour
         health += amount;
         health = Mathf.Clamp(health, 0, 5);
         playerHealth.text = health.ToString();
+        healingEffect.Play();
     }
 
     public void takeDamage(int amount, bool left, int force)
