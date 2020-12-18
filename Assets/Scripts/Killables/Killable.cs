@@ -8,31 +8,35 @@ public class Killable : MonoBehaviour
     public enum Species { ENEMY, SHEEP };
 
     [SerializeField]
-    KillableData data;
+    public KillableData data;
 
-    public Player player;
-    PlayerLevel playerLevel;
-    PlayerQuests quests;
+    protected Player player;
+    protected PlayerLevel playerLevel;
+    protected PlayerQuests quests;
 
     int health = 2;
 
-    public Rigidbody2D rb;
+    protected Rigidbody2D rb;
 
-    public bool isDead = false;
+    protected bool isDead = false;
 
     GameObject drop;
 
     public int damage = 0;
     public int force;
 
+    GameObject lastArrow;
+
+
     // Start is called before the first frame update
-    void Start()
-    {
-        rb = this.GetComponent<Rigidbody2D>();
+    public void Start()
+    {     
+        rb = GetComponent<Rigidbody2D>();
         health = data.health;
         player = Player.instance;
         playerLevel = Player.instance.levels;
         quests = Player.instance.playerQuests;
+
     }
 
     public void attackPlayer()
@@ -65,39 +69,53 @@ public class Killable : MonoBehaviour
 
             if (health <= 0)
             {
-                Invoke("killEnemy", 1f);
-                StopAllCoroutines();
+                killEnemy();
                 isDead = true;
+                CancelInvoke();
+                StopAllCoroutines();
             }
         }
     }
 
     public void killEnemy()
     {
-        if (data.drop != null)
+        if (!isDead)
         {
-            drop = Instantiate(data.drop, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-            //drop.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 3);
+            if (data.drop != null)
+            { 
+                drop = Instantiate(data.drop, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+                //drop.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 3);
+            }
+
+            playerLevel.addXP(data.XP);
+
+            quests.speciesKilled(data.species);
+
+            Destroy(this.gameObject);
         }
-
-        playerLevel.addXP(data.XP);
-
-        quests.speciesKilled(data.species);
-
-        Destroy(this.gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.transform.tag == "Arrow")
         {
-            if (collision.transform.position.x < transform.position.x)
+            if (collision.gameObject != lastArrow)
             {
-                takeDamage(false, Player.instance.getRangedDamage());
+                if (collision.transform.position.x < transform.position.x && !isDead)
+                {
+                    takeDamage(false, Player.instance.getRangedDamage());
+                }
+                else if(!isDead)
+                {
+                    takeDamage(true, Player.instance.getRangedDamage());
+                }
+
+                lastArrow = collision.gameObject;
+                Physics2D.IgnoreCollision(collision, GetComponent<Collider2D>());
             }
             else
             {
-                takeDamage(true, Player.instance.getRangedDamage());
+                Debug.Log("SAME ARROW COLLISION");
             }
         }
     }

@@ -31,4 +31,9 @@ public class GrassEffect : MonoBehaviour
     {
         Player.instance.longRanged();
     }
+
+    public void spawnArrow()
+    {
+        Player.instance.spawnArrow();
+    }
 }

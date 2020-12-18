@@ -45,8 +45,7 @@ public class ChargeEnemy : Killable
 
     private void Start()
     {
-        player = Player.instance;
-        rb = GetComponent<Rigidbody2D>();
+        base.Start();
         StartCoroutine("checkDistance");
     }
 

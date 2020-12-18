@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
     float dashAmount = 50f;
     bool isDashing = false;
     bool dashCooldown = false;
-    int dir = 1;
+    int dir = -1;
     float startDashTime = 0.2f;
     float dashTime = 0;
 
@@ -250,13 +250,13 @@ public class Player : MonoBehaviour
                 {
                     switchAnimation(AnimationStates.MELEEUP);
                     Attack(meleeWeapon.distance, meleeWeapon.damage);
+                    isAttacking = true;
                 }
 
                 //Long Range Attack, hold down then release to fire
                 if (Input.GetMouseButton(0) && longRangeWeapon != null && !isAttacking)
                 {
                     switchAnimation(AnimationStates.RANGED);
-                    spawnArrow();
                     isAttacking = true;
                 }
 

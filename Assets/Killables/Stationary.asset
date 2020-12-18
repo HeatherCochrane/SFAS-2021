@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eaa2b106edb01b9478863c1848ea3a3f, type: 3}
-  m_Name: TestKillable
+  m_Name: Stationary
   m_EditorClassIdentifier: 
   health: 2
   drop: {fileID: 4842158553381770267, guid: 13ca59d0764d6754e8d3e4116e551caf, type: 3}

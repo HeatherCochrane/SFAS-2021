@@ -17,10 +17,11 @@ public class StationaryEnemy : Killable
 
     Animator anim;
 
+
     // Start is called before the first frame update
     void Start()
     {
-        player = Player.instance;
+        base.Start();
         anim = GetComponent<Animator>();
     }
 
