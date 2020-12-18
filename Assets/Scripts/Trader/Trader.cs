@@ -141,6 +141,7 @@ public class Trader : MonoBehaviour
     public void showItemInfoBox(Sprite s, string name, string damage, string range, string price, TraderSlot slot, Item active)
     {
         infoBox.transform.GetChild(0).gameObject.SetActive(true);
+        infoBox.transform.GetChild(0).GetComponent<Image>().sprite = s;
         infoBox.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = name;
         infoBox.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Damage: " + damage;
         infoBox.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Range: " + range;

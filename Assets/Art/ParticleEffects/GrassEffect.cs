@@ -26,4 +26,9 @@ public class GrassEffect : MonoBehaviour
         newGrass.transform.SetParent(Player.instance.transform);
         newGrass.transform.position = Player.instance.transform.position - new Vector3(0, 1);
     }
+
+    public void attack()
+    {
+        Player.instance.longRanged();
+    }
 }

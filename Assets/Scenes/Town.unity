@@ -6532,7 +6532,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2030340931991277765, guid: 69ed9b80576ddca44acd105608b8fafe, type: 3}
       propertyPath: m_Name
-      value: Trader
+      value: Baker
       objectReference: {fileID: 0}
     - target: {fileID: 2030340931991277769, guid: 69ed9b80576ddca44acd105608b8fafe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6580,6 +6580,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2030340931991277770, guid: 69ed9b80576ddca44acd105608b8fafe, type: 3}
       propertyPath: stock.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: cc281aa4473ec1b43a64587d2b0a6bad, type: 2}
+    - target: {fileID: 2030340931991277770, guid: 69ed9b80576ddca44acd105608b8fafe, type: 3}
+      propertyPath: stock.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f636a61a9f750e428d12462653b45ec, type: 2}
+    - target: {fileID: 2030340931991277770, guid: 69ed9b80576ddca44acd105608b8fafe, type: 3}
+      propertyPath: stock.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1a873432f663b364a83bc79fdae3773e, type: 2}
+    - target: {fileID: 2030340931991277770, guid: 69ed9b80576ddca44acd105608b8fafe, type: 3}
+      propertyPath: stock.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: ea841e40d2f3bd84e9d8cd51e2c8a48f, type: 2}
+    - target: {fileID: 2030340931991277770, guid: 69ed9b80576ddca44acd105608b8fafe, type: 3}
+      propertyPath: stock.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: c36189d52d66dac4a8a41a0f65f08184, type: 2}
+    - target: {fileID: 2030340931991277770, guid: 69ed9b80576ddca44acd105608b8fafe, type: 3}
+      propertyPath: stock.Array.data[4]
       value: 
       objectReference: {fileID: 11400000, guid: a4c9bb545cb227444a455db031282fbe, type: 2}
     m_RemovedComponents: []

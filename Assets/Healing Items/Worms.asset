@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ed6015595d24ee48a377765a52e70f9, type: 3}
-  m_Name: TestHealing
+  m_Name: Worms
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: b100937681bf7f34ab004be49852a993, type: 3}
+  itemSprite: {fileID: 5162684294959883060, guid: fc0e1e2c68bc11d4fa40180fe0997d11, type: 3}
   buyPrice: 5
   sellPrice: 3
   worldObject: {fileID: 0}

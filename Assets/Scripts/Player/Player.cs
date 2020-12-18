@@ -42,8 +42,6 @@ public class Player : MonoBehaviour
     //Player weapons
     Weapon meleeWeapon;
     Weapon longRangeWeapon;
-    bool holding = false;
-    Vector2 direction;
     bool isAttacking = false;
 
     [SerializeField]
@@ -109,7 +107,10 @@ public class Player : MonoBehaviour
 
     Building currentBuilding;
 
-    public enum AnimationStates { RUN, JUMP, DASH, IDLE, MELEEDOWN, MELEEUP}
+    public enum AnimationStates { RUN, JUMP, DASH, IDLE, MELEEDOWN, MELEEUP, RANGED}
+
+    [SerializeField]
+    GameObject arrow;
 
     AnimationStates previous;
     // Start is called before the first frame update
@@ -246,16 +247,11 @@ public class Player : MonoBehaviour
                     Attack(meleeWeapon.distance, meleeWeapon.damage);
                 }
 
-                ////Long Range Attack, hold down then release to fire
-                //if (Input.GetMouseButton(0) && longRangeWeapon != null)
-                //{
-                //    holding = true;
-                //}
-                //if (Input.GetMouseButtonUp(0) && holding && longRangeWeapon != null)
-                //{
-                //    Attack(longRangeWeapon.distance, longRangeWeapon.damage);
-                //    holding = false;
-                //}
+                //Long Range Attack, hold down then release to fire
+                if (Input.GetMouseButton(0) && longRangeWeapon != null)
+                {
+                    switchAnimation(AnimationStates.RANGED);
+                }
 
                 if(Input.GetMouseButton(2) && canHide)
                 {
@@ -275,7 +271,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!stopMovement && trackInput && !isDashing)
+        if (!stopMovement && trackInput && !isDashing && !isAttacking)
         {
             if (Input.GetKey(KeyCode.D))
             {
@@ -402,6 +398,9 @@ public class Player : MonoBehaviour
                 case AnimationStates.IDLE:
                     anim.SetBool("Idle", true);
                     break;
+                case AnimationStates.RANGED:
+                    anim.SetBool("Ranged", true);
+                    break;
                 default:
                     anim.SetBool("Run", true);
                     break;
@@ -450,7 +449,6 @@ public class Player : MonoBehaviour
         uiHandler.changeMenu(UIHandler.Menus.DIALOGUE);
         dialogue.startNewDialogue(character.getData().getDialogue(index), character.getData().getCharacterSprite(), character.getData().getName(), uiHandler.getMenuObject(UIHandler.Menus.DIALOGUE));
         stopMovement = true;
-        holding = false;
         stopInventoryToggle = true;
     }
 
@@ -483,6 +481,11 @@ public class Player : MonoBehaviour
     public bool getIfHidden()
     {
         return isHidden;
+    }
+
+    public void longRanged()
+    {
+        Attack(longRangeWeapon.distance, longRangeWeapon.damage);
     }
 
     void Attack(float dist, int damage)

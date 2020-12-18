@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ChargeEnemy : Killable
 {
-    Player player;
     float dir = 1;
 
     IEnumerator checkDistance()
@@ -79,7 +78,7 @@ public class ChargeEnemy : Killable
                 Invoke("stopCountdown", cooldownTime);
             }
 
-            if (charging)
+            if (charging && !isDead)
             {
                 if (distX < 1)
                 {
