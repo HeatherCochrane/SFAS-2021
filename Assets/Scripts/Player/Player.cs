@@ -112,6 +112,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     GameObject arrow;
 
+    [SerializeField]
+    Transform arrowPos;
+
+    GameObject newArrow;
+
     AnimationStates previous;
     // Start is called before the first frame update
     void Start()
@@ -248,9 +253,11 @@ public class Player : MonoBehaviour
                 }
 
                 //Long Range Attack, hold down then release to fire
-                if (Input.GetMouseButton(0) && longRangeWeapon != null)
+                if (Input.GetMouseButton(0) && longRangeWeapon != null && !isAttacking)
                 {
                     switchAnimation(AnimationStates.RANGED);
+                    spawnArrow();
+                    isAttacking = true;
                 }
 
                 if(Input.GetMouseButton(2) && canHide)
@@ -483,9 +490,16 @@ public class Player : MonoBehaviour
         return isHidden;
     }
 
+    public void spawnArrow()
+    {
+        newArrow = Instantiate(arrow);
+        newArrow.GetComponent<Arrow>().setDirection(dir);
+        newArrow.transform.position = arrowPos.position;
+    }
     public void longRanged()
     {
-        Attack(longRangeWeapon.distance, longRangeWeapon.damage);
+        //Attack(longRangeWeapon.distance, longRangeWeapon.damage);
+        isAttacking = false;
     }
 
     void Attack(float dist, int damage)
@@ -525,6 +539,10 @@ public class Player : MonoBehaviour
         canDash = set;
     }
 
+    public int getRangedDamage()
+    {
+        return longRangeWeapon.damage;
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.tag == "Ground" && collision.contacts[0].normal.y >= 0.2f)

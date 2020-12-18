@@ -17,7 +17,6 @@ public class StationaryEnemy : Killable
 
     Animator anim;
 
-    Player player;
     // Start is called before the first frame update
     void Start()
     {

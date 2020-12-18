@@ -5,7 +5,7 @@ using UnityEngine;
 public class Killable : MonoBehaviour
 {
     //Enums for keeping track of which enemy was killed
-    public enum Species { ENEMY, SHEEP};
+    public enum Species { ENEMY, SHEEP };
 
     [SerializeField]
     KillableData data;
@@ -33,12 +33,6 @@ public class Killable : MonoBehaviour
         player = Player.instance;
         playerLevel = Player.instance.levels;
         quests = Player.instance.playerQuests;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void attackPlayer()
@@ -91,5 +85,20 @@ public class Killable : MonoBehaviour
         quests.speciesKilled(data.species);
 
         Destroy(this.gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.transform.tag == "Arrow")
+        {
+            if (collision.transform.position.x < transform.position.x)
+            {
+                takeDamage(false, Player.instance.getRangedDamage());
+            }
+            else
+            {
+                takeDamage(true, Player.instance.getRangedDamage());
+            }
+        }
     }
 }

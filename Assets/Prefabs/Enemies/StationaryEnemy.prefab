@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: d439fa8fe42f81441b0272e9e3d17a94, type: 2}
   player: {fileID: 0}
-  rb: {fileID: 0}
+  rb: {fileID: 1713355574466866859}
   isDead: 0
   damage: 1
   force: 3
@@ -160,9 +160,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.78883564}
+  m_Offset: {x: 0, y: -0.3306495}
   serializedVersion: 2
-  m_Radius: 0.25700295
+  m_Radius: 0.7151891
 --- !u!1 &7864862148985185360
 GameObject:
   m_ObjectHideFlags: 0

@@ -35,15 +35,12 @@ public class ChargeEnemy : Killable
     float distX = 0;
     float distY = 0;
 
-    Rigidbody2D rb;
-
     float speedCap = 5;
 
     bool charging = false;
 
     float chargeTime = 5;
 
-    int walkingDir = 1;
     float walkingSpeed = 2;
 
     private void Start()
