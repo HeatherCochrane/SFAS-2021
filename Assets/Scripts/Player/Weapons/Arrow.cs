@@ -8,6 +8,10 @@ public class Arrow : MonoBehaviour
     float speed = 0.4f;
     float range = 0;
 
+    [SerializeField]
+    ParticleSystem effect;
+
+    ParticleSystem e;
     void Start()
     {
        
@@ -37,14 +41,14 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.transform.tag == "Killable" || collision.transform.tag == "Hazard")
-        {
-            Invoke("destroyArrow", 0.3f);
-        }
+        destroyArrow();
     }
 
     void destroyArrow()
     {
+        e = Instantiate(effect);
+        e.transform.position = transform.position;
         Destroy(this.gameObject);
     }
+
 }

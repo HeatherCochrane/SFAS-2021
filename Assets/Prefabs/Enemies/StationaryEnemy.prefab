@@ -52,7 +52,7 @@ MonoBehaviour:
   damage: 1
   force: 3
   timeBetweenAttacks: 2
-  maxDistance: 5
+  maxDistance: 4
 --- !u!212 &1713355574466866852
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -98,7 +98,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4, y: 2.3}
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -157,9 +157,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.3306495}
+  m_Offset: {x: 0, y: -0.3240322}
   serializedVersion: 2
-  m_Radius: 0.7151891
+  m_Radius: 0.7218064
 --- !u!1 &7864862148985185360
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,7 +169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6619322081461332029}
-  - component: {fileID: 4350893970477640247}
+  - component: {fileID: 3400432378202787467}
   m_Layer: 9
   m_Name: Collider
   m_TagString: Hazard
@@ -191,8 +191,8 @@ Transform:
   m_Father: {fileID: 1713355574466866854}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &4350893970477640247
-CircleCollider2D:
+--- !u!61 &3400432378202787467
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -204,6 +204,16 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.26029634}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 0.2, y: 1.5205927}
+  m_EdgeRadius: 0

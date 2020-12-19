@@ -246,7 +246,7 @@ public class Player : MonoBehaviour
                 }
 
                 //Melee attack
-                if (Input.GetMouseButtonDown(1) && meleeWeapon != null && !isAttacking)
+                if (Input.GetMouseButtonDown(1) && meleeWeapon != null && !isAttacking && !playerStatus.getRecentlyDamaged())
                 {
                     switchAnimation(AnimationStates.MELEEUP);
                     Attack(meleeWeapon.distance, meleeWeapon.damage);
@@ -254,7 +254,7 @@ public class Player : MonoBehaviour
                 }
 
                 //Long Range Attack, hold down then release to fire
-                if (Input.GetMouseButton(0) && longRangeWeapon != null && !isAttacking)
+                if (Input.GetMouseButton(0) && longRangeWeapon != null && !isAttacking && !playerStatus.getRecentlyDamaged())
                 {
                     switchAnimation(AnimationStates.RANGED);
                     isAttacking = true;
@@ -511,7 +511,7 @@ public class Player : MonoBehaviour
 
         if (hit.collider)
         {
-            if (hit.collider.tag == "Killable")
+            if (hit.collider.tag == "Killable" || hit.collider.tag =="Hazard")
             {
                 hit.collider.gameObject.GetComponent<Killable>().takeDamage(facingLeft, damage);
             }

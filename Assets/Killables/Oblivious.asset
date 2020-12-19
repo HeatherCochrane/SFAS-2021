@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Oblivious
   m_EditorClassIdentifier: 
   health: 2
-  drop: {fileID: 5743587714483273148, guid: 6ad7ea800935b0246bb80dcf7df05ed6, type: 3}
+  drop: {fileID: 4040289308730173822, guid: dbff7ab1c659d4140b6a59e1fe9e3c04, type: 3}
   XP: 50
   species: 0

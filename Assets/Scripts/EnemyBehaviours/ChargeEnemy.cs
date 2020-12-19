@@ -71,7 +71,7 @@ public class ChargeEnemy : Killable
 
             }
 
-            if (charging && !isDead)
+            if (charging && !isDead && !Player.instance.playerStatus.getRecentlyDamaged())
             {
                 if (distX < 1)
                 {

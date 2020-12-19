@@ -16,7 +16,10 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField]
     ParticleSystem healingEffect;
 
+    bool recentDamage = false;
 
+    [SerializeField]
+    Animator damageAnim;
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +65,20 @@ public class PlayerStatus : MonoBehaviour
         }
 
         playerHealth.text = health.ToString();
+
+        recentDamage = true;
+        damageAnim.SetBool("DamageTaken", true);
+        Invoke("stopInvulnerableState", 2);
     }
 
+    public void stopInvulnerableState()
+    {
+        damageAnim.SetBool("DamageTaken", false);
+        recentDamage = false;
+    }
+
+    public bool getRecentlyDamaged()
+    {
+        return recentDamage;
+    }
 }

@@ -46,13 +46,16 @@ public class Killable : MonoBehaviour
 
     public void attackPlayer()
     {
-        if (Player.instance.transform.position.x < transform.position.x)
+        if (!Player.instance.playerStatus.getRecentlyDamaged())
         {
-            Player.instance.playerStatus.takeDamage(damage, false, force);
-        }
-        else
-        {
-            Player.instance.playerStatus.takeDamage(damage, true, force);
+            if (Player.instance.transform.position.x < transform.position.x)
+            {
+                Player.instance.playerStatus.takeDamage(damage, false, force);
+            }
+            else
+            {
+                Player.instance.playerStatus.takeDamage(damage, true, force);
+            }
         }
     }
 
@@ -89,7 +92,7 @@ public class Killable : MonoBehaviour
             if (data.drop != null)
             { 
                 drop = Instantiate(data.drop, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-                //drop.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 3);
+                drop.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(0, 2), 3);
             }
 
             playerLevel.addXP(data.XP);
