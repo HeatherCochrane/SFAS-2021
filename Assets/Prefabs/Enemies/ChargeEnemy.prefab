@@ -49,7 +49,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: b8f90933e00a04943ad83e3b958051c2, type: 2}
   damage: 1
   force: 3
-  cooldownTime: 6
+  cooldownTime: 3
 --- !u!212 &5773007024324755837
 SpriteRenderer:
   m_ObjectHideFlags: 0

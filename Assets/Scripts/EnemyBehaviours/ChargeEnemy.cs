@@ -52,26 +52,24 @@ public class ChargeEnemy : Killable
     void stopCountdown()
     {
         onCooldown = false;
+        Debug.Log("Off Cooldown");
     }
 
     private void FixedUpdate()
     {
         if (!isDead)
         {
-            if (!charging || rb.velocity.x == 0)
+            if ((!charging || rb.velocity.x == 0) && !onCooldown)
             {
                 transform.position += new Vector3(walkingSpeed * dir * Time.deltaTime, 0);
             }
 
-            if (distX <= 5 && distY <= 1 && !onCooldown && !isDead)
+            if (distX <= 5 && distY <= 1 && !onCooldown && !charging && !isDead)
             {
                 dir = player.transform.position.x - transform.position.x;
                 dir = Mathf.Clamp(dir, -1, 1);
                 charging = true;
 
-                Debug.Log("CHARGING");
-                onCooldown = true;
-                Invoke("stopCountdown", cooldownTime);
             }
 
             if (charging && !isDead)
@@ -96,7 +94,11 @@ public class ChargeEnemy : Killable
                             Debug.Log("CALLED");
                         }
                     }
-                    
+
+                    onCooldown = true;
+                    Debug.Log("On Cooldown");
+                    Invoke("stopCountdown", cooldownTime);
+
                 }
                 else if (chargeTime > 0)
                 {
@@ -116,6 +118,10 @@ public class ChargeEnemy : Killable
                     chargeTime = 5;
                     charging = false;
                     rb.velocity = new Vector2(0, rb.velocity.y);
+
+                    onCooldown = true;
+                    Debug.Log("On Cooldown");
+                    Invoke("stopCountdown", cooldownTime);
                 }
 
                 rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -speedCap, speedCap), rb.velocity.y);
