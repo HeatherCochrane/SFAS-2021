@@ -199,6 +199,9 @@ public class Game : MonoBehaviour
         dialogueFinished = true;
         _output.Clear();
 
+
+        Player.instance.setMovement(false);
+
         Invoke("closeDialogueScreen", 1f);
     }
 

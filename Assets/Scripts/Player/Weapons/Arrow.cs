@@ -5,7 +5,7 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     int dir = 0;
-    float speed = 0.4f;
+    float speed = 0.3f;
     float range = 0;
 
     [SerializeField]
