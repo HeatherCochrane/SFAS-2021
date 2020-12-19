@@ -19556,7 +19556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe70fbae7e8d9b547af6a43bd98f2611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: Area1
+  scene: Area1 1
   spawnPoint: {x: -7, y: -26}
 --- !u!1 &1284371118
 GameObject:

@@ -63,12 +63,11 @@ public class ChargeEnemy : Killable
                 transform.position += new Vector3(walkingSpeed * dir * Time.deltaTime, 0);
             }
 
-            if (distX <= 5 && distY <= 1 && !onCooldown && !charging && !isDead)
+            if (distX <= 5 && distY <= 1 && !charging && !isDead)
             {
                 dir = player.transform.position.x - transform.position.x;
                 dir = Mathf.Clamp(dir, -1, 1);
                 charging = true;
-
             }
 
             if (charging && !isDead && !Player.instance.playerStatus.getRecentlyDamaged())
@@ -85,18 +84,15 @@ public class ChargeEnemy : Killable
                         if (dir == 1)
                         {
                             Player.instance.playerStatus.takeDamage(damage, true, force);
-                            Debug.Log("CALLED");
                         }
                         else
                         {
                             Player.instance.playerStatus.takeDamage(damage, false, force);
-                            Debug.Log("CALLED");
                         }
                     }
 
                     onCooldown = true;
                     Invoke("stopCountdown", cooldownTime);
-
                 }
                 else if (chargeTime > 0)
                 {
@@ -118,7 +114,6 @@ public class ChargeEnemy : Killable
                     rb.velocity = new Vector2(0, rb.velocity.y);
 
                     onCooldown = true;
-                    Debug.Log("On Cooldown");
                     Invoke("stopCountdown", cooldownTime);
                 }
 

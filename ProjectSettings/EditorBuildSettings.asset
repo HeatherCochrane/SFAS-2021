@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Area1.unity
+    path: Assets/Scenes/Area 1/Area1 1.unity
     guid: 902629bc5f645e8479a67369af72cf46
   - enabled: 1
-    path: Assets/Scenes/Area2.unity
+    path: Assets/Scenes/Area 2/Area2 1.unity
     guid: 2f078ce4fddf39f4c9dfb93a570ad077
   - enabled: 1
     path: Assets/Scenes/PlayerHome.unity
@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TraderWeapons.unity
     guid: ac80d7e09cd1b554086f99a10d01c524
   - enabled: 1
-    path: Assets/Scenes/Area3.unity
+    path: Assets/Scenes/Area 3/Area3 1.unity
     guid: e1452ded323a3c94486a51ab509f253a
+  - enabled: 1
+    path: Assets/Scenes/Area 1/Area1 2.unity
+    guid: cc5fb669d8cc57246b6e5841a065996b
   m_configObjects: {}

@@ -12,8 +12,8 @@ public class SceneLoader : MonoBehaviour
     public struct SceneData
     {
         public string scenePath;
-        public float left;
-        public float right;
+        public Vector2 horizontal;
+        public Vector2 vertical;
         public Particle particleEffect;
 
     }
@@ -76,7 +76,7 @@ public class SceneLoader : MonoBehaviour
             if(scene.scenePath == sceneToLoad)
             {
                 Player.instance.transform.position = newSpawnPoint;
-                Player.instance.setCamBounds(scene.left, scene.right);
+                Player.instance.setCamBounds(scene.horizontal, scene.vertical);
                 current = scene;
                 break;
             }

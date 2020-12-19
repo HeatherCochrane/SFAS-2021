@@ -83,8 +83,8 @@ public class Player : MonoBehaviour
 
     bool trackInput = false;
 
-    float maxLeftCam = 0;
-    float maxRightCam = 0;
+    Vector2 maxHorizontal;
+    Vector2 maxVertical;
 
     bool isHidden = false;
 
@@ -369,7 +369,7 @@ public class Player : MonoBehaviour
         Vector3 targetCamPos = new Vector3(this.transform.position.x + offset.x, this.transform.position.y + offset.y, this.transform.position.z + offset.z);
         cam.transform.position = Vector3.Lerp(cam.transform.position, targetCamPos, smoothing * Time.deltaTime);
 
-        cam.transform.position = new Vector3(Mathf.Clamp(cam.transform.position.x, maxLeftCam, maxRightCam), cam.transform.position.y, cam.transform.position.z);
+        cam.transform.position = new Vector3(Mathf.Clamp(cam.transform.position.x, maxHorizontal.x, maxHorizontal.y), Mathf.Clamp(cam.transform.position.y, maxVertical.x, maxVertical.y), cam.transform.position.z);
     }
 
     void resetAnimations()
@@ -421,10 +421,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void setCamBounds(float l, float r)
+    public void setCamBounds(Vector2 h, Vector2 v)
     {
-        maxLeftCam = l;
-        maxRightCam = r;
+        maxHorizontal = h;
+        maxVertical = v;
     }
 
     void hideAttackAnim()
