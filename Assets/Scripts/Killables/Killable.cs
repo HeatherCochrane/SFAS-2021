@@ -90,9 +90,12 @@ public class Killable : MonoBehaviour
         if (!isDead)
         {
             if (data.drop != null)
-            { 
-                drop = Instantiate(data.drop, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-                drop.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(0, 2), 3);
+            {
+                for (int i = 0; i < data.drop.Count; i++)
+                {
+                    drop = Instantiate(data.drop[i], new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+                    drop.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(0, 2), 3);
+                }
             }
 
             playerLevel.addXP(data.XP);

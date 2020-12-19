@@ -118,6 +118,10 @@ public class Player : MonoBehaviour
     GameObject newArrow;
 
     AnimationStates previous;
+
+    [SerializeField]
+    ParticleSystem pickUpEffect;
+    ParticleSystem effectParticles;
     // Start is called before the first frame update
     void Start()
     {
@@ -551,7 +555,14 @@ public class Player : MonoBehaviour
             hasDoubleJumped = false;
             GetComponentInChildren<GrassEffect>().spawnGrass();
         }
-        
+
+        if (collision.gameObject.tag == "Funds")
+        {
+            inventory.adjustFunds(1);
+            Destroy(collision.gameObject);
+            Debug.Log("COLLECTED FUNDS");
+        }
+
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -603,6 +614,9 @@ public class Player : MonoBehaviour
                 Destroy(pickUp.transform.gameObject);
             }
         }
+
+        effectParticles = Instantiate(pickUpEffect);
+        effectParticles.transform.position = transform.position;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

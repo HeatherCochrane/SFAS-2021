@@ -101,7 +101,7 @@ public class PlayerInventory : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        funds.text = "Funds: " + playerFunds.ToString();
+        funds.text = playerFunds.ToString();
     }
 
     public void adjustFunds(int amount)

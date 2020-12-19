@@ -6,7 +6,7 @@ using UnityEngine;
 public class KillableData : ScriptableObject
 {
     public int health;
-    public GameObject drop;
+    public List<GameObject> drop = new List<GameObject>();
     public float XP;
     public Killable.Species species;
 }
