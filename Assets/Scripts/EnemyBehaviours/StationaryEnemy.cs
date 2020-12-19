@@ -13,16 +13,33 @@ public class StationaryEnemy : Killable
     [SerializeField]
     int maxDistance = 0;
 
-    float dist = 0;
+    float distX = 0;
+    float distY = 0;
 
-    Animator anim;
+    IEnumerator checkDistance()
+    {
+        while (true)
+        {
+            distX = player.transform.position.x - transform.position.x;
+            distY = player.transform.position.y - transform.position.y;
 
+            if (distX < 0)
+            {
+                distX *= -1;
+            }
+            if (distY < 0)
+            {
+                distY *= -1;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         base.Start();
-        anim = GetComponent<Animator>();
+        StartCoroutine("checkDistance");
     }
 
     // Update is called once per frame
@@ -33,11 +50,10 @@ public class StationaryEnemy : Killable
         {
             if (canAttack && !Player.instance.getIfHidden())
             {
-                dist = Vector2.Distance(this.transform.position, player.transform.position);
-
-                if (dist <= maxDistance)
+                if (distX <= maxDistance && distY <= 1)
                 {
                     Attack();
+                    Debug.Log("ATTACK");
                 }
             }
         }
@@ -49,11 +65,11 @@ public class StationaryEnemy : Killable
 
         if (player.transform.position.x < transform.position.x)
         {
-            anim.SetTrigger("Left");
+            changeAnimationStatesTrigger(AnimationStates.ATTACKLEFT);
         }
         else if (player.transform.position.x > transform.position.x)
         {
-            anim.SetTrigger("Right");
+            changeAnimationStatesTrigger(AnimationStates.ATTACKRIGHT);
         }
 
         Invoke("allowAttack", timeBetweenAttacks);

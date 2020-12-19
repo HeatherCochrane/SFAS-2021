@@ -6,14 +6,18 @@ public class Arrow : MonoBehaviour
 {
     int dir = 0;
     float speed = 0.4f;
+    float range = 0;
+
     void Start()
     {
-        Invoke("destroyArrow", 1);
+       
     }
 
-    public void setDirection(int d)
+    public void setDirection(int d, float r)
     {
         dir = d;
+        range = r / 20;
+
         if(dir == 1)
         {
             GetComponent<SpriteRenderer>().flipX = true;
@@ -22,6 +26,8 @@ public class Arrow : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().flipX = false;
         }
+
+        Invoke("destroyArrow", range);
     }
 
     void FixedUpdate()

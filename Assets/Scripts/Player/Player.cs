@@ -493,7 +493,7 @@ public class Player : MonoBehaviour
     public void spawnArrow()
     {
         newArrow = Instantiate(arrow);
-        newArrow.GetComponent<Arrow>().setDirection(dir);
+        newArrow.GetComponent<Arrow>().setDirection(dir, longRangeWeapon.distance);
         newArrow.transform.position = arrowPos.position;
     }
     public void longRanged()

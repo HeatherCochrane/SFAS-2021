@@ -52,7 +52,6 @@ public class ChargeEnemy : Killable
     void stopCountdown()
     {
         onCooldown = false;
-        Debug.Log("Off Cooldown");
     }
 
     private void FixedUpdate()
@@ -96,7 +95,6 @@ public class ChargeEnemy : Killable
                     }
 
                     onCooldown = true;
-                    Debug.Log("On Cooldown");
                     Invoke("stopCountdown", cooldownTime);
 
                 }

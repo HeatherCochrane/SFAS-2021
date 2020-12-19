@@ -27,6 +27,10 @@ public class Killable : MonoBehaviour
 
     GameObject lastArrow;
 
+    Animator anim;
+
+    public enum AnimationStates { IDLE, MOVING, ATTACK, DIE, ATTACKLEFT, ATTACKRIGHT};
+    AnimationStates previous;
 
     // Start is called before the first frame update
     public void Start()
@@ -36,6 +40,7 @@ public class Killable : MonoBehaviour
         player = Player.instance;
         playerLevel = Player.instance.levels;
         quests = Player.instance.playerQuests;
+        anim = GetComponent<Animator>();
 
     }
 
@@ -93,6 +98,84 @@ public class Killable : MonoBehaviour
 
             Destroy(this.gameObject);
         }
+    }
+
+    void resetBoolAnimations()
+    {
+        foreach (AnimatorControllerParameter parameter in anim.parameters)
+        {
+            if (parameter.type == AnimatorControllerParameterType.Bool)
+            {
+                anim.SetBool(parameter.name, false);
+            }
+        }
+    }
+
+    void resetTriggerAnimations()
+    {
+        foreach (AnimatorControllerParameter parameter in anim.parameters)
+        {
+            if (parameter.type == AnimatorControllerParameterType.Trigger)
+            {
+                anim.ResetTrigger(parameter.name);
+            }
+        }
+    }
+
+    public void changeAnimationStatesBool(AnimationStates a)
+    {
+        if (a != previous)
+        {
+            resetBoolAnimations();
+
+            switch (a)
+            {
+                case AnimationStates.IDLE:
+                    anim.SetBool("Idle", true);
+                    break;
+                case AnimationStates.MOVING:
+                    anim.SetBool("Moving", true);
+                    break;
+                case AnimationStates.ATTACK:
+                    anim.SetBool("Attack", true);
+                    break;
+                case AnimationStates.ATTACKLEFT:
+                    anim.SetBool("AttackLeft", true);
+                    break;
+                case AnimationStates.ATTACKRIGHT:
+                    anim.SetBool("AttackRight", true);
+                    break;
+                case AnimationStates.DIE:
+                    anim.SetBool("Die", true);
+                    break;
+                default:
+                    anim.SetBool("Idle", true);
+                    break;
+
+            }
+
+            previous = a;
+        }
+    }
+
+    public void changeAnimationStatesTrigger(AnimationStates a)
+    {
+        resetTriggerAnimations();
+
+        switch (a)
+        {
+            case AnimationStates.ATTACKLEFT:
+                anim.SetTrigger("Left");
+                break;
+            case AnimationStates.ATTACKRIGHT:
+                anim.SetTrigger("Right");
+                break;
+            default:
+                anim.SetBool("Idle", true);
+                break;
+        }
+
+        previous = a;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

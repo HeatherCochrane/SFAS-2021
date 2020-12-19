@@ -49,13 +49,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: d439fa8fe42f81441b0272e9e3d17a94, type: 2}
-  player: {fileID: 0}
-  rb: {fileID: 1713355574466866859}
-  isDead: 0
   damage: 1
   force: 3
   timeBetweenAttacks: 2
-  maxDistance: 3
+  maxDistance: 5
 --- !u!212 &1713355574466866852
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -96,8 +93,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b308cacb621c01f41b53e95063a5614b, type: 3}
-  m_Color: {r: 0.8679245, g: 0.33980063, b: 0.33980063, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 71aabc2e56f4d234fbb70cef97545532, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
