@@ -63,11 +63,6 @@ public class BossEnemy : MonoBehaviour
     [SerializeField]
     List<BossAttacks> bossPattern = new List<BossAttacks>();
 
-
-    [SerializeField]
-    GameObject projectile;
-
-
     bool isDead = false;
 
     Animator anim;
@@ -75,10 +70,19 @@ public class BossEnemy : MonoBehaviour
     Rigidbody2D rb;
 
 
-    float maxDistance = 6;
-    float minDistance = 2;
+    float maxDistance = 4;
+    float minDistance = 1;
 
     bool isCharging = false;
+    float chargeSpeed = 7.5f;
+    int chargeDir = 1;
+    float chargeTime = 1;
+
+    int choice = 0;
+
+    [SerializeField]
+    GameObject projectile;
+    GameObject newProjectile;
 
     // Start is called before the first frame update
     void Start()
@@ -101,23 +105,18 @@ public class BossEnemy : MonoBehaviour
     {
         if(isCharging)
         {
-            if (distX <= minDistance)
+            if (chargeTime <= 0)
             {
-                if (dir == -1)
-                {
-                    rb.velocity = new Vector2(5, 0);
-                }
-                else
-                {
-                    rb.velocity = new Vector2(-5, 0);
-                }
-
                 isCharging = false;
+                chargeTime = 1;
+                rb.velocity = new Vector2(0, 0);
             }
             else
             {
-                rb.velocity = new Vector2(dir * 2, rb.velocity.y);
+                rb.velocity = new Vector2(chargeDir * chargeSpeed, rb.velocity.y);
             }
+
+            chargeTime -= Time.deltaTime;
         }      
     }
 
@@ -150,7 +149,16 @@ public class BossEnemy : MonoBehaviour
 
         if(distX >= maxDistance)
         {
-            JumpAttack();
+            choice = Random.Range(0, 10);
+
+            if (choice > 5)
+            {
+                JumpAttack();
+            }
+            else
+            {
+                shootProjectile();
+            }
         }
         else if(distX <= minDistance)
         {
@@ -184,6 +192,7 @@ public class BossEnemy : MonoBehaviour
 
     void chargeAttack()
     {
+        chargeDir = dir;
         isCharging = true;
         Debug.Log("CHARGE!!");
     }
@@ -201,5 +210,11 @@ public class BossEnemy : MonoBehaviour
 
         Debug.Log("WOAH BACKING OFF!");
     }
-    
+
+    void shootProjectile()
+    {
+        newProjectile = Instantiate(projectile);
+        newProjectile.GetComponent<Arrow>().setDirection(dir, 10);
+        newProjectile.transform.position = this.transform.position;
+    }
 }

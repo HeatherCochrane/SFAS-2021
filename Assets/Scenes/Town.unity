@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 17678327}
   - component: {fileID: 17678325}
   - component: {fileID: 17678326}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: BossEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ MonoBehaviour:
     attackLength: 2
   - attack: 1
     attackLength: 2
-  projectile: {fileID: 0}
+  projectile: {fileID: 5147513752712701425, guid: 8d588ac28638bf74d9879f5af9ee8ae8, type: 3}
 --- !u!58 &17678326
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -176,9 +176,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5124788}
+  m_Offset: {x: 0, y: -0.91198397}
   serializedVersion: 2
-  m_Radius: 0.52113056
+  m_Radius: 0.12162542
 --- !u!50 &17678327
 Rigidbody2D:
   serializedVersion: 4
@@ -259,8 +259,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 17678324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -1.38, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
@@ -4972,7 +4972,7 @@ GameObject:
   - component: {fileID: 848008998}
   - component: {fileID: 848009000}
   - component: {fileID: 848008999}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
