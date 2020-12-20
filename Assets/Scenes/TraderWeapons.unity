@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 980658573}
   m_Layer: 0
   m_Name: ColliderMap
-  m_TagString: Ground
+  m_TagString: ColliderMap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

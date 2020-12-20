@@ -16,6 +16,7 @@ TagManager:
   - Hazard
   - Arrow
   - Funds
+  - ColliderMap
   layers:
   - Default
   - TransparentFX

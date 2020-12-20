@@ -2065,7 +2065,7 @@ GameObject:
   - component: {fileID: 1491460131}
   m_Layer: 0
   m_Name: ColliderMap
-  m_TagString: Untagged
+  m_TagString: ColliderMap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3875,7 +3875,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5995031976520394895, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 120.000046
+      value: 120.00257
       objectReference: {fileID: 0}
     - target: {fileID: 5995031976657251869, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_AnchorMin.y

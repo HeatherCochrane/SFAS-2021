@@ -3,9 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.Tilemaps;
 
 public class SceneLoader : MonoBehaviour
 {
+    IEnumerator checkSceneLoaded()
+    {
+        while (!SceneManager.GetSceneByName(sceneToLoad).isLoaded)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        Debug.Log("SCENE LOADED");
+
+        map = GameObject.FindGameObjectWithTag("ColliderMap").GetComponentInChildren<Tilemap>();
+        mapSizeX = new Vector2(map.cellBounds.xMin + 10, map.cellBounds.xMax - 10);
+        mapSizeY = new Vector2(map.cellBounds.yMin + 5, map.cellBounds.yMax);
+        Debug.Log(mapSizeX + "      " + mapSizeY);
+        Player.instance.setCamBounds(mapSizeX, mapSizeY);
+    }
+
+
+
     public static SceneLoader instance;
 
     [System.Serializable]
@@ -51,6 +69,11 @@ public class SceneLoader : MonoBehaviour
 
     Vector2 newSpawnPoint;
 
+
+    Vector2 mapSizeX;
+    Vector2 mapSizeY;
+    Tilemap map;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -71,16 +94,18 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(sceneToLoad);
         Debug.Log(sceneToLoad);
 
-        foreach(SceneData scene in AllSceneData)
+        foreach (SceneData scene in AllSceneData)
         {
             if(scene.scenePath == sceneToLoad)
             {
                 Player.instance.transform.position = newSpawnPoint;
-                Player.instance.setCamBounds(scene.horizontal, scene.vertical);
                 current = scene;
                 break;
             }
         }
+
+        StartCoroutine(checkSceneLoaded());
+
 
         UnityEngine.EventSystems.EventSystem.current = Player.instance.system;
 
