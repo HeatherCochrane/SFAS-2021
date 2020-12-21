@@ -562,7 +562,6 @@ public class Player : MonoBehaviour
             Destroy(collision.gameObject);
             Debug.Log("COLLECTED FUNDS");
         }
-
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -649,6 +648,21 @@ public class Player : MonoBehaviour
         if(collision.gameObject.tag == "Hazard")
         {
             collision.GetComponentInParent<Killable>().attackPlayer();
+        }
+
+        if (collision.gameObject.tag == "Arrow")
+        {
+            if (!playerStatus.getRecentlyDamaged())
+            {
+                if (collision.gameObject.transform.position.x < transform.position.x)
+                {
+                    playerStatus.takeDamage(1, true, 2);
+                }
+                else
+                {
+                    playerStatus.takeDamage(1, false, 2);
+                }
+            }
         }
     }
 

@@ -27,7 +27,7 @@ public class Killable : MonoBehaviour
 
     GameObject lastArrow;
 
-    Animator anim;
+    protected Animator anim;
 
     public enum AnimationStates { IDLE, MOVING, ATTACK, DIE, ATTACKLEFT, ATTACKRIGHT};
     AnimationStates previous;
@@ -94,7 +94,7 @@ public class Killable : MonoBehaviour
                 for (int i = 0; i < data.drop.Count; i++)
                 {
                     drop = Instantiate(data.drop[i], new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-                    drop.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(0, 2), 3);
+                    drop.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(0, 5), 3);
                 }
             }
 

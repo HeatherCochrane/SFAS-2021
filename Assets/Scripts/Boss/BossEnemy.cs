@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossEnemy : MonoBehaviour
+public class BossEnemy : Killable
 {
     float distX = 0;
     float distY = 0;
@@ -35,24 +35,24 @@ public class BossEnemy : MonoBehaviour
 
     IEnumerator StartAttack()
     {
-        //int currentAttack = -1;
+        int currentAttack = -1;
 
         while(!isDead)
         {
-            //currentAttack += 1;
+            currentAttack += 1;
 
-            //if(currentAttack >= bossPattern.Count)
-            //{
-            //    currentAttack = 0;
-            //}
-            //switchAttack(bossPattern[currentAttack].attack);
-            decideNextAttack();
-            yield return new WaitForSeconds(2);
+            if(currentAttack >= bossPattern.Count)
+            {
+                currentAttack = 0;
+            }
+            switchAttack(bossPattern[currentAttack].attack);
+            //decideNextAttack();
+            yield return new WaitForSeconds(bossPattern[currentAttack].attackLength);
         }
     }
 
 
-    public enum Attacks { JumpAttack, IdleAttack}
+    public enum Attacks { JumpAttack, IdleAttack, ChargeAttack, ShootProjectile, DecideNextAttack}
 
     [System.Serializable]
     public struct BossAttacks
@@ -63,12 +63,7 @@ public class BossEnemy : MonoBehaviour
     [SerializeField]
     List<BossAttacks> bossPattern = new List<BossAttacks>();
 
-    bool isDead = false;
-
-    Animator anim;
-
-    Rigidbody2D rb;
-
+    float fallMult = 2f;
 
     float maxDistance = 4;
     float minDistance = 1;
@@ -87,8 +82,8 @@ public class BossEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
         //anim = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
         StartCoroutine("StartAttack");
         StartCoroutine("checkDistance");
     }
@@ -111,6 +106,20 @@ public class BossEnemy : MonoBehaviour
                 chargeTime = 1;
                 rb.velocity = new Vector2(0, 0);
             }
+            else if(distX <= 1 && distY < 1)
+            {
+                if (!Player.instance.playerStatus.getRecentlyDamaged())
+                {
+                    if (dir == 1)
+                    {
+                        Player.instance.playerStatus.takeDamage(damage, true, force);
+                    }
+                    else
+                    {
+                        Player.instance.playerStatus.takeDamage(damage, false, force);
+                    }
+                }
+            }
             else
             {
                 rb.velocity = new Vector2(chargeDir * chargeSpeed, rb.velocity.y);
@@ -118,31 +127,29 @@ public class BossEnemy : MonoBehaviour
 
             chargeTime -= Time.deltaTime;
         }      
-    }
 
-    void resetBoolAnimations()
-    {
-        foreach (AnimatorControllerParameter parameter in anim.parameters)
+        if(rb.velocity.y < 0)
         {
-            if (parameter.type == AnimatorControllerParameterType.Bool)
+            rb.velocity += Vector2.up * (fallMult - 1) * Physics2D.gravity.y * Time.deltaTime;
+
+            if (distX <= 1 && distY < 1)
             {
-                anim.SetBool(parameter.name, false);
+                if (!Player.instance.playerStatus.getRecentlyDamaged())
+                {
+                    if (dir == 1)
+                    {
+                        Player.instance.playerStatus.takeDamage(damage, true, force);
+                    }
+                    else
+                    {
+                        Player.instance.playerStatus.takeDamage(damage, false, force);
+                    }
+                }
             }
         }
     }
 
-    void resetTriggerAnimations()
-    {
-        foreach (AnimatorControllerParameter parameter in anim.parameters)
-        {
-            if (parameter.type == AnimatorControllerParameterType.Trigger)
-            {
-                anim.ResetTrigger(parameter.name);
-            }
-        }
-    }
-
-    void decideNextAttack()
+    void DecideNextAttack()
     {
         isCharging = false;
         rb.velocity = new Vector2(0, 0);
@@ -157,16 +164,16 @@ public class BossEnemy : MonoBehaviour
             }
             else
             {
-                shootProjectile();
+                ShootProjectile();
             }
         }
-        else if(distX <= minDistance)
-        {
-            backOff();
-        }
+        //else if(distX <= minDistance)
+        //{
+        //    backOff();
+        //}
         else
         {
-            chargeAttack();
+            ChargeAttack();
         }
     }
 
@@ -190,7 +197,7 @@ public class BossEnemy : MonoBehaviour
         Debug.Log("JUMP BITCH");
     }
 
-    void chargeAttack()
+    void ChargeAttack()
     {
         chargeDir = dir;
         isCharging = true;
@@ -211,10 +218,10 @@ public class BossEnemy : MonoBehaviour
         Debug.Log("WOAH BACKING OFF!");
     }
 
-    void shootProjectile()
+    void ShootProjectile()
     {
         newProjectile = Instantiate(projectile);
         newProjectile.GetComponent<Arrow>().setDirection(dir, 10);
-        newProjectile.transform.position = this.transform.position;
+        newProjectile.transform.position = this.transform.position - new Vector3(0, 1, 0);
     }
 }

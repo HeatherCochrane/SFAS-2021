@@ -12,9 +12,9 @@ public class Arrow : MonoBehaviour
     ParticleSystem effect;
 
     ParticleSystem e;
+
     void Start()
     {
-       
     }
 
     public void setDirection(int d, float r)
