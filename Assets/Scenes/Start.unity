@@ -3479,7 +3479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5995031976520394895, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 120.00007
+      value: 120.00003
       objectReference: {fileID: 0}
     - target: {fileID: 5995031976657251869, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_AnchorMin.y
@@ -3505,6 +3505,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.61
       objectReference: {fileID: 0}
+    - target: {fileID: 5995031976819538246, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: longRangeWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 940dadf39bd900141846bf17198bd406, type: 2}
     - target: {fileID: 5995031976913497398, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0

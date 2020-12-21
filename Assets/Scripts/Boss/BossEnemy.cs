@@ -86,19 +86,12 @@ public class BossEnemy : Killable
             {
                 if (!Player.instance.playerStatus.getRecentlyDamaged())
                 {
-                    if (dir == 1)
-                    {
-                        Player.instance.playerStatus.takeDamage(damage, true, force);
-                    }
-                    else
-                    {
-                        Player.instance.playerStatus.takeDamage(damage, false, force);
-                    }
+                    attackPlayer();
                 }
             }
             else
             {
-                rb.velocity = new Vector2(chargeDir * chargeSpeed, rb.velocity.y);
+                rb.velocity = new Vector2(playerDir * chargeSpeed, rb.velocity.y);
             }
 
             chargeTime -= Time.deltaTime;
@@ -154,7 +147,7 @@ public class BossEnemy : Killable
 
     void JumpAttack()
     {
-        if (dir == -1)
+        if (playerDir == -1)
         {
             rb.velocity = new Vector2(-5, 12);
         }
@@ -168,7 +161,7 @@ public class BossEnemy : Killable
 
     void ChargeAttack()
     {
-        chargeDir = dir;
+        chargeDir = playerDir;
         isCharging = true;
         Debug.Log("CHARGE!!");
     }
@@ -190,7 +183,7 @@ public class BossEnemy : Killable
     void ShootProjectile()
     {
         newProjectile = Instantiate(projectile);
-        newProjectile.GetComponent<Arrow>().setDirection(dir, 10);
+        newProjectile.GetComponent<Arrow>().setDirection(playerDir, 10);
         newProjectile.transform.position = this.transform.position - new Vector3(0, 1, 0);
     }
 
