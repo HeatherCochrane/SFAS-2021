@@ -13,33 +13,10 @@ public class StationaryEnemy : Killable
     [SerializeField]
     int maxDistance = 0;
 
-    float distX = 0;
-    float distY = 0;
-
-    IEnumerator checkDistance()
-    {
-        while (true)
-        {
-            distX = player.transform.position.x - transform.position.x;
-            distY = player.transform.position.y - transform.position.y;
-
-            if (distX < 0)
-            {
-                distX *= -1;
-            }
-            if (distY < 0)
-            {
-                distY *= -1;
-            }
-            yield return new WaitForEndOfFrame();
-        }
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         base.Start();
-        StartCoroutine("checkDistance");
     }
 
     // Update is called once per frame
@@ -53,7 +30,6 @@ public class StationaryEnemy : Killable
                 if (distX <= maxDistance && distY <= 1)
                 {
                     Attack();
-                    Debug.Log("ATTACK");
                 }
             }
         }

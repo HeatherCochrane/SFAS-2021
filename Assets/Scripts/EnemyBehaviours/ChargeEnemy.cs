@@ -4,36 +4,12 @@ using UnityEngine;
 
 public class ChargeEnemy : Killable
 {
-    float dir = 1;
-
-    IEnumerator checkDistance()
-    {
-        while (true)
-        {
-            distX = player.transform.position.x - transform.position.x;
-            distY = player.transform.position.y - transform.position.y;
-
-            if(distX < 0)
-            {
-                distX *= -1;
-            }
-            if(distY < 0)
-            {
-                distY *= -1;
-            }
-            yield return new WaitForEndOfFrame();
-        }
-    }
-
     [SerializeField]
     float cooldownTime = 0;
 
     bool onCooldown = false;
 
     float speed = 5f;
-
-    float distX = 0;
-    float distY = 0;
 
     float speedCap = 5;
 
@@ -46,7 +22,6 @@ public class ChargeEnemy : Killable
     private void Start()
     {
         base.Start();
-        StartCoroutine("checkDistance");
     }
 
     void stopCountdown()
@@ -65,8 +40,7 @@ public class ChargeEnemy : Killable
 
             if (distX <= 5 && distY <= 1 && !charging && !onCooldown)
             {
-                dir = player.transform.position.x - transform.position.x;
-                dir = Mathf.Clamp(dir, -1, 1);
+                dir = playerDir;
                 charging = true;
             }
 
@@ -81,14 +55,7 @@ public class ChargeEnemy : Killable
                     //do damage to the player when they are close
                     if (distY <= 1f)
                     {
-                        if (dir == 1)
-                        {
-                            Player.instance.playerStatus.takeDamage(damage, true, force);
-                        }
-                        else
-                        {
-                            Player.instance.playerStatus.takeDamage(damage, false, force);
-                        }
+                        attackPlayer();
                     }
 
                     if (!onCooldown)
@@ -99,7 +66,7 @@ public class ChargeEnemy : Killable
                 }
                 else if (chargeTime > 0)
                 {
-                    if (dir == 1)
+                    if (dir== 1)
                     {
                         rb.velocity += new Vector2(speed, 0);
                     }

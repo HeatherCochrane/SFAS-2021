@@ -4,35 +4,6 @@ using UnityEngine;
 
 public class BossEnemy : Killable
 {
-    float distX = 0;
-    float distY = 0;
-    int dir = 1;
-
-    IEnumerator checkDistance()
-    {
-        while (true)
-        {
-            distX = Player.instance.transform.position.x - transform.position.x;
-            distY = Player.instance.transform.position.y - transform.position.y;
-
-            if (distX < 0)
-            {
-                distX *= -1;
-                dir = -1;
-            }
-            else
-            {
-                dir = 1;
-            }
-            if (distY < 0)
-            {
-                distY *= -1;
-            }
-            yield return new WaitForEndOfFrame();
-        }
-    }
-
-
     IEnumerator StartAttack()
     {
         int currentAttack = -1;
@@ -49,7 +20,6 @@ public class BossEnemy : Killable
             yield return new WaitForSeconds(bossPattern[currentAttack].attackLength);
         }
     }
-
 
     public enum Attacks { JumpAttack, IdleAttack, ChargeAttack, ShootProjectile, DecideNextAttack}
 
@@ -85,7 +55,6 @@ public class BossEnemy : Killable
         base.Start();
         //anim = GetComponent<Animator>();
         StartCoroutine("StartAttack");
-        StartCoroutine("checkDistance");
     }
 
     void switchAttack(Attacks a)
@@ -143,14 +112,7 @@ public class BossEnemy : Killable
             {
                 if (!Player.instance.playerStatus.getRecentlyDamaged())
                 {
-                    if (dir == 1)
-                    {
-                        Player.instance.playerStatus.takeDamage(damage, true, force);
-                    }
-                    else
-                    {
-                        Player.instance.playerStatus.takeDamage(damage, false, force);
-                    }
+                    attackPlayer();
                 }
             }
         }

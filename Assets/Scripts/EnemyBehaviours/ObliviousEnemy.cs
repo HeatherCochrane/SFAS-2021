@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ObliviousEnemy : Killable
 {
-
-    int dir = 1;
     [SerializeField]
     float speed = 0;
 
@@ -21,6 +19,12 @@ public class ObliviousEnemy : Killable
         if (!isDead)
         {
             transform.position += new Vector3(speed * dir * Time.deltaTime, 0);
+
+
+            if (distX < 1 && distY < 1)
+            {
+                attackPlayer();
+            }
         }
     }
 

@@ -6,6 +6,36 @@ using TMPro;
 
 public class Killable : MonoBehaviour
 {
+    protected int playerDir = 1;
+    protected int dir = 1;
+    IEnumerator checkDistance()
+    {
+        while (true)
+        {
+            distX = player.transform.position.x - transform.position.x;
+            distY = player.transform.position.y - transform.position.y;
+
+            if (distX < 0)
+            {
+                distX *= -1;
+                playerDir = -1;
+            }
+            else
+            {
+                playerDir = 1;
+            }
+            if (distY < 0)
+            {
+                distY *= -1;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+
+    protected float distX = 0;
+    protected float distY = 0;
+
     //Enums for keeping track of which enemy was killed
     public enum Species { ENEMY, SHEEP };
 
@@ -51,7 +81,7 @@ public class Killable : MonoBehaviour
         anim = GetComponent<Animator>();
 
         canvas.GetComponent<Canvas>().worldCamera = Camera.main;
-
+        StartCoroutine("checkDistance");
     }
 
     public void attackPlayer()

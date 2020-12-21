@@ -24,11 +24,11 @@ public class Arrow : MonoBehaviour
 
         if(dir == 1)
         {
-            GetComponent<SpriteRenderer>().flipX = true;
+            transform.localScale = new Vector2(-0.3f, 0.3f);
         }
         else
         {
-            GetComponent<SpriteRenderer>().flipX = false;
+            transform.localScale = new Vector2(0.3f, 0.3f);
         }
 
         Invoke("destroyArrow", range);
