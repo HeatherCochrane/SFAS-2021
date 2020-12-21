@@ -94,8 +94,6 @@ public class Killable : MonoBehaviour
                 CancelInvoke();
                 StopAllCoroutines();
             }
-
-
         }
     }
 

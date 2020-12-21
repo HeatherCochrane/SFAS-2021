@@ -63,14 +63,14 @@ public class ChargeEnemy : Killable
                 transform.position += new Vector3(walkingSpeed * dir * Time.deltaTime, 0);
             }
 
-            if (distX <= 5 && distY <= 1 && !charging && !isDead)
+            if (distX <= 5 && distY <= 1 && !charging && !onCooldown)
             {
                 dir = player.transform.position.x - transform.position.x;
                 dir = Mathf.Clamp(dir, -1, 1);
                 charging = true;
             }
 
-            if (charging && !isDead && !Player.instance.playerStatus.getRecentlyDamaged())
+            if (charging && !Player.instance.playerStatus.getRecentlyDamaged())
             {
                 if (distX < 1)
                 {
@@ -91,8 +91,11 @@ public class ChargeEnemy : Killable
                         }
                     }
 
-                    onCooldown = true;
-                    Invoke("stopCountdown", cooldownTime);
+                    if (!onCooldown)
+                    {
+                        onCooldown = true;
+                        Invoke("stopCountdown", cooldownTime);
+                    }
                 }
                 else if (chargeTime > 0)
                 {
@@ -113,8 +116,11 @@ public class ChargeEnemy : Killable
                     charging = false;
                     rb.velocity = new Vector2(0, rb.velocity.y);
 
-                    onCooldown = true;
-                    Invoke("stopCountdown", cooldownTime);
+                    if (!onCooldown)
+                    {
+                        onCooldown = true;
+                        Invoke("stopCountdown", cooldownTime);
+                    }
                 }
 
                 rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -speedCap, speedCap), rb.velocity.y);
@@ -128,6 +134,15 @@ public class ChargeEnemy : Killable
         {
             dir *= -1;
             charging = false;
+
+            if (!onCooldown)
+            {
+                onCooldown = true;
+
+                Invoke("stopCountdown", cooldownTime);
+                Debug.Log("OBSTACLE COOL DOWN");
+
+            }
         }
     }
 
