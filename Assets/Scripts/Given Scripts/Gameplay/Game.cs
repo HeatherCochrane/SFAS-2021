@@ -32,9 +32,6 @@ public class Game : MonoBehaviour
     bool dialogueFinished = false;
 
     [SerializeField]
-    Image characterImage;
-
-    [SerializeField]
     TextMeshProUGUI characterName;
     private void OnEnable()
     {
@@ -64,7 +61,6 @@ public class Game : MonoBehaviour
         dialogueScreen = screen;
 
         dialogueScreen.GetComponent<Animator>().SetBool("Open", true);
-        characterImage.sprite = s;
         characterName.text = n;
         dialogueFinished = false;
         _data = d;
