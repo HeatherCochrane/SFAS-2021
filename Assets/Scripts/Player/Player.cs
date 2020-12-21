@@ -122,6 +122,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     ParticleSystem pickUpEffect;
     ParticleSystem effectParticles;
+
+    float clickTime = 0.25f;
+    float heldTime = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -249,19 +252,30 @@ public class Player : MonoBehaviour
                     }
                 }
 
+                if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+                {
+                    heldTime = Time.time;
+                }
+
                 //Melee attack
                 if (Input.GetMouseButtonDown(1) && meleeWeapon != null && !isAttacking && !playerStatus.getRecentlyDamaged())
                 {
-                    switchAnimation(AnimationStates.MELEEUP);
-                    Attack(meleeWeapon.distance, meleeWeapon.damage);
-                    isAttacking = true;
+                    if ((Time.time - heldTime) < clickTime)
+                    {
+                        switchAnimation(AnimationStates.MELEEUP);
+                        Attack(meleeWeapon.distance, meleeWeapon.damage);
+                        isAttacking = true;
+                    }
                 }
-
                 //Long Range Attack, hold down then release to fire
-                if (Input.GetMouseButton(0) && longRangeWeapon != null && !isAttacking && !playerStatus.getRecentlyDamaged())
+                if (Input.GetMouseButtonUp(0) && longRangeWeapon != null && !isAttacking && !playerStatus.getRecentlyDamaged())
                 {
-                    switchAnimation(AnimationStates.RANGED);
-                    isAttacking = true;
+                    if ((Time.time - heldTime) < clickTime)
+                    {
+                        switchAnimation(AnimationStates.RANGED);
+                        isAttacking = true;
+                    }
+                    
                 }
 
                 if(Input.GetMouseButton(2) && canHide)

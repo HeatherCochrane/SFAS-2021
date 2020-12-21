@@ -46,7 +46,6 @@ public class BossEnemy : Killable
                 currentAttack = 0;
             }
             switchAttack(bossPattern[currentAttack].attack);
-            //decideNextAttack();
             yield return new WaitForSeconds(bossPattern[currentAttack].attackLength);
         }
     }
@@ -79,6 +78,7 @@ public class BossEnemy : Killable
     GameObject projectile;
     GameObject newProjectile;
 
+    bool inBattle = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -90,10 +90,17 @@ public class BossEnemy : Killable
 
     void switchAttack(Attacks a)
     {
-        //resetBoolAnimations();
-        //resetTriggerAnimations();
+        if (inBattle)
+        {
+            //resetBoolAnimations();
+            //resetTriggerAnimations();
 
-        Invoke(a.ToString(), 0);
+            Invoke(a.ToString(), 0);
+        }
+        else
+        {
+            Debug.Log("NO LONGER IN BATTLE!!");
+        }
     }
 
     private void FixedUpdate()
@@ -223,5 +230,10 @@ public class BossEnemy : Killable
         newProjectile = Instantiate(projectile);
         newProjectile.GetComponent<Arrow>().setDirection(dir, 10);
         newProjectile.transform.position = this.transform.position - new Vector3(0, 1, 0);
+    }
+
+    public void setInBattle(bool set)
+    {
+        inBattle = set;
     }
 }

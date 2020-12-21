@@ -7,7 +7,7 @@ using TMPro;
 public class PlayerStatus : MonoBehaviour
 {
     [SerializeField]
-    TextMeshProUGUI playerHealth;
+    GameObject playerHealth;
 
     int health = 5;
 
@@ -24,7 +24,6 @@ public class PlayerStatus : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        playerHealth.text = health.ToString();
     }
 
     // Update is called once per frame
@@ -37,40 +36,54 @@ public class PlayerStatus : MonoBehaviour
     {
         health += amount;
         health = Mathf.Clamp(health, 0, 5);
-        playerHealth.text = health.ToString();
+        updateHealth();
         healingEffect.Play();
     }
 
     public void takeDamage(int amount, bool left, int force)
     {
-        health -= amount;
-
-        rb.velocity = new Vector2(0, 0);
-
-        if (left)
+        if (!getRecentlyDamaged())
         {
+            health -= amount;
 
-            rb.velocity = new Vector2(force, force);
+            rb.velocity = new Vector2(0, 0);
+
+            if (left)
+            {
+
+                rb.velocity = new Vector2(force, force);
+            }
+            else
+            {
+                rb.velocity = new Vector2(-force, force);
+            }
+
+            health = Mathf.Clamp(health, 0, 5);
+
+            if (health <= 0)
+            {
+                Debug.Log("Died!");
+            }
+
+            updateHealth();
+
+            recentDamage = true;
+            damageAnim.SetBool("DamageTaken", true);
+            Invoke("stopInvulnerableState", 2);
         }
-        else
-        {
-            rb.velocity = new Vector2(-force, force);
-        }
-
-        health = Mathf.Clamp(health, 0, 5);
-
-        if (health <= 0)
-        {
-            Debug.Log("Died!");
-        }
-
-        playerHealth.text = health.ToString();
-
-        recentDamage = true;
-        damageAnim.SetBool("DamageTaken", true);
-        Invoke("stopInvulnerableState", 2);
     }
 
+    void updateHealth()
+    {
+        for(int i =0; i < playerHealth.transform.childCount; i++)
+        {
+            playerHealth.transform.GetChild(i).gameObject.SetActive(false);
+        }
+        for(int i =0; i < health; i++)
+        {
+            playerHealth.transform.GetChild(i).gameObject.SetActive(true);
+        }
+    }
     public void stopInvulnerableState()
     {
         damageAnim.SetBool("DamageTaken", false);

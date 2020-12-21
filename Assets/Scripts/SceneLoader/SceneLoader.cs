@@ -30,8 +30,6 @@ public class SceneLoader : MonoBehaviour
     public struct SceneData
     {
         public string scenePath;
-        public Vector2 horizontal;
-        public Vector2 vertical;
         public Particle particleEffect;
 
     }
