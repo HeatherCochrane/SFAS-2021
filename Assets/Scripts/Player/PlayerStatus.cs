@@ -20,6 +20,9 @@ public class PlayerStatus : MonoBehaviour
 
     [SerializeField]
     Animator damageAnim;
+
+    [SerializeField]
+    Animator cameraShake;
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +69,8 @@ public class PlayerStatus : MonoBehaviour
             }
 
             updateHealth();
+
+            cameraShake.SetTrigger("ScreenShake");
 
             recentDamage = true;
             damageAnim.SetBool("DamageTaken", true);

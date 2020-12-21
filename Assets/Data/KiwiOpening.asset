@@ -15,7 +15,7 @@ MonoBehaviour:
   completeThisQuest: {fileID: 0}
   _beats:
   - _choices:
-    - _text: Next
+    - _text: Continue...
       _beatId: 2
       quest: {fileID: 0}
     _text: Ah another adventurer! Such a wonderful looking area wouldn't you say?

@@ -162,7 +162,7 @@ public class Game : MonoBehaviour
         if (data.getChoiceList().Count == 0)
         {
             closeDialogue.gameObject.SetActive(false);
-            Invoke("leaveDialogue", 1);
+            Invoke("leaveDialogue", 0.5f);
         }
 
     }

@@ -35,9 +35,4 @@ public class DialogueHandler : MonoBehaviour
     {
         dialogueData = s;
     }
-
-    public void optionPicked(int p)
-    {
-
-    }
 }
