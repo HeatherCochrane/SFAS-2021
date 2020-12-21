@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 
 public class Killable : MonoBehaviour
 {
@@ -32,6 +34,12 @@ public class Killable : MonoBehaviour
     public enum AnimationStates { IDLE, MOVING, ATTACK, DIE, ATTACKLEFT, ATTACKRIGHT};
     AnimationStates previous;
 
+    [SerializeField]
+    GameObject canvas;
+    [SerializeField]
+    GameObject hitAmount;
+    GameObject hit;
+
     // Start is called before the first frame update
     public void Start()
     {     
@@ -41,6 +49,8 @@ public class Killable : MonoBehaviour
         playerLevel = Player.instance.levels;
         quests = Player.instance.playerQuests;
         anim = GetComponent<Animator>();
+
+        canvas.GetComponent<Canvas>().worldCamera = Camera.main;
 
     }
 
@@ -75,6 +85,8 @@ public class Killable : MonoBehaviour
                 rb.velocity = new Vector2(2, 2);
             }
 
+            spawnHitPoint(dam);
+
             if (health <= 0)
             {
                 killEnemy();
@@ -82,7 +94,17 @@ public class Killable : MonoBehaviour
                 CancelInvoke();
                 StopAllCoroutines();
             }
+
+
         }
+    }
+
+    void spawnHitPoint(int d)
+    {
+        hit = Instantiate(hitAmount);
+        hit.transform.SetParent(canvas.transform);
+        hit.GetComponent<TextMeshProUGUI>().text = d.ToString();
+        hit.GetComponent<RectTransform>().anchoredPosition = new Vector2(Random.Range(-2, 2), Random.Range(-1, 1));
     }
 
     public void killEnemy()

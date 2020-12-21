@@ -14,17 +14,21 @@ public class GrassEffect : MonoBehaviour
 
     public void spawnGrass()
     {
-        if (Player.instance.sceneLoader.getCurrentScene().particleEffect == SceneLoader.Particle.GRASS)
+        if (Player.instance.sceneLoader.getCurrentScene().particleEffect != SceneLoader.Particle.NONE)
         {
-            newGrass = Instantiate(grassParticles);
-        }
-        else if (Player.instance.sceneLoader.getCurrentScene().particleEffect == SceneLoader.Particle.SNOW)
-        {
-            newGrass = Instantiate(snowParticles);
-        }
+            if (Player.instance.sceneLoader.getCurrentScene().particleEffect == SceneLoader.Particle.GRASS)
+            {
+                newGrass = Instantiate(grassParticles);
+            }
+            else if (Player.instance.sceneLoader.getCurrentScene().particleEffect == SceneLoader.Particle.SNOW)
+            {
+                newGrass = Instantiate(snowParticles);
+            }
 
-        newGrass.transform.SetParent(Player.instance.transform);
-        newGrass.transform.position = Player.instance.transform.position - new Vector3(0, 1);
+
+            newGrass.transform.SetParent(Player.instance.transform);
+            newGrass.transform.position = Player.instance.transform.position - new Vector3(0, 1);
+        }
     }
 
     public void attack()

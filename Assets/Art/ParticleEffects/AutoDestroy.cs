@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class AutoDestroy : MonoBehaviour
 {
-    ParticleSystem p;
+    [SerializeField]
+    float time = 1.5f;
     // Start is called before the first frame update
     void Start()
     {
-        p = GetComponent<ParticleSystem>();
-        Invoke("destroyParticles", 1.5f);
+        Invoke("DestroyObject", time);
     }
 
 
-    void destroyParticles()
+    void DestroyObject()
     {
         Destroy(gameObject);
     }
