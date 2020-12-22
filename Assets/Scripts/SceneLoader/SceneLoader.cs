@@ -13,12 +13,11 @@ public class SceneLoader : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
-        Debug.Log("SCENE LOADED");
 
         map = GameObject.FindGameObjectWithTag("ColliderMap").GetComponentInChildren<Tilemap>();
         mapSizeX = new Vector2(map.cellBounds.xMin + 10, map.cellBounds.xMax - 10);
         mapSizeY = new Vector2(map.cellBounds.yMin + 5, map.cellBounds.yMax - 5);
-        Debug.Log(mapSizeX + "      " + mapSizeY);
+        Debug.Log(mapSizeX + " " + mapSizeY);
         Player.instance.setCamBounds(mapSizeX, mapSizeY);
     }
 

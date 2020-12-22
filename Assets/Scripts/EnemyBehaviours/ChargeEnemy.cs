@@ -107,7 +107,6 @@ public class ChargeEnemy : Killable
                 onCooldown = true;
 
                 Invoke("stopCountdown", cooldownTime);
-                Debug.Log("OBSTACLE COOL DOWN");
 
             }
         }
