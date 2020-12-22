@@ -41,9 +41,6 @@ public class PlayerQuests : MonoBehaviour
         //Add this quest to the completed list
         completedQuests.Add(c);
 
-        //Gather the XP from that quest and add to the players xp pool
-        Player.instance.levels.addXP(c.XPGained);
-
         //Remove this quest from the currently active quests
         questsStarted.Remove(c);
 
@@ -88,7 +85,7 @@ public class PlayerQuests : MonoBehaviour
         for (int i = 0; i < questsStarted.Count; i++)
         {
             //Check to ensure allrequirements have been met
-            if (questsStarted[i].checkKills(totalKills) && questsStarted[i].checkCompletedQuests(completedQuests) && questsStarted[i].checkLevelRequirement(Player.instance.levels.level))
+            if (questsStarted[i].checkKills(totalKills) && questsStarted[i].checkCompletedQuests(completedQuests))
             {
                 questCompleted(questsStarted[i]);
             }

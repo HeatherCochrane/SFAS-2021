@@ -43,7 +43,6 @@ public class Killable : MonoBehaviour
     public KillableData data;
 
     protected Player player;
-    protected PlayerLevel playerLevel;
     protected PlayerQuests quests;
 
     int health = 2;
@@ -76,7 +75,6 @@ public class Killable : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         health = data.health;
         player = Player.instance;
-        playerLevel = Player.instance.levels;
         quests = Player.instance.playerQuests;
         anim = GetComponent<Animator>();
 
@@ -147,9 +145,6 @@ public class Killable : MonoBehaviour
                     drop.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(0, 5), 3);
                 }
             }
-
-            playerLevel.addXP(data.XP);
-
             quests.speciesKilled(data.species);
 
             Destroy(this.gameObject);

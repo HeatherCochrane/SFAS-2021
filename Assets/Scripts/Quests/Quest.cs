@@ -5,8 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Quests", menuName = "New Quest/Quest", order = 1)]
 public class Quest : ScriptableObject
 {
-    public int XPGained;
-
     [System.Serializable]
     public struct Kills
     {
@@ -15,9 +13,6 @@ public class Quest : ScriptableObject
         [SerializeField]
         public int number;
     }
-
-    [SerializeField]
-    public int levelRequirement;
 
     [SerializeField]
     public List<Quest> questsCompleted = new List<Quest>();
@@ -82,16 +77,6 @@ public class Quest : ScriptableObject
             }
         }
         else
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    public bool checkLevelRequirement(int l)
-    {
-        if(l >= levelRequirement)
         {
             return true;
         }

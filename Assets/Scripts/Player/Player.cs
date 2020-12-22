@@ -9,9 +9,6 @@ public class Player : MonoBehaviour
     //Quests
     public PlayerQuests playerQuests;
 
-    //Level and XP handler
-    public PlayerLevel levels;
-
     //Inventory
     public PlayerInventory inventory;
 
@@ -134,7 +131,6 @@ public class Player : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
 
-        levels = GetComponent<PlayerLevel>();
         weapons = GetComponent<PlayerWeapons>();
         playerQuests = GetComponent<PlayerQuests>();
       
