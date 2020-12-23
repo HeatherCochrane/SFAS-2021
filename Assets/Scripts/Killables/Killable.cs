@@ -141,8 +141,11 @@ public class Killable : MonoBehaviour
             {
                 for (int i = 0; i < data.drop.Count; i++)
                 {
-                    drop = Instantiate(data.drop[i], new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-                    drop.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(0, 5), 3);
+                    for (int j = 0; j < data.drop[i].amount; j++)
+                    {
+                        drop = Instantiate(data.drop[i].drop, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+                        drop.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(0, 5), 3);
+                    }
                 }
             }
             quests.speciesKilled(data.species);

@@ -57,9 +57,13 @@ public class BossEnemy : Killable
     {
         base.Start();
         //anim = GetComponent<Animator>();
-        StartCoroutine("StartAttack");
     }
 
+    public void startBattle()
+    {
+        inBattle = true;
+        StartCoroutine("StartAttack");
+    }
     void switchAttack(Attacks a)
     {
         if (inBattle)
