@@ -385,7 +385,7 @@ public class Player : MonoBehaviour
         }
 
         //Apply force when the player is falling 
-        if (rb.velocity.y <= 0)
+        if (rb.velocity.y <= 0 && !isDashing)
         {
             rb.velocity += Vector2.up * (fallMult - 1) * Physics2D.gravity.y * Time.deltaTime;
         }

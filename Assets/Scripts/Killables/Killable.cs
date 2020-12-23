@@ -60,7 +60,7 @@ public class Killable : MonoBehaviour
 
     protected Animator anim;
 
-    public enum AnimationStates { IDLE, MOVING, ATTACK, DIE, ATTACKLEFT, ATTACKRIGHT};
+    public enum AnimationStates { IDLE, MOVING, ATTACK, DIE, ATTACKLEFT, ATTACKRIGHT, CHARGE};
     AnimationStates previous;
 
     [SerializeField]
@@ -182,42 +182,41 @@ public class Killable : MonoBehaviour
 
     public void changeAnimationStatesBool(AnimationStates a)
     {
-        if (a != previous)
+        resetBoolAnimations();
+        resetTriggerAnimations();
+
+        switch (a)
         {
-            resetBoolAnimations();
-
-            switch (a)
-            {
-                case AnimationStates.IDLE:
-                    anim.SetBool("Idle", true);
-                    break;
-                case AnimationStates.MOVING:
-                    anim.SetBool("Moving", true);
-                    break;
-                case AnimationStates.ATTACK:
-                    anim.SetBool("Attack", true);
-                    break;
-                case AnimationStates.ATTACKLEFT:
-                    anim.SetBool("AttackLeft", true);
-                    break;
-                case AnimationStates.ATTACKRIGHT:
-                    anim.SetBool("AttackRight", true);
-                    break;
-                case AnimationStates.DIE:
-                    anim.SetBool("Die", true);
-                    break;
-                default:
-                    anim.SetBool("Idle", true);
-                    break;
-
-            }
-
-            previous = a;
+            case AnimationStates.IDLE:
+                anim.SetBool("Idle", true);
+                break;
+            case AnimationStates.MOVING:
+                anim.SetBool("Moving", true);
+                break;
+            case AnimationStates.ATTACK:
+                anim.SetBool("Attack", true);
+                break;
+            case AnimationStates.ATTACKLEFT:
+                anim.SetBool("AttackLeft", true);
+                break;
+            case AnimationStates.ATTACKRIGHT:
+                anim.SetBool("AttackRight", true);
+                break;
+            case AnimationStates.DIE:
+                anim.SetBool("Die", true);
+                break;
+            default:
+                anim.SetBool("Idle", true);
+                break;
         }
+
+        previous = a;
+
     }
 
     public void changeAnimationStatesTrigger(AnimationStates a)
     {
+        resetBoolAnimations();
         resetTriggerAnimations();
 
         switch (a)
@@ -227,6 +226,15 @@ public class Killable : MonoBehaviour
                 break;
             case AnimationStates.ATTACKRIGHT:
                 anim.SetTrigger("Right");
+                break;
+            case AnimationStates.ATTACK:
+                anim.SetTrigger("Attack");
+                break;
+            case AnimationStates.CHARGE:
+                anim.SetTrigger("Charge");
+                break;
+            case AnimationStates.IDLE:
+                anim.SetTrigger("Idle");
                 break;
             default:
                 anim.SetBool("Idle", true);

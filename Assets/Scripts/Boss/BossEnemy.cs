@@ -22,7 +22,7 @@ public class BossEnemy : Killable
         }
     }
 
-    public enum Attacks { JumpAttack, IdleAttack, ChargeAttack, ShootProjectile, DecideNextAttack}
+    public enum Attacks { JumpAttack, IdleAttack, ChargeAttack, ProjectileAttack, DecideNextAttack}
 
     [System.Serializable]
     public struct BossAttacks
@@ -56,11 +56,13 @@ public class BossEnemy : Killable
 
     [SerializeField]
     TextMeshProUGUI bossNextMove;
+
+    int currentDir = 1;
+
     // Start is called before the first frame update
     void Start()
     {
         base.Start();
-        //anim = GetComponent<Animator>();
     }
 
     public void startBattle()
@@ -68,19 +70,15 @@ public class BossEnemy : Killable
         inBattle = true;
         StartCoroutine("StartAttack");
     }
+
     void switchAttack(Attacks a)
     {
         if (inBattle)
         {
-            //resetBoolAnimations();
-            //resetTriggerAnimations();
             bossNextMove.text = a.ToString();
-            chargeDir = playerDir;
+            currentDir = playerDir;
+            updateBossRotation();
             Invoke(a.ToString(), 0);
-        }
-        else
-        {
-            Debug.Log("NO LONGER IN BATTLE!!");
         }
     }
 
@@ -93,13 +91,7 @@ public class BossEnemy : Killable
                 isCharging = false;
                 chargeTime = 1;
                 rb.velocity = new Vector2(0, 0);
-            }
-            else if(distX <= 1 && distY < 1)
-            {
-                if (!Player.instance.playerStatus.getRecentlyDamaged())
-                {
-                    attackPlayer();
-                }
+                changeAnimationStatesBool(AnimationStates.IDLE);
             }
             else
             {
@@ -112,13 +104,13 @@ public class BossEnemy : Killable
         if(rb.velocity.y < 0)
         {
             rb.velocity += Vector2.up * (fallMult - 1) * Physics2D.gravity.y * Time.deltaTime;
+        }
 
-            if (distX <= 1 && distY < 1)
+        if (distX <= 1 && distY < 1)
+        {
+            if (!Player.instance.playerStatus.getRecentlyDamaged())
             {
-                if (!Player.instance.playerStatus.getRecentlyDamaged())
-                {
-                    attackPlayer();
-                }
+                attackPlayer();
             }
         }
     }
@@ -141,10 +133,6 @@ public class BossEnemy : Killable
                 ShootProjectile();
             }
         }
-        //else if(distX <= minDistance)
-        //{
-        //    backOff();
-        //}
         else
         {
             ChargeAttack();
@@ -153,12 +141,14 @@ public class BossEnemy : Killable
 
     void IdleAttack()
     {
-        //anim.SetBool("Idle", true);
+        changeAnimationStatesTrigger(AnimationStates.IDLE);
         Debug.Log("IM IDLING");
     }
 
     void JumpAttack()
     {
+        changeAnimationStatesTrigger(AnimationStates.IDLE);
+
         if (playerDir == -1)
         {
             rb.velocity = new Vector2(-5, 12);
@@ -167,29 +157,20 @@ public class BossEnemy : Killable
         {
             rb.velocity = new Vector2(5, 12);
         }
-
         Debug.Log("JUMP BITCH");
     }
 
     void ChargeAttack()
     {
+        changeAnimationStatesTrigger(AnimationStates.CHARGE);
         chargeDir = playerDir;
         isCharging = true;
         Debug.Log("CHARGE!!");
     }
 
-    void backOff()
+    void ProjectileAttack()
     {
-        if(dir == -1)
-        {
-            rb.velocity = new Vector2(5, 0);
-        }
-        else
-        {
-            rb.velocity = new Vector2(-5, 0);
-        }
-
-        Debug.Log("WOAH BACKING OFF!");
+        changeAnimationStatesTrigger(AnimationStates.ATTACK);
     }
 
     void ShootProjectile()
@@ -207,5 +188,17 @@ public class BossEnemy : Killable
     public void openBattleArea()
     {
         area.openBossArea();
+    }
+
+    void updateBossRotation()
+    {
+        if (currentDir == 1)
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
     }
 }
