@@ -49,6 +49,9 @@ public class BossEnemy : Killable
     GameObject newProjectile;
 
     bool inBattle = false;
+
+    [SerializeField]
+    BossScene area;
     // Start is called before the first frame update
     void Start()
     {
@@ -190,5 +193,10 @@ public class BossEnemy : Killable
     public void setInBattle(bool set)
     {
         inBattle = set;
+    }
+
+    public void openBattleArea()
+    {
+        area.openBossArea();
     }
 }

@@ -147,6 +147,10 @@ public class Killable : MonoBehaviour
             }
             quests.speciesKilled(data.species);
 
+            if(GetComponent<BossEnemy>() != null)
+            {
+                GetComponent<BossEnemy>().openBattleArea();
+            }
             Destroy(this.gameObject);
         }
     }

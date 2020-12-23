@@ -122,6 +122,9 @@ public class Player : MonoBehaviour
 
     float clickTime = 0.25f;
     float heldTime = 0;
+
+    float attackCooldown = 0.5f;
+    bool onAttackCooldown = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -253,30 +256,37 @@ public class Player : MonoBehaviour
                     heldTime = Time.time;
                 }
 
-                //Melee attack
-                if (Input.GetMouseButtonDown(1) && meleeWeapon != null && !isAttacking && !playerStatus.getRecentlyDamaged())
+                if (!onAttackCooldown)
                 {
-                    if ((Time.time - heldTime) < clickTime)
+                    //Melee attack
+                    if (Input.GetMouseButtonDown(1) && meleeWeapon != null && !isAttacking && !playerStatus.getRecentlyDamaged())
                     {
-                        switchAnimation(AnimationStates.MELEEUP);
-                        Attack(meleeWeapon.distance, meleeWeapon.damage);
-                        isAttacking = true;
+                        if ((Time.time - heldTime) < clickTime)
+                        {
+                            switchAnimation(AnimationStates.MELEEUP);
+                            Attack(meleeWeapon.distance, meleeWeapon.damage);
+                            isAttacking = true;
+                            onAttackCooldown = true;
+                            Invoke("stopAttackCooldown", attackCooldown);
+                        }
                     }
-                }
-                //Long Range Attack, hold down then release to fire
-                if (Input.GetMouseButtonUp(0) && longRangeWeapon != null && !isAttacking && !playerStatus.getRecentlyDamaged())
-                {
-                    if ((Time.time - heldTime) < clickTime)
+                    //Long Range Attack, hold down then release to fire
+                    if (Input.GetMouseButtonUp(0) && longRangeWeapon != null && !isAttacking && !playerStatus.getRecentlyDamaged())
                     {
-                        switchAnimation(AnimationStates.RANGED);
-                        isAttacking = true;
-                    }
-                    
-                }
+                        if ((Time.time - heldTime) < clickTime)
+                        {
+                            switchAnimation(AnimationStates.RANGED);
+                            isAttacking = true;
+                            onAttackCooldown = true;
+                            Invoke("stopAttackCooldown", attackCooldown);
+                        }
 
-                if(Input.GetMouseButton(2) && canHide)
-                {
-                    startHiding();
+                    }
+
+                    if (Input.GetMouseButton(2) && canHide)
+                    {
+                        startHiding();
+                    }
                 }
             }
             else
@@ -288,6 +298,11 @@ public class Player : MonoBehaviour
         {
             switchAnimation(AnimationStates.IDLE);
         }
+    }
+
+    void stopAttackCooldown()
+    {
+        onAttackCooldown = false;
     }
 
     private void FixedUpdate()
