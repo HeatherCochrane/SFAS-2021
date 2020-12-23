@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BossEnemy : Killable
 {
@@ -52,6 +53,9 @@ public class BossEnemy : Killable
 
     [SerializeField]
     BossScene area;
+
+    [SerializeField]
+    TextMeshProUGUI bossNextMove;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,7 +74,8 @@ public class BossEnemy : Killable
         {
             //resetBoolAnimations();
             //resetTriggerAnimations();
-
+            bossNextMove.text = a.ToString();
+            chargeDir = playerDir;
             Invoke(a.ToString(), 0);
         }
         else
@@ -98,7 +103,7 @@ public class BossEnemy : Killable
             }
             else
             {
-                rb.velocity = new Vector2(playerDir * chargeSpeed, rb.velocity.y);
+                rb.velocity = new Vector2(chargeDir * chargeSpeed, rb.velocity.y);
             }
 
             chargeTime -= Time.deltaTime;

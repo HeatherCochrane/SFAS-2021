@@ -96,6 +96,7 @@ public class Player : MonoBehaviour
     int dir = -1;
     float startDashTime = 0.2f;
     float dashTime = 0;
+    float startingY = 0;
 
     [SerializeField]
     Animator anim;
@@ -215,6 +216,7 @@ public class Player : MonoBehaviour
                     isDashing = true;
                     dashCooldown = true;
                     speedCap = 30;
+                    startingY = transform.position.y;
                     switchAnimation(AnimationStates.DASH);
                 }
 
@@ -368,6 +370,8 @@ public class Player : MonoBehaviour
                 }
 
                 dashTime -= Time.deltaTime;
+                //stop the player from dipping down or jumping up
+                transform.position = new Vector2(transform.position.x, startingY);
             }
             else
             {
