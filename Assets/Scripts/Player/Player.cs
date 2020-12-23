@@ -125,6 +125,8 @@ public class Player : MonoBehaviour
 
     float attackCooldown = 0.5f;
     bool onAttackCooldown = false;
+
+    bool playerControlled = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -388,13 +390,16 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -speedCap, speedCap), rb.velocity.y);
     }
 
-  
+
     void LateUpdate()
     {
-        Vector3 targetCamPos = new Vector3(this.transform.position.x + offset.x, this.transform.position.y + offset.y, this.transform.position.z + offset.z);
-        cam.transform.position = Vector3.Lerp(cam.transform.position, targetCamPos, smoothing * Time.deltaTime);
+        if (playerControlled)
+        {
+            Vector3 targetCamPos = new Vector3(this.transform.position.x + offset.x, this.transform.position.y + offset.y, this.transform.position.z + offset.z);
+            cam.transform.position = Vector3.Lerp(cam.transform.position, targetCamPos, smoothing * Time.deltaTime);
 
-        cam.transform.position = new Vector3(Mathf.Clamp(cam.transform.position.x, maxHorizontal.x, maxHorizontal.y), Mathf.Clamp(cam.transform.position.y, maxVertical.x, maxVertical.y), cam.transform.position.z);
+            cam.transform.position = new Vector3(Mathf.Clamp(cam.transform.position.x, maxHorizontal.x, maxHorizontal.y), Mathf.Clamp(cam.transform.position.y, maxVertical.x, maxVertical.y), cam.transform.position.z);
+        }
     }
 
     void resetAnimations()
@@ -615,6 +620,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void setCameraControlled(bool set)
+    {
+        playerControlled = set;
+    }
     void pickUpItem()
     {
         if (!pickUp.gameObject.GetComponent<WorldItem>().getItemData().stackable)
