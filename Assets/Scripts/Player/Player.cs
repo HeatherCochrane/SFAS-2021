@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
     float cooldown = 10f;
 
     //Dash Variables
-    bool canDash = true;
+    bool canDash = false;
     float dashAmount = 50f;
     bool isDashing = false;
     bool dashCooldown = false;
@@ -581,6 +581,16 @@ public class Player : MonoBehaviour
     {
         return longRangeWeapon.damage;
     }
+
+    void checkBossDrop(BossDrops.PlayerAbilities p)
+    {
+        switch(p)
+        {
+            case BossDrops.PlayerAbilities.DASH:
+                setDash(true);
+                break;
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.tag == "Ground" && collision.contacts[0].normal.y >= 0.2f)
@@ -628,6 +638,7 @@ public class Player : MonoBehaviour
     {
         playerControlled = set;
     }
+
     void pickUpItem()
     {
         if (!pickUp.gameObject.GetComponent<WorldItem>().getItemData().stackable)
@@ -701,6 +712,11 @@ public class Player : MonoBehaviour
                     playerStatus.takeDamage(1, false, 2);
                 }
             }
+        }
+
+        if(collision.transform.tag == "PlayerAbility")
+        {
+            checkBossDrop(collision.GetComponent<BossDrops>().getAbility());
         }
     }
 

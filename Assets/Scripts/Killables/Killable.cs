@@ -12,8 +12,8 @@ public class Killable : MonoBehaviour
     {
         while (true)
         {
-            distX = player.transform.position.x - transform.position.x;
-            distY = player.transform.position.y - transform.position.y;
+            distX = Player.instance.transform.position.x - transform.position.x;
+            distY = Player.instance.transform.position.y - transform.position.y;
 
             if (distX < 0)
             {
@@ -28,6 +28,15 @@ public class Killable : MonoBehaviour
             {
                 distY *= -1;
             }
+
+            if (distX <=  boundsX && distY < boundsY)
+            {
+                if (!Player.instance.playerStatus.getRecentlyDamaged())
+                {
+                    attackPlayer();
+                }
+            }
+
             yield return new WaitForEndOfFrame();
         }
     }
@@ -36,13 +45,15 @@ public class Killable : MonoBehaviour
     protected float distX = 0;
     protected float distY = 0;
 
+    float boundsX = 0;
+    float boundsY = 0;
+
     //Enums for keeping track of which enemy was killed
     public enum Species { ENEMY, SHEEP };
 
     [SerializeField]
     public KillableData data;
 
-    protected Player player;
     protected PlayerQuests quests;
 
     int health = 2;
@@ -74,27 +85,28 @@ public class Killable : MonoBehaviour
     {     
         rb = GetComponent<Rigidbody2D>();
         health = data.health;
-        player = Player.instance;
         quests = Player.instance.playerQuests;
         anim = GetComponent<Animator>();
 
         canvas.GetComponent<Canvas>().worldCamera = Camera.main;
+
+        boundsX = GetComponent<SpriteRenderer>().bounds.size.x / 2;
+        boundsY = GetComponent<SpriteRenderer>().bounds.size.y / 2;
         StartCoroutine("checkDistance");
     }
 
     public void attackPlayer()
     {
-        if (!Player.instance.playerStatus.getRecentlyDamaged())
+
+        if (Player.instance.transform.position.x < transform.position.x)
         {
-            if (Player.instance.transform.position.x < transform.position.x)
-            {
-                Player.instance.playerStatus.takeDamage(damage, false, force);
-            }
-            else
-            {
-                Player.instance.playerStatus.takeDamage(damage, true, force);
-            }
+            Player.instance.playerStatus.takeDamage(damage, false, force);
         }
+        else
+        {
+            Player.instance.playerStatus.takeDamage(damage, true, force);
+        }
+
     }
 
     public void takeDamage(bool dir, int dam)

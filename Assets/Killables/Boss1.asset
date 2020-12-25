@@ -18,4 +18,6 @@ MonoBehaviour:
     amount: 2
   - drop: {fileID: 7319180011277340677, guid: bb241e2f45c82894596ec9154c2b2946, type: 3}
     amount: 8
+  - drop: {fileID: 8180142586823847632, guid: 5a34e2820b0e172498e6bbed3ce89184, type: 3}
+    amount: 1
   species: 0

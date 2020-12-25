@@ -105,14 +105,6 @@ public class BossEnemy : Killable
         {
             rb.velocity += Vector2.up * (fallMult - 1) * Physics2D.gravity.y * Time.deltaTime;
         }
-
-        if (distX <= 1 && distY < 1)
-        {
-            if (!Player.instance.playerStatus.getRecentlyDamaged())
-            {
-                attackPlayer();
-            }
-        }
     }
 
     void DecideNextAttack()
