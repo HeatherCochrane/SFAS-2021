@@ -164,7 +164,9 @@ public class Killable : MonoBehaviour
 
             if(GetComponent<BossEnemy>() != null)
             {
-                GetComponent<BossEnemy>().openBattleArea();
+                GetComponent<BossEnemy>().area.openBossArea();
+                Player.instance.checkBossDrop(GetComponent<BossEnemy>().drop.getAbility());
+                Player.instance.data.addBoss(GetComponent<BossEnemy>());
             }
             Destroy(this.gameObject);
         }

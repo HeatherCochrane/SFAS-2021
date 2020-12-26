@@ -52,12 +52,12 @@ public class BossEnemy : Killable
     bool inBattle = false;
 
     [SerializeField]
-    BossScene area;
-
-    [SerializeField]
-    TextMeshProUGUI bossNextMove;
+    public BossScene area;
 
     int currentDir = 1;
+
+    [SerializeField]
+    public BossDrops drop;
 
     // Start is called before the first frame update
     void Start()
@@ -71,11 +71,15 @@ public class BossEnemy : Killable
         StartCoroutine("StartAttack");
     }
 
+    public void setScene(BossScene b)
+    {
+        area = b;
+    }
+
     void switchAttack(Attacks a)
     {
         if (inBattle)
         {
-            bossNextMove.text = a.ToString();
             currentDir = playerDir;
             updateBossRotation();
             Invoke(a.ToString(), 0);
@@ -175,11 +179,6 @@ public class BossEnemy : Killable
     public void setInBattle(bool set)
     {
         inBattle = set;
-    }
-
-    public void openBattleArea()
-    {
-        area.openBossArea();
     }
 
     void updateBossRotation()

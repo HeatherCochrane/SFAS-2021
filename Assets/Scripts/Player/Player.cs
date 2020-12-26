@@ -213,8 +213,8 @@ public class Player : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.F) && canDash && !isDashing && !dashCooldown)
                 {
+                    playerStatus.StartCoroutine("dashCooldown");
                     isDashing = true;
-                    dashCooldown = true;
                     speedCap = 30;
                     startingY = transform.position.y;
                     switchAnimation(AnimationStates.DASH);
@@ -375,7 +375,6 @@ public class Player : MonoBehaviour
             }
             else
             {
-                Invoke("stopDashing", 1);
                 isDashing = false;
                 dashTime = startDashTime;
                 speedCap = 5;
@@ -484,9 +483,9 @@ public class Player : MonoBehaviour
         canHide = true;
     }
 
-    void stopDashing()
+    public void setDashing(bool set)
     {
-        dashCooldown = false;
+        dashCooldown = set;
     }
     void beginConversation(int index)
     {
@@ -582,7 +581,7 @@ public class Player : MonoBehaviour
         return longRangeWeapon.damage;
     }
 
-    void checkBossDrop(BossDrops.PlayerAbilities p)
+    public void checkBossDrop(BossDrops.PlayerAbilities p)
     {
         switch(p)
         {
@@ -712,11 +711,6 @@ public class Player : MonoBehaviour
                     playerStatus.takeDamage(1, false, 2);
                 }
             }
-        }
-
-        if(collision.transform.tag == "PlayerAbility")
-        {
-            checkBossDrop(collision.GetComponent<BossDrops>().getAbility());
         }
     }
 

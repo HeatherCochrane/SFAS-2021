@@ -14,33 +14,59 @@ public class BossScene : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI battleMessage;
 
+    [SerializeField]
+    GameObject abilityDropScreen;
+
+    [SerializeField]
+    GameObject bossCharacter;
+
+    GameObject newBoss;
     // Start is called before the first frame update
     void Start()
     {
-        blockingObject.SetActive(true);
+        if(!Player.instance.data.hasBossBeenDefeated(boss))
+        {
+            newBoss = Instantiate(bossCharacter);
+            newBoss.GetComponentInChildren<BossEnemy>().setScene(this);
+            blockingObject.SetActive(true);
+            Player.instance.setInput(false);
+            battleMessage.gameObject.SetActive(true);
+
+
+            Invoke("startBattle", 2);
+        }
+        else
+        {
+            blockingObject.SetActive(false);
+            battleMessage.gameObject.SetActive(false);
+        }
+
+        showAbilityDropScreen(false);
         Player.instance.setCameraControlled(false);
         Player.instance.cam.transform.position = new Vector3(3, -20, -10);
         Player.instance.cam.GetComponent<Camera>().orthographicSize = 7;
-
-        Player.instance.setInput(false);
-
-        Invoke("startBattle", 2);
     }
 
     void startBattle()
     {
-        boss.startBattle();
+        newBoss.GetComponentInChildren<BossEnemy>().startBattle();
         Player.instance.setInput(true);
     }
 
     public void openBossArea()
     {
         blockingObject.SetActive(false);
+        showAbilityDropScreen(true);
     }
 
     private void OnDisable()
     {
         Player.instance.cam.GetComponent<Camera>().orthographicSize = 4;
         Player.instance.setCameraControlled(true);
+    }
+
+    public void showAbilityDropScreen(bool set)
+    {
+        abilityDropScreen.SetActive(set);
     }
 }

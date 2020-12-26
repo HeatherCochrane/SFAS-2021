@@ -6,6 +6,21 @@ using TMPro;
 
 public class PlayerStatus : MonoBehaviour
 {
+    IEnumerator dashCooldown()
+    {
+        Player.instance.setDashing(true);
+        dashCooldownSlider.gameObject.SetActive(true);
+        dashCooldownSlider.value = 10;
+
+        while(dashCooldownSlider.value > 0)
+        {
+            dashCooldownSlider.value -= 1;
+            yield return new WaitForSeconds(0.2f);
+        }
+        dashCooldownSlider.gameObject.SetActive(false);
+        Player.instance.setDashing(false);
+    }
+
     [SerializeField]
     GameObject playerHealth;
 
@@ -23,10 +38,15 @@ public class PlayerStatus : MonoBehaviour
 
     [SerializeField]
     Animator cameraShake;
+
+    [SerializeField]
+    Slider dashCooldownSlider;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        dashCooldownSlider.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
