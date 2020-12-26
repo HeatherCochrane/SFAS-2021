@@ -6,18 +6,20 @@ using TMPro;
 
 public class PlayerStatus : MonoBehaviour
 {
-    IEnumerator dashCooldown()
+    public IEnumerator DashCooldown()
     {
         Player.instance.setDashing(true);
-        dashCooldownSlider.gameObject.SetActive(true);
-        dashCooldownSlider.value = 10;
+        dashObject.gameObject.SetActive(true);
+        dashFill.rectTransform.anchoredPosition = new Vector2(dashFill.transform.parent.GetComponent<Image>().rectTransform.anchoredPosition.x - 50, 0);
 
-        while(dashCooldownSlider.value > 0)
+        while (dashFill.rectTransform.anchoredPosition.x < 0)
         {
-            dashCooldownSlider.value -= 1;
-            yield return new WaitForSeconds(0.2f);
+            dashFill.rectTransform.anchoredPosition += new Vector2(3, 0);
+            yield return new WaitForSeconds(0.1f);
         }
-        dashCooldownSlider.gameObject.SetActive(false);
+
+        dashObject.gameObject.SetActive(false);
+        dashFill.rectTransform.anchoredPosition = dashFillPos;
         Player.instance.setDashing(false);
     }
 
@@ -39,20 +41,31 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField]
     Animator cameraShake;
 
-    [SerializeField]
-    Slider dashCooldownSlider;
 
+    [SerializeField]
+    GameObject dashObject;
+
+    [SerializeField]
+    Image dashFill;
+    Vector2 dashFillPos;
+    Vector2 newPos;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        dashCooldownSlider.gameObject.SetActive(false);
+        dashFillPos = dashFill.rectTransform.position;
+        dashObject.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void startCooldown()
+    {
+        StartCoroutine(DashCooldown());
     }
     
     public void healPlayer(int amount)

@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
     float cooldown = 10f;
 
     //Dash Variables
-    bool canDash = false;
+    bool canDash = true;
     float dashAmount = 50f;
     bool isDashing = false;
     bool dashCooldown = false;
@@ -213,7 +213,7 @@ public class Player : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.F) && canDash && !isDashing && !dashCooldown)
                 {
-                    playerStatus.StartCoroutine("dashCooldown");
+                    playerStatus.startCooldown();
                     isDashing = true;
                     speedCap = 30;
                     startingY = transform.position.y;
