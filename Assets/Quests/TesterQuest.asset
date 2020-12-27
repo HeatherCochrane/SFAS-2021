@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da9c3a386854d14cb4d1bebec7284d8, type: 3}
   m_Name: TesterQuest
   m_EditorClassIdentifier: 
-  XPGained: 100
-  levelRequirement: 0
+  questName: Tester
   questsCompleted: []
   totalKillsNeeded:
   - species: 0
     number: 1
+  bossName: 0

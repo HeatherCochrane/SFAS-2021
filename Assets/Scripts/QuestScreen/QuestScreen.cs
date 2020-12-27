@@ -60,7 +60,7 @@ public class QuestScreen : MonoBehaviour
     public void addActiveQuest(Quest data)
     {
         newButton = Instantiate(questButtonPrefab);
-        newButton.GetComponentInChildren<TextMeshProUGUI>().text = data.name;
+        newButton.GetComponentInChildren<TextMeshProUGUI>().text = data.questName;
         newButton.transform.SetParent(questParent.transform);
         newButton.transform.SetSiblingIndex(0);
         newButton.GetComponent<QuestButton>().setData(data, this);
@@ -73,7 +73,7 @@ public class QuestScreen : MonoBehaviour
         removeQuest(data);
 
         newButton = Instantiate(questButtonPrefab);
-        newButton.GetComponentInChildren<TextMeshProUGUI>().text = data.name;
+        newButton.GetComponentInChildren<TextMeshProUGUI>().text = data.questName;
         newButton.transform.SetParent(finishedQuestParent.transform);
         newButton.GetComponent<QuestButton>().setData(data, this);
     }

@@ -26,9 +26,6 @@ public class Game : MonoBehaviour
 
     bool spawnedChoices = false;
 
-    [SerializeField]
-    Button closeDialogue;
-
     bool dialogueFinished = false;
 
     [SerializeField]
@@ -66,7 +63,6 @@ public class Game : MonoBehaviour
         _data = d;
         startDialogue = true;
         spawnedChoices = false;
-        closeDialogue.gameObject.SetActive(true);
 
         if (d.getQuestToComplete() != null)
         {
@@ -131,7 +127,6 @@ public class Game : MonoBehaviour
 
         if(choice.quest != null)
         {
-            Debug.Log("Quest Started!: " + choice.quest);
             Player.instance.playerQuests.addNewQuest(choice.quest);
         }
 
@@ -161,7 +156,6 @@ public class Game : MonoBehaviour
 
         if (data.getChoiceList().Count == 0)
         {
-            closeDialogue.gameObject.SetActive(false);
             Invoke("leaveDialogue", 0.5f);
         }
 

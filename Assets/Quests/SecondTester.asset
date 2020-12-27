@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da9c3a386854d14cb4d1bebec7284d8, type: 3}
   m_Name: SecondTester
   m_EditorClassIdentifier: 
-  XPGained: 100
-  levelRequirement: 0
+  questName: Second Tester
   questsCompleted:
   - {fileID: 11400000, guid: da648812ab80c494e85dccfbe5a1bb86, type: 2}
   totalKillsNeeded: []
+  bossName: 0

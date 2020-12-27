@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Quests", menuName = "New Quest/Quest", order = 1)]
 public class Quest : ScriptableObject
 {
+    [SerializeField]
+    public string questName;
+
     [System.Serializable]
     public struct Kills
     {

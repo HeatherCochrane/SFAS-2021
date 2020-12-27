@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerQuests : MonoBehaviour
 {
@@ -17,18 +18,6 @@ public class PlayerQuests : MonoBehaviour
 
     [SerializeField]
     QuestScreen questScreen;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void addNewQuest(Quest n)
     {
@@ -111,5 +100,16 @@ public class PlayerQuests : MonoBehaviour
         }
 
         return 0;
+    }
+
+
+    public List<Quest> getStartedQuests()
+    {
+        return questsStarted;
+    }
+
+    public List<Quest> getCompletedQuests()
+    {
+        return completedQuests;
     }
 }

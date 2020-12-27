@@ -90,8 +90,8 @@ public class Killable : MonoBehaviour
 
         canvas.GetComponent<Canvas>().worldCamera = Camera.main;
 
-        boundsX = GetComponent<SpriteRenderer>().bounds.size.x / 2;
-        boundsY = GetComponent<SpriteRenderer>().bounds.size.y / 2;
+        boundsX = GetComponent<SpriteRenderer>().bounds.size.x / 3;
+        boundsY = GetComponent<SpriteRenderer>().bounds.size.y / 3;
         StartCoroutine("checkDistance");
     }
 
@@ -160,16 +160,16 @@ public class Killable : MonoBehaviour
                     }
                 }
             }
-           
 
-            if(GetComponent<BossEnemy>() != null)
+            quests.speciesKilled(data.species);
+
+            if (GetComponent<BossEnemy>() != null)
             {
                 GetComponent<BossEnemy>().area.openBossArea();
                 Player.instance.checkBossDrop(GetComponent<BossEnemy>().drop.getAbility());
+                quests.bossesKilled(GetComponent<BossEnemy>().bossName);
             }
 
-            quests.speciesKilled(data.species);
-            quests.bossesKilled(GetComponent<BossEnemy>().bossName);
 
             Destroy(this.gameObject);
         }
