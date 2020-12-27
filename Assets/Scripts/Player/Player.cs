@@ -97,6 +97,8 @@ public class Player : MonoBehaviour
     float startDashTime = 0.2f;
     float dashTime = 0;
     float startingY = 0;
+    [SerializeField]
+    TrailRenderer dashTrail;
 
     [SerializeField]
     Animator anim;
@@ -152,7 +154,7 @@ public class Player : MonoBehaviour
         UnityEngine.EventSystems.EventSystem.current = system;
 
         dashTime = startDashTime;
-
+        dashTrail.gameObject.SetActive(false);
     }
 
 
@@ -218,6 +220,7 @@ public class Player : MonoBehaviour
                     speedCap = 30;
                     startingY = transform.position.y;
                     switchAnimation(AnimationStates.DASH);
+                    dashTrail.gameObject.SetActive(true);
                 }
 
                 //Interaction Key
@@ -251,7 +254,7 @@ public class Player : MonoBehaviour
                     }
                     else if(currentBuilding != null)
                     {
-                        sceneLoader.switchScene(currentBuilding.getSceneName(), currentBuilding.getSpawnPoint());
+                        sceneLoader.switchScene(currentBuilding.getSceneName(), currentBuilding.GetComponent<TransitionGate>());
                     }
                 }
 
@@ -380,6 +383,7 @@ public class Player : MonoBehaviour
                 speedCap = 5;
                 rb.velocity = new Vector2(0, rb.velocity.y);
                 switchAnimation(AnimationStates.RUN);
+                dashTrail.gameObject.SetActive(false);
             }
         }
 
@@ -487,6 +491,7 @@ public class Player : MonoBehaviour
     {
         dashCooldown = set;
     }
+
     void beginConversation(int index)
     {
         //Pass in the characters dialogue data to begin the conversation
@@ -692,7 +697,7 @@ public class Player : MonoBehaviour
 
         if(collision.tag == "TransitionGate")
         {
-            sceneLoader.switchScene(collision.GetComponent<TransitionGate>().getScene(), collision.GetComponent<TransitionGate>().getSpawnPoint());
+            sceneLoader.switchScene(collision.GetComponent<TransitionGate>().getScene(), collision.GetComponent<TransitionGate>());
         }
 
         if (collision.gameObject.tag == "Pickup")

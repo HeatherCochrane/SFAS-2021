@@ -11,9 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Area 2/Area2 1.unity
     guid: 2f078ce4fddf39f4c9dfb93a570ad077
-  - enabled: 1
-    path: Assets/Scenes/PlayerHome.unity
-    guid: ca8527eca02ad8a4bb3db24b2f314ee5
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Town.unity
     guid: 8ead71bae81506844b629a49998efc41
@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Area 1/Area1 Boss.unity
     guid: 51224e47a7748934899527271583b159
+  - enabled: 1
+    path: Assets/Scenes/TutorialScene.unity
+    guid: b76acc9446bbd234898d47b8cee8a058
   m_configObjects: {}

@@ -1044,4 +1044,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: Area1 1
-  spawnPoint: {x: 80, y: -22}
+  spawn: Area2 Exit

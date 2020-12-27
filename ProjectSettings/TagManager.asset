@@ -18,6 +18,7 @@ TagManager:
   - Funds
   - ColliderMap
   - PlayerAbility
+  - Spawn
   layers:
   - Default
   - TransparentFX

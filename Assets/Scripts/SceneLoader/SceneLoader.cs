@@ -18,6 +18,17 @@ public class SceneLoader : MonoBehaviour
         mapSizeX = new Vector2(map.cellBounds.xMin + 10, map.cellBounds.xMax - 10);
         mapSizeY = new Vector2(map.cellBounds.yMin + 5, map.cellBounds.yMax - 5);
         Player.instance.setCamBounds(mapSizeX, mapSizeY);
+
+        GameObject[] allSpawns = GameObject.FindGameObjectsWithTag("Spawn");
+
+        foreach(GameObject spawn in allSpawns)
+        {
+            if(spawn.GetComponent<PlayerSpawns>().spawn == gate.getSpawn())
+            {
+                Player.instance.transform.position = spawn.transform.position;
+            }
+        }
+       
     }
 
 
@@ -29,7 +40,6 @@ public class SceneLoader : MonoBehaviour
     {
         public string scenePath;
         public Particle particleEffect;
-
     }
 
     public enum Particle { GRASS, SNOW, NONE};
@@ -69,6 +79,8 @@ public class SceneLoader : MonoBehaviour
     Vector2 mapSizeX;
     Vector2 mapSizeY;
     Tilemap map;
+
+    TransitionGate gate;
     
     // Start is called before the first frame update
     void Start()
@@ -110,17 +122,17 @@ public class SceneLoader : MonoBehaviour
         
     }
 
-    public void switchScene(string scene, Vector2 newSpawn)
+    public void switchScene(string scene, TransitionGate g)
     {
         sceneToLoad = scene;
-        newSpawnPoint = newSpawn;
+        gate = g;
         loadScene();
     }
 
     public void startGame(string scene)
     {
         sceneToLoad = scene;
-        newSpawnPoint = new Vector2(-6, -2);
+        gate = GetComponent<TransitionGate>();
         loadScene();
     }
 

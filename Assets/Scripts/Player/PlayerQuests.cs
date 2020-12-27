@@ -23,6 +23,7 @@ public class PlayerQuests : MonoBehaviour
     {
         questsStarted.Add(n);
         questScreen.addActiveQuest(n);
+
     }
 
     public void questCompleted(Quest c)

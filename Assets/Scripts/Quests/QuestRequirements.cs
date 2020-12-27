@@ -20,7 +20,6 @@ public class QuestRequirements : MonoBehaviour
             if (Player.instance.playerQuests.getCompletedQuests().Contains(quest))
             {
                 destroyObject();
-
             }
         }
         else if (needsQuestStarted)
@@ -28,7 +27,6 @@ public class QuestRequirements : MonoBehaviour
             if (Player.instance.playerQuests.getStartedQuests().Contains(quest))
             {
                 destroyObject();
-
             }
         }
     }

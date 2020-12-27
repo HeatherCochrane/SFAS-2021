@@ -8,15 +8,15 @@ public class TransitionGate : MonoBehaviour
     string scene;
 
     [SerializeField]
-    Vector2 spawnPoint;
+    string spawn;
 
     public string getScene()
     {
         return scene;
     }
 
-    public Vector2 getSpawnPoint()
+    public string getSpawn()
     {
-        return spawnPoint;
+        return spawn;
     }
 }
