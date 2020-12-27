@@ -9,13 +9,24 @@ public class Parralax : MonoBehaviour
 
     GameObject cam;
 
-    [SerializeField]
-    float parralaxEffect = 0;
+    float parralaxEffect;
 
     Vector2 dist;
+
+    [SerializeField]
+    bool forward = false;
     // Start is called before the first frame update
     void Start()
     {
+        if (forward)
+        {
+            parralaxEffect = 0.05f;
+        }
+        else
+        {
+            parralaxEffect = 0.1f;
+        }
+
         startXPos = transform.position.x;
         lengthX = GetComponent<SpriteRenderer>().bounds.size.x;
 
