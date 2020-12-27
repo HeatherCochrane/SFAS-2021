@@ -2131,7 +2131,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 17503952294341ebf95f6b3d8be1cf7c00000000
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -2151,8 +2151,8 @@ MonoBehaviour:
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
   - {x: -0.8245411, y: -1.7880535, z: 0}
-  - {x: 2.6226397, y: -5.4254613, z: 0}
-  - {x: 7.774173, y: -5.541378, z: 0}
+  - {x: 3.6354384, y: -6.9965987, z: 0}
+  - {x: 8.475342, y: -6.982669, z: 0}
   - {x: 0.5820923, y: 0.25372684, z: 0}
   - {x: 0.04141426, y: 0.43693447, z: 0}
   - {x: -0.35026264, y: 0.42180586, z: 0}
