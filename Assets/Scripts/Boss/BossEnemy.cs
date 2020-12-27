@@ -59,6 +59,9 @@ public class BossEnemy : Killable
     [SerializeField]
     public BossDrops drop;
 
+    [SerializeField]
+    public BossScene.BossNames bossName;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -138,7 +141,6 @@ public class BossEnemy : Killable
     void IdleAttack()
     {
         changeAnimationStatesTrigger(AnimationStates.IDLE);
-        Debug.Log("IM IDLING");
     }
 
     void JumpAttack()
@@ -153,7 +155,6 @@ public class BossEnemy : Killable
         {
             rb.velocity = new Vector2(5, 12);
         }
-        Debug.Log("JUMP BITCH");
     }
 
     void ChargeAttack()
@@ -161,7 +162,6 @@ public class BossEnemy : Killable
         changeAnimationStatesTrigger(AnimationStates.CHARGE);
         chargeDir = playerDir;
         isCharging = true;
-        Debug.Log("CHARGE!!");
     }
 
     void ProjectileAttack()

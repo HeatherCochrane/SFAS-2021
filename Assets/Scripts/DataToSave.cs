@@ -6,7 +6,8 @@ public class DataToSave : MonoBehaviour
 {
     List<Character> charactersTalkedTo = new List<Character>();
 
-    List<BossEnemy> bossesDefeated = new List<BossEnemy>();
+    List<BossScene.BossNames> bossesDefeated = new List<BossScene.BossNames>();
+
     public bool hasBeenTalkedTo(Character c)
     {
         foreach(Character character in charactersTalkedTo)
@@ -25,9 +26,9 @@ public class DataToSave : MonoBehaviour
         charactersTalkedTo.Add(c);
     }
 
-    public bool hasBossBeenDefeated(BossEnemy b)
+    public bool hasBossBeenDefeated(BossScene.BossNames b)
     {
-        foreach(BossEnemy boss in bossesDefeated)
+        foreach(BossScene.BossNames boss in bossesDefeated)
         {
             if(boss == b)
             {
@@ -38,7 +39,7 @@ public class DataToSave : MonoBehaviour
         return false;
     }
 
-    public void addBoss(BossEnemy b)
+    public void addBoss(BossScene.BossNames b)
     {
         bossesDefeated.Add(b);
     }

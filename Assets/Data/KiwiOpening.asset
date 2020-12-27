@@ -19,28 +19,29 @@ MonoBehaviour:
       _beatId: 2
       quest: {fileID: 0}
     _text: Ah another adventurer! Such a wonderful looking area wouldn't you say?
-      I've been documenting the flora around this area for my research you see but
+      I've been documenting the fauna around this area for my research you see but
       I feel as though I should go further.
     _id: 1
   - _choices:
-    - _text: How do you get to this biome?
+    - _text: Where is the beast?
       _beatId: 3
       quest: {fileID: 0}
-    - _text: Okay, bye!
+    - _text: Sign me up!
       _beatId: 4
-      quest: {fileID: 0}
-    _text: There's another biome not too far from here but I can't seem to reach
-      it. Maybe you'll have better luck!
+      quest: {fileID: 11400000, guid: c56c97116e59e3f4490bb90fec24b0c3, type: 2}
+    _text: I've heard rumours of a large beast that roams this biome not too far
+      from here but I still have so much work to do. Would you be up for finding
+      this beast and slaying it?
     _id: 2
   - _choices:
     - _text: Okay, thank you!
       _beatId: 5
-      quest: {fileID: 0}
-    _text: Head south east from here until you reach the end of this biome and look
-      up, if only i could jump forward then I may be able to reach it.
+      quest: {fileID: 11400000, guid: c56c97116e59e3f4490bb90fec24b0c3, type: 2}
+    _text: Head to the bottom of this biome which will lead you to another area,
+      from there head west until you find the entrance to its lair. Be careful adventurer!
     _id: 3
   - _choices: []
-    _text: Goodbye!
+    _text: Good luck!
     _id: 4
   - _choices: []
     _text: Good luck!

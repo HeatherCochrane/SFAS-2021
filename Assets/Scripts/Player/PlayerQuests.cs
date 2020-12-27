@@ -79,14 +79,21 @@ public class PlayerQuests : MonoBehaviour
         checkQuestRequirements();
     }
 
+    public void bossesKilled(BossScene.BossNames b)
+    {
+        Player.instance.data.addBoss(b);
+        checkQuestRequirements();
+    }
+
     void checkQuestRequirements()
     {
         //Grab all the currently started quests and check each other their requirements against stored values
         for (int i = 0; i < questsStarted.Count; i++)
         {
-            //Check to ensure allrequirements have been met
-            if (questsStarted[i].checkKills(totalKills) && questsStarted[i].checkCompletedQuests(completedQuests))
+            //Check to ensure all requirements have been met
+            if (questsStarted[i].checkKills(totalKills) && questsStarted[i].checkCompletedQuests(completedQuests) && questsStarted[i].checkBossKilled())
             {
+                Debug.Log("QUEST COMPLETED!");
                 questCompleted(questsStarted[i]);
             }
         }

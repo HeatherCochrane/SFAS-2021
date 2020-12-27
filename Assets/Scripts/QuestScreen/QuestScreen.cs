@@ -139,6 +139,14 @@ public class QuestScreen : MonoBehaviour
                 newString.transform.SetParent(infoBox.transform);
             }
         }
+
+        if(currentQuestToggled.bossName != BossScene.BossNames.NONE)
+        {
+            string sheepString = "Boss to kill: " + currentQuestToggled.bossName;
+            TextMeshProUGUI newString = Instantiate(stringPrefab);
+            newString.text = sheepString;
+            newString.transform.SetParent(infoBox.transform);
+        }
     }
 
     void clearInfoBox()

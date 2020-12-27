@@ -603,7 +603,6 @@ public class Player : MonoBehaviour
         {
             inventory.adjustFunds(1);
             Destroy(collision.gameObject);
-            Debug.Log("COLLECTED FUNDS");
         }
     }
 
@@ -664,6 +663,14 @@ public class Player : MonoBehaviour
 
         effectParticles = Instantiate(pickUpEffect);
         effectParticles.transform.position = transform.position;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Pickup")
+        {
+            pickUp = collision.gameObject;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

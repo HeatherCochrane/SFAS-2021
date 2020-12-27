@@ -20,6 +20,8 @@ public class Quest : ScriptableObject
     [SerializeField]
     public List<Kills> totalKillsNeeded = new List<Kills>();
 
+    [SerializeField]
+    public BossScene.BossNames bossName;
 
     public bool checkKills(List<Kills> k)
     {
@@ -72,6 +74,23 @@ public class Quest : ScriptableObject
             }
 
             if(totalTrue == questsCompleted.Count)
+            {
+                return true;
+            }
+        }
+        else
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool checkBossKilled()
+    {
+        if (bossName != BossScene.BossNames.NONE)
+        {
+            if (Player.instance.data.hasBossBeenDefeated(bossName))
             {
                 return true;
             }

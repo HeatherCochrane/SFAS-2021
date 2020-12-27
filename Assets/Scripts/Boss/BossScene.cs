@@ -5,11 +5,11 @@ using TMPro;
 
 public class BossScene : MonoBehaviour
 {
-    [SerializeField]
-    GameObject blockingObject;
+    public enum BossNames { GOAT, SNAKE, NONE}
+
 
     [SerializeField]
-    BossEnemy boss;
+    GameObject blockingObject;
 
     [SerializeField]
     TextMeshProUGUI battleMessage;
@@ -21,6 +21,9 @@ public class BossScene : MonoBehaviour
     GameObject bossCharacter;
 
     GameObject newBoss;
+
+    [SerializeField]
+    BossNames boss;
     // Start is called before the first frame update
     void Start()
     {

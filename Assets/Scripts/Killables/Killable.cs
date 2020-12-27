@@ -160,14 +160,17 @@ public class Killable : MonoBehaviour
                     }
                 }
             }
-            quests.speciesKilled(data.species);
+           
 
             if(GetComponent<BossEnemy>() != null)
             {
                 GetComponent<BossEnemy>().area.openBossArea();
                 Player.instance.checkBossDrop(GetComponent<BossEnemy>().drop.getAbility());
-                Player.instance.data.addBoss(GetComponent<BossEnemy>());
             }
+
+            quests.speciesKilled(data.species);
+            quests.bossesKilled(GetComponent<BossEnemy>().bossName);
+
             Destroy(this.gameObject);
         }
     }
