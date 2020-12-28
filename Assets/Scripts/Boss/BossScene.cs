@@ -64,7 +64,7 @@ public class BossScene : MonoBehaviour
 
     private void OnDisable()
     {
-        Player.instance.cam.GetComponent<Camera>().orthographicSize = 4;
+        Player.instance.cam.GetComponent<Camera>().orthographicSize = 5;
         Player.instance.setCameraControlled(true);
     }
 

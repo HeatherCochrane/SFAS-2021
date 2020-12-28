@@ -1,0 +1,520 @@
+fileFormatVersion: 2
+guid: e96db71adb7e6304196075092094a5bc
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4007696763470283383
+    second: woods decor_0
+  - first:
+      213: -7379968639235842658
+    second: woods decor_1
+  - first:
+      213: 2475677457009892069
+    second: woods decor_2
+  - first:
+      213: 8495821926229018282
+    second: woods decor_3
+  - first:
+      213: -3565258061387897424
+    second: woods decor_4
+  - first:
+      213: -1582661989220181658
+    second: woods decor_5
+  - first:
+      213: 8980634377058001885
+    second: woods decor_6
+  - first:
+      213: 8505279365794272762
+    second: woods decor_7
+  - first:
+      213: 1515114603282992394
+    second: woods decor_8
+  - first:
+      213: -4651079215877551223
+    second: woods decor_9
+  - first:
+      213: -737016162723345587
+    second: woods decor_10
+  - first:
+      213: 4431565318128965348
+    second: woods decor_11
+  - first:
+      213: 229202190741311273
+    second: woods decor_12
+  - first:
+      213: -6033120304059525499
+    second: woods decor_13
+  - first:
+      213: -1103947954609631025
+    second: woods decor_14
+  - first:
+      213: -4817070262040974955
+    second: woods decor_15
+  - first:
+      213: -2561226256830011279
+    second: woods decor_16
+  - first:
+      213: 6156283031429210185
+    second: woods decor_17
+  - first:
+      213: -5008867056654351777
+    second: woods decor_18
+  - first:
+      213: -2663813769844652824
+    second: woods decor_19
+  - first:
+      213: 2710505171596176769
+    second: woods decor_20
+  - first:
+      213: -4812159406454752019
+    second: woods decor_21
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: woods decor_0
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 1685
+        width: 400
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98dfeddf60dc168c0800000000000000
+      internalID: -4007696763470283383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods decor_1
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 1745
+        width: 476
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9d13d49f95159990800000000000000
+      internalID: -7379968639235842658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods decor_2
+      rect:
+        serializedVersion: 2
+        x: 1332
+        y: 1910
+        width: 105
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ea548bc78f5b5220800000000000000
+      internalID: 2475677457009892069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods decor_3
+      rect:
+        serializedVersion: 2
+        x: 1770
+        y: 1858
+        width: 154
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa60bd3770937e570800000000000000
+      internalID: 8495821926229018282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods decor_4
+      rect:
+        serializedVersion: 2
+        x: 1047
+        y: 1753
+        width: 254
+        height: 106
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b56066cea8a58ec0800000000000000
+      internalID: -3565258061387897424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods decor_5
+      rect:
+        serializedVersion: 2
+        x: 1423
+        y: 1770
+        width: 294
+        height: 126
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 669940d5e41490ae0800000000000000
+      internalID: -1582661989220181658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods decor_6
+      rect:
+        serializedVersion: 2
+        x: 1781
+        y: 1713
+        width: 73
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd3243e626f91ac70800000000000000
+      internalID: 8980634377058001885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods decor_8
+      rect:
+        serializedVersion: 2
+        x: 1316
+        y: 1641
+        width: 107
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0d80ba44b4c60510800000000000000
+      internalID: 1515114603282992394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods decor_9
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 1587
+        width: 167
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98b8a6b781c047fb0800000000000000
+      internalID: -4651079215877551223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods decor_12
+      rect:
+        serializedVersion: 2
+        x: 1409
+        y: 1501
+        width: 294
+        height: 126
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92f80e89d2a4e2300800000000000000
+      internalID: 229202190741311273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods decor_16
+      rect:
+        serializedVersion: 2
+        x: 1767
+        y: 1444
+        width: 73
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1786e341a42b47cd0800000000000000
+      internalID: -2561226256830011279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods decor_7
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 1545
+        width: 719
+        height: 103
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af590a13582d80670800000000000000
+      internalID: 8505279365794272762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods decor_10
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 1453
+        width: 675
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4b472374b795c5f0800000000000000
+      internalID: -737016162723345587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods decor_11
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 1328
+        width: 223
+        height: 289
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e6940a6d25108d30800000000000000
+      internalID: 4431565318128965348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods decor_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3
+        width: 806
+        height: 1045
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 586d55d5c0d064ca0800000000000000
+      internalID: -6033120304059525499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: woods decor_14
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 0
+        width: 1014
+        height: 793
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc059fa2f2dfda0f0800000000000000
+      internalID: -1103947954609631025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
