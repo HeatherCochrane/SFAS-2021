@@ -17,6 +17,12 @@ TextureImporter:
   - first:
       213: -8163944532759659069
     second: WoodBoards_2
+  - first:
+      213: 6815061473383368289
+    second: WoodBoards_3
+  - first:
+      213: 3202669187670761130
+    second: WoodBoards_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -124,7 +130,7 @@ TextureImporter:
         width: 538
         height: 159
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -140,12 +146,12 @@ TextureImporter:
       name: WoodBoards_1
       rect:
         serializedVersion: 2
-        x: 716
-        y: 418
-        width: 160
-        height: 539
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 778
+        y: 437
+        width: 182
+        height: 547
+      alignment: 9
+      pivot: {x: 0.5071152, y: 0.49788788}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -166,7 +172,7 @@ TextureImporter:
         width: 186
         height: 154
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -174,6 +180,48 @@ TextureImporter:
       bones: []
       spriteID: 3cd3edea3b7d3be80800000000000000
       internalID: -8163944532759659069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WoodBoards_3
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 24
+        width: 369
+        height: 525
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16647736d46f39e50800000000000000
+      internalID: 6815061473383368289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WoodBoards_4
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 23
+        width: 379
+        height: 531
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aae543068aa227c20800000000000000
+      internalID: 3202669187670761130
       vertices: []
       indices: 
       edges: []

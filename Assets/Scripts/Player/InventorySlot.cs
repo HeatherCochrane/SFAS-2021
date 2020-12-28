@@ -56,6 +56,10 @@ public class InventorySlot : MonoBehaviour
 
             Player.instance.inventory.setActiveSlot(this);
         }
+        else
+        {
+            Player.instance.inventory.emptyInfoBox();
+        }
     }
 
     public Item getItem()
