@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4640518577379541337}
   - component: {fileID: 4640518577379541342}
   - component: {fileID: 2679095273275964018}
-  m_Layer: 9
+  m_Layer: 17
   m_Name: SnowParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4825,3 +4825,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d52670bda69df7a41be3fcf8a5ae4488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 1.5
