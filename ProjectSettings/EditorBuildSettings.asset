@@ -47,4 +47,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/JungleToIce/JungleToIce1.unity
     guid: 1bf520a6e560ab6429b86c59cec577a3
+  - enabled: 1
+    path: Assets/Scenes/Woods/WoodsBoss.unity
+    guid: b469130ef6303cb4a81e5eac5911d8b4
   m_configObjects: {}
