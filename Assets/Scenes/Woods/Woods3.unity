@@ -746,6 +746,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 19
       objectReference: {fileID: 0}
+    - target: {fileID: 3646413858359670646, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 3646413858359670646, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 206
+      objectReference: {fileID: 0}
     - target: {fileID: 4756661960599465965, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
@@ -820,7 +828,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5211865471340848947, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
       propertyPath: m_margin.x
-      value: -32.18036
+      value: -27.696259
+      objectReference: {fileID: 0}
+    - target: {fileID: 5211865471340848947, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 6034214629372006433, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
       propertyPath: m_Color.r
