@@ -10956,21 +10956,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: MiniMap
       objectReference: {fileID: 0}
+    - target: {fileID: 2334214593868866124, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 165
+      objectReference: {fileID: 0}
+    - target: {fileID: 2334214593868866124, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 169
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671638721865366769, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -175
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671638721865366769, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 155
+      objectReference: {fileID: 0}
     - target: {fileID: 4756661960599465965, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -36.67
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4756661960599465965, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 73.34729
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 4756661960599465965, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4756661960599465965, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 200
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 5192311902403586784, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11016,9 +11032,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5211865471340848947, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_text
+      value: The Wastes
+      objectReference: {fileID: 0}
+    - target: {fileID: 5211865471340848947, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5211865471340848947, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_fontSize
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5211865471340848947, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5211865471340848947, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_margin.x
+      value: -5.275818
+      objectReference: {fileID: 0}
     - target: {fileID: 7875126436495691855, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -35.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7875126436495691888, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
       propertyPath: m_Color.r

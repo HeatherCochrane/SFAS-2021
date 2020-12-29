@@ -7921,21 +7921,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: MiniMap
       objectReference: {fileID: 0}
+    - target: {fileID: 2334214593868866124, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 181
+      objectReference: {fileID: 0}
+    - target: {fileID: 2334214593868866124, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671638721865366769, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671638721865366769, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -180
+      objectReference: {fileID: 0}
     - target: {fileID: 4756661960599465965, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -34.47
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4756661960599465965, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 68.950424
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 4756661960599465965, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4756661960599465965, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 150
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 5192311902403586784, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7981,9 +7997,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5211865471340848947, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_text
+      value: Town
+      objectReference: {fileID: 0}
+    - target: {fileID: 5211865471340848947, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_fontSize
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5211865471340848947, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 7875126436495691855, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -35.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7875126436495691888, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
       propertyPath: m_Color.r

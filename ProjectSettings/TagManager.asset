@@ -19,6 +19,7 @@ TagManager:
   - ColliderMap
   - PlayerAbility
   - Spawn
+  - MiniMap
   layers:
   - Default
   - TransparentFX

@@ -19,6 +19,8 @@ public class UIHandler : MonoBehaviour
     Menus currentMenu;
     Menus currentMenu2;
 
+    GameObject currentMap;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +57,39 @@ public class UIHandler : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void setCurrentMap(GameObject m)
+    {
+        currentMap = m;
+        currentMap.SetActive(false);
+    }
+
+    public void showMap()
+    {
+        for (int i = 0; i < allActiveMenus.Count; i++)
+        {
+            allActiveMenus[i].obj.SetActive(false);
+        }
+
+       currentMap.SetActive(true);
+    }
+
+    public void hideMap()
+    {
+        currentMap.SetActive(false);
+
+        changeMenu(Menus.PLAYERUI);
+    }
+
+    public bool getMapActive()
+    {
+        if(currentMap.activeSelf)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public void changeDoubleMenu(Menus n, Menus m)
@@ -100,4 +135,6 @@ public class UIHandler : MonoBehaviour
         return null;
     }
 
+
+    
 }

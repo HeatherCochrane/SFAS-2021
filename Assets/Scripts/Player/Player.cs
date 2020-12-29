@@ -196,6 +196,20 @@ public class Player : MonoBehaviour
                 }
             }
 
+            if(Input.GetKeyDown(KeyCode.M))
+            {
+                if (!uiHandler.getMapActive())
+                {
+                    uiHandler.showMap();
+                    setMovement(true);
+                }
+                else
+                {
+                    uiHandler.hideMap();
+                    setMovement(false);
+                }
+            }
+
             if (!stopMovement)
             {
                 if (Input.GetKeyDown(KeyCode.Space) && (isGrounded || !hasDoubleJumped))

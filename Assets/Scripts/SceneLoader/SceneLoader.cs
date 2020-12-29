@@ -28,6 +28,13 @@ public class SceneLoader : MonoBehaviour
                 Player.instance.transform.position = spawn.transform.position;
             }
         }
+
+        GameObject m = GameObject.FindGameObjectWithTag("MiniMap");
+
+        if (m != null)
+        {
+            Player.instance.uiHandler.setCurrentMap(m);
+        }
        
     }
 

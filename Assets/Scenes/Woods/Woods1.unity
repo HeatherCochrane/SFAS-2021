@@ -17013,6 +17013,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: MiniMap
       objectReference: {fileID: 0}
+    - target: {fileID: 1210905169103123731, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617113154058173330, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3646413858359670646, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 228
+      objectReference: {fileID: 0}
+    - target: {fileID: 3646413858359670646, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5192311902403586784, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -17057,6 +17073,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5211865471340848947, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_text
+      value: The Woods
+      objectReference: {fileID: 0}
+    - target: {fileID: 5211865471340848947, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_fontSize
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5211865471340848947, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5211865471340848947, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_margin.x
+      value: -27.696259
+      objectReference: {fileID: 0}
+    - target: {fileID: 6302629474411680184, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7875126436495691888, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
       propertyPath: m_Color.r
       value: 0
@@ -17068,6 +17104,14 @@ PrefabInstance:
     - target: {fileID: 7875126436495691888, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
       propertyPath: m_Color.b
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7875126437938146653, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_Antialiasing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7875126437938146653, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
+      propertyPath: m_RequiresOpaqueTextureOption
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7875126437938146655, guid: 2d4daf366911e7b4dab43bd6e18515d5, type: 3}
       propertyPath: orthographic size
