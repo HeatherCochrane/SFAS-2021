@@ -90,8 +90,8 @@ public class Killable : MonoBehaviour
 
         canvas.GetComponent<Canvas>().worldCamera = Camera.main;
 
-        boundsX = GetComponent<SpriteRenderer>().bounds.size.x / 3;
-        boundsY = GetComponent<SpriteRenderer>().bounds.size.y / 3;
+        boundsX = GetComponent<Collider2D>().bounds.size.x;
+        boundsY = GetComponent<Collider2D>().bounds.size.y;
         StartCoroutine("checkDistance");
     }
 

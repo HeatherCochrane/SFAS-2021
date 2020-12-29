@@ -28,6 +28,12 @@ public class QuestRequirements : MonoBehaviour
             {
                 destroyObject();
             }
+
+            //Check completed ones aswell as they move list when done
+            if (Player.instance.playerQuests.getCompletedQuests().Contains(quest))
+            {
+                destroyObject();
+            }
         }
     }
 
