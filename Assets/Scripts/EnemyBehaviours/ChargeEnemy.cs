@@ -19,14 +19,18 @@ public class ChargeEnemy : Killable
 
     float walkingSpeed = 2;
 
+    Vector2 scaleValue;
     private void Start()
     {
         base.Start();
+        scaleValue = transform.localScale;
+        changeAnimationStatesTrigger(AnimationStates.MOVING);
     }
 
     void stopCountdown()
     {
         onCooldown = false;
+        changeAnimationStatesTrigger(AnimationStates.MOVING);
     }
 
     private void FixedUpdate()
@@ -41,7 +45,9 @@ public class ChargeEnemy : Killable
             if (distX <= 5 && distY <= 1 && !charging && !onCooldown)
             {
                 dir = playerDir;
+                transform.localScale = new Vector3(playerDir * scaleValue.x, scaleValue.y, 0);
                 charging = true;
+                changeAnimationStatesTrigger(AnimationStates.CHARGE);
             }
 
             if (charging && !Player.instance.playerStatus.getRecentlyDamaged())
@@ -63,6 +69,8 @@ public class ChargeEnemy : Killable
                         onCooldown = true;
                         Invoke("stopCountdown", cooldownTime);
                     }
+
+                    changeAnimationStatesTrigger(AnimationStates.IDLE);
                 }
                 else if (chargeTime > 0)
                 {
@@ -88,6 +96,8 @@ public class ChargeEnemy : Killable
                         onCooldown = true;
                         Invoke("stopCountdown", cooldownTime);
                     }
+
+                    changeAnimationStatesTrigger(AnimationStates.IDLE);
                 }
 
                 rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -speedCap, speedCap), rb.velocity.y);
@@ -101,9 +111,12 @@ public class ChargeEnemy : Killable
         {
             dir *= -1;
             charging = false;
+            transform.localScale = new Vector3(dir * scaleValue.x, scaleValue.y, 0);
 
             if (!onCooldown)
             {
+
+                changeAnimationStatesTrigger(AnimationStates.IDLE);
                 onCooldown = true;
 
                 Invoke("stopCountdown", cooldownTime);

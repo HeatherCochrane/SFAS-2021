@@ -253,6 +253,9 @@ public class Killable : MonoBehaviour
             case AnimationStates.IDLE:
                 anim.SetTrigger("Idle");
                 break;
+            case AnimationStates.MOVING:
+                anim.SetTrigger("Moving");
+                break;
             default:
                 anim.SetBool("Idle", true);
                 break;
