@@ -599,8 +599,9 @@ public class Player : MonoBehaviour
     {
         if (collision.transform.tag == "Ground" && collision.contacts[0].normal.y >= 0.2f)
         {
+            hasDoubleJumped = true;
             isGrounded = true;
-            hasDoubleJumped = false;
+            jumpNum = 0;
             GetComponentInChildren<GrassEffect>().spawnGrass();
         }
 
