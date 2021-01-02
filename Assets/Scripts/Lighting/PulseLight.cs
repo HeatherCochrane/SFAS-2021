@@ -5,7 +5,6 @@ using UnityEngine.Experimental.Rendering.Universal;
 
 public class PulseLight : MonoBehaviour
 {
-    [SerializeField]
     Light2D lightObj;
 
     [SerializeField]
@@ -48,6 +47,7 @@ public class PulseLight : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        lightObj = GetComponent<Light2D>();
         StartCoroutine("pulsing");
     }
 

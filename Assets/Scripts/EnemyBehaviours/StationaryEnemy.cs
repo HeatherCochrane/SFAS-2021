@@ -37,20 +37,27 @@ public class StationaryEnemy : Killable
 
     void Attack()
     {
-        if (!Player.instance.playerStatus.getRecentlyDamaged())
+        if (!isDead)
         {
-            canAttack = false;
-
-            if (Player.instance.transform.position.x < transform.position.x)
+            if (!Player.instance.playerStatus.getRecentlyDamaged())
             {
-                changeAnimationStatesTrigger(AnimationStates.ATTACKLEFT);
-            }
-            else if (Player.instance.transform.position.x > transform.position.x)
-            {
-                changeAnimationStatesTrigger(AnimationStates.ATTACKRIGHT);
-            }
+                canAttack = false;
 
-            Invoke("allowAttack", timeBetweenAttacks);
+                if (Player.instance.transform.position.x < transform.position.x)
+                {
+                    changeAnimationStatesTrigger(AnimationStates.ATTACKLEFT);
+                }
+                else if (Player.instance.transform.position.x > transform.position.x)
+                {
+                    changeAnimationStatesTrigger(AnimationStates.ATTACKRIGHT);
+                }
+
+                Invoke("allowAttack", timeBetweenAttacks);
+            }
+        }
+        else
+        {
+            CancelInvoke();
         }
     }
 

@@ -145,7 +145,7 @@ public class BossEnemy : Killable
 
     void JumpAttack()
     {
-        changeAnimationStatesTrigger(AnimationStates.IDLE);
+        changeAnimationStatesTrigger(AnimationStates.JUMP);
 
         if (playerDir == -1)
         {

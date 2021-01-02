@@ -177,6 +177,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
+                    uiHandler.hideMap();
                     uiHandler.changeDoubleMenu(UIHandler.Menus.PLAYERUI, UIHandler.Menus.INVENTORY);
                     stopMovement = true;
                 }
@@ -280,24 +281,23 @@ public class Player : MonoBehaviour
                 if (!onAttackCooldown)
                 {
                     //Melee attack
-                    if (Input.GetMouseButtonDown(1) && meleeWeapon != null && !isAttacking && !playerStatus.getRecentlyDamaged())
+                    if (Input.GetMouseButtonDown(1) && meleeWeapon != null && !onAttackCooldown && !playerStatus.getRecentlyDamaged())
                     {
                         if ((Time.time - heldTime) < clickTime)
                         {
                             switchAnimation(AnimationStates.MELEEUP);
                             Attack(meleeWeapon.distance, meleeWeapon.damage);
-                            isAttacking = true;
                             onAttackCooldown = true;
                             Invoke("stopAttackCooldown", attackCooldown);
+                            rb.velocity += new Vector2(dir * 4, 0);
                         }
                     }
                     //Long Range Attack, hold down then release to fire
-                    if (Input.GetMouseButtonUp(0) && longRangeWeapon != null && !isAttacking && !playerStatus.getRecentlyDamaged())
+                    if (Input.GetMouseButtonUp(0) && longRangeWeapon != null && !onAttackCooldown && !playerStatus.getRecentlyDamaged())
                     {
                         if ((Time.time - heldTime) < clickTime)
                         {
                             switchAnimation(AnimationStates.RANGED);
-                            isAttacking = true;
                             onAttackCooldown = true;
                             Invoke("stopAttackCooldown", attackCooldown);
                         }

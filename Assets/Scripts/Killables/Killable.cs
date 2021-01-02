@@ -29,14 +29,16 @@ public class Killable : MonoBehaviour
                 distY *= -1;
             }
 
-            if (distX <=  boundsX && distY < boundsY)
+            if (!isDead)
             {
-                if (!Player.instance.playerStatus.getRecentlyDamaged())
+                if (distX <= boundsX && distY < boundsY)
                 {
-                    attackPlayer();
+                    if (!Player.instance.playerStatus.getRecentlyDamaged())
+                    {
+                        attackPlayer();
+                    }
                 }
             }
-
             yield return new WaitForEndOfFrame();
         }
     }
@@ -71,7 +73,7 @@ public class Killable : MonoBehaviour
 
     protected Animator anim;
 
-    public enum AnimationStates { IDLE, MOVING, ATTACK, DIE, ATTACKLEFT, ATTACKRIGHT, CHARGE};
+    public enum AnimationStates { IDLE, MOVING, ATTACK, DIE, ATTACKLEFT, ATTACKRIGHT, CHARGE, JUMP, DEATH};
     AnimationStates previous;
 
     [SerializeField]
@@ -171,7 +173,11 @@ public class Killable : MonoBehaviour
             }
 
 
-            Destroy(this.gameObject);
+            isDead = true;
+            changeAnimationStatesTrigger(AnimationStates.DEATH);
+
+            StopAllCoroutines();
+            CancelInvoke();
         }
     }
 
@@ -255,6 +261,12 @@ public class Killable : MonoBehaviour
                 break;
             case AnimationStates.MOVING:
                 anim.SetTrigger("Moving");
+                break;
+            case AnimationStates.JUMP:
+                anim.SetTrigger("Jump");
+                break;
+            case AnimationStates.DEATH:
+                anim.SetTrigger("Death");
                 break;
             default:
                 anim.SetBool("Idle", true);
