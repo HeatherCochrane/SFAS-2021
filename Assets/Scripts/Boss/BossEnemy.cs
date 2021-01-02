@@ -192,4 +192,12 @@ public class BossEnemy : Killable
             GetComponent<SpriteRenderer>().flipX = false;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.transform.tag == "Ground")
+        {
+            IdleAttack();
+        }
+    }
 }

@@ -100,6 +100,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     TrailRenderer dashTrail;
 
+    //Wall jump variables
+    bool canWallJump = true;
+    bool onWall = false;
+    bool jumpLeft = false;
+    bool ignorePlayerDir = false;
+
+
     [SerializeField]
     Animator anim;
 
@@ -213,18 +220,38 @@ public class Player : MonoBehaviour
 
             if (!stopMovement)
             {
+
                 if (Input.GetKeyDown(KeyCode.Space) && (isGrounded || !hasDoubleJumped))
                 {
-                    rb.velocity = new Vector2(rb.velocity.x, jump);
-                    isGrounded = false;
-                    switchAnimation(AnimationStates.JUMP);
-                    jumpNum += 1;
-
-                    if(jumpNum == 2)
+                    if (onWall)
                     {
-                        hasDoubleJumped = true;
+                        if(canWallJump)
+                        {
+                            rb.velocity = new Vector2(0, 0);
+                            if(jumpLeft)
+                            {
+                                rb.velocity = new Vector2(-jump * 10, jump);
+                            }
+                            else
+                            {
+                                rb.velocity = new Vector2(jump * 10, jump);
+                            }
+                        }
+                    }
+                    else
+                    {
+
+                        rb.velocity = new Vector2(rb.velocity.x, jump);
                         isGrounded = false;
-                        jumpNum = 0;
+                        switchAnimation(AnimationStates.JUMP);
+                        jumpNum += 1;
+
+                        if (jumpNum == 2)
+                        {
+                            hasDoubleJumped = true;
+                            isGrounded = false;
+                            jumpNum = 0;
+                        }
                     }
                 }
 
@@ -330,26 +357,29 @@ public class Player : MonoBehaviour
     {
         if (!stopMovement && trackInput && !isDashing && !isAttacking)
         {
-            if (Input.GetKey(KeyCode.D))
+            if (!ignorePlayerDir)
             {
-                rb.velocity += new Vector2(speed, 0);
-                facingLeft = false;
-                dir = 1;
-                playerSprites.transform.localScale = new Vector2(-0.3f, 0.3f);
-                isRunning = true;
-            }
-            else if (Input.GetKey(KeyCode.A))
-            {
-                rb.velocity -= new Vector2(speed, 0);
-                facingLeft = true;
-                dir = -1;
-                playerSprites.transform.localScale = new Vector2(0.3f, 0.3f);
-                isRunning = true;
+                if (Input.GetKey(KeyCode.D))
+                {
+                    rb.velocity += new Vector2(speed, 0);
+                    facingLeft = false;
+                    dir = 1;
+                    playerSprites.transform.localScale = new Vector2(-0.3f, 0.3f);
+                    isRunning = true;
+                }
+                else if (Input.GetKey(KeyCode.A))
+                {
+                    rb.velocity -= new Vector2(speed, 0);
+                    facingLeft = true;
+                    dir = -1;
+                    playerSprites.transform.localScale = new Vector2(0.3f, 0.3f);
+                    isRunning = true;
 
-            }
-            else
-            {
-                isRunning = false;
+                }
+                else
+                {
+                    isRunning = false;
+                }
             }
 
 
@@ -401,6 +431,8 @@ public class Player : MonoBehaviour
             }
         }
 
+
+       
         //Apply force when the player is falling 
         if (rb.velocity.y <= 0 && !isDashing)
         {
@@ -609,6 +641,11 @@ public class Player : MonoBehaviour
                 break;
         }
     }
+
+    void stopIgnoringPlayerDir()
+    {
+        ignorePlayerDir = false;
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.tag == "Ground" && collision.contacts[0].normal.y >= 0.2f)
@@ -616,6 +653,7 @@ public class Player : MonoBehaviour
             hasDoubleJumped = true;
             isGrounded = true;
             jumpNum = 0;
+            ignorePlayerDir = false;
             GetComponentInChildren<GrassEffect>().spawnGrass();
         }
 
@@ -623,6 +661,26 @@ public class Player : MonoBehaviour
         {
             inventory.adjustFunds(1);
             Destroy(collision.gameObject);
+        }
+
+        if (!isGrounded)
+        {
+            if (collision.transform.tag == "Ground" && collision.contacts[0].normal.x >= 0.2f || collision.contacts[0].normal.x <= 0.2f)
+            {
+                onWall = true;
+
+                if(collision.contacts[0].point.x < transform.position.x)
+                {
+                    jumpLeft = false;
+                }
+                else
+                {
+                    jumpLeft = true;
+                }
+              
+                ignorePlayerDir = true;
+                Invoke("stopIgnoringPlayerDir", 3);
+            }
         }
     }
 
@@ -632,6 +690,27 @@ public class Player : MonoBehaviour
         {
             isGrounded = true;
             hasDoubleJumped = false;
+            onWall = false; 
+        }
+
+        if (!isGrounded)
+        {
+            if (collision.transform.tag == "Ground" && collision.contacts[0].normal.x >= 0.2f || collision.contacts[0].normal.x <= 0.2f)
+            {
+                onWall = true;
+
+                if (collision.contacts[0].point.x < transform.position.x)
+                {
+                    jumpLeft = false;
+                }
+                else
+                {
+                    jumpLeft = true;
+                }
+
+                ignorePlayerDir = true;
+                Invoke("stopIgnoringPlayerDir", 3);
+            }
         }
     }
 
@@ -640,6 +719,7 @@ public class Player : MonoBehaviour
         if (collision.transform.tag == "Ground")
         {
             isGrounded = false;
+            onWall = false;
             Invoke("checkGrounded", 0.5f);
         }
     }
