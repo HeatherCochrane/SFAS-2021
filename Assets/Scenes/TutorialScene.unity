@@ -28877,7 +28877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2752339633440666741, guid: f9c2b33c650a81e48b54147f8e20c226, type: 3}
       propertyPath: spawn
-      value: Tutorial
+      value: First
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9c2b33c650a81e48b54147f8e20c226, type: 3}

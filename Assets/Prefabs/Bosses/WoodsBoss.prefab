@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 8329799387906204368}
   - component: {fileID: 8329799387906204375}
   m_Layer: 0
-  m_Name: BossArea
+  m_Name: WoodsBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -287,6 +287,14 @@ PrefabInstance:
       propertyPath: drop
       value: 
       objectReference: {fileID: 1352139649}
+    - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
+      propertyPath: chargeSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
+      propertyPath: range
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480571, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: m_Name
       value: BossEnemy

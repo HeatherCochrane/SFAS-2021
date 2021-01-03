@@ -75,6 +75,7 @@ public class Killable : MonoBehaviour
 
     public enum AnimationStates { IDLE, MOVING, ATTACK, DIE, ATTACKLEFT, ATTACKRIGHT, CHARGE, JUMP, DEATH};
     AnimationStates previous;
+    AnimationStates current;
 
     [SerializeField]
     GameObject canvas;
@@ -233,6 +234,7 @@ public class Killable : MonoBehaviour
                 break;
         }
 
+        current = a;
         previous = a;
 
     }
@@ -273,6 +275,7 @@ public class Killable : MonoBehaviour
                 break;
         }
 
+        current = a;
         previous = a;
     }
 
@@ -299,5 +302,10 @@ public class Killable : MonoBehaviour
                 Debug.Log("SAME ARROW COLLISION");
             }
         }
+    }
+
+    public AnimationStates getCurrentState()
+    {
+        return current;
     }
 }

@@ -228,19 +228,23 @@ public class Player : MonoBehaviour
                         if(canWallJump)
                         {
                             rb.velocity = new Vector2(0, 0);
+
                             if(jumpLeft)
                             {
                                 rb.velocity = new Vector2(-jump * 10, jump);
+                                playerSprites.transform.localScale = new Vector2(0.3f, 0.3f);
                             }
                             else
                             {
                                 rb.velocity = new Vector2(jump * 10, jump);
+                                playerSprites.transform.localScale = new Vector2(-0.3f, 0.3f);
                             }
+
+                            isGrounded = false;
                         }
                     }
                     else
-                    {
-
+                    {        
                         rb.velocity = new Vector2(rb.velocity.x, jump);
                         isGrounded = false;
                         switchAnimation(AnimationStates.JUMP);
@@ -455,6 +459,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void setIsGrounded()
+    {
+        isGrounded = true;
+        ignorePlayerDir = false;
+        onWall = false;
+    }
     void resetAnimations()
     {
         foreach (AnimatorControllerParameter parameter in anim.parameters)
@@ -646,14 +656,24 @@ public class Player : MonoBehaviour
     {
         ignorePlayerDir = false;
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.tag == "Ground" && collision.contacts[0].normal.y >= 0.2f)
+        if (collision.transform.tag == "Ground")
         {
-            hasDoubleJumped = true;
-            isGrounded = true;
-            jumpNum = 0;
-            ignorePlayerDir = false;
+            foreach(ContactPoint2D c in collision.contacts)
+            {
+                if(c.normal.y >= 0.2f)
+                {
+                    hasDoubleJumped = true;
+                    isGrounded = true;
+                    jumpNum = 0;
+                    ignorePlayerDir = false;
+                    onWall = false;
+                }
+            }
+          
+            CancelInvoke("stopIgnoringPlayerDir");
             GetComponentInChildren<GrassEffect>().spawnGrass();
         }
 
@@ -665,11 +685,11 @@ public class Player : MonoBehaviour
 
         if (!isGrounded)
         {
-            if (collision.transform.tag == "Ground" && collision.contacts[0].normal.x >= 0.2f || collision.contacts[0].normal.x <= 0.2f)
+            if (collision.transform.tag == "Ground")
             {
                 onWall = true;
 
-                if(collision.contacts[0].point.x < transform.position.x)
+                if (collision.contacts[0].point.x < transform.position.x)
                 {
                     jumpLeft = false;
                 }
@@ -677,7 +697,7 @@ public class Player : MonoBehaviour
                 {
                     jumpLeft = true;
                 }
-              
+
                 ignorePlayerDir = true;
                 Invoke("stopIgnoringPlayerDir", 3);
             }
@@ -690,12 +710,16 @@ public class Player : MonoBehaviour
         {
             isGrounded = true;
             hasDoubleJumped = false;
-            onWall = false; 
+            onWall = false;
+            ignorePlayerDir = false;
+            onWall = false;
+                      
+            CancelInvoke("stopIgnoringPlayerDir");
         }
 
-        if (!isGrounded)
+         if (!isGrounded)
         {
-            if (collision.transform.tag == "Ground" && collision.contacts[0].normal.x >= 0.2f || collision.contacts[0].normal.x <= 0.2f)
+            if (collision.transform.tag == "Ground")
             {
                 onWall = true;
 

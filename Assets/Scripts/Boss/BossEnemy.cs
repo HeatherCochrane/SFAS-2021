@@ -22,7 +22,7 @@ public class BossEnemy : Killable
         }
     }
 
-    public enum Attacks { JumpAttack, IdleAttack, ChargeAttack, ProjectileAttack, DecideNextAttack}
+    public enum Attacks { JumpAttack, IdleAttack, ChargeAttack, ProjectileAttack, DecideNextAttack, MultipleProjectiles}
 
     [System.Serializable]
     public struct BossAttacks
@@ -39,10 +39,13 @@ public class BossEnemy : Killable
     float minDistance = 1;
 
     bool isCharging = false;
+    [SerializeField]
     float chargeSpeed = 7.5f;
     int chargeDir = 1;
     float chargeTime = 1;
 
+    [SerializeField]
+    int range = 0;
     int choice = 0;
 
     [SerializeField]
@@ -62,6 +65,7 @@ public class BossEnemy : Killable
     [SerializeField]
     public BossScene.BossNames bossName;
 
+    int multipleCount = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -169,10 +173,24 @@ public class BossEnemy : Killable
         changeAnimationStatesTrigger(AnimationStates.ATTACK);
     }
 
+    void MultipleProjectiles()
+    {
+        if (multipleCount != 3)
+        {
+            changeAnimationStatesTrigger(AnimationStates.ATTACK);
+            Invoke("MultipleProjectiles", 1);
+            multipleCount += 1;
+        }
+        else
+        {
+            multipleCount = 0;
+        }
+    }
+
     void ShootProjectile()
     {
         newProjectile = Instantiate(projectile);
-        newProjectile.GetComponent<Arrow>().setDirection(playerDir, 10);
+        newProjectile.GetComponent<Arrow>().setDirection(playerDir, range);
         newProjectile.transform.position = this.transform.position - new Vector3(0, 1, 0);
     }
 
@@ -197,7 +215,14 @@ public class BossEnemy : Killable
     {
         if(collision.transform.tag == "Ground")
         {
-            IdleAttack();
+            if(collision.contacts[0].normal.y <= 0.2f && getCurrentState() != AnimationStates.IDLE)
+            {
+                IdleAttack();
+            }
+            else if (getCurrentState() == AnimationStates.JUMP)
+            {
+                IdleAttack();
+            }
         }
     }
 }
