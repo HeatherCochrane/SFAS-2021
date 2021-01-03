@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
     TrailRenderer dashTrail;
 
     //Wall jump variables
-    bool canWallJump = true;
+    bool canWallJump = false;
     bool onWall = false;
     bool jumpLeft = false;
     bool ignorePlayerDir = false;
@@ -637,6 +637,11 @@ public class Player : MonoBehaviour
         canDash = set;
     }
 
+    public void setWallJump(bool set)
+    {
+        canWallJump = set;
+    }
+
     public int getRangedDamage()
     {
         return longRangeWeapon.damage;
@@ -648,6 +653,9 @@ public class Player : MonoBehaviour
         {
             case BossDrops.PlayerAbilities.DASH:
                 setDash(true);
+                break;
+            case BossDrops.PlayerAbilities.WALLJUMP:
+                setWallJump(true);
                 break;
         }
     }
