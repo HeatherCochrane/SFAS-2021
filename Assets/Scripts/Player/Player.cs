@@ -695,19 +695,23 @@ public class Player : MonoBehaviour
         {
             if (collision.transform.tag == "Ground")
             {
-                onWall = true;
-
-                if (collision.contacts[0].point.x < transform.position.x)
+                if (collision.contacts.Length > 0)
                 {
-                    jumpLeft = false;
-                }
-                else
-                {
-                    jumpLeft = true;
-                }
+                    onWall = true;
 
-                ignorePlayerDir = true;
-                Invoke("stopIgnoringPlayerDir", 3);
+                    if (collision.contacts[0].point.x < transform.position.x)
+                    {
+                        jumpLeft = false;
+                    }
+                    else
+                    {
+                        jumpLeft = true;
+                    }
+
+
+                    ignorePlayerDir = true;
+                    Invoke("stopIgnoringPlayerDir", 3);
+                }
             }
         }
     }
@@ -751,9 +755,14 @@ public class Player : MonoBehaviour
         if (collision.transform.tag == "Ground")
         {
             isGrounded = false;
-            onWall = false;
+            Invoke("notOnWall", 0.5f);
             Invoke("checkGrounded", 0.5f);
         }
+    }
+
+    void notOnWall()
+    {
+        onWall = false;
     }
 
     void checkGrounded()

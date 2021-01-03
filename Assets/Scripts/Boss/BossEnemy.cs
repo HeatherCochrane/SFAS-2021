@@ -215,7 +215,7 @@ public class BossEnemy : Killable
     {
         if(collision.transform.tag == "Ground")
         {
-            if(collision.contacts[0].normal.y <= 0.2f && getCurrentState() != AnimationStates.IDLE)
+            if(collision.contacts[0].normal.x >= 0.2f && getCurrentState() != AnimationStates.IDLE)
             {
                 IdleAttack();
             }
