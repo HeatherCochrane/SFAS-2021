@@ -20,7 +20,6 @@ public class ObliviousEnemy : Killable
         {
             transform.position += new Vector3(speed * dir * Time.deltaTime, 0);
 
-
             if (distX < 1 && distY < 1)
             {
                 attackPlayer();
@@ -33,6 +32,15 @@ public class ObliviousEnemy : Killable
         if (collision.transform.tag == "Obstacle")
         {
             dir *= -1;
+
+            if(dir == 1)
+            {
+                transform.localScale = new Vector2(0.5f, 0.5f);
+            }
+            else
+            {
+                transform.localScale = new Vector2(-0.5f, 0.5f);
+            }
         }
     }
 

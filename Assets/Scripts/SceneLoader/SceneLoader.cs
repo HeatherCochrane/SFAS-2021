@@ -49,7 +49,7 @@ public class SceneLoader : MonoBehaviour
         public Particle particleEffect;
     }
 
-    public enum Particle { GRASS, SNOW, NONE};
+    public enum Particle { GRASS, SNOW, JUNGLE, NONE};
     [SerializeField]
     List<SceneData> AllSceneData = new List<SceneData>();
 

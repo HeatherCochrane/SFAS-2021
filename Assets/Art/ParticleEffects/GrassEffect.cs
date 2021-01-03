@@ -10,6 +10,9 @@ public class GrassEffect : MonoBehaviour
     [SerializeField]
     GameObject snowParticles;
 
+    [SerializeField]
+    GameObject jungleParticles;
+
     GameObject newGrass;
 
     public void spawnGrass()
@@ -23,6 +26,10 @@ public class GrassEffect : MonoBehaviour
             else if (Player.instance.sceneLoader.getCurrentScene().particleEffect == SceneLoader.Particle.SNOW)
             {
                 newGrass = Instantiate(snowParticles);
+            }
+            else if(Player.instance.sceneLoader.getCurrentScene().particleEffect == SceneLoader.Particle.JUNGLE)
+            {
+                newGrass = Instantiate(jungleParticles);
             }
 
 
