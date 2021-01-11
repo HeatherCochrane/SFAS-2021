@@ -72,21 +72,30 @@ public class UIHandler : MonoBehaviour
             allActiveMenus[i].obj.SetActive(false);
         }
 
-       currentMap.SetActive(true);
+        if (currentMap != null)
+        {
+            currentMap.SetActive(true);
+        }
     }
 
     public void hideMap()
     {
-        currentMap.SetActive(false);
+        if (currentMap != null)
+        {
+            currentMap.SetActive(false);
+        }
 
         changeMenu(Menus.PLAYERUI);
     }
 
     public bool getMapActive()
     {
-        if(currentMap.activeSelf)
+        if (currentMap != null)
         {
-            return true;
+            if (currentMap.activeSelf)
+            {
+                return true;
+            }
         }
 
         return false;
@@ -98,10 +107,14 @@ public class UIHandler : MonoBehaviour
         {
             if (allActiveMenus[i].obj != null)
             {
-                if (allActiveMenus[i].name == n || allActiveMenus[i].name == m)
+                if (allActiveMenus[i].name == n)
                 {
                     allActiveMenus[i].obj.SetActive(true);
                     currentMenu = n;
+                }
+                else if(allActiveMenus[i].name == m)
+                {
+                    allActiveMenus[i].obj.SetActive(true);
                     currentMenu2 = m;
                 }
                 else

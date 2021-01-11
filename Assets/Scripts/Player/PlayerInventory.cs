@@ -38,8 +38,6 @@ public class PlayerInventory : MonoBehaviour
     GameObject infoBox;
 
     [SerializeField]
-    Image itemSprite;
-    [SerializeField]
     TextMeshProUGUI itemName;
     [SerializeField]
     TextMeshProUGUI itemEffect;
@@ -293,8 +291,6 @@ public class PlayerInventory : MonoBehaviour
 
     public void showItemInfoBox(Sprite s, string name, string damage, string range, string price, InventorySlot slot, bool equipable, bool droppable)
     {
-        itemSprite.gameObject.SetActive(true);
-        itemSprite.sprite = s;
         itemName.gameObject.SetActive(true);
         itemName.text = name;
         itemEffect.gameObject.SetActive(true);
@@ -306,7 +302,6 @@ public class PlayerInventory : MonoBehaviour
 
         if (currentTrader != null)
         {
-            itemSprite.gameObject.SetActive(true);
             itemEquip.gameObject.SetActive(false);
             itemDrop.gameObject.SetActive(false);
             itemSell.gameObject.SetActive(true);
@@ -339,6 +334,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 itemDrop.gameObject.SetActive(false);
             }
+
             itemSell.gameObject.SetActive(false);
             itemSellAll.gameObject.SetActive(false);
         }
@@ -348,7 +344,6 @@ public class PlayerInventory : MonoBehaviour
 
     public void emptyInfoBox()
     {
-        itemSprite.gameObject.SetActive(false);
         itemName.gameObject.SetActive(false);
         itemEffect.gameObject.SetActive(false);
         itemRange.gameObject.SetActive(false);

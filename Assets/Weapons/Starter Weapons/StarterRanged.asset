@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f660969ab37e654b8eda9cc1fe76641, type: 3}
   m_Name: StarterRanged
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 82878f3f86eacce49bcb653de90cca65, type: 3}
+  itemSprite: {fileID: 21300000, guid: 966b9dcff166eb34d9971c07f49c4b14, type: 3}
   buyPrice: 10
   sellPrice: 5
   worldObject: {fileID: 1874821832968600517, guid: 6c492e938e0dc2b449f58b915dda3dcf, type: 3}

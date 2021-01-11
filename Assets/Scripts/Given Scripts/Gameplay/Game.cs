@@ -198,5 +198,6 @@ public class Game : MonoBehaviour
     public void closeDialogueScreen()
     {
         Player.instance.uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
+        Player.instance.setInventoryToggle(false);
     }
 }
