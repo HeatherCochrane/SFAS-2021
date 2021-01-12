@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BossKill1
   m_EditorClassIdentifier: 
   questName: Kiwi's Quest
+  questDescription: Slay the beast located within the woods.
   questsCompleted: []
   totalKillsNeeded: []
   bossName: 0

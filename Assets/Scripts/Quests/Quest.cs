@@ -8,6 +8,9 @@ public class Quest : ScriptableObject
     [SerializeField]
     public string questName;
 
+    [SerializeField]
+    public string questDescription;
+
     [System.Serializable]
     public struct Kills
     {
