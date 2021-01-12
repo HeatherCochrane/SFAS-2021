@@ -25,7 +25,7 @@ public class StationaryEnemy : Killable
         //change to canAttack to allow attacking
         if (!isDead)
         {
-            if (canAttack && !Player.instance.getIfHidden())
+            if (canAttack)
             {
                 if (distX <= maxDistance && distY <= 1)
                 {

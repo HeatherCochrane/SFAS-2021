@@ -228,6 +228,18 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3380540905005089763, guid: 8c912b4b44ee09b488ae0d13eefc2c64, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3380540905005089763, guid: 8c912b4b44ee09b488ae0d13eefc2c64, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3380540905005089763, guid: 8c912b4b44ee09b488ae0d13eefc2c64, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 3380540905686993840, guid: 8c912b4b44ee09b488ae0d13eefc2c64, type: 3}
       propertyPath: spawn
       value: First
@@ -350,7 +362,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf971a6fa080f640be9a0fc5c9bb5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightObj: {fileID: 495666779}
   min: 0.1
   max: 0.4
 --- !u!114 &76422190
@@ -573,6 +584,67 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forward: 1
+--- !u!1001 &104585791
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 172417708998053736, guid: f6bef097e8d253c4c99310acde29c753, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 172417708998053737, guid: f6bef097e8d253c4c99310acde29c753, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 172417708998053737, guid: f6bef097e8d253c4c99310acde29c753, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 172417708998053737, guid: f6bef097e8d253c4c99310acde29c753, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 172417708998053737, guid: f6bef097e8d253c4c99310acde29c753, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 172417708998053737, guid: f6bef097e8d253c4c99310acde29c753, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 172417708998053737, guid: f6bef097e8d253c4c99310acde29c753, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 172417708998053737, guid: f6bef097e8d253c4c99310acde29c753, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 172417708998053737, guid: f6bef097e8d253c4c99310acde29c753, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 172417708998053737, guid: f6bef097e8d253c4c99310acde29c753, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 172417708998053737, guid: f6bef097e8d253c4c99310acde29c753, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 172417708998053737, guid: f6bef097e8d253c4c99310acde29c753, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 172417708998053742, guid: f6bef097e8d253c4c99310acde29c753, type: 3}
+      propertyPath: m_Name
+      value: SnowParticles 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f6bef097e8d253c4c99310acde29c753, type: 3}
 --- !u!1 &116883727
 GameObject:
   m_ObjectHideFlags: 0
@@ -11385,7 +11457,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf971a6fa080f640be9a0fc5c9bb5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightObj: {fileID: 495666779}
   min: 0.1
   max: 0.4
 --- !u!114 &439848593
@@ -11596,7 +11667,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf971a6fa080f640be9a0fc5c9bb5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightObj: {fileID: 495666779}
   min: 0.1
   max: 0.4
 --- !u!4 &495666781
@@ -13537,7 +13607,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf971a6fa080f640be9a0fc5c9bb5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightObj: {fileID: 495666779}
   min: 0.1
   max: 0.4
 --- !u!114 &841729623
@@ -13625,7 +13694,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf971a6fa080f640be9a0fc5c9bb5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightObj: {fileID: 495666779}
   min: 0.1
   max: 0.4
 --- !u!114 &861625477
@@ -14074,7 +14142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf971a6fa080f640be9a0fc5c9bb5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightObj: {fileID: 495666779}
   min: 0.1
   max: 0.4
 --- !u!114 &1016868525
@@ -14340,7 +14407,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf971a6fa080f640be9a0fc5c9bb5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightObj: {fileID: 495666779}
   min: 0.1
   max: 0.4
 --- !u!114 &1100300861
@@ -14874,7 +14940,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf971a6fa080f640be9a0fc5c9bb5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightObj: {fileID: 495666779}
   min: 0.1
   max: 0.4
 --- !u!114 &1266778136
@@ -15127,7 +15192,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf971a6fa080f640be9a0fc5c9bb5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightObj: {fileID: 495666779}
   min: 0.1
   max: 0.4
 --- !u!114 &1415595990
@@ -15407,7 +15471,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf971a6fa080f640be9a0fc5c9bb5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightObj: {fileID: 495666779}
   min: 0.1
   max: 0.4
 --- !u!114 &1509369363
@@ -16140,6 +16203,18 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3380540905005089763, guid: 8c912b4b44ee09b488ae0d13eefc2c64, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3380540905005089763, guid: 8c912b4b44ee09b488ae0d13eefc2c64, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3380540905005089763, guid: 8c912b4b44ee09b488ae0d13eefc2c64, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 3380540905686993840, guid: 8c912b4b44ee09b488ae0d13eefc2c64, type: 3}
       propertyPath: spawn
       value: Third
@@ -16419,7 +16494,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf971a6fa080f640be9a0fc5c9bb5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightObj: {fileID: 495666779}
   min: 0.1
   max: 0.4
 --- !u!114 &1948616709
@@ -16507,7 +16581,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf971a6fa080f640be9a0fc5c9bb5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightObj: {fileID: 495666779}
   min: 0.1
   max: 0.4
 --- !u!114 &1982565335

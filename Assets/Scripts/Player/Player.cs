@@ -83,11 +83,6 @@ public class Player : MonoBehaviour
     Vector2 maxHorizontal;
     Vector2 maxVertical;
 
-    bool isHidden = false;
-
-    bool canHide = true;
-    float cooldown = 10f;
-
     //Dash Variables
     bool canDash = true;
     float dashAmount = 50f;
@@ -101,9 +96,7 @@ public class Player : MonoBehaviour
     TrailRenderer dashTrail;
 
     //Wall jump variables
-    bool canWallJump = false;
-    bool onWall = false;
-    bool jumpLeft = false;
+    bool canWallJump = true;
     bool ignorePlayerDir = false;
 
 
@@ -220,31 +213,49 @@ public class Player : MonoBehaviour
 
             if (!stopMovement)
             {
-
                 if (Input.GetKeyDown(KeyCode.Space) && (isGrounded || !hasDoubleJumped))
                 {
-                    if (onWall)
+                    if (canWallJump && !isGrounded)
                     {
-                        if(canWallJump)
+                        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, GetComponent<Collider2D>().bounds.size.x);
+                        RaycastHit2D hit2 = Physics2D.Raycast(transform.position, -Vector2.right, GetComponent<Collider2D>().bounds.size.x);
+                        rb.velocity = new Vector2(0, 0);
+
+                        if (hit.collider != null)
                         {
-                            rb.velocity = new Vector2(0, 0);
+                            rb.velocity = new Vector2(-jump * 10, jump);
+                            playerSprites.transform.localScale = new Vector2(0.3f, 0.3f);
 
-                            if(jumpLeft)
-                            {
-                                rb.velocity = new Vector2(-jump * 10, jump);
-                                playerSprites.transform.localScale = new Vector2(0.3f, 0.3f);
-                            }
-                            else
-                            {
-                                rb.velocity = new Vector2(jump * 10, jump);
-                                playerSprites.transform.localScale = new Vector2(-0.3f, 0.3f);
-                            }
-
-                            isGrounded = false;
+                            ignorePlayerDir = true;
+                            Invoke("stopIgnoringPlayerDir", 4);
                         }
+                        else if (hit2.collider != null)
+                        {
+                            rb.velocity = new Vector2(jump * 10, jump);
+                            playerSprites.transform.localScale = new Vector2(-0.3f, 0.3f);
+
+                            ignorePlayerDir = true;
+                            Invoke("stopIgnoringPlayerDir", 4);
+                        }
+                        else
+                        {
+                            rb.velocity = new Vector2(rb.velocity.x, jump);
+                            isGrounded = false;
+                            switchAnimation(AnimationStates.JUMP);
+                            jumpNum += 1;
+
+                            if (jumpNum == 2)
+                            {
+                                hasDoubleJumped = true;
+                                isGrounded = false;
+                                jumpNum = 0;
+                            }
+                        }
+
+                        isGrounded = false;
                     }
                     else
-                    {        
+                    {
                         rb.velocity = new Vector2(rb.velocity.x, jump);
                         isGrounded = false;
                         switchAnimation(AnimationStates.JUMP);
@@ -333,11 +344,6 @@ public class Player : MonoBehaviour
                             Invoke("stopAttackCooldown", attackCooldown);
                         }
 
-                    }
-
-                    if (Input.GetMouseButton(2) && canHide)
-                    {
-                        startHiding();
                     }
                 }
             }
@@ -463,7 +469,6 @@ public class Player : MonoBehaviour
     {
         isGrounded = true;
         ignorePlayerDir = false;
-        onWall = false;
     }
     void resetAnimations()
     {
@@ -525,24 +530,6 @@ public class Player : MonoBehaviour
         isAttacking = false;
     }
 
-    void startHiding()
-    {
-        canHide = false;
-        isHidden = true;
-        Invoke("stopHiding", 3);
-    }
-
-    void stopHiding()
-    {
-        isHidden = false;
-        Invoke("stopCooldown", cooldown);
-    }
-
-    void stopCooldown()
-    {
-        canHide = true;
-    }
-
     public void setDashing(bool set)
     {
         dashCooldown = set;
@@ -581,11 +568,6 @@ public class Player : MonoBehaviour
     public void setInventoryToggle(bool set)
     {
         stopInventoryToggle = set;
-    }
-
-    public bool getIfHidden()
-    {
-        return isHidden;
     }
 
     public void spawnArrow()
@@ -677,7 +659,6 @@ public class Player : MonoBehaviour
                     isGrounded = true;
                     jumpNum = 0;
                     ignorePlayerDir = false;
-                    onWall = false;
                 }
             }
           
@@ -690,30 +671,6 @@ public class Player : MonoBehaviour
             inventory.adjustFunds(1);
             Destroy(collision.gameObject);
         }
-
-        if (!isGrounded)
-        {
-            if (collision.transform.tag == "Ground")
-            {
-                if (collision.contacts.Length > 0)
-                {
-                    onWall = true;
-
-                    if (collision.contacts[0].point.x < transform.position.x)
-                    {
-                        jumpLeft = false;
-                    }
-                    else
-                    {
-                        jumpLeft = true;
-                    }
-
-
-                    ignorePlayerDir = true;
-                    Invoke("stopIgnoringPlayerDir", 3);
-                }
-            }
-        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -722,31 +679,9 @@ public class Player : MonoBehaviour
         {
             isGrounded = true;
             hasDoubleJumped = false;
-            onWall = false;
             ignorePlayerDir = false;
-            onWall = false;
                       
             CancelInvoke("stopIgnoringPlayerDir");
-        }
-
-         if (!isGrounded)
-        {
-            if (collision.transform.tag == "Ground")
-            {
-                onWall = true;
-
-                if (collision.contacts[0].point.x < transform.position.x)
-                {
-                    jumpLeft = false;
-                }
-                else
-                {
-                    jumpLeft = true;
-                }
-
-                ignorePlayerDir = true;
-                Invoke("stopIgnoringPlayerDir", 3);
-            }
         }
     }
 
@@ -755,14 +690,8 @@ public class Player : MonoBehaviour
         if (collision.transform.tag == "Ground")
         {
             isGrounded = false;
-            Invoke("notOnWall", 0.5f);
             Invoke("checkGrounded", 0.5f);
         }
-    }
-
-    void notOnWall()
-    {
-        onWall = false;
     }
 
     void checkGrounded()
