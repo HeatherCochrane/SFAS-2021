@@ -201,8 +201,10 @@ public class Player : MonoBehaviour
             {
                 if (!uiHandler.getMapActive())
                 {
-                    uiHandler.showMap();
-                    setMovement(true);
+                    if (uiHandler.showMap())
+                    {
+                        setMovement(true);
+                    }
                 }
                 else
                 {

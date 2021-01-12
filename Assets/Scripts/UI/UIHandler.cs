@@ -65,17 +65,24 @@ public class UIHandler : MonoBehaviour
         currentMap.SetActive(false);
     }
 
-    public void showMap()
+    public bool showMap()
     {
-        for (int i = 0; i < allActiveMenus.Count; i++)
-        {
-            allActiveMenus[i].obj.SetActive(false);
-        }
-
         if (currentMap != null)
         {
-            currentMap.SetActive(true);
+            for (int i = 0; i < allActiveMenus.Count; i++)
+            {
+                allActiveMenus[i].obj.SetActive(false);
+            }
+
+            if (currentMap != null)
+            {
+                currentMap.SetActive(true);
+            }
+
+            return true;
         }
+
+        return false;
     }
 
     public void hideMap()
