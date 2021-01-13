@@ -541,6 +541,7 @@ public class Player : MonoBehaviour
     {
         //Pass in the characters dialogue data to begin the conversation
         uiHandler.changeMenu(UIHandler.Menus.DIALOGUE);
+
         dialogue.startNewDialogue(character.getData().getDialogue(index), character.getData().getCharacterSprite(), character.getData().getName(), uiHandler.getMenuObject(UIHandler.Menus.DIALOGUE));
         stopMovement = true;
         stopInventoryToggle = true;

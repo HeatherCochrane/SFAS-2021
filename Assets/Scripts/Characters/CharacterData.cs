@@ -22,9 +22,14 @@ public class CharacterData : ScriptableObject
             int ran = Random.Range(1, dialogue.Count);
             return dialogue[ran];
         }
+
         return dialogue[0];
     }
 
+    public int getDialogueCount()
+    {
+        return dialogue.Count;
+    }
     public string getName()
     {
         return characterName;

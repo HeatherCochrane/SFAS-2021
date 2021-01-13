@@ -30,10 +30,14 @@ public class Game : MonoBehaviour
 
     [SerializeField]
     TextMeshProUGUI characterName;
+
+    [SerializeField]
+    GameObject closeButton;
     private void OnEnable()
     {
         _currentBeat = null;
         _wait = new WaitForSeconds(0.5f);
+        closeButton.SetActive(false);
     }
 
     private void Update()
@@ -156,7 +160,7 @@ public class Game : MonoBehaviour
 
         if (data.getChoiceList().Count == 0)
         {
-            Invoke("leaveDialogue", 0.5f);
+            closeButton.SetActive(true);
         }
 
     }
@@ -188,6 +192,7 @@ public class Game : MonoBehaviour
         _currentBeat = null;
         dialogueFinished = true;
         _output.Clear();
+        closeButton.SetActive(false);
 
 
         Player.instance.setMovement(false);

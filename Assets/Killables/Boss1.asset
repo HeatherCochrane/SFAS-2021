@@ -17,5 +17,5 @@ MonoBehaviour:
   - drop: {fileID: 4040289308730173822, guid: dbff7ab1c659d4140b6a59e1fe9e3c04, type: 3}
     amount: 2
   - drop: {fileID: 7319180011277340677, guid: bb241e2f45c82894596ec9154c2b2946, type: 3}
-    amount: 8
+    amount: 10
   species: 0
