@@ -160,11 +160,15 @@ public class Game : MonoBehaviour
 
         if (data.getChoiceList().Count == 0)
         {
-            closeButton.SetActive(true);
+            Invoke("showCloseButton", 1);
         }
 
     }
 
+    void showCloseButton()
+    {
+        closeButton.SetActive(true);
+    }
     private IEnumerator DoDisplay(BeatData data)
     {
         _output.Clear();
