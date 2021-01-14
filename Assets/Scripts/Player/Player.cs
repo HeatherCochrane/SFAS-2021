@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     public float smoothing = 2f;
     Vector3 offset;
     Vector3 camPos;
+    Vector3 targetCamPos;
 
     //Player weapons
     Weapon meleeWeapon;
@@ -458,9 +459,23 @@ public class Player : MonoBehaviour
 
     void LateUpdate()
     {
+        
         if (playerControlled)
         {
-            Vector3 targetCamPos = new Vector3(this.transform.position.x + offset.x, this.transform.position.y + offset.y, this.transform.position.z + offset.z);
+
+            if (Input.GetKey(KeyCode.S))
+            {
+                targetCamPos = new Vector3(transform.position.x + offset.x, transform.position.y +( offset.y - 3), transform.position.z + offset.z);
+            }
+            else if(Input.GetKey(KeyCode.W))
+            {
+                targetCamPos = new Vector3(transform.position.x + offset.x, transform.position.y + (offset.y + 2), transform.position.z + offset.z);
+            }
+            else
+            {
+                targetCamPos = new Vector3(this.transform.position.x + offset.x, this.transform.position.y + offset.y, this.transform.position.z + offset.z);
+            }
+
             cam.transform.position = Vector3.Lerp(cam.transform.position, targetCamPos, smoothing * Time.deltaTime);
 
             cam.transform.position = new Vector3(Mathf.Clamp(cam.transform.position.x, maxHorizontal.x, maxHorizontal.y), Mathf.Clamp(cam.transform.position.y, maxVertical.x, maxVertical.y), cam.transform.position.z);
