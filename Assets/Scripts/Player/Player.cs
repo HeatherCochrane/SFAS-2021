@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 
 public class Player : MonoBehaviour
 {
@@ -56,6 +58,7 @@ public class Player : MonoBehaviour
     //Rigidbody
     Rigidbody2D rb;
     bool isRunning = false;
+    Vector2 moveDirection;
 
     //Fall multiplier
     [SerializeField]
@@ -131,6 +134,7 @@ public class Player : MonoBehaviour
     bool onAttackCooldown = false;
 
     bool playerControlled = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -158,47 +162,63 @@ public class Player : MonoBehaviour
         dashTrail.gameObject.SetActive(false);
     }
 
-
     public void setInput(bool set)
     {
         trackInput = set;
     }
 
-    // Update is called once per frame
-    void Update()
+    void stopAttackCooldown()
     {
-        if (trackInput)
+        onAttackCooldown = false;
+    }
+
+    public void OnInteract(CallbackContext ctx)
+    {
+        if (ctx.performed)
         {
-            if (Input.GetKeyDown(KeyCode.Q) && !stopInventoryToggle)
+            if (!stopMovement && trackInput)
             {
-                if (uiHandler.getInMenu(UIHandler.Menus.INVENTORY))
+                if (character != null)
                 {
-                    uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
-                    stopMovement = false;
+                    uiHandler.changeMenu(UIHandler.Menus.DIALOGUE);
+
+                    if (!data.hasBeenTalkedTo(character))
+                    {
+                        beginConversation(0);
+                    }
+                    else
+                    {
+                        beginConversation(-1);
+                    }
+
+                    data.addCharacter(character);
+                    character = null;
                 }
-                else
+                else if (trader != null)
                 {
-                    uiHandler.hideMap();
-                    uiHandler.changeDoubleMenu(UIHandler.Menus.PLAYERUI, UIHandler.Menus.INVENTORY);
-                    stopMovement = true;
+                    uiHandler.changeMenu(UIHandler.Menus.TRADER);
+                    beginTrading();
+                    trader = null;
+                }
+                else if (pickUp != null)
+                {
+                    pickUpItem();
+                    pickUp = null;
+                }
+                else if (currentBuilding != null)
+                {
+                    sceneLoader.switchScene(currentBuilding.getSceneName(), currentBuilding.GetComponent<TransitionGate>());
                 }
             }
+        }
+    }
 
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                if (!uiHandler.getInMenu(UIHandler.Menus.QUESTS))
-                {
-                    uiHandler.changeMenu(UIHandler.Menus.QUESTS);
-                    setMovement(true);
-                }
-                else
-                {
-                    uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
-                    setMovement(false);
-                }
-            }
 
-            if(Input.GetKeyDown(KeyCode.M))
+    public void OnMap(CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            if (trackInput)
             {
                 if (!uiHandler.getMapActive())
                 {
@@ -213,10 +233,216 @@ public class Player : MonoBehaviour
                     setMovement(false);
                 }
             }
+        }
+    }
 
-            if (!stopMovement)
+
+    public void OnInventory(CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            if (trackInput && !stopInventoryToggle)
             {
-                if (Input.GetKeyDown(KeyCode.Space) && (isGrounded || !hasDoubleJumped))
+                if (uiHandler.getInMenu(UIHandler.Menus.INVENTORY))
+                {
+                    uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
+                    stopMovement = false;
+                }
+                else
+                {
+                    uiHandler.hideMap();
+                    uiHandler.changeDoubleMenu(UIHandler.Menus.PLAYERUI, UIHandler.Menus.INVENTORY);
+                    stopMovement = true;
+                }
+            }
+        }
+    }
+
+
+    public void OnQuests(CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            if (trackInput)
+            {
+                if (!uiHandler.getInMenu(UIHandler.Menus.QUESTS))
+                {
+                    uiHandler.changeMenu(UIHandler.Menus.QUESTS);
+                    setMovement(true);
+                }
+                else
+                {
+                    uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
+                    setMovement(false);
+                }
+            }
+        }
+    }
+
+    public void OnMeleeAttack(CallbackContext ctx)
+    {
+        if (!stopMovement && trackInput && !onAttackCooldown)
+        {
+            if (ctx.performed)
+            {
+                //Melee attack
+                if (meleeWeapon != null && !onAttackCooldown && !playerStatus.getRecentlyDamaged())
+                {
+
+                    switchAnimation(AnimationStates.MELEEUP);
+                    Attack(meleeWeapon.distance, meleeWeapon.damage);
+                    onAttackCooldown = true;
+                    Invoke("stopAttackCooldown", attackCooldown);
+                    rb.velocity += new Vector2(dir * 4, 0);
+
+                }
+            }
+        }
+    }
+
+    public void OnRangeAttack(CallbackContext ctx)
+    {
+        if (!stopMovement && trackInput && !onAttackCooldown)
+        {
+            if (ctx.performed)
+            {
+                if (longRangeWeapon != null && !onAttackCooldown && !playerStatus.getRecentlyDamaged())
+                {
+                    switchAnimation(AnimationStates.RANGED);
+                    onAttackCooldown = true;
+                    Invoke("stopAttackCooldown", attackCooldown);
+                }
+            }
+        }
+    }
+
+    public void OnMove(CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            isRunning = true;
+            moveDirection = ctx.ReadValue<Vector2>();
+        }
+        else if(ctx.canceled)
+        {
+            isRunning = false;
+        }
+    }
+
+    public void OnDash()
+    {
+        if (!stopMovement && trackInput)
+        {
+            if (canDash && !isDashing && !dashCooldown)
+            {
+                playerStatus.startCooldown();
+                isDashing = true;
+                speedCap = 30;
+                startingY = transform.position.y;
+                switchAnimation(AnimationStates.DASH);
+                dashTrail.gameObject.SetActive(true);
+            }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (!stopMovement && trackInput && !isDashing && !isAttacking)
+        {
+            if (!stopMovement && trackInput && !isDashing && !isAttacking)
+            {
+                if (!ignorePlayerDir)
+                {
+                    if (isRunning)
+                    {
+                        rb.velocity += new Vector2(moveDirection.x, 0);
+
+                        if (moveDirection.x > 0)
+                        {
+                            facingLeft = false;
+                            dir = 1;
+
+                            playerSprites.transform.localScale = new Vector2(-0.3f, 0.3f);
+                        }
+                        else
+                        {
+                            facingLeft = true;
+                            dir = -1;
+
+                            playerSprites.transform.localScale = new Vector2(0.3f, 0.3f);
+                        }
+                    }
+                }
+            }
+
+
+            if (isRunning && isGrounded)
+            {
+                switchAnimation(AnimationStates.RUN);
+            }
+
+            if (rb.velocity.x == 0 && rb.velocity.y == 0 && isGrounded)
+            {
+                switchAnimation(AnimationStates.IDLE);
+            }
+
+            if (rb.velocity.y > 3.5f || rb.velocity.y < -3.5f && !isGrounded)
+            {
+                switchAnimation(AnimationStates.JUMP);
+            }
+        }
+        else if (!isDashing)
+        {
+            switchAnimation(AnimationStates.IDLE);
+        }
+
+        if (isDashing)
+        {
+            if (dashTime > 0)
+            {
+                if (dir == 1)
+                {
+                    rb.velocity += new Vector2(dashAmount, 0);
+                }
+                else
+                {
+                    rb.velocity -= new Vector2(dashAmount, 0);
+                }
+
+                dashTime -= Time.deltaTime;
+                //stop the player from dipping down or jumping up
+                transform.position = new Vector2(transform.position.x, startingY);
+            }
+            else
+            {
+                isDashing = false;
+                dashTime = startDashTime;
+                speedCap = 5;
+                rb.velocity = new Vector2(0, rb.velocity.y);
+                switchAnimation(AnimationStates.RUN);
+                dashTrail.gameObject.SetActive(false);
+            }
+        }
+
+            //Apply force when the player is falling 
+            if (rb.velocity.y <= 0 && !isDashing)
+            {
+                rb.velocity += Vector2.up * (fallMult - 1) * Physics2D.gravity.y * Time.deltaTime;
+            }
+
+            //Prevent the player from picking up too much speed
+            rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -speedCap, speedCap), rb.velocity.y);
+        
+    }
+
+
+    public void OnJump(CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            if (!stopMovement && trackInput)
+            {
+                if ((isGrounded || !hasDoubleJumped))
                 {
                     if (canWallJump && !isGrounded)
                     {
@@ -272,202 +498,53 @@ public class Player : MonoBehaviour
                         }
                     }
                 }
-
-                if (Input.GetKeyDown(KeyCode.F) && canDash && !isDashing && !dashCooldown)
-                {
-                    playerStatus.startCooldown();
-                    isDashing = true;
-                    speedCap = 30;
-                    startingY = transform.position.y;
-                    switchAnimation(AnimationStates.DASH);
-                    dashTrail.gameObject.SetActive(true);
-                }
-
-                //Interaction Key
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    if (character != null)
-                    {
-                        uiHandler.changeMenu(UIHandler.Menus.DIALOGUE);
-
-                        if (!data.hasBeenTalkedTo(character))
-                        {
-                            beginConversation(0);
-                        }
-                        else
-                        {
-                            beginConversation(-1);
-                        }
-                        data.addCharacter(character);
-                        character = null;
-                    }
-                    else if (trader != null)
-                    {
-                        uiHandler.changeMenu(UIHandler.Menus.TRADER);
-                        beginTrading();
-                        trader = null;
-                    }
-                    else if(pickUp != null)
-                    {
-                        pickUpItem();
-                        pickUp = null;
-                    }
-                    else if(currentBuilding != null)
-                    {
-                        sceneLoader.switchScene(currentBuilding.getSceneName(), currentBuilding.GetComponent<TransitionGate>());
-                    }
-                }
-
-                if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
-                {
-                    heldTime = Time.time;
-                }
-
-                if (!onAttackCooldown)
-                {
-                    //Melee attack
-                    if (Input.GetMouseButtonDown(1) && meleeWeapon != null && !onAttackCooldown && !playerStatus.getRecentlyDamaged())
-                    {
-                        if ((Time.time - heldTime) < clickTime)
-                        {
-                            switchAnimation(AnimationStates.MELEEUP);
-                            Attack(meleeWeapon.distance, meleeWeapon.damage);
-                            onAttackCooldown = true;
-                            Invoke("stopAttackCooldown", attackCooldown);
-                            rb.velocity += new Vector2(dir * 4, 0);
-                        }
-                    }
-                    //Long Range Attack, hold down then release to fire
-                    if (Input.GetMouseButtonUp(0) && longRangeWeapon != null && !onAttackCooldown && !playerStatus.getRecentlyDamaged())
-                    {
-                        if ((Time.time - heldTime) < clickTime)
-                        {
-                            switchAnimation(AnimationStates.RANGED);
-                            onAttackCooldown = true;
-                            Invoke("stopAttackCooldown", attackCooldown);
-                        }
-
-                    }
-                }
             }
-            else
-            {
-                 switchAnimation(AnimationStates.IDLE);
-            }
-        }
-        else
-        {
-            switchAnimation(AnimationStates.IDLE);
         }
     }
 
-    void stopAttackCooldown()
+    public void OnLookDown(CallbackContext ctx)
     {
-        onAttackCooldown = false;
+        if (!stopMovement && trackInput)
+        {
+            if (ctx.performed)
+            {
+                lookDown = true;
+            }
+            else if (ctx.canceled)
+            {
+                lookDown = false;
+            }
+        }
     }
 
-    private void FixedUpdate()
+    public void OnLookUp(CallbackContext ctx)
     {
-        if (!stopMovement && trackInput && !isDashing && !isAttacking)
+        if (!stopMovement && trackInput)
         {
-            if (!ignorePlayerDir)
+            if (ctx.performed)
             {
-                if (Input.GetKey(KeyCode.D))
-                {
-                    rb.velocity += new Vector2(speed, 0);
-                    facingLeft = false;
-                    dir = 1;
-                    playerSprites.transform.localScale = new Vector2(-0.3f, 0.3f);
-                    isRunning = true;
-                }
-                else if (Input.GetKey(KeyCode.A))
-                {
-                    rb.velocity -= new Vector2(speed, 0);
-                    facingLeft = true;
-                    dir = -1;
-                    playerSprites.transform.localScale = new Vector2(0.3f, 0.3f);
-                    isRunning = true;
-
-                }
-                else
-                {
-                    isRunning = false;
-                }
+                lookUp = true;
             }
-
-
-            if(isRunning && isGrounded)
+            else if (ctx.canceled)
             {
-                switchAnimation(AnimationStates.RUN);
-            }
-
-            if(rb.velocity.x == 0 && rb.velocity.y == 0 && isGrounded)
-            {
-                switchAnimation(AnimationStates.IDLE);
-            }
-
-            if(rb.velocity.y > 3.5f || rb.velocity.y < -3.5f && !isGrounded)
-            {
-                switchAnimation(AnimationStates.JUMP);
+                lookUp = false;
             }
         }
-        else if(!isDashing)
-        {
-            switchAnimation(AnimationStates.IDLE);
-        }
-
-        if (isDashing)
-        {
-            if (dashTime > 0)
-            {
-                if (dir == 1)
-                {
-                    rb.velocity += new Vector2(dashAmount, 0);
-                }
-                else
-                {
-                    rb.velocity -= new Vector2(dashAmount, 0);
-                }
-
-                dashTime -= Time.deltaTime;
-                //stop the player from dipping down or jumping up
-                transform.position = new Vector2(transform.position.x, startingY);
-            }
-            else
-            {
-                isDashing = false;
-                dashTime = startDashTime;
-                speedCap = 5;
-                rb.velocity = new Vector2(0, rb.velocity.y);
-                switchAnimation(AnimationStates.RUN);
-                dashTrail.gameObject.SetActive(false);
-            }
-        }
-
-
-       
-        //Apply force when the player is falling 
-        if (rb.velocity.y <= 0 && !isDashing)
-        {
-            rb.velocity += Vector2.up * (fallMult - 1) * Physics2D.gravity.y * Time.deltaTime;
-        }
-
-        //Prevent the player from picking up too much speed
-        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -speedCap, speedCap), rb.velocity.y);
     }
 
+    bool lookDown = false;
+    bool lookUp = false;
 
     void LateUpdate()
     {
-        
         if (playerControlled)
         {
 
-            if (Input.GetKey(KeyCode.S))
+            if (lookDown)
             {
                 targetCamPos = new Vector3(transform.position.x + offset.x, transform.position.y +( offset.y - 3), transform.position.z + offset.z);
             }
-            else if(Input.GetKey(KeyCode.W))
+            else if(lookUp)
             {
                 targetCamPos = new Vector3(transform.position.x + offset.x, transform.position.y + (offset.y + 2), transform.position.z + offset.z);
             }
