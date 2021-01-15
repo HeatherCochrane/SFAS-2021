@@ -320,8 +320,11 @@ public class Player : MonoBehaviour
     {
         if (ctx.performed)
         {
-            isRunning = true;
             moveDirection = ctx.ReadValue<Vector2>();
+            if(moveDirection.x <= -0.9f || moveDirection.x >= 0.9f)
+            {
+                isRunning = true;
+            }
         }
         else if(ctx.canceled)
         {
