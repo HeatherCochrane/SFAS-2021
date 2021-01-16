@@ -7,20 +7,10 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class MenuSelection : MonoBehaviour
 {
-    [System.Serializable]
-    public class MenuButtons
-    {
-        //each of these are seperate buttons
-        [SerializeField]
-        public GameObject[] buttons;
-    }
-
     //Each entry in this list is a row
-    [SerializeField]
-    MenuButtons[] screenButtons;
+    MenuButtons.Buttons[] screenButtons;
 
     GameObject[] currentRowButtons;
-
 
     Vector2 currentButton;
 
@@ -30,9 +20,11 @@ public class MenuSelection : MonoBehaviour
     GameObject highlightedButton;
     Vector2 originalScale;
 
-    // Start is called before the first frame update
-    void Start()
+    bool instance = false;
+    public void setMenu(MenuButtons.Buttons[] b)
     {
+        screenButtons = b;
+
         currentButton = new Vector2(0, 0);
         rows = screenButtons.Length - 1;
 
@@ -42,6 +34,7 @@ public class MenuSelection : MonoBehaviour
 
         originalScale = highlightedButton.transform.GetComponent<RectTransform>().localScale;
 
+        instance = true;
         highlightButton();
     }
 
@@ -67,46 +60,49 @@ public class MenuSelection : MonoBehaviour
 
     public void OnMoveY(CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (instance)
         {
-            Debug.Log("MOVE Y");
-
-            float dir = ctx.ReadValue<float>();
-
-            if (dir < 0)
+            if (ctx.performed)
             {
-                if (currentButton.y < rows)
+                Debug.Log("MOVE Y");
+
+                float dir = ctx.ReadValue<float>();
+
+                if (dir < 0)
                 {
-                    currentButton += new Vector2(0, 1);
+                    if (currentButton.y < rows)
+                    {
+                        currentButton += new Vector2(0, 1);
+                    }
+                    else
+                    {
+                        Debug.Log("Reached end of button rows");
+                        currentButton = new Vector2(0, 0);
+                    }
                 }
-                else
+                else if (dir > 0)
                 {
-                    Debug.Log("Reached end of button rows");
-                    currentButton = new Vector2(0, 0);
+                    if (currentButton.y > 0)
+                    {
+                        currentButton -= new Vector2(0, 1);
+                    }
+                    else
+                    {
+                        Debug.Log("Reached end of button rows");
+                        currentButton = new Vector2(0, 0);
+                    }
                 }
+
+                currentRowButtons = screenButtons[(int)currentButton.y].buttons;
+
+                if (currentButton.x > currentRowButtons.Length - 1)
+                {
+                    currentButton = new Vector2(0, currentButton.y);
+                }
+
+
+                highlightButton();
             }
-            else if (dir > 0)
-            {
-                if (currentButton.y > 0)
-                {
-                    currentButton -= new Vector2(0, 1);
-                }
-                else
-                {
-                    Debug.Log("Reached end of button rows");
-                    currentButton = new Vector2(0, 0);
-                }
-            }
-
-            currentRowButtons = screenButtons[(int)currentButton.y].buttons;
-
-            if (currentButton.x > currentRowButtons.Length - 1)
-            {
-                currentButton = new Vector2(0, currentButton.y);
-            }
-
-
-            highlightButton();
         }
     }
 
@@ -114,49 +110,55 @@ public class MenuSelection : MonoBehaviour
 
     public void OnMoveX(CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (instance)
         {
-            Debug.Log("MOVE X");
-
-            float dir = ctx.ReadValue<float>();
-
-            if (dir > 0)
+            if (ctx.performed)
             {
-                if (currentButton.x < currentRowButtons.Length - 1)
+                Debug.Log("MOVE X");
+
+                float dir = ctx.ReadValue<float>();
+
+                if (dir > 0)
                 {
-                    currentButton += new Vector2(1, 0);
+                    if (currentButton.x < currentRowButtons.Length - 1)
+                    {
+                        currentButton += new Vector2(1, 0);
+                    }
+                    else
+                    {
+                        Debug.Log("Reached end of row");
+                        currentButton = new Vector2(0, currentButton.y);
+                    }
                 }
-                else
+                else if (dir < 0)
                 {
-                    Debug.Log("Reached end of row");
-                    currentButton = new Vector2(0, currentButton.y);
+                    if (currentButton.x > 0)
+                    {
+                        currentButton -= new Vector2(1, 0);
+                    }
+                    else
+                    {
+                        Debug.Log("Reached end of row");
+                        currentButton = new Vector2(0, currentButton.y);
+                    }
                 }
             }
-            else if (dir < 0)
-            {
-                if (currentButton.x > 0)
-                {
-                    currentButton -= new Vector2(1, 0);
-                }
-                else
-                {
-                    Debug.Log("Reached end of row");
-                    currentButton = new Vector2(0, currentButton.y);
-                }
-            }
+
+            highlightButton();
         }
-
-        highlightButton();
     }
 
     
 
     public void OnButtonSelect(CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (instance)
         {
-            Debug.Log("SELECT!");
-            screenButtons[(int)currentButton.y].buttons[(int)currentButton.x].GetComponent<Button>().onClick.Invoke();
+            if (ctx.performed)
+            {
+                Debug.Log("SELECT!");
+                screenButtons[(int)currentButton.y].buttons[(int)currentButton.x].GetComponent<Button>().onClick.Invoke();
+            }
         }
     }
 }

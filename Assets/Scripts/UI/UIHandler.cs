@@ -10,7 +10,8 @@ public class UIHandler : MonoBehaviour
     {
         public Menus name;
         public GameObject obj;
-        public MenuSelection menus;
+        public MenuButtons buttons;
+        public bool priority;
     }
 
     [SerializeField]
@@ -53,6 +54,11 @@ public class UIHandler : MonoBehaviour
                 {
                     allActiveMenus[i].obj.SetActive(true);
                     currentMenu = n;
+                    if (allActiveMenus[i].buttons != null)
+                    {
+                        Player.instance.menus.setMenu(allActiveMenus[i].buttons.getMenuList());
+                    }
+                    
                 }
                 else
                 {
@@ -112,7 +118,9 @@ public class UIHandler : MonoBehaviour
     }
 
     public void changeDoubleMenu(Menus n, Menus m)
-    {
+    {   
+        bool pickPriority = false;
+
         for (int i = 0; i < allActiveMenus.Count; i++)
         {
             if (allActiveMenus[i].obj != null)
@@ -121,11 +129,25 @@ public class UIHandler : MonoBehaviour
                 {
                     allActiveMenus[i].obj.SetActive(true);
                     currentMenu = n;
+                    if (allActiveMenus[i].buttons != null)
+                    {
+                       
+                            Player.instance.menus.setMenu(allActiveMenus[i].buttons.getMenuList());
+                            pickPriority = true;
+                        
+                    }
                 }
                 else if(allActiveMenus[i].name == m)
                 {
                     allActiveMenus[i].obj.SetActive(true);
                     currentMenu2 = m;
+                    if (allActiveMenus[i].buttons != null)
+                    {
+                       
+                            Player.instance.menus.setMenu(allActiveMenus[i].buttons.getMenuList());
+                            pickPriority = true;
+                        
+                    }
                 }
                 else
                 {

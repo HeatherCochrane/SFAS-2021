@@ -29,6 +29,9 @@ public class Player : MonoBehaviour
     //Player Status effects
     public PlayerStatus playerStatus;
 
+    //Player Menus
+    public MenuSelection menus;
+
     //Event System
     public UnityEngine.EventSystems.EventSystem system;
 
