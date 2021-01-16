@@ -6704,7 +6704,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4604873721183114119}
   m_HandleRect: {fileID: 4604873721183114118}
   m_Direction: 2
-  m_Value: -0.0000055948894
+  m_Value: 0.00000012715658
   m_Size: 0.6
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -6856,6 +6856,7 @@ GameObject:
   - component: {fileID: 7888643075299230447}
   - component: {fileID: 7888643075299230440}
   - component: {fileID: 7888643075299230441}
+  - component: {fileID: 8619743234269955277}
   m_Layer: 9
   m_Name: Inventory
   m_TagString: Untagged
@@ -6943,6 +6944,39 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8619743234269955277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4604873720961508412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9536d183c3ebdc4f83e4ef056c6e153, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenButtons:
+  - buttons:
+    - {fileID: 4604873720963878111}
+    - {fileID: 1073321125084086501}
+    - {fileID: 413193969862469780}
+  - buttons:
+    - {fileID: 2344589909774158656}
+    - {fileID: 986199851717743762}
+    - {fileID: 8531326143055915733}
+  - buttons:
+    - {fileID: 9156871117930551644}
+    - {fileID: 1483621893646528371}
+    - {fileID: 4818943313654639640}
+  - buttons:
+    - {fileID: 5995031976142970338}
+  - buttons:
+    - {fileID: 5995031976308650342}
+  - buttons:
+    - {fileID: 5995031975935187856}
+  - buttons:
+    - {fileID: 5995031977028848659}
 --- !u!1 &4604873720963878111
 GameObject:
   m_ObjectHideFlags: 0
@@ -7131,7 +7165,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 114.2, y: 95.9}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 73.28799, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4604873721161090387
 MonoBehaviour:
@@ -9069,14 +9103,19 @@ MonoBehaviour:
   allActiveMenus:
   - name: 0
     obj: {fileID: 5995031975890308649}
+    menus: {fileID: 0}
   - name: 1
     obj: {fileID: 1139760352948892687}
+    menus: {fileID: 8619743234269955277}
   - name: 2
     obj: {fileID: 5995031975842077841}
+    menus: {fileID: 0}
   - name: 3
     obj: {fileID: 5995031976273691399}
+    menus: {fileID: 0}
   - name: 4
     obj: {fileID: 5995031975479934538}
+    menus: {fileID: 0}
 --- !u!1 &5995031975629062062
 GameObject:
   m_ObjectHideFlags: 0
@@ -11116,7 +11155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 120.0007}
+  m_AnchoredPosition: {x: 0, y: 120.00004}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &5995031976520394894
@@ -11706,6 +11745,7 @@ MonoBehaviour:
   jump: 8.5
   dialogue: {fileID: 5995031976512148720}
   playerSprites: {fileID: 5995031976300798041}
+  trackInput: 0
   dashTrail: {fileID: 8601198290877398944}
   anim: {fileID: 5995031976300798043}
   arrow: {fileID: 5147513752712701425, guid: 8d588ac28638bf74d9879f5af9ee8ae8, type: 3}

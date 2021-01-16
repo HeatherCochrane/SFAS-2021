@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     GameObject playerSprites;
 
-    bool trackInput = false;
+    public bool trackInput = false;
 
     Vector2 maxHorizontal;
     Vector2 maxVertical;

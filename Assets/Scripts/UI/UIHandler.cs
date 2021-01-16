@@ -10,6 +10,7 @@ public class UIHandler : MonoBehaviour
     {
         public Menus name;
         public GameObject obj;
+        public MenuSelection menus;
     }
 
     [SerializeField]
@@ -20,6 +21,8 @@ public class UIHandler : MonoBehaviour
     Menus currentMenu2;
 
     GameObject currentMap;
+
+    MenuSelection currentMenuButtons;
 
     // Start is called before the first frame update
     void Start()

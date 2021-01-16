@@ -105,6 +105,30 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ButtonSelect"",
+                    ""type"": ""Value"",
+                    ""id"": ""fca3de86-837f-4670-96b6-e36ae9b1f405"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoveX"",
+                    ""type"": ""Value"",
+                    ""id"": ""cc667fd8-4fe4-4da7-a4db-357d6f75d507"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""MoveY"",
+                    ""type"": ""Value"",
+                    ""id"": ""cb97d66d-dbe7-47c5-8b2b-a0e9ed5af474"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -470,6 +494,94 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""288a5b8b-670f-4ba8-9bd9-955b2a29a690"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""All"",
+                    ""action"": ""ButtonSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b878c841-dab0-4be4-9a14-c6909e15e527"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""All"",
+                    ""action"": ""ButtonSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""c70fab61-c570-4f17-a8b8-0da3e91b85b0"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveY"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""b5135bc2-51f7-4be8-a3c9-6d68ef6f92ef"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""All"",
+                    ""action"": ""MoveY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""c5c8c03f-ae1d-4799-b2fa-2e72ea6616b6"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""All"",
+                    ""action"": ""MoveY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""1124fc6f-7720-4e2a-b214-c09769f597b1"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveX"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""0cdcb6f9-3307-4392-a9a5-079fe84d3d4d"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""All"",
+                    ""action"": ""MoveX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""4e758807-8d1a-4f6f-b226-4dc4f3a56a69"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""All"",
+                    ""action"": ""MoveX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -516,6 +628,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
         m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_ButtonSelect = m_Player.FindAction("ButtonSelect", throwIfNotFound: true);
+        m_Player_MoveX = m_Player.FindAction("MoveX", throwIfNotFound: true);
+        m_Player_MoveY = m_Player.FindAction("MoveY", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -576,6 +691,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Inventory;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_ButtonSelect;
+    private readonly InputAction m_Player_MoveX;
+    private readonly InputAction m_Player_MoveY;
     public struct PlayerActions
     {
         private @InputSystem m_Wrapper;
@@ -591,6 +709,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
         public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @ButtonSelect => m_Wrapper.m_Player_ButtonSelect;
+        public InputAction @MoveX => m_Wrapper.m_Player_MoveX;
+        public InputAction @MoveY => m_Wrapper.m_Player_MoveY;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -633,6 +754,15 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @ButtonSelect.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnButtonSelect;
+                @ButtonSelect.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnButtonSelect;
+                @ButtonSelect.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnButtonSelect;
+                @MoveX.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveX;
+                @MoveX.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveX;
+                @MoveX.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveX;
+                @MoveY.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveY;
+                @MoveY.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveY;
+                @MoveY.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveY;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -670,6 +800,15 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @ButtonSelect.started += instance.OnButtonSelect;
+                @ButtonSelect.performed += instance.OnButtonSelect;
+                @ButtonSelect.canceled += instance.OnButtonSelect;
+                @MoveX.started += instance.OnMoveX;
+                @MoveX.performed += instance.OnMoveX;
+                @MoveX.canceled += instance.OnMoveX;
+                @MoveY.started += instance.OnMoveY;
+                @MoveY.performed += instance.OnMoveY;
+                @MoveY.canceled += instance.OnMoveY;
             }
         }
     }
@@ -705,5 +844,8 @@ public class @InputSystem : IInputActionCollection, IDisposable
         void OnInventory(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+        void OnButtonSelect(InputAction.CallbackContext context);
+        void OnMoveX(InputAction.CallbackContext context);
+        void OnMoveY(InputAction.CallbackContext context);
     }
 }
