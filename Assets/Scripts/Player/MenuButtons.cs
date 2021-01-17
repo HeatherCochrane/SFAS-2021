@@ -10,16 +10,15 @@ public class MenuButtons : MonoBehaviour
     {
         //each of these are seperate buttons
         [SerializeField]
-        public GameObject[] buttons;
+        public List<GameObject> buttons;
     }
 
     [SerializeField]
-    Buttons[] menuButtonList;
+    List<Buttons> menuButtonList = new List<Buttons>();
 
-    [SerializeField]
     GameObject[] menuButtonObjects;
 
-    public Buttons[] getMenuList()
+    public List<Buttons> getMenuList()
     {
         return menuButtonList;
     }
