@@ -89,7 +89,11 @@ public class MenuSelection : MonoBehaviour
 
                 if (dir < 0)
                 {
-                    if (currentButton.y < rows)
+                    if(rows == 0 && currentButton.x < currentRowButtons.Count - 1)
+                    {
+                        currentButton += new Vector2(1, 0);
+                    }
+                    else if (currentButton.y < rows)
                     {
                         currentButton += new Vector2(0, 1);
                     }
@@ -101,7 +105,11 @@ public class MenuSelection : MonoBehaviour
                 }
                 else if (dir > 0)
                 {
-                    if (currentButton.y > 0)
+                    if (rows == 0 && currentButton.x > 0)
+                    {
+                        currentButton -= new Vector2(1, 0);
+                    }
+                    else if (currentButton.y > 0)
                     {
                         currentButton -= new Vector2(0, 1);
                     }
