@@ -8,15 +8,19 @@ using static UnityEngine.InputSystem.InputAction;
 public class MenuSelection : MonoBehaviour
 {
     //Each entry in this list is a row
+    [SerializeField]
     MenuButtons.Buttons[] screenButtons;
 
+    [SerializeField]
     GameObject[] currentRowButtons;
 
     Vector2 currentButton;
 
     int rows = 0;
 
+    [SerializeField]
     GameObject lastButton;
+    [SerializeField]
     GameObject highlightedButton;
     Vector2 originalScale;
 
@@ -51,24 +55,27 @@ public class MenuSelection : MonoBehaviour
     }
     public void highlightButton()
     {
-        Debug.Log("HIGHLIGHT BUTTON: " + currentButton);
-        lastButton.transform.GetComponent<RectTransform>().localScale = originalScale;
-
-        if (currentRowButtons[(int)currentButton.x] != null)
+        if (instance)
         {
-            if (currentRowButtons[(int)currentButton.x].activeSelf)
-            {
-                highlightedButton = currentRowButtons[(int)currentButton.x];
-            }
-            else
-            {
-                currentButton = new Vector2(0, 0);
-                highlightedButton = screenButtons[0].buttons[0];
-            }
+            Debug.Log("HIGHLIGHT BUTTON: " + currentButton);
+            lastButton.transform.GetComponent<RectTransform>().localScale = originalScale;
 
-            originalScale = highlightedButton.transform.GetComponent<RectTransform>().localScale;
-            highlightedButton.transform.GetComponent<RectTransform>().localScale = new Vector2(originalScale.x * 1.2f, originalScale.y * 1.2f);
-            lastButton = highlightedButton;
+            if ((int)currentButton.x < currentRowButtons.Length)
+            {
+                if (currentRowButtons[(int)currentButton.x].activeSelf)
+                {
+                    highlightedButton = currentRowButtons[(int)currentButton.x];
+                }
+                else
+                {
+                    currentButton = new Vector2(0, 0);
+                    highlightedButton = screenButtons[0].buttons[0];
+                }
+
+                originalScale = highlightedButton.transform.GetComponent<RectTransform>().localScale;
+                highlightedButton.transform.GetComponent<RectTransform>().localScale = new Vector2(originalScale.x * 1.2f, originalScale.y * 1.2f);
+                lastButton = highlightedButton;
+            }
         }
     }
 
@@ -195,6 +202,7 @@ public class MenuSelection : MonoBehaviour
 
     public void updateCurrentButton()
     {
+        
         for (int i = 0; i < screenButtons.Length; i++)
         {
             for (int j = 0; j < screenButtons[i].buttons.Length; j++)
