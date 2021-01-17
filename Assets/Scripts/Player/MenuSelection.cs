@@ -23,39 +23,53 @@ public class MenuSelection : MonoBehaviour
     bool instance = false;
     public void setMenu(MenuButtons.Buttons[] b)
     {
-        screenButtons = b;
+        if (b.Length >= 1)
+        {
+            screenButtons = b;
 
-        currentButton = new Vector2(0, 0);
-        rows = screenButtons.Length - 1;
+            currentButton = new Vector2(0, 0);
+            rows = screenButtons.Length - 1;
 
-        currentRowButtons = screenButtons[0].buttons;
-        lastButton = currentRowButtons[(int)currentButton.x];
-        highlightedButton = currentRowButtons[(int)currentButton.x];
+            currentRowButtons = screenButtons[0].buttons;
+            lastButton = currentRowButtons[(int)currentButton.x];
+            highlightedButton = currentRowButtons[(int)currentButton.x];
 
-        originalScale = highlightedButton.transform.GetComponent<RectTransform>().localScale;
+            originalScale = highlightedButton.transform.GetComponent<RectTransform>().localScale;
 
-        instance = true;
-        highlightButton();
+            instance = true;
+            highlightButton();
+        }
+        else
+        {
+            Debug.Log("BUTTON ARRAY EMPTY!");
+        }
     }
 
-    void highlightButton()
+    public void setInstance()
+    {
+        instance = false;
+    }
+    public void highlightButton()
     {
         Debug.Log("HIGHLIGHT BUTTON: " + currentButton);
         lastButton.transform.GetComponent<RectTransform>().localScale = originalScale;
 
-        if (currentRowButtons[(int)currentButton.x].activeSelf)
+        if (currentRowButtons[(int)currentButton.x] != null)
         {
-            highlightedButton = currentRowButtons[(int)currentButton.x];
-        }
-        else
-        {
-            currentButton = new Vector2(0, 0);
-            highlightedButton = screenButtons[0].buttons[0];
-        }
+            if (currentRowButtons[(int)currentButton.x].activeSelf)
+            {
+                highlightedButton = currentRowButtons[(int)currentButton.x];
+            }
+            else
+            {
+                currentButton = new Vector2(0, 0);
+                highlightedButton = screenButtons[0].buttons[0];
+            }
 
-        originalScale = highlightedButton.transform.GetComponent<RectTransform>().localScale;
-        highlightedButton.transform.GetComponent<RectTransform>().localScale = new Vector2(originalScale.x * 1.5f, originalScale.y * 1.5f);
-        lastButton = highlightedButton;
+            originalScale = highlightedButton.transform.GetComponent<RectTransform>().localScale;
+            highlightedButton.transform.GetComponent<RectTransform>().localScale = new Vector2(originalScale.x * 1.2f, originalScale.y * 1.2f);
+            lastButton = highlightedButton;
+        }
     }
 
     public void OnMoveY(CallbackContext ctx)
@@ -156,9 +170,44 @@ public class MenuSelection : MonoBehaviour
         {
             if (ctx.performed)
             {
-                Debug.Log("SELECT!");
+                Debug.Log("SELECT!" + (int)currentButton.y + "  " + (int)currentButton.x);
                 screenButtons[(int)currentButton.y].buttons[(int)currentButton.x].GetComponent<Button>().onClick.Invoke();
+
+                
+                    for(int i = 0; i < screenButtons.Length; i++)
+                    {
+                        for(int j = 0; j < screenButtons[i].buttons.Length; j ++)
+                        {
+                            if(screenButtons[i].buttons[j].activeSelf)
+                            {
+                                Debug.Log(screenButtons[i].buttons[j].name);
+                                currentButton = new Vector2(i, j);
+                                currentRowButtons = screenButtons[j].buttons;
+                                highlightButton();
+                            }
+                        }
+                    }
+                   
+                
             }
         }
+    }
+
+    public void updateCurrentButton()
+    {
+        for (int i = 0; i < screenButtons.Length; i++)
+        {
+            for (int j = 0; j < screenButtons[i].buttons.Length; j++)
+            {
+                if (screenButtons[i].buttons[j].activeSelf)
+                {
+                    Debug.Log(screenButtons[i].buttons[j].name);
+                    currentButton = new Vector2(j, i);
+                    currentRowButtons = screenButtons[i].buttons;
+                    highlightButton();
+                }
+            }
+        }
+
     }
 }

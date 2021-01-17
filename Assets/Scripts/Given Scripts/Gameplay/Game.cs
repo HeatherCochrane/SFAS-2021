@@ -19,9 +19,6 @@ public class Game : MonoBehaviour
     bool startDialogue = false;
 
     [SerializeField]
-    Button choicePrefab;
-
-    [SerializeField]
     GameObject choiceParent;
 
     bool spawnedChoices = false;
@@ -32,12 +29,20 @@ public class Game : MonoBehaviour
     TextMeshProUGUI characterName;
 
     [SerializeField]
-    GameObject closeButton;
+    MenuButtons buttons;
+
+    [SerializeField]
+    List<GameObject> choices = new List<GameObject>();
+
     private void OnEnable()
     {
         _currentBeat = null;
         _wait = new WaitForSeconds(0.5f);
-        closeButton.SetActive(false);
+
+        foreach (GameObject g in choices)
+        {
+            g.SetActive(false);
+        }
     }
 
     private void Update()
@@ -115,14 +120,21 @@ public class Game : MonoBehaviour
 
     void setUpChoiceButtons()
     {
+        foreach(GameObject g in choices)
+        {
+            g.SetActive(false);
+        }
+
         //Set up the correct amount of buttons as there is choices
         for(int i = 0; i < _currentBeat.Decision.Count; i++)
         {
-            Button newChoice = Instantiate(choicePrefab);
-            newChoice.GetComponent<DialogueChoice>().setChoiceNum(i);
-            newChoice.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _currentBeat.Decision[i].DisplayText;
-            newChoice.transform.SetParent(choiceParent.transform);
+            choices[i].SetActive(true);
+            choices[i].GetComponent<DialogueChoice>().setChoiceNum(i);
+            choices[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _currentBeat.Decision[i].DisplayText;
+            choices[i].transform.SetParent(choiceParent.transform);
         }
+
+        buttons.updateButtons();
     }
     public void pickOption(int p)
     {
@@ -134,21 +146,11 @@ public class Game : MonoBehaviour
             Player.instance.playerQuests.addNewQuest(choice.quest);
         }
 
-        List<GameObject> b = new List<GameObject>();
-        
-        //Grab references to all spawned buttons
-        for(int i =0; i < choiceParent.transform.childCount; i++)
+        foreach (GameObject g in choices)
         {
-            b.Add(choiceParent.transform.GetChild(i).gameObject);
+            g.SetActive(false);
         }
 
-        //Delete all buttons
-        for(int i =0; i < b.Count; i++)
-        {
-            Destroy(b[i]);
-        }
-
-        b.Clear();
         spawnedChoices = false;
     }
 
@@ -167,8 +169,10 @@ public class Game : MonoBehaviour
 
     void showCloseButton()
     {
-        closeButton.SetActive(true);
+        choices[4].SetActive(true);
+        Player.instance.menus.updateCurrentButton();
     }
+
     private IEnumerator DoDisplay(BeatData data)
     {
         _output.Clear();
@@ -196,7 +200,7 @@ public class Game : MonoBehaviour
         _currentBeat = null;
         dialogueFinished = true;
         _output.Clear();
-        closeButton.SetActive(false);
+
 
 
         Player.instance.setMovement(false);
