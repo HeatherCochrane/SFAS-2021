@@ -54,6 +54,7 @@ public class UIHandler : MonoBehaviour
                 {
                     allActiveMenus[i].obj.SetActive(true);
                     currentMenu = n;
+
                     if (allActiveMenus[i].buttons != null)
                     {
                         Player.instance.menus.setMenu(allActiveMenus[i].buttons.getMenuList());
@@ -118,7 +119,7 @@ public class UIHandler : MonoBehaviour
     }
 
     public void changeDoubleMenu(Menus n, Menus m)
-    {   
+    {
         bool pickPriority = false;
 
         for (int i = 0; i < allActiveMenus.Count; i++)
@@ -131,22 +132,26 @@ public class UIHandler : MonoBehaviour
                     currentMenu = n;
                     if (allActiveMenus[i].buttons != null)
                     {
-                       
+                        if (allActiveMenus[i].priority)
+                        {
                             Player.instance.menus.setMenu(allActiveMenus[i].buttons.getMenuList());
+
                             pickPriority = true;
-                        
+                        }
                     }
                 }
-                else if(allActiveMenus[i].name == m)
+                else if (allActiveMenus[i].name == m)
                 {
                     allActiveMenus[i].obj.SetActive(true);
                     currentMenu2 = m;
                     if (allActiveMenus[i].buttons != null)
                     {
-                       
+                        if (allActiveMenus[i].priority)
+                        {
                             Player.instance.menus.setMenu(allActiveMenus[i].buttons.getMenuList());
+
                             pickPriority = true;
-                        
+                        }
                     }
                 }
                 else

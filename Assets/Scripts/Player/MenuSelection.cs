@@ -52,37 +52,40 @@ public class MenuSelection : MonoBehaviour
     public void setInstance()
     {
         instance = false;
+        if (highlightedButton != null)
+        {
+            highlightedButton.transform.GetComponent<RectTransform>().localScale = originalScale;
+        }
     }
     public void highlightButton()
     {
         if (instance)
         {
-            Debug.Log("HIGHLIGHT BUTTON: " + currentButton);
+            //Debug.Log("HIGHLIGHT BUTTON: " + currentButton);
             lastButton.transform.GetComponent<RectTransform>().localScale = originalScale;
 
-            if ((int)currentButton.x < currentRowButtons.Count || (int)currentButton.x > currentRowButtons.Count)
-            {
-                if (currentRowButtons[(int)currentButton.x].activeSelf)
-                {
-                    highlightedButton = currentRowButtons[(int)currentButton.x];
-                }
-                else
-                {
-                    currentButton = new Vector2(0, 0);
-                    highlightedButton = screenButtons[0].buttons[0];
-                }
 
-                originalScale = highlightedButton.transform.GetComponent<RectTransform>().localScale;
-                highlightedButton.transform.GetComponent<RectTransform>().localScale = new Vector3(originalScale.x * 1.2f, originalScale.y * 1.2f, 1);
-                lastButton = highlightedButton;
+            if (currentRowButtons[(int)currentButton.x].activeSelf)
+            {
+                highlightedButton = currentRowButtons[(int)currentButton.x];
             }
+            else
+            {
+                currentButton = new Vector2(0, 0);
+                highlightedButton = screenButtons[0].buttons[0];
+            }
+
+            originalScale = highlightedButton.transform.GetComponent<RectTransform>().localScale;
+            highlightedButton.transform.GetComponent<RectTransform>().localScale = new Vector3(originalScale.x * 1.2f, originalScale.y * 1.2f, 1);
+            lastButton = highlightedButton;
         }
+
     }
 
     public void OnMoveY(CallbackContext ctx)
     {
         if (instance)
-        {
+        { 
             if (ctx.performed)
             {
                 float dir = ctx.ReadValue<float>();
@@ -93,15 +96,43 @@ public class MenuSelection : MonoBehaviour
                     {
                         currentButton += new Vector2(1, 0);
                     }
-                    else if (currentButton.y < rows)
+                    else if (currentButton.y + 1 <= rows)
                     {
-                        currentButton += new Vector2(0, 1);
+                        currentRowButtons = screenButtons[(int)currentButton.y].buttons;
+
+                        bool rowHasActive = false;
+                        if (currentButton.x < screenButtons[(int)currentButton.y + 1].buttons.Count && screenButtons[(int)currentButton.y + 1].buttons[(int)currentButton.x].activeSelf)
+                        {
+                            currentButton = new Vector2(currentButton.x, currentButton.y + 1);
+                            rowHasActive = true;
+                        }
+                        else
+                        {
+                            for (int i = 0; i < screenButtons[(int)currentButton.y + 1].buttons.Count; i++)
+                            {
+                                if (screenButtons[(int)currentButton.y + 1].buttons[i].activeSelf)
+                                {
+                                    rowHasActive = true;
+                                    currentButton = new Vector2(i, currentButton.y + 1);
+                                    break;
+                                }
+                            }
+                        }
+
+                        if(!rowHasActive)
+                        {
+                            currentButton = new Vector2(0, 0);
+                        }
+
+                        currentRowButtons = screenButtons[(int)currentButton.y].buttons;
                     }
                     else
                     {
                         Debug.Log("Reached end of button rows");
                         currentButton = new Vector2(0, 0);
+                        currentRowButtons = screenButtons[0].buttons;
                     }
+
                 }
                 else if (dir > 0)
                 {
@@ -109,24 +140,44 @@ public class MenuSelection : MonoBehaviour
                     {
                         currentButton -= new Vector2(1, 0);
                     }
-                    else if (currentButton.y > 0)
+                    else if (currentButton.y - 1 >= 0)
                     {
-                        currentButton -= new Vector2(0, 1);
+                        currentRowButtons = screenButtons[(int)currentButton.y].buttons;
+
+                        bool rowHasActive = false;
+                        if (currentButton.x < screenButtons[(int)currentButton.y - 1].buttons.Count && screenButtons[(int)currentButton.y - 1].buttons[(int)currentButton.x].activeSelf)
+                        {
+                            currentButton = new Vector2(currentButton.x, currentButton.y - 1);
+                            rowHasActive = true;
+                        }
+                        else
+                        {
+                            for (int i = 0; i < screenButtons[(int)currentButton.y - 1].buttons.Count; i++)
+                            {
+                                if (screenButtons[(int)currentButton.y - 1].buttons[i].activeSelf)
+                                {
+                                    rowHasActive = true;
+                                    currentButton = new Vector2(i, currentButton.y - 1);
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (!rowHasActive)
+                        {
+                            currentButton = new Vector2(0, 0);
+                        }
+
+                        currentRowButtons = screenButtons[(int)currentButton.y].buttons;
                     }
                     else
                     {
                         Debug.Log("Reached end of button rows");
                         currentButton = new Vector2(0, 0);
+                        currentRowButtons = screenButtons[0].buttons;
                     }
+                   
                 }
-
-                currentRowButtons = screenButtons[(int)currentButton.y].buttons;
-
-                if (currentButton.x > currentRowButtons.Count - 1)
-                {
-                    currentButton = new Vector2(0, currentButton.y);
-                }
-
 
                 highlightButton();
             }
@@ -149,15 +200,39 @@ public class MenuSelection : MonoBehaviour
                     {
                         currentButton += new Vector2(1, 0);
                     }
-                    else if(currentButton.y + 1 < rows)
+                    else if (currentButton.y + 1 <= rows)
                     {
-                        currentButton = new Vector2(0, currentButton.y + 1);
+                        currentRowButtons = screenButtons[(int)currentButton.y].buttons;
+
+                        bool rowHasActive = false;
+
+                        
+                        
+                            for (int i = 0; i < screenButtons[(int)currentButton.y + 1].buttons.Count; i++)
+                            {
+                                if (screenButtons[(int)currentButton.y + 1].buttons[i].activeSelf)
+                                {
+                                    rowHasActive = true;
+                                    currentButton = new Vector2(i, currentButton.y + 1);
+                                    break;
+                                }
+                            }
+                        
+
+                        if (!rowHasActive)
+                        {
+                            currentButton = new Vector2(0, 0);
+                        }
+
+                        currentRowButtons = screenButtons[(int)currentButton.y].buttons;
                     }
                     else
                     {
                         Debug.Log("Reached end of row");
                         currentButton = new Vector2(0, currentButton.y);
+                        currentRowButtons = screenButtons[(int)currentButton.y].buttons;
                     }
+
                 }
                 else if (dir < 0)
                 {
@@ -165,21 +240,40 @@ public class MenuSelection : MonoBehaviour
                     {
                         currentButton -= new Vector2(1, 0);
                     }
-                    else if(currentButton.y - 1 >= 0)
+                    else if (currentButton.y - 1 >= 0)
                     {
-                        Debug.Log("Reached end of row");
                         currentRowButtons = screenButtons[(int)currentButton.y].buttons;
-                        currentButton = new Vector2(currentRowButtons.Count - 1, currentButton.y - 1);
+
+                        bool rowHasActive = false;
+                       
+                            for (int i = 0; i < screenButtons[(int)currentButton.y - 1].buttons.Count; i++)
+                            {
+                                if (screenButtons[(int)currentButton.y - 1].buttons[i].activeSelf)
+                                {
+                                    rowHasActive = true;
+                                    currentButton = new Vector2(i, currentButton.y - 1);
+                                    break;
+                                }
+                            }
+                        
+
+                        if (!rowHasActive)
+                        {
+                            currentButton = new Vector2(0, 0);
+                        }
+
+                        currentRowButtons = screenButtons[(int)currentButton.y].buttons;
                     }
                     else
                     {
                         Debug.Log("Reached end of row");
+
                         currentButton = new Vector2(0, currentButton.y);
+                        currentRowButtons = screenButtons[(int)currentButton.y].buttons;
                     }
+
                 }
             }
-
-            currentRowButtons = screenButtons[(int)currentButton.y].buttons;
 
             highlightButton();
         }
