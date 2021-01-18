@@ -249,12 +249,14 @@ public class Player : MonoBehaviour
                 if (uiHandler.getInMenu(UIHandler.Menus.INVENTORY))
                 {
                     uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
+                    inventory.setInventory(false);
                     stopMovement = false;
                 }
                 else
                 {
                     uiHandler.hideMap();
                     uiHandler.changeDoubleMenu(UIHandler.Menus.PLAYERUI, UIHandler.Menus.INVENTORY);
+                    inventory.setInventory(true);
                     stopMovement = true;
                 }
             }

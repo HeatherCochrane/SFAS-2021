@@ -97,6 +97,7 @@ public class PlayerInventory : MonoBehaviour
     {
         emptyInfoBox();
     }
+
     private void FixedUpdate()
     {
         funds.text = playerFunds.ToString();
@@ -126,10 +127,12 @@ public class PlayerInventory : MonoBehaviour
     {
         inventory.SetActive(set);
 
-        if(set)
+        foreach(Slot obj in slots)
         {
-            emptyInfoBox();
+            obj.slotObject.GetComponent<RectTransform>().localScale = new Vector3(0.7f, 0.7f, 1);
         }
+
+        emptyInfoBox();
     }
 
     void updateUI(Item item)
