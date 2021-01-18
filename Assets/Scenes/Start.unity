@@ -3900,7 +3900,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1139760354093740498, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 73.28799
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1139760354093740498, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_SizeDelta.y
@@ -4412,7 +4412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5995031976520394895, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 120.00003
+      value: 122.34281
       objectReference: {fileID: 0}
     - target: {fileID: 5995031976913497398, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_SizeDelta.y
@@ -4684,7 +4684,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9179662926214864797, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: menuButtonList.Array.data[3].buttons.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9179662926214864797, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: menuButtonList.Array.data[5].buttons.Array.size
@@ -4692,16 +4692,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9179662926214864797, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: menuButtonList.Array.size
-      value: 4
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9179662926214864797, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: menuButtonList.Array.data[4].buttons.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9179662926214864797, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: menuButtonList.Array.data[3].buttons.Array.data[1]
       value: 
-      objectReference: {fileID: 1310346068564049460}
+      objectReference: {fileID: 1310346069272816043}
     - target: {fileID: 9179662926214864797, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: menuButtonList.Array.data[4].buttons.Array.data[0]
       value: 
-      objectReference: {fileID: 1310346069272816043}
+      objectReference: {fileID: 1310346068564049460}
     - target: {fileID: 9179662926214864797, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: menuButtonList.Array.data[5].buttons.Array.data[0]
       value: 
@@ -4713,9 +4717,17 @@ PrefabInstance:
     - target: {fileID: 9179662926214864797, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: menuButtonList.Array.data[3].buttons.Array.data[2]
       value: 
-      objectReference: {fileID: 1310346069272816043}
+      objectReference: {fileID: 1310346068624055984}
     - target: {fileID: 9179662926214864797, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: menuButtonList.Array.data[3].buttons.Array.data[3]
+      value: 
+      objectReference: {fileID: 1310346068624055984}
+    - target: {fileID: 9179662926214864797, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: menuButtonList.Array.data[4].buttons.Array.data[1]
+      value: 
+      objectReference: {fileID: 1310346069272816043}
+    - target: {fileID: 9179662926214864797, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: menuButtonList.Array.data[4].buttons.Array.data[2]
       value: 
       objectReference: {fileID: 1310346068624055984}
     m_RemovedComponents: []
