@@ -30,9 +30,48 @@ public class QuestScreen : MonoBehaviour
 
     List<GameObject> startedQuests = new List<GameObject>();
 
+    [System.Serializable]
+    public struct QuestButtons
+    {
+        public GameObject button;
+        public bool inUse;
+    }
+
+    [SerializeField]
+    List<QuestButtons> avaliableQuestButtons = new List<QuestButtons>();
+
+    [SerializeField]
+    List<QuestButtons> avaliableCompletedButtons = new List<QuestButtons>();
+
+    [SerializeField]
+    GameObject contentAvaliable;
+
+    [SerializeField]
+    GameObject contentCompleted;
     // Start is called before the first frame update
     void Start()
     {
+        for(int i =0; i < contentAvaliable.transform.childCount; i++)
+        {
+            QuestButtons butt = new QuestButtons();
+            butt.button = contentAvaliable.transform.GetChild(i).gameObject;
+            butt.button.SetActive(false);
+            butt.inUse = false;
+
+            avaliableQuestButtons.Add(butt);
+
+        }
+
+        for (int i = 0; i < contentCompleted.transform.childCount; i++)
+        {
+            QuestButtons butt = new QuestButtons();
+            butt.button = contentCompleted.transform.GetChild(i).gameObject;
+            butt.button.SetActive(false);
+            butt.inUse = false;
+
+            avaliableCompletedButtons.Add(butt);
+        }
+
         questScreen.SetActive(false);
     }
 
@@ -59,23 +98,49 @@ public class QuestScreen : MonoBehaviour
 
     public void addActiveQuest(Quest data)
     {
-        newButton = Instantiate(questButtonPrefab);
-        newButton.GetComponentInChildren<TextMeshProUGUI>().text = data.questName;
-        newButton.transform.SetParent(questParent.transform);
-        newButton.transform.SetSiblingIndex(0);
-        newButton.GetComponent<QuestButton>().setData(data, this);
 
-        startedQuests.Add(newButton);
+        for (int i = 0; i < avaliableQuestButtons.Count; i++)
+        {
+            if (!avaliableQuestButtons[i].inUse)
+            {
+                newButton = avaliableQuestButtons[i].button;
+                newButton.SetActive(true);
+                newButton.GetComponentInChildren<TextMeshProUGUI>().text = data.questName;
+                newButton.transform.SetParent(questParent.transform);
+                newButton.transform.SetSiblingIndex(0);
+                newButton.GetComponent<QuestButton>().setData(data, this);
+
+                QuestButtons butt = avaliableQuestButtons[i];
+                butt.inUse = true;
+                avaliableQuestButtons[i] = butt;
+
+                startedQuests.Add(newButton);
+                break;
+            }
+        }
     }
 
     public void addCompletedQuest(Quest data)
     {
         removeQuest(data);
 
-        newButton = Instantiate(questButtonPrefab);
-        newButton.GetComponentInChildren<TextMeshProUGUI>().text = data.questName;
-        newButton.transform.SetParent(finishedQuestParent.transform);
-        newButton.GetComponent<QuestButton>().setData(data, this);
+        for (int i = 0; i < avaliableCompletedButtons.Count; i++)
+        {
+            if (!avaliableCompletedButtons[i].inUse)
+            {
+                newButton = avaliableCompletedButtons[i].button;
+                newButton.SetActive(true);
+                newButton.GetComponentInChildren<TextMeshProUGUI>().text = data.questName;
+                newButton.transform.SetParent(finishedQuestParent.transform);
+                newButton.GetComponent<QuestButton>().setData(data, this);
+
+
+                QuestButtons butt = avaliableQuestButtons[i];
+                butt.inUse = false;
+                avaliableQuestButtons[i] = butt;
+                break;
+            }
+        }
     }
 
     void removeQuest(Quest data)
@@ -86,6 +151,12 @@ public class QuestScreen : MonoBehaviour
             {
                 GameObject b = startedQuests[i];
                 startedQuests.RemoveAt(i);
+
+                QuestButtons butt = avaliableQuestButtons[i];
+                butt.button.SetActive(false);
+                butt.inUse = false;
+                avaliableQuestButtons[i] = butt;
+
                 Destroy(b);
                 break;
             }

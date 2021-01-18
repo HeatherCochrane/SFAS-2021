@@ -19,8 +19,15 @@ public class PlayerQuests : MonoBehaviour
     [SerializeField]
     QuestScreen questScreen;
 
+
+    private void Start()
+    {
+        
+    }
+
     public void addNewQuest(Quest n)
     {
+        
         questsStarted.Add(n);
         questScreen.addActiveQuest(n);
 

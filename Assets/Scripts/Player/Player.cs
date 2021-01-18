@@ -199,7 +199,6 @@ public class Player : MonoBehaviour
                 }
                 else if (trader != null)
                 {
-                    uiHandler.changeMenu(UIHandler.Menus.TRADER);
                     beginTrading();
                     trader = null;
                 }
@@ -230,7 +229,7 @@ public class Player : MonoBehaviour
                         setMovement(true);
                     }
                 }
-                else
+                else if (!uiHandler.GetInMenu())
                 {
                     uiHandler.hideMap();
                     setMovement(false);
@@ -252,7 +251,7 @@ public class Player : MonoBehaviour
                     inventory.setInventory(false);
                     stopMovement = false;
                 }
-                else
+                else if(!uiHandler.GetInMenu())
                 {
                     uiHandler.hideMap();
                     uiHandler.changeDoubleMenu(UIHandler.Menus.PLAYERUI, UIHandler.Menus.INVENTORY);
@@ -270,15 +269,15 @@ public class Player : MonoBehaviour
         {
             if (trackInput)
             {
-                if (!uiHandler.getInMenu(UIHandler.Menus.QUESTS))
-                {
-                    uiHandler.changeMenu(UIHandler.Menus.QUESTS);
-                    setMovement(true);
-                }
-                else
+                if (uiHandler.getInMenu(UIHandler.Menus.QUESTS))
                 {
                     uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
                     setMovement(false);
+                }
+                else if (!uiHandler.GetInMenu())
+                {
+                    uiHandler.changeMenu(UIHandler.Menus.QUESTS);
+                    setMovement(true);
                 }
             }
         }
@@ -652,7 +651,7 @@ public class Player : MonoBehaviour
         trader.setTraderCanvas(uiHandler.getMenuObject(UIHandler.Menus.TRADER));
         SceneLoader.instance.traderButton.GetComponent<TraderButton>().setTrader(trader);
         SceneLoader.instance.leaveButton.GetComponent<TraderButton>().setTrader(trader);
-        uiHandler.changeDoubleMenu(UIHandler.Menus.TRADER, UIHandler.Menus.INVENTORY);
+        uiHandler.changeDoubleMenu(UIHandler.Menus.INVENTORY, UIHandler.Menus.TRADER);
         setMovement(true);
         stopInventoryToggle = true;
     }

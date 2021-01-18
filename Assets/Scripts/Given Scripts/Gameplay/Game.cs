@@ -134,7 +134,6 @@ public class Game : MonoBehaviour
             choices[i].transform.SetParent(choiceParent.transform);
         }
 
-        buttons.updateButtons();
     }
     public void pickOption(int p)
     {

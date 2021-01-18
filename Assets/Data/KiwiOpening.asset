@@ -17,7 +17,7 @@ MonoBehaviour:
   - _choices:
     - _text: Continue...
       _beatId: 2
-      quest: {fileID: 0}
+      quest: {fileID: 11400000, guid: cb4a02d8a237d5448a55f3191fd04001, type: 2}
     _text: Ah another adventurer! Such a wonderful looking area wouldn't you say?
       I've been documenting the fauna around here for my research you see but I feel
       as though I should go further.

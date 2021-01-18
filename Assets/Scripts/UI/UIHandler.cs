@@ -25,10 +25,13 @@ public class UIHandler : MonoBehaviour
 
     MenuSelection currentMenuButtons;
 
+    bool inMenu = false;
+
     // Start is called before the first frame update
     void Start()
     {
         changeMenu(Menus.START);
+        inMenu = true;
     }
 
     // Update is called once per frame
@@ -46,27 +49,57 @@ public class UIHandler : MonoBehaviour
     {
         currentMenu2 = n;
 
-        for(int i =0; i < allActiveMenus.Count; i++)
+        //if not switching to player ui and already in a menu
+        if(n != Menus.PLAYERUI && currentMenu != Menus.PLAYERUI)
         {
-            if (allActiveMenus[i].obj != null)
-            {
-                if (allActiveMenus[i].name == n)
-                {
-                    allActiveMenus[i].obj.SetActive(true);
-                    currentMenu = n;
+            //DONT
+            Debug.Log("DONT SWITCH ALREADY IN MENU");
+        }
+        else
+        {
+            //if switching to a diff menu and in player ui
+            //GO AHEAD
 
-                    if (allActiveMenus[i].buttons != null)
-                    {
-                        Player.instance.menus.setMenu(allActiveMenus[i].buttons.getMenuList());
-                    }
-                    
-                }
-                else
+            for (int i = 0; i < allActiveMenus.Count; i++)
+            {
+                if (allActiveMenus[i].obj != null)
                 {
-                    allActiveMenus[i].obj.SetActive(false);
+                    if (allActiveMenus[i].name == n)
+                    {
+                        allActiveMenus[i].obj.SetActive(true);
+                        currentMenu = n;
+
+                        if (allActiveMenus[i].buttons != null)
+                        {
+                            Player.instance.menus.setMenu(allActiveMenus[i].buttons.getMenuList());
+                        }
+
+                    }
+                    else
+                    {
+                        allActiveMenus[i].obj.SetActive(false);
+                    }
                 }
             }
         }
+           
+        
+
+        if (currentMenu == Menus.PLAYERUI)
+        {
+            Player.instance.menus.setInstance();
+            inMenu = false;
+        }
+        else
+        {
+            inMenu = true;
+        }
+
+    }
+
+    public bool GetInMenu()
+    {
+        return inMenu;
     }
 
     public void setCurrentMap(GameObject m)
@@ -122,44 +155,55 @@ public class UIHandler : MonoBehaviour
     {
         bool pickPriority = false;
 
-        for (int i = 0; i < allActiveMenus.Count; i++)
+        //if not switching to playerUI and also not in the UI
+        if (n != Menus.PLAYERUI && currentMenu != Menus.PLAYERUI)
         {
-            if (allActiveMenus[i].obj != null)
+            //DONT
+            Debug.Log("DONT SWITCH ALREADY IN MENU");
+        }
+        else
+        {
+            for (int i = 0; i < allActiveMenus.Count; i++)
             {
-                if (allActiveMenus[i].name == n)
+                if (allActiveMenus[i].obj != null)
                 {
-                    allActiveMenus[i].obj.SetActive(true);
-                    currentMenu = n;
-                    if (allActiveMenus[i].buttons != null)
+                    if (allActiveMenus[i].name == n)
                     {
-                        if (allActiveMenus[i].priority)
+                        allActiveMenus[i].obj.SetActive(true);
+                        currentMenu = n;
+                       
+                    }
+                    else if (allActiveMenus[i].name == m)
+                    {
+                        allActiveMenus[i].obj.SetActive(true);
+                        currentMenu2 = m;
+                        if (allActiveMenus[i].buttons != null)
                         {
-                            Player.instance.menus.setMenu(allActiveMenus[i].buttons.getMenuList());
-
-                            pickPriority = true;
+                            if (allActiveMenus[i].priority)
+                            {
+                                Player.instance.menus.setMenu(allActiveMenus[i].buttons.getMenuList());
+                                pickPriority = true;
+                            }
                         }
                     }
-                }
-                else if (allActiveMenus[i].name == m)
-                {
-                    allActiveMenus[i].obj.SetActive(true);
-                    currentMenu2 = m;
-                    if (allActiveMenus[i].buttons != null)
+                    else
                     {
-                        if (allActiveMenus[i].priority)
-                        {
-                            Player.instance.menus.setMenu(allActiveMenus[i].buttons.getMenuList());
-
-                            pickPriority = true;
-                        }
+                        allActiveMenus[i].obj.SetActive(false);
                     }
-                }
-                else
-                {
-                    allActiveMenus[i].obj.SetActive(false);
                 }
             }
         }
+        
+        if(currentMenu == Menus.PLAYERUI || (currentMenu == Menus.PLAYERUI && currentMenu2 == Menus.INVENTORY))
+        {
+            inMenu = true;
+        }
+        else
+        {
+            inMenu = false;
+            Player.instance.menus.setInstance();
+        }
+
     }
 
     public bool getInMenu(Menus m)

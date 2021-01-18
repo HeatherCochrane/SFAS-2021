@@ -29,6 +29,8 @@ public class Quest : ScriptableObject
     [SerializeField]
     public BossScene.BossNames bossName;
 
+    
+
     public bool checkKills(List<Kills> k)
     {
         if (k.Count > 0 && totalKillsNeeded.Count > 0)

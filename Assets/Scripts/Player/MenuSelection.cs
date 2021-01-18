@@ -63,7 +63,6 @@ public class MenuSelection : MonoBehaviour
         {
             lastButton.transform.GetComponent<RectTransform>().localScale = originalScale;
 
-
             if (currentRowButtons[(int)currentButton.x].activeSelf)
             {
                 highlightedButton = currentRowButtons[(int)currentButton.x];
@@ -77,6 +76,8 @@ public class MenuSelection : MonoBehaviour
             originalScale = highlightedButton.transform.GetComponent<RectTransform>().localScale;
             highlightedButton.transform.GetComponent<RectTransform>().localScale = new Vector3(originalScale.x * 1.2f, originalScale.y * 1.2f, 1);
             lastButton = highlightedButton;
+
+            Debug.Log(highlightedButton.GetComponent<RectTransform>().localScale);
         }
 
     }
@@ -405,10 +406,13 @@ public class MenuSelection : MonoBehaviour
         {
             if (ctx.performed)
             {
-                Debug.Log("SELECT!" + (int)currentButton.y + "  " + (int)currentButton.x);
-                screenButtons[(int)currentButton.y].buttons[(int)currentButton.x].GetComponent<Button>().onClick.Invoke();
+                if (highlightedButton.activeSelf)
+                {
+                    Debug.Log("SELECT!" + (int)currentButton.y + "  " + (int)currentButton.x);
+                    screenButtons[(int)currentButton.y].buttons[(int)currentButton.x].GetComponent<Button>().onClick.Invoke();
 
-                updateCurrentButton();
+                    updateCurrentButton();
+                }
             }
         }
     }
