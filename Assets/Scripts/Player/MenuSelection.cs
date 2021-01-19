@@ -56,6 +56,9 @@ public class MenuSelection : MonoBehaviour
             highlightedButton.transform.GetComponent<RectTransform>().localScale = originalScale;
         }
 
+        lastButton = null;
+        highlightedButton = null;
+
         currentScrollBar = null;
     }
     public void highlightButton()
@@ -79,7 +82,6 @@ public class MenuSelection : MonoBehaviour
             highlightedButton.transform.GetComponent<RectTransform>().localScale = new Vector3(originalScale.x * 1.2f, originalScale.y * 1.2f, 1);
             lastButton = highlightedButton;
 
-            Debug.Log(highlightedButton.GetComponent<RectTransform>().localScale);
 
             if(screenButtons[(int)currentButton.y].scrollBar != null)
             {
@@ -128,20 +130,85 @@ public class MenuSelection : MonoBehaviour
                     }
                     else if (currentButton.y + 1 <= rows)
                     {
-
                         currentRowButtons = screenButtons[(int)currentButton.y].buttons;
 
                         bool rowHasActive = false;
                         if (currentButton.x < screenButtons[(int)currentButton.y + 1].buttons.Count)
                         {
-                            if (screenButtons[(int)currentButton.y + 1].buttons[(int)currentButton.x].activeSelf)
+                            if (screenButtons[(int)currentButton.y + 1].buttons[(int)currentButton.x].activeSelf && (currentButton.y + 1 != rows - 1))
                             {
                                 currentButton = new Vector2(currentButton.x, currentButton.y + 1);
-                                Debug.Log(currentButton + " " + currentRowButtons[(int)currentButton.x].name + " is active!");
                                 rowHasActive = true;
                             }
                             else
                             {
+                                if (Player.instance.uiHandler.getInMenu(UIHandler.Menus.TRADER))
+                                {
+                                    if (currentButton.x >= 3)
+                                    {
+                                        Debug.Log("RIGHT");
+                                        for (int i = screenButtons[(int)currentButton.y + 1].buttons.Count - 1; i > 0; i--)
+                                        {
+                                            if (screenButtons[(int)currentButton.y + 1].buttons[i].activeSelf)
+                                            {
+                                                rowHasActive = true;
+                                                currentButton = new Vector2(i, currentButton.y + 1);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Debug.Log("LEFT");
+                                        for (int i = 0; i < screenButtons[(int)currentButton.y + 1].buttons.Count; i++)
+                                        {
+                                            if (screenButtons[(int)currentButton.y + 1].buttons[i].activeSelf)
+                                            {
+                                                rowHasActive = true;
+                                                currentButton = new Vector2(i, currentButton.y + 1);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                               
+                            }
+                        }
+                        else
+                        {
+                            
+                            if (Player.instance.uiHandler.getInMenu(UIHandler.Menus.TRADER))
+                            {
+                                if (currentButton.x >= 3)
+                                {
+                                    Debug.Log("RIGHT");
+                                    for (int i = screenButtons[(int)currentButton.y + 1].buttons.Count - 1; i > 0; i--)
+                                    {
+                                        if (screenButtons[(int)currentButton.y + 1].buttons[i].activeSelf)
+                                        {
+                                            rowHasActive = true;
+                                            currentButton = new Vector2(i, currentButton.y + 1);
+                                            break;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    Debug.Log("LEFT");
+                                    for (int i = 0; i < screenButtons[(int)currentButton.y + 1].buttons.Count; i++)
+                                    {
+                                        if (screenButtons[(int)currentButton.y + 1].buttons[i].activeSelf)
+                                        {
+                                            rowHasActive = true;
+                                            currentButton = new Vector2(i, currentButton.y + 1);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Debug.Log("LEFT");
                                 for (int i = 0; i < screenButtons[(int)currentButton.y + 1].buttons.Count; i++)
                                 {
                                     if (screenButtons[(int)currentButton.y + 1].buttons[i].activeSelf)
@@ -153,22 +220,10 @@ public class MenuSelection : MonoBehaviour
                                 }
                             }
                         }
-                        else
-                        {
-                            for (int i = 0; i < screenButtons[(int)currentButton.y + 1].buttons.Count; i++)
-                            {
-                                if (screenButtons[(int)currentButton.y + 1].buttons[i].activeSelf)
-                                {
-                                    rowHasActive = true;
-                                    currentButton = new Vector2(i, currentButton.y + 1);
-                                    break;
-                                }
-                            }
-                        }
 
                         if (!rowHasActive)
                         {
-                                currentButton = new Vector2(0, 0);
+                            currentButton = new Vector2(0, 0);
                         }
 
                         currentRowButtons = screenButtons[(int)currentButton.y].buttons;
@@ -193,33 +248,73 @@ public class MenuSelection : MonoBehaviour
                         bool rowHasActive = false;
                         if (currentButton.x < screenButtons[(int)currentButton.y - 1].buttons.Count)
                         {
-                            if (screenButtons[(int)currentButton.y - 1].buttons[(int)currentButton.x].activeSelf)
+                            if (screenButtons[(int)currentButton.y - 1].buttons[(int)currentButton.x].activeSelf && currentButton.y - 1 != rows)
                             {
                                 currentButton = new Vector2(currentButton.x, currentButton.y - 1);
                                 rowHasActive = true;
                             }
                             else
                             {
-                                for (int i = 0; i < screenButtons[(int)currentButton.y - 1].buttons.Count; i++)
+                                if (Player.instance.uiHandler.getInMenu(UIHandler.Menus.TRADER))
                                 {
-                                    if (screenButtons[(int)currentButton.y - 1].buttons[i].activeSelf)
+                                    if (currentButton.x >= 3)
                                     {
-                                        rowHasActive = true;
-                                        currentButton = new Vector2(i, currentButton.y - 1);
-                                        break;
+                                        Debug.Log("RIGHT");
+                                        for (int i = screenButtons[(int)currentButton.y - 1].buttons.Count - 1; i > 0; i--)
+                                        {
+                                            if (screenButtons[(int)currentButton.y - 1].buttons[i].activeSelf)
+                                            {
+                                                rowHasActive = true;
+                                                currentButton = new Vector2(i, currentButton.y - 1);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Debug.Log("LEFT");
+                                        for (int i = 0; i < screenButtons[(int)currentButton.y - 1].buttons.Count; i++)
+                                        {
+                                            if (screenButtons[(int)currentButton.y - 1].buttons[i].activeSelf)
+                                            {
+                                                rowHasActive = true;
+                                                currentButton = new Vector2(i, currentButton.y - 1);
+                                                break;
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
                         else
                         {
-                            for (int i = 0; i < screenButtons[(int)currentButton.y - 1].buttons.Count; i++)
+                            if (Player.instance.uiHandler.getInMenu(UIHandler.Menus.TRADER))
                             {
-                                if (screenButtons[(int)currentButton.y - 1].buttons[i].activeSelf)
+                                if (currentButton.x >= 3)
                                 {
-                                    rowHasActive = true;
-                                    currentButton = new Vector2(i, currentButton.y - 1);
-                                    break;
+                                    Debug.Log("RIGHT");
+                                    for (int i = screenButtons[(int)currentButton.y - 1].buttons.Count - 1; i > 0; i--)
+                                    {
+                                        if (screenButtons[(int)currentButton.y - 1].buttons[i].activeSelf)
+                                        {
+                                            rowHasActive = true;
+                                            currentButton = new Vector2(i, currentButton.y - 1);
+                                            break;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    Debug.Log("LEFT");
+                                    for (int i = 0; i < screenButtons[(int)currentButton.y - 1].buttons.Count; i++)
+                                    {
+                                        if (screenButtons[(int)currentButton.y - 1].buttons[i].activeSelf)
+                                        {
+                                            rowHasActive = true;
+                                            currentButton = new Vector2(i, currentButton.y - 1);
+                                            break;
+                                        }
+                                    }
                                 }
                             }
                         }

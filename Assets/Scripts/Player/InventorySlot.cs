@@ -121,7 +121,7 @@ public class InventorySlot : MonoBehaviour
                 o.GetComponent<SpriteRenderer>().sprite = slotData.itemSprite;
                 o.GetComponent<WorldItem>().setData(slotData);
                 o.SetActive(true);
-                o.transform.position = Player.instance.transform.position + new Vector3(Random.Range(-2, 2), 3, 0);
+                o.transform.position = Player.instance.transform.position + new Vector3(Random.Range(-2, 2), 0, 0);
             }
             
             amount -= 1;
