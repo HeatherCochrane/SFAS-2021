@@ -22,6 +22,12 @@ public class Audio : MonoBehaviour
     AudioClip dialogueClose;
 
     [SerializeField]
+    AudioClip mapOpen;
+
+    [SerializeField]
+    AudioClip mapClose;
+
+    [SerializeField]
     AudioClip buttonTap;
 
     public void playInventory(bool open)
@@ -51,6 +57,23 @@ public class Audio : MonoBehaviour
         else
         {
             newAudioSource.source.clip = dialogueClose;
+        }
+
+        newAudioSource.source.Play();
+
+    }
+
+    public void playMap(bool open)
+    {
+        newAudioSource = Instantiate(audioSource);
+
+        if (open)
+        {
+            newAudioSource.source.clip = mapOpen;
+        }
+        else
+        {
+            newAudioSource.source.clip = mapClose;
         }
 
         newAudioSource.source.Play();

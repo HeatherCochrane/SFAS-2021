@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
+using UnityEngine.EventSystems;
 
 public class MenuSelection : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class MenuSelection : MonoBehaviour
 
     ScrollRect currentScrollBar;
 
+    bool mouseOnButt = false;
+    GameObject mouseButton;
     public void setMenu(List<MenuButtons.Buttons> b)
     {
         if (b.Count >= 1)
@@ -509,13 +512,30 @@ public class MenuSelection : MonoBehaviour
         {
             if (ctx.performed)
             {
-                if (highlightedButton.activeSelf)
+                if (ctx.control.ToString() is "Button:/Mouse/leftButton")
                 {
-                    screenButtons[(int)currentButton.y].buttons[(int)currentButton.x].GetComponent<Button>().onClick.Invoke();
+                    if (mouseButton == highlightedButton)
+                    {
+                        if (highlightedButton.activeSelf)
+                        {
+                            screenButtons[(int)currentButton.y].buttons[(int)currentButton.x].GetComponent<Button>().onClick.Invoke();
 
-                    updateCurrentButton();
+                            updateCurrentButton();
 
-                    Player.instance.audioHandler.playButtonTap();
+                            Player.instance.audioHandler.playButtonTap();
+                        }
+                    }
+                }
+                else
+                {
+                    if (highlightedButton.activeSelf)
+                    {
+                        screenButtons[(int)currentButton.y].buttons[(int)currentButton.x].GetComponent<Button>().onClick.Invoke();
+
+                        updateCurrentButton();
+
+                        Player.instance.audioHandler.playButtonTap();
+                    }
                 }
             }
         }
@@ -557,6 +577,13 @@ public class MenuSelection : MonoBehaviour
                 }
             }
         }
+
+    }
+
+    public void setMouseOnButton(bool set, GameObject m)
+    {
+        mouseOnButt = set;
+        mouseButton = m;
 
     }
 }

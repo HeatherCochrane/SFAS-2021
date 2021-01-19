@@ -114,7 +114,10 @@ public class UIHandler : MonoBehaviour
         {
             for (int i = 0; i < allActiveMenus.Count; i++)
             {
-                allActiveMenus[i].obj.SetActive(false);
+                if (allActiveMenus[i].obj != null)
+                {
+                    allActiveMenus[i].obj.SetActive(false);
+                }
             }
 
             if (currentMap != null)
@@ -122,9 +125,11 @@ public class UIHandler : MonoBehaviour
                 currentMap.SetActive(true);
             }
 
+            inMenu = true;
             return true;
         }
 
+        inMenu = false;
         return false;
     }
 

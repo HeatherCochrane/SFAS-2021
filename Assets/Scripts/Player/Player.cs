@@ -231,12 +231,14 @@ public class Player : MonoBehaviour
                     if (uiHandler.showMap())
                     {
                         setMovement(true);
+                        audioHandler.playMap(true);
                     }
                 }
                 else if (!uiHandler.GetInMenu())
                 {
                     uiHandler.hideMap();
                     setMovement(false);
+                    audioHandler.playMap(false);
                 }
             }
         }
@@ -281,11 +283,13 @@ public class Player : MonoBehaviour
                 {
                     uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
                     setMovement(false);
+                    audioHandler.playMap(false);
                 }
                 else if (!uiHandler.GetInMenu())
                 {
                     uiHandler.changeMenu(UIHandler.Menus.QUESTS);
                     setMovement(true);
+                    audioHandler.playMap(true);
                 }
             }
         }
