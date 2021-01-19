@@ -30,6 +30,21 @@ public class Audio : MonoBehaviour
     [SerializeField]
     AudioClip buttonTap;
 
+    [SerializeField]
+    AudioClip melee;
+
+    [SerializeField]
+    AudioClip ranged;
+
+    [SerializeField]
+    AudioClip dash;
+
+    [SerializeField]
+    AudioClip enemyDamage;
+
+    [SerializeField]
+    AudioClip playerDamage;
+
     public void playInventory(bool open)
     {
         newAudioSource = Instantiate(audioSource);
@@ -87,5 +102,24 @@ public class Audio : MonoBehaviour
         newAudioSource.source.Play();
     }
 
+    public void playMelee()
+    {
+        newAudioSource = Instantiate(audioSource);
+        newAudioSource.source.clip = melee;
+        newAudioSource.source.Play();
+    }
 
+    public void playRanged()
+    {
+        newAudioSource = Instantiate(audioSource);
+        newAudioSource.source.clip = ranged;
+        newAudioSource.source.Play();
+    }
+
+    public void playDash()
+    {
+        newAudioSource = Instantiate(audioSource);
+        newAudioSource.source.clip = dash;
+        newAudioSource.source.Play();
+    }
 }

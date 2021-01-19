@@ -311,6 +311,7 @@ public class Player : MonoBehaviour
                     Invoke("stopAttackCooldown", attackCooldown);
                     rb.velocity += new Vector2(dir * 4, 0);
 
+                    audioHandler.playMelee();
                 }
             }
         }
@@ -327,6 +328,8 @@ public class Player : MonoBehaviour
                     switchAnimation(AnimationStates.RANGED);
                     onAttackCooldown = true;
                     Invoke("stopAttackCooldown", attackCooldown);
+
+                    audioHandler.playRanged();
                 }
             }
         }
@@ -360,6 +363,8 @@ public class Player : MonoBehaviour
                 startingY = transform.position.y;
                 switchAnimation(AnimationStates.DASH);
                 dashTrail.gameObject.SetActive(true);
+
+                audioHandler.playDash();
             }
         }
     }

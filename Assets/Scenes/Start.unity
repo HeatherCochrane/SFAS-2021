@@ -4061,6 +4061,18 @@ PrefabInstance:
       propertyPath: mapOpen
       value: 
       objectReference: {fileID: 8300000, guid: 9b214bdf712316f43ac2c3e2a0cc01ab, type: 3}
+    - target: {fileID: 2223995012511569436, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: melee
+      value: 
+      objectReference: {fileID: 8300000, guid: 9b103e4d27437ca48a1c05975ba1a24c, type: 3}
+    - target: {fileID: 2223995012511569436, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: dash
+      value: 
+      objectReference: {fileID: 8300000, guid: 20d9db991d6bd1449b8ea4a1dbb7d5af, type: 3}
+    - target: {fileID: 2223995012511569436, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: ranged
+      value: 
+      objectReference: {fileID: 8300000, guid: 92335b24f6b675246b31f708dd2919d2, type: 3}
     - target: {fileID: 2486312420252752027, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
