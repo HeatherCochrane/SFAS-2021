@@ -15,19 +15,16 @@ MonoBehaviour:
   completeThisQuest: {fileID: 0}
   _beats:
   - _choices:
-    - _text: The first choice is to go one way...
+    - _text: First choice..
       _beatId: 2
       quest: {fileID: 11400000, guid: da648812ab80c494e85dccfbe5a1bb86, type: 2}
-    - _text: The second choice is to go the alternative way...
+    - _text: Second choice...
       _beatId: 3
       quest: {fileID: 11400000, guid: da648812ab80c494e85dccfbe5a1bb86, type: 2}
     _text: "The story starts here. \nSome stuff happens and then you are faced with
       a choice. "
     _id: 1
-  - _choices:
-    - _text: New Beat Choice
-      _beatId: 4
-      quest: {fileID: 0}
+  - _choices: []
     _text: "You choose to go the first way and this is an ok choice, the story plays
       out. You are happy. \n\nTHE END"
     _id: 2

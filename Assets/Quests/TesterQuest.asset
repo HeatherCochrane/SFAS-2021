@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: TesterQuest
   m_EditorClassIdentifier: 
   questName: Tester
+  questDescription: 
   questsCompleted: []
   totalKillsNeeded:
   - species: 0
     number: 1
-  bossName: 0
+  bossName: 2

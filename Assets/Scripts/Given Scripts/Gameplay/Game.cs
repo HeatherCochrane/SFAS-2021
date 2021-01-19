@@ -200,6 +200,7 @@ public class Game : MonoBehaviour
         dialogueFinished = true;
         _output.Clear();
 
+        choices[4].SetActive(false);
 
 
         Player.instance.setMovement(false);

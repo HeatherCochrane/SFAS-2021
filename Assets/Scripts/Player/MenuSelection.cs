@@ -25,6 +25,9 @@ public class MenuSelection : MonoBehaviour
     Vector3 originalScale;
 
     bool instance = false;
+
+    ScrollRect currentScrollBar;
+
     public void setMenu(List<MenuButtons.Buttons> b)
     {
         if (b.Count >= 1)
@@ -43,10 +46,6 @@ public class MenuSelection : MonoBehaviour
             instance = true;
             highlightButton();
         }
-        else
-        {
-            Debug.Log("BUTTON ARRAY EMPTY!");
-        }
     }
 
     public void setInstance()
@@ -56,6 +55,8 @@ public class MenuSelection : MonoBehaviour
         {
             highlightedButton.transform.GetComponent<RectTransform>().localScale = originalScale;
         }
+
+        currentScrollBar = null;
     }
     public void highlightButton()
     {
@@ -71,6 +72,7 @@ public class MenuSelection : MonoBehaviour
             {
                 currentButton = new Vector2(0, 0);
                 highlightedButton = screenButtons[0].buttons[0];
+                currentRowButtons = screenButtons[0].buttons;
             }
 
             originalScale = highlightedButton.transform.GetComponent<RectTransform>().localScale;
@@ -78,6 +80,19 @@ public class MenuSelection : MonoBehaviour
             lastButton = highlightedButton;
 
             Debug.Log(highlightedButton.GetComponent<RectTransform>().localScale);
+
+            if(screenButtons[(int)currentButton.y].scrollBar != null)
+            {
+                currentScrollBar = screenButtons[(int)currentButton.y].scrollBar;
+            }
+            else
+            {
+                currentScrollBar = null;
+            }
+            if(currentScrollBar != null)
+            {
+                
+            }
         }
 
     }
@@ -88,15 +103,11 @@ public class MenuSelection : MonoBehaviour
         {
             lastButton.transform.GetComponent<RectTransform>().localScale = originalScale;
 
-            Debug.Log(lastButton.name);
-
             highlightedButton = currentRowButtons[(int)currentButton.x];
 
             originalScale = highlightedButton.transform.GetComponent<RectTransform>().localScale;
             highlightedButton.transform.GetComponent<RectTransform>().localScale = new Vector3(originalScale.x * 1.2f, originalScale.y * 1.2f, 1);
             lastButton = highlightedButton;
-
-            Debug.Log(lastButton);
         }
 
     }
@@ -117,6 +128,7 @@ public class MenuSelection : MonoBehaviour
                     }
                     else if (currentButton.y + 1 <= rows)
                     {
+
                         currentRowButtons = screenButtons[(int)currentButton.y].buttons;
 
                         bool rowHasActive = false;
@@ -125,7 +137,7 @@ public class MenuSelection : MonoBehaviour
                             if (screenButtons[(int)currentButton.y + 1].buttons[(int)currentButton.x].activeSelf)
                             {
                                 currentButton = new Vector2(currentButton.x, currentButton.y + 1);
-                                Debug.Log(currentButton + " " + currentRowButtons[(int)currentButton.x].name);
+                                Debug.Log(currentButton + " " + currentRowButtons[(int)currentButton.x].name + " is active!");
                                 rowHasActive = true;
                             }
                             else
@@ -156,14 +168,13 @@ public class MenuSelection : MonoBehaviour
 
                         if (!rowHasActive)
                         {
-                            currentButton = new Vector2(0, 0);
+                                currentButton = new Vector2(0, 0);
                         }
 
                         currentRowButtons = screenButtons[(int)currentButton.y].buttons;
                     }
                     else
                     {
-                        Debug.Log("Reached end of button rows");
                         currentButton = new Vector2(0, 0);
                         currentRowButtons = screenButtons[0].buttons;
                     }
@@ -222,7 +233,6 @@ public class MenuSelection : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("Reached end of button rows");
                         currentButton = new Vector2(0, 0);
                         currentRowButtons = screenButtons[0].buttons;
                     }
@@ -365,7 +375,7 @@ public class MenuSelection : MonoBehaviour
 
                         bool rowHasActive = false;
 
-                        for (int i = (int)currentButton.x; i < screenButtons[(int)currentButton.y - 1].buttons.Count; i++)
+                        for (int i = (int)currentButton.x; i > 0; i--)
                         {
                             if (screenButtons[(int)currentButton.y - 1].buttons[i].activeSelf)
                             {
@@ -385,8 +395,6 @@ public class MenuSelection : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("Reached end of row");
-
                         currentButton = new Vector2(0, currentButton.y);
                         currentRowButtons = screenButtons[(int)currentButton.y].buttons;
                     }
@@ -408,7 +416,6 @@ public class MenuSelection : MonoBehaviour
             {
                 if (highlightedButton.activeSelf)
                 {
-                    Debug.Log("SELECT!" + (int)currentButton.y + "  " + (int)currentButton.x);
                     screenButtons[(int)currentButton.y].buttons[(int)currentButton.x].GetComponent<Button>().onClick.Invoke();
 
                     updateCurrentButton();
@@ -427,7 +434,6 @@ public class MenuSelection : MonoBehaviour
                 {
                     if (screenButtons[i].buttons[j].activeSelf)
                     {
-                        Debug.Log(screenButtons[i].buttons[j].name);
                         currentButton = new Vector2(j, i);
                         currentRowButtons = screenButtons[i].buttons;
                         highlightButton();
@@ -436,11 +442,6 @@ public class MenuSelection : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            Debug.Log("Highlighted Button: " + highlightedButton);
-        }
-
     }
 
     public void setActiveButton(GameObject b)
@@ -453,7 +454,6 @@ public class MenuSelection : MonoBehaviour
                 {
                     currentButton = new Vector2(j, i);
                     currentRowButtons = screenButtons[i].buttons;
-                    Debug.Log(currentButton);
 
                     highlightPointerButton();
                     return;

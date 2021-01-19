@@ -194,7 +194,7 @@ public class UIHandler : MonoBehaviour
             }
         }
         
-        if(currentMenu == Menus.PLAYERUI || (currentMenu == Menus.PLAYERUI && currentMenu2 == Menus.INVENTORY))
+        if((currentMenu == Menus.PLAYERUI && currentMenu2 == Menus.INVENTORY) || currentMenu == Menus.INVENTORY && currentMenu2 == Menus.TRADER)
         {
             inMenu = true;
         }

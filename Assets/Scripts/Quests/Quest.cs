@@ -102,12 +102,14 @@ public class Quest : ScriptableObject
             {
                 return true;
             }
+            else
+            {
+                return false;
+            }
         }
         else
         {
             return true;
         }
-
-        return false;
     }
 }

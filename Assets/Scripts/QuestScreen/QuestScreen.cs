@@ -41,13 +41,8 @@ public class QuestScreen : MonoBehaviour
     List<QuestButtons> avaliableQuestButtons = new List<QuestButtons>();
 
     [SerializeField]
-    List<QuestButtons> avaliableCompletedButtons = new List<QuestButtons>();
-
-    [SerializeField]
     GameObject contentAvaliable;
 
-    [SerializeField]
-    GameObject contentCompleted;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,19 +54,7 @@ public class QuestScreen : MonoBehaviour
             butt.inUse = false;
 
             avaliableQuestButtons.Add(butt);
-
         }
-
-        for (int i = 0; i < contentCompleted.transform.childCount; i++)
-        {
-            QuestButtons butt = new QuestButtons();
-            butt.button = contentCompleted.transform.GetChild(i).gameObject;
-            butt.button.SetActive(false);
-            butt.inUse = false;
-
-            avaliableCompletedButtons.Add(butt);
-        }
-
         questScreen.SetActive(false);
     }
 
@@ -120,44 +103,23 @@ public class QuestScreen : MonoBehaviour
         }
     }
 
-    public void addCompletedQuest(Quest data)
-    {
-        removeQuest(data);
-
-        for (int i = 0; i < avaliableCompletedButtons.Count; i++)
-        {
-            if (!avaliableCompletedButtons[i].inUse)
-            {
-                newButton = avaliableCompletedButtons[i].button;
-                newButton.SetActive(true);
-                newButton.GetComponentInChildren<TextMeshProUGUI>().text = data.questName;
-                newButton.transform.SetParent(finishedQuestParent.transform);
-                newButton.GetComponent<QuestButton>().setData(data, this);
-
-
-                QuestButtons butt = avaliableQuestButtons[i];
-                butt.inUse = false;
-                avaliableQuestButtons[i] = butt;
-                break;
-            }
-        }
-    }
-
-    void removeQuest(Quest data)
+    public void removeQuest(Quest data)
     {
         for(int i =0; i < startedQuests.Count; i++)
         {
             if(startedQuests[i].GetComponent<QuestButton>().getData() == data)
             {
-                GameObject b = startedQuests[i];
-                startedQuests.RemoveAt(i);
-
                 QuestButtons butt = avaliableQuestButtons[i];
                 butt.button.SetActive(false);
                 butt.inUse = false;
                 avaliableQuestButtons[i] = butt;
 
-                Destroy(b);
+                GameObject b = startedQuests[i];
+                startedQuests.RemoveAt(i);
+                b = startedQuests[i];
+
+                Debug.Log(b.name + "  " + data.name);
+
                 break;
             }
         }

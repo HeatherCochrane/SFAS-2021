@@ -11,6 +11,7 @@ public class MenuButtons : MonoBehaviour
         //each of these are seperate buttons
         [SerializeField]
         public List<GameObject> buttons;
+        public ScrollRect scrollBar;
     }
 
     [SerializeField]
