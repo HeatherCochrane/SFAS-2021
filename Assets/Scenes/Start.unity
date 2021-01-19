@@ -4518,13 +4518,33 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5995031975553628528, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: allActiveMenus.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031975553628528, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: allActiveMenus.Array.data[5].obj
       value: 
-      objectReference: {fileID: 629291872}
+      objectReference: {fileID: 0}
     - target: {fileID: 5995031975553628528, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: allActiveMenus.Array.data[5].buttons
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031975553628528, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: allActiveMenus.Array.data[6].name
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031975553628528, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: allActiveMenus.Array.data[6].obj
+      value: 
+      objectReference: {fileID: 629291872}
+    - target: {fileID: 5995031975553628528, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: allActiveMenus.Array.data[6].buttons
+      value: 
       objectReference: {fileID: 629291878}
+    - target: {fileID: 5995031975553628528, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: allActiveMenus.Array.data[5].name
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5995031975935187859, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -4687,7 +4707,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5995031976520394895, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 5995031976819538244, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: audioHandler

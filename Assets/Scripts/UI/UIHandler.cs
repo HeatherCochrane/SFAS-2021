@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIHandler : MonoBehaviour
 {
-    public enum Menus { PLAYERUI, INVENTORY, QUESTS, TRADER, DIALOGUE, START};
+    public enum Menus { PLAYERUI, INVENTORY, QUESTS, TRADER, DIALOGUE, START, MAP};
     [System.Serializable]
     public struct Menu
     {
@@ -106,31 +106,16 @@ public class UIHandler : MonoBehaviour
     {
         currentMap = m;
         currentMap.SetActive(false);
-    }
 
-    public bool showMap()
-    {
-        if (currentMap != null)
+        for(int i =0; i < allActiveMenus.Count; i++)
         {
-            for (int i = 0; i < allActiveMenus.Count; i++)
+            if(allActiveMenus[i].name == Menus.MAP)
             {
-                if (allActiveMenus[i].obj != null)
-                {
-                    allActiveMenus[i].obj.SetActive(false);
-                }
+                Menu newM = allActiveMenus[i];
+                newM.obj = m;
+                allActiveMenus[i] = newM;
             }
-
-            if (currentMap != null)
-            {
-                currentMap.SetActive(true);
-            }
-
-            inMenu = true;
-            return true;
         }
-
-        inMenu = false;
-        return false;
     }
 
     public void hideMap()

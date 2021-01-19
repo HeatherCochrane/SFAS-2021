@@ -226,19 +226,19 @@ public class Player : MonoBehaviour
         {
             if (trackInput)
             {
-                if (!uiHandler.getMapActive())
+                if (uiHandler.getInMenu(UIHandler.Menus.MAP))
                 {
-                    if (uiHandler.showMap())
-                    {
-                        setMovement(true);
-                        audioHandler.playMap(true);
-                    }
+                    uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
+                    setMovement(false);
+                    audioHandler.playMap(false);
+
                 }
                 else if (!uiHandler.GetInMenu())
                 {
-                    uiHandler.hideMap();
-                    setMovement(false);
-                    audioHandler.playMap(false);
+                    uiHandler.changeMenu(UIHandler.Menus.MAP);
+                    setMovement(true);
+                    audioHandler.playMap(true);
+
                 }
             }
         }
