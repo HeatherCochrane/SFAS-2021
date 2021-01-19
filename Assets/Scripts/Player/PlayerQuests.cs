@@ -92,7 +92,7 @@ public class PlayerQuests : MonoBehaviour
             //Check to ensure all requirements have been met
             if (questsStarted[i].checkKills(totalKills) && questsStarted[i].checkCompletedQuests(completedQuests) && questsStarted[i].checkBossKilled())
             {
-                Debug.Log("QUEST COMPLETED!");
+                Debug.Log("QUEST COMPLETED!" + questsStarted[i].questName);
                 questCompleted(questsStarted[i]);
             }
         }

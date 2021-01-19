@@ -50,5 +50,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Woods/WoodsBoss.unity
     guid: b469130ef6303cb4a81e5eac5911d8b4
+  - enabled: 1
+    path: Assets/Scenes/OpeningScene.unity
+    guid: dd79a2821cccbab46b7491c05e0e294d
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 2d560084a70adac4c998ce106aedbae4, type: 2}

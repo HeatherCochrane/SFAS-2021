@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     //Player Menus
     public MenuSelection menus;
 
+
     //Event System
     public UnityEngine.EventSystems.EventSystem system;
 
@@ -80,7 +81,7 @@ public class Player : MonoBehaviour
     bool stopInventoryToggle = false;
 
     [SerializeField]
-    Game dialogue;
+    public Game dialogue;
 
     [SerializeField]
     GameObject playerSprites;
@@ -642,6 +643,12 @@ public class Player : MonoBehaviour
         uiHandler.changeMenu(UIHandler.Menus.DIALOGUE);
 
         dialogue.startNewDialogue(character.getData().getDialogue(index), character.getData().getCharacterSprite(), character.getData().getName(), uiHandler.getMenuObject(UIHandler.Menus.DIALOGUE));
+        stopMovement = true;
+        stopInventoryToggle = true;
+    }
+
+    public void setInConvo()
+    {
         stopMovement = true;
         stopInventoryToggle = true;
     }

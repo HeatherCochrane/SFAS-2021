@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf5d5e33bab057c43929a11bc8f25f44, type: 3}
+  m_Name: KingsQuest
+  m_EditorClassIdentifier: 
+  completeThisQuest: {fileID: 11400000, guid: 324fb70b3acd01341a1f96631ac4401e, type: 2}
+  _beats:
+  - _choices:
+    - _text: Continue...
+      _beatId: 2
+      quest: {fileID: 11400000, guid: 1852fe99e768df143aba3e0898859898, type: 2}
+    _text: You have been tasked with the duty and honor of fetching the power hidden
+      within the depths of the wilds outside of Dovecote.
+    _id: 1
+  - _choices:
+    - _text: Continue...
+      _beatId: 3
+      quest: {fileID: 0}
+    _text: Should you fail to bring me this artifact there shall be dire consequences,
+      but should you succeed you shall be given riches beyond your wildest dreams.
+    _id: 2
+  - _choices: []
+    _text: Go forth and bring me this power and we shall rid the wilds of their gastly
+      darkness and restore the kingdom to its former glory.
+    _id: 3

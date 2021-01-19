@@ -802,7 +802,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Town
+          m_StringArgument: OpeningScene
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1310346070307638103}
@@ -4589,6 +4589,34 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5995031976361068588, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: AllSceneData.Array.size
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031976361068588, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: AllSceneData.Array.data[12].scenePath
+      value: TutorialScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031976361068588, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: AllSceneData.Array.data[12].character
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031976361068588, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: AllSceneData.Array.data[13].scenePath
+      value: OpeningScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031976361068588, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: AllSceneData.Array.data[13].switchScene
+      value: TutorialScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995031976361068588, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: AllSceneData.Array.data[13].gate
+      value: 
+      objectReference: {fileID: 8613692889092303264, guid: 236467b070f41374ebd016e1b519a197, type: 3}
+    - target: {fileID: 5995031976361068588, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: AllSceneData.Array.data[13].character
+      value: 
+      objectReference: {fileID: 5886129248935391690, guid: 2b8a0d194c501504991a03afef5dbfdc, type: 3}
     - target: {fileID: 5995031976361069010, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4651,7 +4679,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5995031976520394895, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 5995031976913497398, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_SizeDelta.y

@@ -36,6 +36,14 @@ public class SceneLoader : MonoBehaviour
             }
         }
 
+        if(current.character != null)
+        {
+            Player.instance.uiHandler.changeMenu(UIHandler.Menus.DIALOGUE);
+            Player.instance.dialogue.startNewDialogue(current.character.getData().getDialogue(0), current.character.getData().getCharacterSprite(), current.character.getData().getName(), Player.instance.uiHandler.getMenuObject(UIHandler.Menus.DIALOGUE));
+            Player.instance.setInConvo();
+            Player.instance.dialogue.switchSceneOnEnd(current.switchScene, current.gate);
+        }
+        
     }
 
 
@@ -47,6 +55,9 @@ public class SceneLoader : MonoBehaviour
     {
         public string scenePath;
         public Particle particleEffect;
+        public Character character;
+        public string switchScene;
+        public TransitionGate gate;
     }
 
     public enum Particle { GRASS, SNOW, JUNGLE, NONE};

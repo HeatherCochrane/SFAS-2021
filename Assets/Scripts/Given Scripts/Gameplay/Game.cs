@@ -34,6 +34,8 @@ public class Game : MonoBehaviour
     [SerializeField]
     List<GameObject> choices = new List<GameObject>();
 
+    string sceneToSwtichTo;
+    TransitionGate gate;
     private void OnEnable()
     {
         _currentBeat = null;
@@ -79,6 +81,12 @@ public class Game : MonoBehaviour
         }
     }
 
+    public void switchSceneOnEnd(string s, TransitionGate g)
+    {
+        sceneToSwtichTo = s;
+        gate = g;
+    }
+
     private void UpdateInput()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -120,18 +128,23 @@ public class Game : MonoBehaviour
 
     void setUpChoiceButtons()
     {
-        foreach(GameObject g in choices)
-        {
-            g.SetActive(false);
-        }
+        Debug.Log("CALLED");
 
-        //Set up the correct amount of buttons as there is choices
-        for(int i = 0; i < _currentBeat.Decision.Count; i++)
+        if (!choices[4].activeSelf)
         {
-            choices[i].SetActive(true);
-            choices[i].GetComponent<DialogueChoice>().setChoiceNum(i);
-            choices[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _currentBeat.Decision[i].DisplayText;
-            choices[i].transform.SetParent(choiceParent.transform);
+            foreach (GameObject g in choices)
+            {
+                g.SetActive(false);
+            }
+
+            //Set up the correct amount of buttons as there is choices
+            for (int i = 0; i < _currentBeat.Decision.Count; i++)
+            {
+                choices[i].SetActive(true);
+                choices[i].GetComponent<DialogueChoice>().setChoiceNum(i);
+                choices[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _currentBeat.Decision[i].DisplayText;
+                choices[i].transform.SetParent(choiceParent.transform);
+            }
         }
 
     }
@@ -206,6 +219,12 @@ public class Game : MonoBehaviour
         Player.instance.setMovement(false);
 
         Invoke("closeDialogueScreen", 1f);
+
+        if(sceneToSwtichTo != "")
+        {
+            Player.instance.sceneLoader.switchScene(sceneToSwtichTo, gate);
+            sceneToSwtichTo = "";
+        }
     }
 
     public void closeDialogueScreen()

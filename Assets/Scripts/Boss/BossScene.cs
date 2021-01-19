@@ -5,7 +5,7 @@ using TMPro;
 
 public class BossScene : MonoBehaviour
 {
-    public enum BossNames { GOAT, SNAKE, NONE}
+    public enum BossNames { GOAT, SNAKE, FINALBOSS, NONE}
 
 
     [SerializeField]
