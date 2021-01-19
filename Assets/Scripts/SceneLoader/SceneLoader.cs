@@ -140,6 +140,23 @@ public class SceneLoader : MonoBehaviour
         
     }
 
+    public void respawnPlayer()
+    {
+        Player.instance.setInput(true);
+        anim.SetTrigger("FadeIn");
+
+        GameObject[] allSpawns = GameObject.FindGameObjectsWithTag("Spawn");
+
+        foreach (GameObject spawn in allSpawns)
+        {
+            if (spawn.GetComponent<PlayerSpawns>().spawn == "First")
+            {
+                Player.instance.transform.position = spawn.transform.position;
+                return;
+            }
+        }
+    }
+
     public void switchScene(string scene, TransitionGate g)
     {
         sceneToLoad = scene;

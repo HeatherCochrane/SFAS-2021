@@ -128,8 +128,6 @@ public class Game : MonoBehaviour
 
     void setUpChoiceButtons()
     {
-        Debug.Log("CALLED");
-
         if (!choices[4].activeSelf)
         {
             foreach (GameObject g in choices)

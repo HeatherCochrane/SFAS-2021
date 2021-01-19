@@ -99,6 +99,9 @@ public class PlayerStatus : MonoBehaviour
             if (health <= 0)
             {
                 Debug.Log("Died!");
+                Player.instance.sceneLoader.respawnPlayer();
+                health = 5;
+                updateHealth();
             }
 
             updateHealth();

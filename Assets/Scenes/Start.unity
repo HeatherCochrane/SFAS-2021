@@ -3955,11 +3955,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1139760354093740498, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 73.28799
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1139760354093740498, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1139760354210862098, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_VerticalScrollbarVisibility
