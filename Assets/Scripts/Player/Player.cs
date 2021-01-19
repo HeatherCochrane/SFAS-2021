@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
     //Player Menus
     public MenuSelection menus;
 
+    //Audio Handler
+    public Audio audioHandler;
 
     //Event System
     public UnityEngine.EventSystems.EventSystem system;
@@ -197,6 +199,7 @@ public class Player : MonoBehaviour
 
                     data.addCharacter(character);
                     character = null;
+
                 }
                 else if (trader != null)
                 {
@@ -251,6 +254,8 @@ public class Player : MonoBehaviour
                     uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
                     inventory.setInventory(false);
                     stopMovement = false;
+
+                    audioHandler.playInventory(false);
                 }
                 else if(!uiHandler.GetInMenu())
                 {
@@ -258,6 +263,8 @@ public class Player : MonoBehaviour
                     uiHandler.changeDoubleMenu(UIHandler.Menus.PLAYERUI, UIHandler.Menus.INVENTORY);
                     inventory.setInventory(true);
                     stopMovement = true;
+
+                    audioHandler.playInventory(true);
                 }
             }
         }
@@ -645,12 +652,16 @@ public class Player : MonoBehaviour
         dialogue.startNewDialogue(character.getData().getDialogue(index), character.getData().getCharacterSprite(), character.getData().getName(), uiHandler.getMenuObject(UIHandler.Menus.DIALOGUE));
         stopMovement = true;
         stopInventoryToggle = true;
+
+        audioHandler.playDialogue(true);
     }
 
     public void setInConvo()
     {
         stopMovement = true;
         stopInventoryToggle = true;
+
+        audioHandler.playDialogue(true);
     }
 
     void beginTrading()
@@ -667,6 +678,8 @@ public class Player : MonoBehaviour
     {
         stopMovement = false;
         stopInventoryToggle = false;
+
+        audioHandler.playDialogue(false);
     }
 
     public void setMovement(bool set)

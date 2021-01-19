@@ -214,7 +214,7 @@ public class Game : MonoBehaviour
         choices[4].SetActive(false);
 
 
-        Player.instance.setMovement(false);
+        Player.instance.endConversation();
 
         Invoke("closeDialogueScreen", 1f);
 
@@ -228,6 +228,5 @@ public class Game : MonoBehaviour
     public void closeDialogueScreen()
     {
         Player.instance.uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
-        Player.instance.setInventoryToggle(false);
     }
 }

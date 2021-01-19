@@ -363,6 +363,17 @@
                 },
                 {
                     "name": "",
+                    "id": "b1743479-2c26-4756-82aa-7c985c8cda7a",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "All",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "edbdf5d3-1b9c-4c31-a390-b4a7e20b3a59",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
@@ -497,6 +508,17 @@
                     "name": "",
                     "id": "b878c841-dab0-4be4-9a14-c6909e15e527",
                     "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "All",
+                    "action": "ButtonSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "59e0e8cc-530a-4bfd-9684-b63522cf8aba",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "All",

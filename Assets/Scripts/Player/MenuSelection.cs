@@ -514,6 +514,8 @@ public class MenuSelection : MonoBehaviour
                     screenButtons[(int)currentButton.y].buttons[(int)currentButton.x].GetComponent<Button>().onClick.Invoke();
 
                     updateCurrentButton();
+
+                    Player.instance.audioHandler.playButtonTap();
                 }
             }
         }

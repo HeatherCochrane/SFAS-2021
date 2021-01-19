@@ -3955,11 +3955,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1139760354093740498, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 73.28799
       objectReference: {fileID: 0}
     - target: {fileID: 1139760354093740498, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 200
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1139760354210862098, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_VerticalScrollbarVisibility
@@ -4681,6 +4681,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.000030517578
       objectReference: {fileID: 0}
+    - target: {fileID: 5995031976819538244, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+      propertyPath: audioHandler
+      value: 
+      objectReference: {fileID: 5663400461349520965}
     - target: {fileID: 5995031976913497398, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -5099,3 +5103,14 @@ PrefabInstance:
       objectReference: {fileID: 1310346068564049460}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+--- !u!114 &5663400461349520965 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2223995012511569436, guid: cb82361f4fce8454394d4fc4cc5e7c6a, type: 3}
+  m_PrefabInstance: {fileID: 5663400461349520964}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f6d0517a2947a943ac8f3ad611f03d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
