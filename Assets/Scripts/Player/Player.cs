@@ -226,19 +226,20 @@ public class Player : MonoBehaviour
         {
             if (trackInput)
             {
-                if (uiHandler.getInMenu(UIHandler.Menus.MAP))
+                if (uiHandler.getMapActive())
                 {
-                    uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
-                    setMovement(false);
-                    audioHandler.playMap(false);
-
-                }
-                else if (!uiHandler.GetInMenu())
-                {
-                    uiHandler.changeMenu(UIHandler.Menus.MAP);
-                    setMovement(true);
-                    audioHandler.playMap(true);
-
+                    if (uiHandler.getInMenu(UIHandler.Menus.MAP))
+                    {
+                        uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
+                        setMovement(false);
+                        audioHandler.playMap(false);
+                    }
+                    else if (!uiHandler.GetInMenu())
+                    {
+                        uiHandler.changeMenu(UIHandler.Menus.MAP);
+                        setMovement(true);
+                        audioHandler.playMap(true);
+                    }
                 }
             }
         }

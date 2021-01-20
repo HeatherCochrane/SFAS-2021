@@ -150,13 +150,12 @@ public class UIHandler : MonoBehaviour
     {
         if (currentMap != null)
         {
-            if (currentMap.activeSelf)
-            {
-                return true;
-            }
+            return true;
         }
-
-        return false;
+        else
+        {
+            return false;
+        }
     }
 
     public void changeDoubleMenu(Menus n, Menus m)

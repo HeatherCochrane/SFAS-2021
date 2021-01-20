@@ -411,7 +411,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 if (activeSlot.removeInventory(interaction))
                 {
-                    playerFunds += activeSlot.getItem().sellPrice;
+                    adjustFunds(activeSlot.getItem().sellPrice);
 
                     if (activeSlot.amount > 0)
                     {
@@ -428,10 +428,9 @@ public class PlayerInventory : MonoBehaviour
             }
             else if (interaction == "SellAll")
             {
-                playerFunds += (activeSlot.getItem().sellPrice * activeSlot.amount);
+                adjustFunds((activeSlot.getItem().sellPrice * activeSlot.amount));
 
                 activeSlot.removeInventory(interaction);
-
 
                 activeSlot.amount = 0;
 

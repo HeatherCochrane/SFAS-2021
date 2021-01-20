@@ -3605,10 +3605,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: coins.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: enemyDeath.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: woodFootsteps.Array.size
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
@@ -3674,11 +3678,11 @@ PrefabInstance:
     - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: coins.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 64f5471c0776d7441aa6fbbdef10680d, type: 3}
+      objectReference: {fileID: 8300000, guid: a5503599e7bb35941a98e2fc3949806f, type: 3}
     - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: coins.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: a5503599e7bb35941a98e2fc3949806f, type: 3}
+      objectReference: {fileID: 8300000, guid: 6dfc5c0b89e0cb84e96134d880a94862, type: 3}
     - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: coins.Array.data[2]
       value: 
@@ -3707,6 +3711,18 @@ PrefabInstance:
       propertyPath: enemyDeath.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: e6f147e7f034d7d4393eb62ed1a52bef, type: 3}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: woodFootsteps.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 99c219aed32cb9046bef385f6493f536, type: 3}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: woodFootsteps.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: f3ff66f1602e8714e8cac5fffe45794f, type: 3}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: woodFootsteps.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: dc00e19b168dc2441b9104c51c26e004, type: 3}
     - target: {fileID: 5014896997536749666, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -4001,11 +4017,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7120617889664005598, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 73.28799
       objectReference: {fileID: 0}
     - target: {fileID: 7120617889664005598, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 200
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7120617889702621955, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: m_AnchorMin.y
@@ -4421,7 +4437,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9164810880857401893, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9164810881000910748, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: m_SizeDelta.y
@@ -4451,6 +4467,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9164810881104051180, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: longRangeWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: cdf55e8a9ce635b49a1613ac73101672, type: 2}
     - target: {fileID: 9164810881373908540, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0

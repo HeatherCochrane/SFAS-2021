@@ -88,6 +88,9 @@ public class Audio : MonoBehaviour
     [SerializeField]
     List<AudioClip> snowFootsteps = new List<AudioClip>();
 
+    [SerializeField]
+    List<AudioClip> woodFootsteps = new List<AudioClip>();
+
 
     float effectsVolume = 0.5f;
     float ambienceVolume = 0.5f;
@@ -244,6 +247,16 @@ public class Audio : MonoBehaviour
         newAudioSource = Instantiate(audioSource);
 
         newAudioSource.source.clip = snowFootsteps[Random.Range(0, snowFootsteps.Count)];
+        newAudioSource.source.pitch = Random.Range(0.8f, 1.2f);
+        newAudioSource.source.volume = effectsVolume;
+        newAudioSource.source.Play();
+    }
+
+    public void playWoodStep()
+    {
+        newAudioSource = Instantiate(audioSource);
+
+        newAudioSource.source.clip = woodFootsteps[Random.Range(0, woodFootsteps.Count)];
         newAudioSource.source.pitch = Random.Range(0.8f, 1.2f);
         newAudioSource.source.volume = effectsVolume;
         newAudioSource.source.Play();
