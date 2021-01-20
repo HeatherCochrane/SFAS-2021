@@ -9,6 +9,11 @@ public class SceneLoader : MonoBehaviour
 {
     IEnumerator checkSceneLoaded()
     {
+        string spawnP = "";
+        if(transitionFromBoss)
+        {
+            spawnP = GameObject.FindObjectOfType<TransitionGate>().getSpawn();
+        }
         while (!SceneManager.GetSceneByName(sceneToLoad).isLoaded)
         {
             yield return new WaitForEndOfFrame();
@@ -26,13 +31,28 @@ public class SceneLoader : MonoBehaviour
         mapSizeY = new Vector2(map.cellBounds.yMin + 5, map.cellBounds.yMax - 5);
         Player.instance.setCamBounds(mapSizeX, mapSizeY);
 
-        GameObject[] allSpawns = GameObject.FindGameObjectsWithTag("Spawn");
-
-        foreach(GameObject spawn in allSpawns)
+        if (spawnP == "")
         {
-            if(spawn.GetComponent<PlayerSpawns>().spawn == gate.getSpawn())
+            GameObject[] allSpawns = GameObject.FindGameObjectsWithTag("Spawn");
+
+            foreach (GameObject spawn in allSpawns)
             {
-                Player.instance.transform.position = spawn.transform.position;
+                if (spawn.GetComponent<PlayerSpawns>().spawn == gate.getSpawn())
+                {
+                    Player.instance.transform.position = spawn.transform.position;
+                }
+            }
+        }
+        else
+        {
+            GameObject[] allSpawns = GameObject.FindGameObjectsWithTag("Spawn");
+
+            foreach (GameObject spawn in allSpawns)
+            {
+                if (spawn.GetComponent<PlayerSpawns>().spawn == spawnP)
+                {
+                    Player.instance.transform.position = spawn.transform.position;
+                }
             }
         }
 
@@ -43,7 +63,8 @@ public class SceneLoader : MonoBehaviour
             Player.instance.setInConvo();
             Player.instance.dialogue.switchSceneOnEnd(current.switchScene, current.gate);
         }
-        
+
+        transitionFromBoss = false;
     }
 
 
@@ -58,6 +79,7 @@ public class SceneLoader : MonoBehaviour
         public Character character;
         public string switchScene;
         public TransitionGate gate;
+        public bool bossScene;
     }
 
     public enum Particle { GRASS, SNOW, JUNGLE, NONE};
@@ -90,6 +112,8 @@ public class SceneLoader : MonoBehaviour
     List<Sprite> gateSprites = new List<Sprite>();
 
     SceneData current;
+    SceneData previousScene;
+
 
     Vector2 newSpawnPoint;
 
@@ -99,6 +123,8 @@ public class SceneLoader : MonoBehaviour
     Tilemap map;
 
     TransitionGate gate;
+
+    bool transitionFromBoss = false;
     
     // Start is called before the first frame update
     void Start()
@@ -111,14 +137,16 @@ public class SceneLoader : MonoBehaviour
         instance = this;
         anim = this.GetComponent<Animator>();
 
-        current = AllSceneData[1];
+        current = AllSceneData[3];
     }
 
 
     void loadSetScene()
     {
+
         SceneManager.LoadScene(sceneToLoad);
-        Debug.Log(sceneToLoad);
+
+        previousScene = current;
 
         foreach (SceneData scene in AllSceneData)
         {
@@ -145,16 +173,26 @@ public class SceneLoader : MonoBehaviour
         Player.instance.setInput(true);
         anim.SetTrigger("FadeIn");
 
-        GameObject[] allSpawns = GameObject.FindGameObjectsWithTag("Spawn");
-
-        foreach (GameObject spawn in allSpawns)
+        if(current.bossScene)
         {
-            if (spawn.GetComponent<PlayerSpawns>().spawn == "First")
+            sceneToLoad = previousScene.scenePath;
+            transitionFromBoss = true;
+            loadSetScene();
+        }
+        else
+        {
+            GameObject[] allSpawns = GameObject.FindGameObjectsWithTag("Spawn");
+
+            foreach (GameObject spawn in allSpawns)
             {
-                Player.instance.transform.position = spawn.transform.position;
-                return;
+                if (spawn.GetComponent<PlayerSpawns>().spawn == "First")
+                {
+                    Player.instance.transform.position = spawn.transform.position;
+                    break;
+                }
             }
         }
+      
     }
 
     public void switchScene(string scene, TransitionGate g)

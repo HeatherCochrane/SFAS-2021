@@ -74,4 +74,5 @@ public class BossScene : MonoBehaviour
     {
         abilityDropScreen.SetActive(set);
     }
+
 }
