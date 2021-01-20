@@ -127,7 +127,7 @@ public class MenuSelection : MonoBehaviour
 
                 if (dir < 0)
                 {
-                    if (rows == 0 && currentButton.x < currentRowButtons.Count - 1 )
+                    if (rows == 0 && currentButton.x < currentRowButtons.Count - 1)
                     {
                         currentButton += new Vector2(1, 0);
                     }
@@ -174,12 +174,12 @@ public class MenuSelection : MonoBehaviour
                                         }
                                     }
                                 }
-                               
+
                             }
                         }
                         else
                         {
-                            
+
                             if (Player.instance.uiHandler.getInMenu(UIHandler.Menus.TRADER))
                             {
                                 if (currentButton.x >= 3)

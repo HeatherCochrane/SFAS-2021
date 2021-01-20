@@ -417,6 +417,7 @@ public class Audio : MonoBehaviour
     {
         newAudioSource = Instantiate(audioSource);
         newAudioSource.source.clip = melee;
+        newAudioSource.source.pitch = Random.Range(0.8f, 1.2f);
         newAudioSource.source.volume = effectsVolume;
         newAudioSource.source.Play();
     }
