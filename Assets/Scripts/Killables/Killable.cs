@@ -129,6 +129,7 @@ public class Killable : MonoBehaviour
             }
 
             spawnHitPoint(dam);
+            Player.instance.audioHandler.playEnemyHit();
 
             if (health <= 0)
             {

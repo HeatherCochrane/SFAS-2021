@@ -106,6 +106,7 @@ public class PlayerInventory : MonoBehaviour
     public void adjustFunds(int amount)
     {
         playerFunds += amount;
+        Player.instance.audioHandler.playCoins();
     }
 
     public bool checkFunds(int amount)
@@ -385,6 +386,8 @@ public class PlayerInventory : MonoBehaviour
                 {
                     removeItem(inventoryItems[pos].item);
                 }
+
+                Player.instance.audioHandler.playEat();
             }
             else if (interaction == "Drop")
             {
@@ -400,6 +403,8 @@ public class PlayerInventory : MonoBehaviour
                     {
                         removeItem(inventoryItems[pos].item);
                     }
+
+                    Player.instance.audioHandler.playDrop();
                 }
             }
             else if (interaction == "Sell")
@@ -436,7 +441,6 @@ public class PlayerInventory : MonoBehaviour
 
 
                 removeItem(inventoryItems[pos].item);
-
             }
         }
 

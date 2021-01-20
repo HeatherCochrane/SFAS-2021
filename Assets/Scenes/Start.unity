@@ -3012,7 +3012,7 @@ PrefabInstance:
       objectReference: {fileID: 2137751214400405300}
     - target: {fileID: 5902577227563476044, guid: 17c02e51c6c4903489bbb0f6750beb30, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: Woods3
+      value: Town
       objectReference: {fileID: 0}
     - target: {fileID: 8896104596162891312, guid: 17c02e51c6c4903489bbb0f6750beb30, type: 3}
       propertyPath: m_AnchorMin.y
@@ -3595,6 +3595,90 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: grassFootsteps.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: snowFootsteps.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: coins.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: jungleAmbience
+      value: 
+      objectReference: {fileID: 8300000, guid: 0d945b311101948419bc43338ad08c98, type: 3}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: snowAmbience
+      value: 
+      objectReference: {fileID: 8300000, guid: daff27bb2d62d4848a956ec4c91ed262, type: 3}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: woodsAmbience
+      value: 
+      objectReference: {fileID: 8300000, guid: ffe4275b634d08c47af1a53c73931abd, type: 3}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: grassFootsteps.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 43df11187e21cf64baac51a74e16c44f, type: 3}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: grassFootsteps.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: efc38d50dfcaafc48a4dcf4d465bcc2f, type: 3}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: grassFootsteps.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: b95c945c3b3ff1d4ebabb292210b3817, type: 3}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: snowFootsteps.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e0e0449a61e4bd4b9b98e1304906d2f, type: 3}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: snowFootsteps.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: c2c2820107510814db5eb6ac1dc8ba23, type: 3}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: snowFootsteps.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4a0bb56ae7a3e1241a8f8dcad7423804, type: 3}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: enemyDamage
+      value: 
+      objectReference: {fileID: 8300000, guid: 369533f21431f6c49b244d34db27f0cd, type: 3}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: playerDamage
+      value: 
+      objectReference: {fileID: 8300000, guid: 4641c478f0823da4a83b38a9d9736594, type: 3}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: jump
+      value: 
+      objectReference: {fileID: 8300000, guid: 913f6fb013b293c40a9a27448fc89a1a, type: 3}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: coins
+      value: 
+      objectReference: {fileID: 8300000, guid: 64f5471c0776d7441aa6fbbdef10680d, type: 3}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: eat
+      value: 
+      objectReference: {fileID: 8300000, guid: 5288b182b98b633498c3c1dc6e68d9cc, type: 3}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: drop
+      value: 
+      objectReference: {fileID: 8300000, guid: eead4cfa4be08704cba3cac86701c0fa, type: 3}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: coins.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 64f5471c0776d7441aa6fbbdef10680d, type: 3}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: coins.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: a5503599e7bb35941a98e2fc3949806f, type: 3}
+    - target: {fileID: 4428543568241275495, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: coins.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6dfc5c0b89e0cb84e96134d880a94862, type: 3}
     - target: {fileID: 5014896997536749666, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -3889,7 +3973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7120617889664005598, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 73.28799
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7120617889664005598, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: m_SizeDelta.y
@@ -4309,7 +4393,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9164810880857401893, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
+      value: 271.49066
       objectReference: {fileID: 0}
     - target: {fileID: 9164810881000910748, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: m_SizeDelta.y

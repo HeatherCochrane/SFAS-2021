@@ -569,6 +569,8 @@ public class Player : MonoBehaviour
                             jumpNum = 0;
                         }
                     }
+
+                    audioHandler.playJump();
                 }
             }
         }
@@ -842,7 +844,6 @@ public class Player : MonoBehaviour
             }
           
             CancelInvoke("stopIgnoringPlayerDir");
-            GetComponentInChildren<GrassEffect>().spawnGrass();
         }
 
         if (collision.gameObject.tag == "Funds")
@@ -912,6 +913,8 @@ public class Player : MonoBehaviour
 
         effectParticles = Instantiate(pickUpEffect);
         effectParticles.transform.position = transform.position;
+
+        audioHandler.playPickup();
     }
 
     private void OnTriggerStay2D(Collider2D collision)

@@ -104,6 +104,7 @@ public class PlayerStatus : MonoBehaviour
                 updateHealth();
             }
 
+            Player.instance.audioHandler.playPlayerHit();
             updateHealth();
 
             cameraShake.SetTrigger("ScreenShake");

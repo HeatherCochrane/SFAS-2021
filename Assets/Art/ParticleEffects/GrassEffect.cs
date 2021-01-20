@@ -22,14 +22,17 @@ public class GrassEffect : MonoBehaviour
             if (Player.instance.sceneLoader.getCurrentScene().particleEffect == SceneLoader.Particle.GRASS)
             {
                 newGrass = Instantiate(grassParticles);
+                Player.instance.audioHandler.playGrassStep();
             }
             else if (Player.instance.sceneLoader.getCurrentScene().particleEffect == SceneLoader.Particle.SNOW)
             {
                 newGrass = Instantiate(snowParticles);
+                Player.instance.audioHandler.playSnowStep();
             }
             else if(Player.instance.sceneLoader.getCurrentScene().particleEffect == SceneLoader.Particle.JUNGLE)
             {
                 newGrass = Instantiate(jungleParticles);
+                Player.instance.audioHandler.playGrassStep();
             }
 
 

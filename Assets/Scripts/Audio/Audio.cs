@@ -50,6 +50,19 @@ public class Audio : MonoBehaviour
     AudioClip playerDamage;
 
     [SerializeField]
+    AudioClip jump;
+
+    [SerializeField]
+    AudioClip drop;
+
+    [SerializeField]
+    AudioClip eat;
+
+    [SerializeField]
+    AudioClip pickup;
+
+
+    [SerializeField]
     AudioClip woodsAmbience;
 
     [SerializeField]
@@ -58,7 +71,14 @@ public class Audio : MonoBehaviour
     [SerializeField]
     AudioClip snowAmbience;
 
+    [SerializeField]
+    List<AudioClip> coins = new List<AudioClip>();
 
+    [SerializeField]
+    List<AudioClip> grassFootsteps = new List<AudioClip>();
+
+    [SerializeField]
+    List<AudioClip> snowFootsteps = new List<AudioClip>();
 
 
     float effectsVolume = 0.5f;
@@ -102,6 +122,8 @@ public class Audio : MonoBehaviour
 
         float visualVolume = ambienceVolume * 10;
         ambienceText.text = Mathf.RoundToInt(visualVolume).ToString();
+
+        ambienceSource.source.volume = ambienceVolume;
     }
 
 
@@ -198,6 +220,93 @@ public class Audio : MonoBehaviour
             ambienceSource.transform.SetParent(this.transform);
         }
     }
+
+    public void playGrassStep()
+    {
+        newAudioSource = Instantiate(audioSource);
+
+        newAudioSource.source.clip = grassFootsteps[Random.Range(0, grassFootsteps.Count)];
+        newAudioSource.source.pitch = Random.Range(0.8f, 1.2f);
+        newAudioSource.source.volume = effectsVolume;
+        newAudioSource.source.Play();
+    }
+
+    public void playSnowStep()
+    {
+        newAudioSource = Instantiate(audioSource);
+
+        newAudioSource.source.clip = snowFootsteps[Random.Range(0, snowFootsteps.Count)];
+        newAudioSource.source.pitch = Random.Range(0.8f, 1.2f);
+        newAudioSource.source.volume = effectsVolume;
+        newAudioSource.source.Play();
+    }
+
+    public void playEnemyHit()
+    {
+        newAudioSource = Instantiate(audioSource);
+
+        newAudioSource.source.clip = enemyDamage;
+        newAudioSource.source.volume = effectsVolume;
+        newAudioSource.source.Play();
+    }
+
+    public void playPlayerHit()
+    {
+        newAudioSource = Instantiate(audioSource);
+
+        newAudioSource.source.clip = playerDamage;
+        newAudioSource.source.volume = effectsVolume;
+        newAudioSource.source.Play();
+    }
+
+    public void playJump()
+    {
+        newAudioSource = Instantiate(audioSource);
+
+        newAudioSource.source.clip = jump;
+        newAudioSource.source.volume = effectsVolume;
+        newAudioSource.source.pitch = Random.Range(0.8f, 1.2f);
+        newAudioSource.source.Play();
+    }
+
+    public void playCoins()
+    {
+        newAudioSource = Instantiate(audioSource);
+
+        newAudioSource.source.clip = coins[Random.Range(0, coins.Count)];
+        newAudioSource.source.volume = effectsVolume;
+        newAudioSource.source.Play();
+    }
+
+    public void playDrop()
+    {
+        newAudioSource = Instantiate(audioSource);
+
+        newAudioSource.source.clip = drop;
+        newAudioSource.source.volume = effectsVolume;
+        newAudioSource.source.pitch = Random.Range(0.8f, 1.2f);
+        newAudioSource.source.Play();
+    }
+
+    public void playEat()
+    {
+        newAudioSource = Instantiate(audioSource);
+
+        newAudioSource.source.clip = eat;
+        newAudioSource.source.volume = effectsVolume;
+        newAudioSource.source.pitch = Random.Range(0.8f, 1.2f);
+        newAudioSource.source.Play();
+    }
+
+    public void playPickup()
+    {
+        newAudioSource = Instantiate(audioSource);
+
+        newAudioSource.source.clip = pickup;
+        newAudioSource.source.volume = effectsVolume;
+        newAudioSource.source.Play();
+    }
+
 
 
     public void playInventory(bool open)
