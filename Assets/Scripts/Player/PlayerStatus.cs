@@ -102,6 +102,8 @@ public class PlayerStatus : MonoBehaviour
                 Player.instance.sceneLoader.respawnPlayer();
                 health = 5;
                 updateHealth();
+
+                Player.instance.audioHandler.playPlayerDeath();
             }
 
             Player.instance.audioHandler.playPlayerHit();

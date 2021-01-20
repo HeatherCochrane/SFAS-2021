@@ -133,10 +133,10 @@ public class Killable : MonoBehaviour
 
             if (health <= 0)
             {
-                killEnemy();
                 isDead = true;
                 CancelInvoke();
                 StopAllCoroutines();
+                killEnemy();
             }
         }
     }
@@ -151,37 +151,41 @@ public class Killable : MonoBehaviour
 
     public void killEnemy()
     {
-        if (!isDead)
+        if (data.drop != null)
         {
-            if (data.drop != null)
+            for (int i = 0; i < data.drop.Count; i++)
             {
-                for (int i = 0; i < data.drop.Count; i++)
+                for (int j = 0; j < data.drop[i].amount; j++)
                 {
-                    for (int j = 0; j < data.drop[i].amount; j++)
-                    {
-                        drop = Instantiate(data.drop[i].drop, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-                        drop.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(0, 5), 3);
-                    }
+                    drop = Instantiate(data.drop[i].drop, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+                    drop.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(0, 5), 3);
                 }
             }
-
-            quests.speciesKilled(data.species);
-
-            if (GetComponent<BossEnemy>() != null)
-            {
-                GetComponent<BossEnemy>().area.openBossArea();
-                Player.instance.checkBossDrop(GetComponent<BossEnemy>().drop.getAbility());
-                quests.bossesKilled(GetComponent<BossEnemy>().bossName);
-            }
-
-
-            isDead = true;
-            changeAnimationStatesTrigger(AnimationStates.DEATH);
-
-            StopAllCoroutines();
-            CancelInvoke();
         }
+
+        quests.speciesKilled(data.species);
+
+        if (GetComponent<BossEnemy>() != null)
+        {
+            GetComponent<BossEnemy>().area.openBossArea();
+            Player.instance.checkBossDrop(GetComponent<BossEnemy>().drop.getAbility());
+            quests.bossesKilled(GetComponent<BossEnemy>().bossName);
+
+            Player.instance.audioHandler.playBossDeath();
+        }
+        else
+        {
+            Player.instance.audioHandler.playEnemyDeath();
+        }
+
+
+        isDead = true;
+        changeAnimationStatesTrigger(AnimationStates.DEATH);
+
+        StopAllCoroutines();
+        CancelInvoke();
     }
+    
 
     void resetBoolAnimations()
     {

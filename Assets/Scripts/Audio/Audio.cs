@@ -61,6 +61,8 @@ public class Audio : MonoBehaviour
     [SerializeField]
     AudioClip pickup;
 
+    [SerializeField]
+    AudioClip bossDeath;
 
     [SerializeField]
     AudioClip woodsAmbience;
@@ -69,7 +71,13 @@ public class Audio : MonoBehaviour
     AudioClip jungleAmbience;
 
     [SerializeField]
+    AudioClip playerDeath;
+
+    [SerializeField]
     AudioClip snowAmbience;
+
+    [SerializeField]
+    List<AudioClip> enemyDeath = new List<AudioClip>();
 
     [SerializeField]
     List<AudioClip> coins = new List<AudioClip>();
@@ -307,7 +315,31 @@ public class Audio : MonoBehaviour
         newAudioSource.source.Play();
     }
 
+    public void playEnemyDeath()
+    {
+        newAudioSource = Instantiate(audioSource);
 
+        newAudioSource.source.clip = enemyDeath[Random.Range(0, enemyDeath.Count)];
+        newAudioSource.source.volume = effectsVolume;
+        newAudioSource.source.Play();
+    }
+
+    public void playBossDeath()
+    {
+        newAudioSource = Instantiate(audioSource);
+
+        newAudioSource.source.clip = bossDeath;
+        newAudioSource.source.volume = effectsVolume;
+        newAudioSource.source.Play();
+    }
+    public void playPlayerDeath()
+    {
+        newAudioSource = Instantiate(audioSource);
+
+        newAudioSource.source.clip = playerDeath;
+        newAudioSource.source.volume = effectsVolume;
+        newAudioSource.source.Play();
+    }
 
     public void playInventory(bool open)
     {
