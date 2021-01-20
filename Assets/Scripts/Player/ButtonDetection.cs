@@ -5,6 +5,16 @@ using UnityEngine.EventSystems;
 
 public class ButtonDetection : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+	Vector3 originalScale;
+	private void OnEnable()
+	{
+		originalScale = GetComponent<RectTransform>().localScale;
+	}
+
+	private void OnDisable()
+	{
+		GetComponent<RectTransform>().localScale = originalScale;
+	}
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		Player.instance.menus.setActiveButton(this.gameObject);

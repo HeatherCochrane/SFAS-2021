@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIHandler : MonoBehaviour
 {
-    public enum Menus { PLAYERUI, INVENTORY, QUESTS, TRADER, DIALOGUE, START, MAP};
+    public enum Menus { PLAYERUI, INVENTORY, QUESTS, TRADER, DIALOGUE, START, MAP, AUDIO};
     [System.Serializable]
     public struct Menu
     {
@@ -20,6 +20,8 @@ public class UIHandler : MonoBehaviour
 
     Menus currentMenu;
     Menus currentMenu2;
+
+    Menus previousMenu;
 
     GameObject currentMap;
 
@@ -49,8 +51,10 @@ public class UIHandler : MonoBehaviour
     {
         currentMenu2 = n;
 
+        previousMenu = currentMenu;
+
         //if not switching to player ui and already in a menu
-        if(n != Menus.PLAYERUI && currentMenu != Menus.PLAYERUI)
+        if (n != Menus.PLAYERUI && currentMenu != Menus.PLAYERUI && currentMenu != Menus.START && currentMenu != Menus.AUDIO)
         {
             //DONT
             Debug.Log("DONT SWITCH ALREADY IN MENU");
@@ -89,12 +93,32 @@ public class UIHandler : MonoBehaviour
         {
             Player.instance.menus.setInstance();
             inMenu = false;
+            Player.instance.setMovement(false);
         }
         else
         {
             inMenu = true;
         }
 
+
+    }
+
+    public void goBack()
+    {
+        currentMenu = previousMenu;
+        Debug.Log(previousMenu);
+        changeMenu(currentMenu);
+    }
+
+    public void changeMenuEditor(string menu)
+    {
+        foreach(Menu m in allActiveMenus)
+        {
+            if(m.name.ToString() == menu)
+            {
+                changeMenu(m.name);
+            }
+        }
     }
 
     public bool GetInMenu()
@@ -192,6 +216,7 @@ public class UIHandler : MonoBehaviour
         {
             inMenu = false;
             Player.instance.menus.setInstance();
+            Player.instance.setMovement(false);
         }
 
     }

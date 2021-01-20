@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Audio : MonoBehaviour
 {
@@ -45,6 +47,53 @@ public class Audio : MonoBehaviour
     [SerializeField]
     AudioClip playerDamage;
 
+
+
+
+    float effectsVolume = 0.5f;
+    float ambienceVolume = 0.5f;
+
+    [SerializeField]
+    TextMeshProUGUI effectsText;
+
+    [SerializeField]
+    TextMeshProUGUI ambienceText;
+
+    public void adjustEffectsVolume(float i)
+    {
+        effectsVolume += i;
+
+        if(effectsVolume > 1)
+        {
+            effectsVolume = 1;
+        }
+        else if(effectsVolume < 0)
+        {
+            effectsVolume = 0;
+        }
+
+        float visualVolume = effectsVolume * 10;
+        effectsText.text = Mathf.RoundToInt(visualVolume).ToString();
+    }
+
+    public void adjustAmbienceVolume(float i)
+    {
+        ambienceVolume += i;
+
+        if (ambienceVolume > 1)
+        {
+            ambienceVolume = 1;
+        }
+        else if (ambienceVolume < 0)
+        {
+            ambienceVolume = 0;
+        }
+
+        float visualVolume = ambienceVolume * 10;
+        ambienceText.text = Mathf.RoundToInt(visualVolume).ToString();
+    }
+
+
     public void playInventory(bool open)
     {
         newAudioSource = Instantiate(audioSource);
@@ -58,6 +107,7 @@ public class Audio : MonoBehaviour
             newAudioSource.source.clip = inventoryClose;
         }
 
+        newAudioSource.source.volume = effectsVolume;
         newAudioSource.source.Play();
 
     }
@@ -73,7 +123,7 @@ public class Audio : MonoBehaviour
         {
             newAudioSource.source.clip = dialogueClose;
         }
-
+        newAudioSource.source.volume = effectsVolume;
         newAudioSource.source.Play();
 
     }
@@ -90,7 +140,7 @@ public class Audio : MonoBehaviour
         {
             newAudioSource.source.clip = mapClose;
         }
-
+        newAudioSource.source.volume = effectsVolume;
         newAudioSource.source.Play();
 
     }
@@ -99,6 +149,7 @@ public class Audio : MonoBehaviour
     {
         newAudioSource = Instantiate(audioSource);
         newAudioSource.source.clip = buttonTap;
+        newAudioSource.source.volume = effectsVolume;
         newAudioSource.source.Play();
     }
 
@@ -106,6 +157,7 @@ public class Audio : MonoBehaviour
     {
         newAudioSource = Instantiate(audioSource);
         newAudioSource.source.clip = melee;
+        newAudioSource.source.volume = effectsVolume;
         newAudioSource.source.Play();
     }
 
@@ -113,6 +165,7 @@ public class Audio : MonoBehaviour
     {
         newAudioSource = Instantiate(audioSource);
         newAudioSource.source.clip = ranged;
+        newAudioSource.source.volume = effectsVolume;
         newAudioSource.source.Play();
     }
 
@@ -120,6 +173,7 @@ public class Audio : MonoBehaviour
     {
         newAudioSource = Instantiate(audioSource);
         newAudioSource.source.clip = dash;
+        newAudioSource.source.volume = effectsVolume;
         newAudioSource.source.Play();
     }
 }

@@ -116,6 +116,14 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press"
+                },
+                {
+                    "name": "Settings",
+                    "type": "Button",
+                    "id": "83a7f75b-1aaa-4f32-8264-f3bc030b6512",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -600,6 +608,28 @@
                     "processors": "",
                     "groups": "All",
                     "action": "MoveX",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cc481125-cb1a-4631-a856-d5354d449eb8",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "All",
+                    "action": "Settings",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8eef9653-e8fc-448a-89fb-e70289e8f3e5",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "All",
+                    "action": "Settings",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

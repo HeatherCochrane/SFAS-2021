@@ -129,6 +129,14 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Settings"",
+                    ""type"": ""Button"",
+                    ""id"": ""83a7f75b-1aaa-4f32-8264-f3bc030b6512"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -615,6 +623,28 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""action"": ""MoveX"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc481125-cb1a-4631-a856-d5354d449eb8"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""All"",
+                    ""action"": ""Settings"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8eef9653-e8fc-448a-89fb-e70289e8f3e5"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""All"",
+                    ""action"": ""Settings"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -664,6 +694,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         m_Player_ButtonSelect = m_Player.FindAction("ButtonSelect", throwIfNotFound: true);
         m_Player_MoveX = m_Player.FindAction("MoveX", throwIfNotFound: true);
         m_Player_MoveY = m_Player.FindAction("MoveY", throwIfNotFound: true);
+        m_Player_Settings = m_Player.FindAction("Settings", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -727,6 +758,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_ButtonSelect;
     private readonly InputAction m_Player_MoveX;
     private readonly InputAction m_Player_MoveY;
+    private readonly InputAction m_Player_Settings;
     public struct PlayerActions
     {
         private @InputSystem m_Wrapper;
@@ -745,6 +777,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         public InputAction @ButtonSelect => m_Wrapper.m_Player_ButtonSelect;
         public InputAction @MoveX => m_Wrapper.m_Player_MoveX;
         public InputAction @MoveY => m_Wrapper.m_Player_MoveY;
+        public InputAction @Settings => m_Wrapper.m_Player_Settings;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -796,6 +829,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @MoveY.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveY;
                 @MoveY.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveY;
                 @MoveY.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveY;
+                @Settings.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSettings;
+                @Settings.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSettings;
+                @Settings.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSettings;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -842,6 +878,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @MoveY.started += instance.OnMoveY;
                 @MoveY.performed += instance.OnMoveY;
                 @MoveY.canceled += instance.OnMoveY;
+                @Settings.started += instance.OnSettings;
+                @Settings.performed += instance.OnSettings;
+                @Settings.canceled += instance.OnSettings;
             }
         }
     }
@@ -880,5 +919,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
         void OnButtonSelect(InputAction.CallbackContext context);
         void OnMoveX(InputAction.CallbackContext context);
         void OnMoveY(InputAction.CallbackContext context);
+        void OnSettings(InputAction.CallbackContext context);
     }
 }
