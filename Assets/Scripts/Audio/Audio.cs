@@ -11,6 +11,8 @@ public class Audio : MonoBehaviour
 
     AudioSourceObject newAudioSource;
 
+    AudioSourceObject ambienceSource;
+
     [SerializeField]
     AudioClip inventoryOpen;
 
@@ -46,6 +48,15 @@ public class Audio : MonoBehaviour
 
     [SerializeField]
     AudioClip playerDamage;
+
+    [SerializeField]
+    AudioClip woodsAmbience;
+
+    [SerializeField]
+    AudioClip jungleAmbience;
+
+    [SerializeField]
+    AudioClip snowAmbience;
 
 
 
@@ -91,6 +102,101 @@ public class Audio : MonoBehaviour
 
         float visualVolume = ambienceVolume * 10;
         ambienceText.text = Mathf.RoundToInt(visualVolume).ToString();
+    }
+
+
+    public void spawnWoodsAmbience()
+    {
+        if(ambienceSource != null)
+        {
+            if (ambienceSource.source.clip != woodsAmbience)
+            {
+                Destroy(ambienceSource.gameObject);
+
+                ambienceSource = Instantiate(audioSource);
+                ambienceSource.source.clip = woodsAmbience;
+                ambienceSource.source.volume = ambienceVolume;
+                ambienceSource.source.loop = true;
+                ambienceSource.source.Play();
+
+
+                ambienceSource.transform.SetParent(this.transform);
+            }
+        }
+        else
+        {
+            ambienceSource = Instantiate(audioSource);
+            ambienceSource.source.clip = woodsAmbience;
+            ambienceSource.source.volume = ambienceVolume;
+            ambienceSource.source.loop = true;
+            ambienceSource.source.Play();
+
+
+            ambienceSource.transform.SetParent(this.transform);
+        }
+
+       
+    }
+
+    public void spawnJungleAmbience()
+    {
+        if (ambienceSource != null )
+        {
+            if (ambienceSource.source.clip != jungleAmbience)
+            {
+                Destroy(ambienceSource.gameObject);
+
+                ambienceSource = Instantiate(audioSource);
+                ambienceSource.source.clip = jungleAmbience;
+                ambienceSource.source.volume = ambienceVolume;
+                ambienceSource.source.loop = true;
+                ambienceSource.source.Play();
+
+                ambienceSource.transform.SetParent(this.transform);
+            }
+        }
+        else
+        {
+            ambienceSource = Instantiate(audioSource);
+            ambienceSource.source.clip = jungleAmbience;
+            ambienceSource.source.volume = ambienceVolume;
+            ambienceSource.source.loop = true;
+            ambienceSource.source.Play();
+
+            ambienceSource.transform.SetParent(this.transform);
+        }
+
+    }
+
+    public void spawnSnowAmbience()
+    {
+        if (ambienceSource != null)
+        {
+            if (ambienceSource.source.clip != snowAmbience)
+            {
+                Destroy(ambienceSource.gameObject);
+
+                ambienceSource = Instantiate(audioSource);
+                ambienceSource.source.clip = snowAmbience;
+                ambienceSource.source.volume = ambienceVolume;
+                ambienceSource.source.loop = true;
+                ambienceSource.source.Play();
+
+
+                ambienceSource.transform.SetParent(this.transform);
+            }
+        }
+        else
+        {
+            ambienceSource = Instantiate(audioSource);
+            ambienceSource.source.clip = snowAmbience;
+            ambienceSource.source.volume = ambienceVolume;
+            ambienceSource.source.loop = true;
+            ambienceSource.source.Play();
+
+
+            ambienceSource.transform.SetParent(this.transform);
+        }
     }
 
 

@@ -64,6 +64,19 @@ public class SceneLoader : MonoBehaviour
             Player.instance.dialogue.switchSceneOnEnd(current.switchScene, current.gate);
         }
 
+        if(current.particleEffect == Particle.GRASS)
+        {
+            Player.instance.audioHandler.spawnWoodsAmbience();
+        }
+        else if (current.particleEffect == Particle.JUNGLE)
+        {
+            Player.instance.audioHandler.spawnJungleAmbience();
+        }
+        else if (current.particleEffect == Particle.SNOW)
+        {
+            Player.instance.audioHandler.spawnSnowAmbience();
+        }
+
         transitionFromBoss = false;
     }
 

@@ -10,7 +10,10 @@ public class AudioSourceObject : MonoBehaviour
     void Start()
     {
         source = GetComponent<AudioSource>();
-        Invoke("destroyObject", source.clip.length);
+        if (!source.loop)
+        {
+            Invoke("destroyObject", source.clip.length);
+        }
     }
 
     void destroyObject()
