@@ -19,12 +19,10 @@ public class ButtonDetection : MonoBehaviour, IPointerEnterHandler, IPointerExit
 	{
 		Player.instance.menus.setActiveButton(this.gameObject);
 		Player.instance.menus.setMouseOnButton(true, this.gameObject);
-		Debug.Log("ON UI ELEMENT!");
 	}
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
-		Debug.Log("NOT ON UI ELEMENT!");
 		Player.instance.menus.setMouseOnButton(false, null);
 	}
 }

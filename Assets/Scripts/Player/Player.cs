@@ -267,9 +267,32 @@ public class Player : MonoBehaviour
             }
         }
     }
-    
 
-    
+    public void onShowSettings(CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            if (trackInput)
+            {
+                if (uiHandler.getInMenu(UIHandler.Menus.INGAMESETTINGS))
+                {
+                    uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
+                    stopMovement = false;
+
+                    audioHandler.playInventory(false);
+                }
+                else if (!uiHandler.GetInMenu())
+                {
+                    uiHandler.changeMenu(UIHandler.Menus.INGAMESETTINGS);
+                    stopMovement = true;
+
+                    audioHandler.playInventory(true);
+                }
+            }
+        }
+    }
+
+
     public void OnInventory(CallbackContext ctx)
     {
         if (ctx.performed)
