@@ -85,7 +85,9 @@ public class Killable : MonoBehaviour
 
     // Start is called before the first frame update
     public void Start()
-    {     
+    {
+        Physics2D.queriesStartInColliders = false;
+
         rb = GetComponent<Rigidbody2D>();
         health = data.health;
         quests = Player.instance.playerQuests;

@@ -218,7 +218,7 @@ public class Game : MonoBehaviour
 
         Invoke("closeDialogueScreen", 1f);
 
-        if(sceneToSwtichTo != "")
+        if(sceneToSwtichTo != null)
         {
             Player.instance.sceneLoader.switchScene(sceneToSwtichTo, gate);
             sceneToSwtichTo = "";

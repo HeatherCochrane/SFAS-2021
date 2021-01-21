@@ -308,6 +308,7 @@ public class Audio : MonoBehaviour
     public void playPlayerDeath()
     {
         newAudioSource = Instantiate(audioSource);
+        newAudioSource.transform.SetParent(this.transform);
         EffectNormal(newAudioSource.source, playerDeath);
     }
 

@@ -98,6 +98,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!70 &1915187643079258931
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4948603633552926149}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.18649603, y: -0.96510327}
+  m_Size: {x: 3.594248, y: 2.6222098}
+  m_Direction: 1
 --- !u!95 &1352139648
 Animator:
   serializedVersion: 3
@@ -307,7 +323,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossEnemy
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2497558181492459340, guid: bbc12a455a631c04881d1a9391507707, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bbc12a455a631c04881d1a9391507707, type: 3}
 --- !u!1 &4948603633552926149 stripped
 GameObject:

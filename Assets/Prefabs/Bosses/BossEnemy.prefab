@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3978258064048480567}
   - component: {fileID: 3978258064048480568}
   - component: {fileID: 3978258064048480570}
-  - component: {fileID: 3978258064048480569}
+  - component: {fileID: 2497558181492459340}
   m_Layer: 10
   m_Name: BossEnemy
   m_TagString: Killable
@@ -121,6 +121,8 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: da348f01e8e96734e96b8ba923aab9bb, type: 2}
   damage: 1
   force: 2
+  canvas: {fileID: 0}
+  hitAmount: {fileID: 0}
   bossPattern:
   - attack: 1
     attackLength: 1
@@ -138,9 +140,14 @@ MonoBehaviour:
     attackLength: 2
   - attack: 4
     attackLength: 2
+  chargeSpeed: 7.5
+  range: 0
   projectile: {fileID: 5147513752712701425, guid: 367564c6fff77c3428ff9d8e83bdf6e8, type: 3}
---- !u!58 &3978258064048480569
-CircleCollider2D:
+  area: {fileID: 0}
+  drop: {fileID: 0}
+  bossName: 0
+--- !u!70 &2497558181492459340
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -152,6 +159,6 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.31404912}
-  serializedVersion: 2
-  m_Radius: 0.7195603
+  m_Offset: {x: 0.07224369, y: -0.3688256}
+  m_Size: {x: 1.4828577, y: 1.4828577}
+  m_Direction: 0

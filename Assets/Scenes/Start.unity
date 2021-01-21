@@ -3094,7 +3094,7 @@ PrefabInstance:
       objectReference: {fileID: 2137751214400405300}
     - target: {fileID: 5902577227563476044, guid: 17c02e51c6c4903489bbb0f6750beb30, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: OpeningScene
+      value: Jungle1
       objectReference: {fileID: 0}
     - target: {fileID: 8896104596162891312, guid: 17c02e51c6c4903489bbb0f6750beb30, type: 3}
       propertyPath: m_AnchorMin.y

@@ -62,12 +62,13 @@ public class SceneLoader : MonoBehaviour
             }
         }
 
-        if(current.character != null)
+        if (current.character != null)
         {
             Player.instance.uiHandler.changeMenu(UIHandler.Menus.DIALOGUE);
             Player.instance.dialogue.startNewDialogue(current.character.getData().getDialogue(0), current.character.getData().getCharacterSprite(), current.character.getData().getName(), Player.instance.uiHandler.getMenuObject(UIHandler.Menus.DIALOGUE));
             Player.instance.setInConvo();
             Player.instance.dialogue.switchSceneOnEnd(current.switchScene, current.gate);
+            current.character = null;
         }
         else
         {
@@ -135,7 +136,6 @@ public class SceneLoader : MonoBehaviour
     List<Sprite> gateSprites = new List<Sprite>();
 
     SceneData current;
-    SceneData previousScene;
 
 
     Vector2 newSpawnPoint;
@@ -159,17 +159,12 @@ public class SceneLoader : MonoBehaviour
 
         instance = this;
         anim = this.GetComponent<Animator>();
-
-        current = AllSceneData[3];
     }
 
 
     void loadSetScene()
     {
-
         SceneManager.LoadScene(sceneToLoad);
-
-        previousScene = current;
 
         foreach (SceneData scene in AllSceneData)
         {
@@ -198,7 +193,7 @@ public class SceneLoader : MonoBehaviour
 
         if(current.bossScene)
         {
-            sceneToLoad = previousScene.scenePath;
+            sceneToLoad = GameObject.FindObjectOfType<TransitionGate>().getScene();
             transitionFromBoss = true;
             loadSetScene();
         }
@@ -214,21 +209,43 @@ public class SceneLoader : MonoBehaviour
                     break;
                 }
             }
-        }
-      
+        }  
     }
 
     public void switchScene(string scene, TransitionGate g)
     {
         sceneToLoad = scene;
         gate = g;
+
+        foreach(SceneData d in AllSceneData)
+        {
+            if(d.scenePath == scene)
+            {
+                current = d;
+                Debug.Log(current.scenePath);
+                break;
+            }
+        }
+
         loadScene();
+
     }
 
     public void startGame(string scene)
     {
         sceneToLoad = scene;
         gate = GetComponent<TransitionGate>();
+
+        foreach (SceneData d in AllSceneData)
+        {
+            if (d.scenePath == scene)
+            {
+                current = d;
+                Debug.Log(current.scenePath);
+                break;
+            }
+        }
+
         loadScene();
     }
 

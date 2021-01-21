@@ -6005,7 +6005,7 @@ MonoBehaviour:
   blockingObject: {fileID: 547789794}
   battleMessage: {fileID: 1464284410}
   abilityDropScreen: {fileID: 1920360620}
-  bossCharacter: {fileID: 3521993591882925534, guid: e79894c810457474880b23f72ffcc849, type: 3}
+  bossCharacter: {fileID: 8891206540565663227, guid: ce772310ff2c25944a58769a3994031e, type: 3}
   boss: 0
 --- !u!4 &458550440
 Transform:

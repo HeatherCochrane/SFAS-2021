@@ -66,10 +66,13 @@ public class BossEnemy : Killable
     public BossScene.BossNames bossName;
 
     int multipleCount = 0;
+
+    float originalScale = 0;
     // Start is called before the first frame update
     void Start()
     {
         base.Start();
+        originalScale = transform.localScale.x;
     }
 
     public void startBattle()
@@ -203,11 +206,11 @@ public class BossEnemy : Killable
     {
         if (currentDir == 1)
         {
-            GetComponent<SpriteRenderer>().flipX = true;
+            transform.localScale = new Vector3(-originalScale, originalScale, 1);
         }
         else
         {
-            GetComponent<SpriteRenderer>().flipX = false;
+            transform.localScale = new Vector3(originalScale, originalScale, 1);
         }
     }
 
