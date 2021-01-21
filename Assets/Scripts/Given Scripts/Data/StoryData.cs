@@ -37,6 +37,8 @@ public class StoryData : ScriptableObject
         return AssetDatabase.GetAssetPath(this);
     }
 
+#endif
+
     public int getBeatSize()
     {
         return _beats.Count;
@@ -47,6 +49,6 @@ public class StoryData : ScriptableObject
         return completeThisQuest;
     }
 
-#endif
+
 }
 

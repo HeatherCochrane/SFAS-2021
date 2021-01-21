@@ -100,8 +100,7 @@ public class Killable : MonoBehaviour
 
     public void attackPlayer()
     {
-
-        if (Player.instance.transform.position.x < transform.position.x)
+        if (Player.instance.transform.position.x <= transform.position.x)
         {
             Player.instance.playerStatus.takeDamage(damage, false, force);
         }
@@ -109,6 +108,13 @@ public class Killable : MonoBehaviour
         {
             Player.instance.playerStatus.takeDamage(damage, true, force);
         }
+
+        attackedPlayerResponse();
+
+    }
+
+    public virtual void attackedPlayerResponse()
+    {
 
     }
 
@@ -138,9 +144,17 @@ public class Killable : MonoBehaviour
                 StopAllCoroutines();
                 killEnemy();
             }
+            else
+            {
+                damageResponse();
+            }
         }
     }
 
+    public virtual void damageResponse()
+    {
+
+    }
     void spawnHitPoint(int d)
     {
         hit = Instantiate(hitAmount);

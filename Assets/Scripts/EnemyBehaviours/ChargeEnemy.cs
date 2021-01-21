@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ChargeEnemy : Killable
 {
-    [SerializeField]
-    float cooldownTime = 0;
+    float cooldownTime = 2;
 
     bool onCooldown = false;
 
@@ -15,7 +14,7 @@ public class ChargeEnemy : Killable
 
     bool charging = false;
 
-    float chargeTime = 5;
+    float chargeTime = 3;
 
     float walkingSpeed = 2;
 
@@ -54,15 +53,9 @@ public class ChargeEnemy : Killable
             {
                 if (distX < 1)
                 {
-                    chargeTime = 5;
+                    chargeTime = 3;
                     charging = false;
                     rb.velocity = new Vector2(0, rb.velocity.y);
-
-                    //do damage to the player when they are close
-                    if (distY <= 1f)
-                    {
-                        attackPlayer();
-                    }
 
                     if (!onCooldown)
                     {
@@ -87,7 +80,7 @@ public class ChargeEnemy : Killable
                 }
                 else
                 {
-                    chargeTime = 5;
+                    chargeTime = 3;
                     charging = false;
                     rb.velocity = new Vector2(0, rb.velocity.y);
 
@@ -105,9 +98,29 @@ public class ChargeEnemy : Killable
         }
     }
 
+    public override void attackedPlayerResponse()
+    {
+        chargeTime = 3;
+        charging = false;
+        rb.velocity = new Vector2(0, rb.velocity.y);
+
+        onCooldown = true;
+        Invoke("stopCountdown", cooldownTime);
+
+        changeAnimationStatesTrigger(AnimationStates.IDLE);
+    }
+
+    public override void damageResponse()
+    {
+        dir = playerDir;
+        transform.localScale = new Vector3(playerDir * scaleValue.x, scaleValue.y, 0);
+        charging = true;
+        changeAnimationStatesTrigger(AnimationStates.CHARGE);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.tag == "Obstacle")
+        if (collision.transform.tag == "Obstacle" && rb.velocity.y == 0 && !isDead)
         {
             dir *= -1;
             charging = false;

@@ -237,6 +237,9 @@ public class UIHandler : MonoBehaviour
         return null;
     }
 
-
+    public void close()
+    {
+        Application.Quit();
+    }
     
 }
