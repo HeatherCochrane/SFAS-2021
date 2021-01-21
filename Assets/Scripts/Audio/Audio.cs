@@ -138,6 +138,30 @@ public class Audio : MonoBehaviour
         ambienceText.text = Mathf.RoundToInt(visualVolume).ToString();
     }
 
+    public void Ambience(AudioSource s, AudioClip c)
+    {
+        s.clip = c;
+        s.volume = ambienceVolume;
+        s.loop = true;
+        s.Play();
+
+        s.transform.SetParent(this.transform);
+    }
+
+    public void EffectNormal(AudioSource s, AudioClip c)
+    {
+        s.clip = c;
+        s.volume = effectsVolume;
+        s.Play();
+    }
+
+    public void EffectPitched(AudioSource s, AudioClip c)
+    {
+        s.clip = c;
+        s.volume = effectsVolume;
+        s.pitch = Random.Range(0.8f, 1.2f);
+        s.Play();
+    }
 
     public void spawnWoodsAmbience()
     {
@@ -148,25 +172,14 @@ public class Audio : MonoBehaviour
                 Destroy(ambienceSource.gameObject);
 
                 ambienceSource = Instantiate(audioSource);
-                ambienceSource.source.clip = woodsAmbience;
-                ambienceSource.source.volume = ambienceVolume;
-                ambienceSource.source.loop = true;
-                ambienceSource.source.Play();
 
-
-                ambienceSource.transform.SetParent(this.transform);
+                Ambience(ambienceSource.source, woodsAmbience);
             }
         }
         else
         {
             ambienceSource = Instantiate(audioSource);
-            ambienceSource.source.clip = woodsAmbience;
-            ambienceSource.source.volume = ambienceVolume;
-            ambienceSource.source.loop = true;
-            ambienceSource.source.Play();
-
-
-            ambienceSource.transform.SetParent(this.transform);
+            Ambience(ambienceSource.source, woodsAmbience);
         }
 
        
@@ -181,21 +194,13 @@ public class Audio : MonoBehaviour
                 Destroy(ambienceSource.gameObject);
 
                 ambienceSource = Instantiate(audioSource);
-                ambienceSource.source.clip = jungleAmbience;
-                ambienceSource.source.volume = ambienceVolume;
-                ambienceSource.source.loop = true;
-                ambienceSource.source.Play();
-
-                ambienceSource.transform.SetParent(this.transform);
+                Ambience(ambienceSource.source, jungleAmbience);
             }
         }
         else
         {
             ambienceSource = Instantiate(audioSource);
-            ambienceSource.source.clip = jungleAmbience;
-            ambienceSource.source.volume = ambienceVolume;
-            ambienceSource.source.loop = true;
-            ambienceSource.source.Play();
+            Ambience(ambienceSource.source, jungleAmbience);
 
             ambienceSource.transform.SetParent(this.transform);
         }
@@ -211,159 +216,99 @@ public class Audio : MonoBehaviour
                 Destroy(ambienceSource.gameObject);
 
                 ambienceSource = Instantiate(audioSource);
-                ambienceSource.source.clip = snowAmbience;
-                ambienceSource.source.volume = ambienceVolume;
-                ambienceSource.source.loop = true;
-                ambienceSource.source.Play();
-
-
-                ambienceSource.transform.SetParent(this.transform);
+                Ambience(ambienceSource.source, snowAmbience);
             }
         }
         else
         {
             ambienceSource = Instantiate(audioSource);
-            ambienceSource.source.clip = snowAmbience;
-            ambienceSource.source.volume = ambienceVolume;
-            ambienceSource.source.loop = true;
-            ambienceSource.source.Play();
-
-
-            ambienceSource.transform.SetParent(this.transform);
+            Ambience(ambienceSource.source, snowAmbience);
         }
     }
 
     public void playGrassStep()
     {
         newAudioSource = Instantiate(audioSource);
-
-        newAudioSource.source.clip = grassFootsteps[Random.Range(0, grassFootsteps.Count)];
-        newAudioSource.source.pitch = Random.Range(0.8f, 1.2f);
-        newAudioSource.source.volume = effectsVolume;
-        newAudioSource.source.Play();
+        EffectPitched(newAudioSource.source, grassFootsteps[Random.Range(0, grassFootsteps.Count)]);
     }
 
     public void playSnowStep()
     {
         newAudioSource = Instantiate(audioSource);
-
-        newAudioSource.source.clip = snowFootsteps[Random.Range(0, snowFootsteps.Count)];
-        newAudioSource.source.pitch = Random.Range(0.8f, 1.2f);
-        newAudioSource.source.volume = effectsVolume;
-        newAudioSource.source.Play();
+        EffectPitched(newAudioSource.source, snowFootsteps[Random.Range(0, snowFootsteps.Count)]);
     }
 
     public void playWoodStep()
     {
         newAudioSource = Instantiate(audioSource);
-
-        newAudioSource.source.clip = woodFootsteps[Random.Range(0, woodFootsteps.Count)];
-        newAudioSource.source.pitch = Random.Range(0.8f, 1.2f);
-        newAudioSource.source.volume = effectsVolume;
-        newAudioSource.source.Play();
+        EffectPitched(newAudioSource.source, woodFootsteps[Random.Range(0, woodFootsteps.Count)]);
     }
 
     public void playEnemyHit()
     {
         newAudioSource = Instantiate(audioSource);
 
-        newAudioSource.source.clip = enemyDamage;
-        newAudioSource.source.volume = effectsVolume;
-        newAudioSource.source.Play();
+        EffectNormal(newAudioSource.source, enemyDamage);
     }
 
     public void playPlayerHit()
     {
         newAudioSource = Instantiate(audioSource);
-
-        newAudioSource.source.clip = playerDamage;
-        newAudioSource.source.volume = effectsVolume;
-        newAudioSource.source.Play();
+        EffectNormal(newAudioSource.source, playerDamage);
     }
 
     public void playJump()
     {
         newAudioSource = Instantiate(audioSource);
-
-        newAudioSource.source.clip = jump;
-        newAudioSource.source.volume = effectsVolume;
-        newAudioSource.source.pitch = Random.Range(0.8f, 1.2f);
-        newAudioSource.source.Play();
+        EffectNormal(newAudioSource.source, jump);
     }
 
     public void playCoins()
     {
         newAudioSource = Instantiate(audioSource);
-
-        newAudioSource.source.clip = coins[Random.Range(0, coins.Count)];
-        newAudioSource.source.volume = effectsVolume;
-        newAudioSource.source.Play();
+        EffectPitched(newAudioSource.source, coins[Random.Range(0, coins.Count)]);
     }
 
     public void playDrop()
     {
         newAudioSource = Instantiate(audioSource);
-
-        newAudioSource.source.clip = drop;
-        newAudioSource.source.volume = effectsVolume;
-        newAudioSource.source.pitch = Random.Range(0.8f, 1.2f);
-        newAudioSource.source.Play();
+        EffectPitched(newAudioSource.source, drop);
     }
 
     public void playEat()
     {
         newAudioSource = Instantiate(audioSource);
-
-        newAudioSource.source.clip = eat;
-        newAudioSource.source.volume = effectsVolume;
-        newAudioSource.source.pitch = Random.Range(0.8f, 1.2f);
-        newAudioSource.source.Play();
+        EffectPitched(newAudioSource.source, eat);
     }
 
     public void playPickup()
     {
         newAudioSource = Instantiate(audioSource);
-
-        newAudioSource.source.clip = pickup;
-        newAudioSource.source.volume = effectsVolume;
-        newAudioSource.source.Play();
+        EffectNormal(newAudioSource.source, pickup);
     }
 
     public void playEnemyDeath()
     {
         newAudioSource = Instantiate(audioSource);
-
-        newAudioSource.source.clip = enemyDeath[Random.Range(0, enemyDeath.Count)];
-        newAudioSource.source.volume = effectsVolume;
-        newAudioSource.source.Play();
+        EffectNormal(newAudioSource.source, enemyDeath[Random.Range(0, enemyDeath.Count)]);
     }
 
     public void playBossDeath()
     {
         newAudioSource = Instantiate(audioSource);
-
-        newAudioSource.source.clip = bossDeath;
-        newAudioSource.source.volume = effectsVolume;
-        newAudioSource.source.Play();
+        EffectNormal(newAudioSource.source, bossDeath);
     }
 
     public void playHighlightButton()
     {
         newAudioSource = Instantiate(audioSource);
-
-        newAudioSource.source.clip = buttonHighlight;
-        newAudioSource.source.volume = effectsVolume;
-        newAudioSource.source.pitch = Random.Range(0.8f, 1.2f);
-        newAudioSource.source.Play();
+        EffectPitched(newAudioSource.source, buttonHighlight);
     }
 
     public void playPlayerDeath()
     {
         newAudioSource = Instantiate(audioSource);
-
-        newAudioSource.source.clip = playerDeath;
-        newAudioSource.source.volume = effectsVolume;
-        newAudioSource.source.Play();
+        EffectNormal(newAudioSource.source, playerDeath);
     }
 
     public void playInventory(bool open)
@@ -372,16 +317,12 @@ public class Audio : MonoBehaviour
 
         if (open)
         {
-            newAudioSource.source.clip = inventoryOpen;
+            EffectNormal(newAudioSource.source, inventoryOpen);
         }
         else
         {
-            newAudioSource.source.clip = inventoryClose;
+            EffectNormal(newAudioSource.source, inventoryClose);
         }
-
-        newAudioSource.source.volume = effectsVolume;
-        newAudioSource.source.Play();
-
     }
     public void playDialogue(bool open)
     {
@@ -389,15 +330,12 @@ public class Audio : MonoBehaviour
 
         if (open)
         {
-            newAudioSource.source.clip = dialogueOpen;
+            EffectNormal(newAudioSource.source, dialogueOpen);
         }
         else
         {
-            newAudioSource.source.clip = dialogueClose;
+            EffectNormal(newAudioSource.source, dialogueClose);
         }
-        newAudioSource.source.volume = effectsVolume;
-        newAudioSource.source.Play();
-
     }
 
     public void playMap(bool open)
@@ -406,47 +344,36 @@ public class Audio : MonoBehaviour
 
         if (open)
         {
-            newAudioSource.source.clip = mapOpen;
+            EffectNormal(newAudioSource.source, mapOpen);
         }
         else
         {
-            newAudioSource.source.clip = mapClose;
+            EffectNormal(newAudioSource.source, mapClose);
         }
-        newAudioSource.source.volume = effectsVolume;
-        newAudioSource.source.Play();
 
     }
 
     public void playButtonTap()
     {
         newAudioSource = Instantiate(audioSource);
-        newAudioSource.source.clip = buttonTap;
-        newAudioSource.source.volume = effectsVolume;
-        newAudioSource.source.Play();
+        EffectNormal(newAudioSource.source, buttonTap);
     }
 
     public void playMelee()
     {
         newAudioSource = Instantiate(audioSource);
-        newAudioSource.source.clip = melee;
-        newAudioSource.source.pitch = Random.Range(0.8f, 1.2f);
-        newAudioSource.source.volume = effectsVolume;
-        newAudioSource.source.Play();
+        EffectPitched(newAudioSource.source, melee);
     }
 
     public void playRanged()
     {
         newAudioSource = Instantiate(audioSource);
-        newAudioSource.source.clip = ranged;
-        newAudioSource.source.volume = effectsVolume;
-        newAudioSource.source.Play();
+        EffectNormal(newAudioSource.source, ranged);
     }
 
     public void playDash()
     {
         newAudioSource = Instantiate(audioSource);
-        newAudioSource.source.clip = dash;
-        newAudioSource.source.volume = effectsVolume;
-        newAudioSource.source.Play();
+        EffectNormal(newAudioSource.source, dash);
     }
 }
