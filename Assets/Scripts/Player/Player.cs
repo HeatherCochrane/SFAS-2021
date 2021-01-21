@@ -226,7 +226,7 @@ public class Player : MonoBehaviour
         {
             if (trackInput)
             {
-                if (uiHandler.getMapActive())
+                if (uiHandler.areaHasMap())
                 {
                     if (uiHandler.getInMenu(UIHandler.Menus.MAP))
                     {
@@ -310,7 +310,6 @@ public class Player : MonoBehaviour
                 }
                 else if(!uiHandler.GetInMenu())
                 {
-                    uiHandler.hideMap();
                     uiHandler.changeDoubleMenu(UIHandler.Menus.PLAYERUI, UIHandler.Menus.INVENTORY);
                     inventory.setInventory(true);
                     stopMovement = true;

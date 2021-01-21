@@ -10,10 +10,12 @@ public class SceneLoader : MonoBehaviour
     IEnumerator checkSceneLoaded()
     {
         string spawnP = "";
+
         if(transitionFromBoss)
         {
             spawnP = GameObject.FindObjectOfType<TransitionGate>().getSpawn();
         }
+
         while (!SceneManager.GetSceneByName(sceneToLoad).isLoaded)
         {
             yield return new WaitForEndOfFrame();
@@ -24,6 +26,10 @@ public class SceneLoader : MonoBehaviour
         if (m != null)
         {
             Player.instance.uiHandler.setCurrentMap(m);
+        }
+        else
+        {
+            Debug.Log("NO MAP FOUND!");
         }
 
         map = GameObject.FindGameObjectWithTag("ColliderMap").GetComponentInChildren<Tilemap>();
@@ -62,6 +68,10 @@ public class SceneLoader : MonoBehaviour
             Player.instance.dialogue.startNewDialogue(current.character.getData().getDialogue(0), current.character.getData().getCharacterSprite(), current.character.getData().getName(), Player.instance.uiHandler.getMenuObject(UIHandler.Menus.DIALOGUE));
             Player.instance.setInConvo();
             Player.instance.dialogue.switchSceneOnEnd(current.switchScene, current.gate);
+        }
+        else
+        {
+            Player.instance.uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
         }
 
         if(current.particleEffect == Particle.GRASS)

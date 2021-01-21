@@ -23,8 +23,6 @@ public class UIHandler : MonoBehaviour
 
     Menus previousMenu;
 
-    GameObject currentMap;
-
     MenuSelection currentMenuButtons;
 
     bool inMenu = false;
@@ -122,9 +120,6 @@ public class UIHandler : MonoBehaviour
 
     public void setCurrentMap(GameObject m)
     {
-        currentMap = m;
-        currentMap.SetActive(false);
-
         for(int i =0; i < allActiveMenus.Count; i++)
         {
             if(allActiveMenus[i].name == Menus.MAP)
@@ -132,30 +127,29 @@ public class UIHandler : MonoBehaviour
                 Menu newM = allActiveMenus[i];
                 newM.obj = m;
                 allActiveMenus[i] = newM;
+                allActiveMenus[i].obj.SetActive(false);
             }
         }
     }
 
-    public void hideMap()
+    public bool areaHasMap()
     {
-        if (currentMap != null)
+        for (int i = 0; i < allActiveMenus.Count; i++)
         {
-            currentMap.SetActive(false);
+            if (allActiveMenus[i].name == Menus.MAP)
+            {
+               if(allActiveMenus[i].obj != null)
+                {
+                    return true;
+                }
+               else
+                {
+                    return false;
+                }
+            }
         }
 
-        changeMenu(Menus.PLAYERUI);
-    }
-
-    public bool getMapActive()
-    {
-        if (currentMap != null)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     public void changeDoubleMenu(Menus n, Menus m)

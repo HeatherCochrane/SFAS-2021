@@ -2627,8 +2627,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1139760354065426176}
   m_HandleRect: {fileID: 1139760354065426177}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.5807109
+  m_Value: 0.99999976
+  m_Size: 0.5807108
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4041,6 +4041,21 @@ MonoBehaviour:
   dash: {fileID: 8300000, guid: 20d9db991d6bd1449b8ea4a1dbb7d5af, type: 3}
   enemyDamage: {fileID: 0}
   playerDamage: {fileID: 0}
+  jump: {fileID: 0}
+  drop: {fileID: 0}
+  eat: {fileID: 0}
+  pickup: {fileID: 0}
+  bossDeath: {fileID: 0}
+  buttonHighlight: {fileID: 0}
+  woodsAmbience: {fileID: 0}
+  jungleAmbience: {fileID: 0}
+  playerDeath: {fileID: 0}
+  snowAmbience: {fileID: 0}
+  enemyDeath: []
+  coins: []
+  grassFootsteps: []
+  snowFootsteps: []
+  woodFootsteps: []
   effectsText: {fileID: 4109326716823841066}
   ambienceText: {fileID: 7658634448046644616}
 --- !u!82 &5070544052315297166
@@ -13052,71 +13067,85 @@ MonoBehaviour:
     character: {fileID: 0}
     switchScene: 
     gate: {fileID: 0}
+    bossScene: 0
   - scenePath: Woods1
     particleEffect: 0
     character: {fileID: 0}
     switchScene: 
     gate: {fileID: 0}
+    bossScene: 0
   - scenePath: Woods2
     particleEffect: 0
     character: {fileID: 0}
     switchScene: 
     gate: {fileID: 0}
+    bossScene: 0
   - scenePath: Woods3
     particleEffect: 0
     character: {fileID: 0}
     switchScene: 
     gate: {fileID: 0}
+    bossScene: 0
   - scenePath: Ice1
     particleEffect: 1
     character: {fileID: 0}
     switchScene: 
     gate: {fileID: 0}
+    bossScene: 0
   - scenePath: Jungle1
     particleEffect: 2
     character: {fileID: 0}
     switchScene: 
     gate: {fileID: 0}
+    bossScene: 0
   - scenePath: WoodsToJungle1
     particleEffect: 0
     character: {fileID: 0}
     switchScene: 
     gate: {fileID: 0}
+    bossScene: 0
   - scenePath: WoodsToJungle2
     particleEffect: 0
     character: {fileID: 0}
     switchScene: 
     gate: {fileID: 0}
+    bossScene: 0
   - scenePath: JungleToIce1
     particleEffect: 1
     character: {fileID: 0}
     switchScene: 
     gate: {fileID: 0}
+    bossScene: 0
   - scenePath: JungleBoss
     particleEffect: 2
     character: {fileID: 0}
     switchScene: 
     gate: {fileID: 0}
+    bossScene: 0
   - scenePath: TraderWeapons
     particleEffect: 3
     character: {fileID: 0}
     switchScene: 
     gate: {fileID: 0}
+    bossScene: 0
   - scenePath: WoodsBoss
     particleEffect: 0
     character: {fileID: 0}
     switchScene: 
     gate: {fileID: 0}
+    bossScene: 0
   - scenePath: TutorialScene
     particleEffect: 0
     character: {fileID: 0}
     switchScene: 
     gate: {fileID: 0}
+    bossScene: 0
   - scenePath: OpeningScene
     particleEffect: 0
     character: {fileID: 5886129248935391690, guid: 2b8a0d194c501504991a03afef5dbfdc, type: 3}
     switchScene: TutorialScene
     gate: {fileID: 8613692889092303264, guid: 236467b070f41374ebd016e1b519a197, type: 3}
+    bossScene: 0
   player: {fileID: 5995031976819538249}
   currentScene: {fileID: 0}
   traderSlotParent: {fileID: 4704377830791369970}
@@ -14056,7 +14085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meleeWeapon: {fileID: 11400000, guid: a51923fc1a92cc74fb6a15aeab0fe7d8, type: 2}
-  longRangeWeapon: {fileID: 11400000, guid: 940dadf39bd900141846bf17198bd406, type: 2}
+  longRangeWeapon: {fileID: 0}
   standardMeleeWeapon: {fileID: 11400000, guid: a51923fc1a92cc74fb6a15aeab0fe7d8, type: 2}
 --- !u!114 &5995031976819538241
 MonoBehaviour:
@@ -20673,6 +20702,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 83219690045756014, guid: 38647f3584cbcf14b9dea03973c70bb5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1086347807164077758, guid: 38647f3584cbcf14b9dea03973c70bb5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1086347807164077758, guid: 38647f3584cbcf14b9dea03973c70bb5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1086347807164077758, guid: 38647f3584cbcf14b9dea03973c70bb5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1086347807164077758, guid: 38647f3584cbcf14b9dea03973c70bb5, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}

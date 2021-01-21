@@ -265,7 +265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossPattern.Array.data[5].attackLength
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: canvas
@@ -294,6 +294,14 @@ PrefabInstance:
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: range
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
+      propertyPath: bossPattern.Array.data[6].attackLength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
+      propertyPath: bossPattern.Array.data[7].attackLength
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480571, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: m_Name
