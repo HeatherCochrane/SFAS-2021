@@ -90,6 +90,9 @@ public class Killable : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         health = data.health;
+        damage = data.damage;
+        force = data.force;
+        
         quests = Player.instance.playerQuests;
         anim = GetComponent<Animator>();
 

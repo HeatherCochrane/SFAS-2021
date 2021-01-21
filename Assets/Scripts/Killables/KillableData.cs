@@ -14,6 +14,9 @@ public class KillableData : ScriptableObject
         public int amount;
     }
     public int health;
+    public int range;
+    public int damage;
+    public int force;
     public List<Drops> drop = new List<Drops>();
     public Killable.Species species;
 }

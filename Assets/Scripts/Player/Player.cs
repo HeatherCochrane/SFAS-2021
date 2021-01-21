@@ -520,7 +520,6 @@ public class Player : MonoBehaviour
                     {
                         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, GetComponent<Collider2D>().bounds.size.x);
                         RaycastHit2D hit2 = Physics2D.Raycast(transform.position, -Vector2.right, GetComponent<Collider2D>().bounds.size.x);
-                        rb.velocity = new Vector2(0, 0);
 
                         if (hit.collider != null)
                         {

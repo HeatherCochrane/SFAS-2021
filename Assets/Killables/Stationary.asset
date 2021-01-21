@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Stationary
   m_EditorClassIdentifier: 
   health: 2
+  range: 0
+  damage: 1
+  force: 2
   drop:
   - drop: {fileID: 7319180011277340677, guid: bb241e2f45c82894596ec9154c2b2946, type: 3}
     amount: 2
