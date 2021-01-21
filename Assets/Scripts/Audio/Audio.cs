@@ -65,6 +65,9 @@ public class Audio : MonoBehaviour
     AudioClip bossDeath;
 
     [SerializeField]
+    AudioClip buttonHighlight;
+
+    [SerializeField]
     AudioClip woodsAmbience;
 
     [SerializeField]
@@ -133,8 +136,6 @@ public class Audio : MonoBehaviour
 
         float visualVolume = ambienceVolume * 10;
         ambienceText.text = Mathf.RoundToInt(visualVolume).ToString();
-
-        ambienceSource.source.volume = ambienceVolume;
     }
 
 
@@ -345,6 +346,17 @@ public class Audio : MonoBehaviour
         newAudioSource.source.volume = effectsVolume;
         newAudioSource.source.Play();
     }
+
+    public void playHighlightButton()
+    {
+        newAudioSource = Instantiate(audioSource);
+
+        newAudioSource.source.clip = buttonHighlight;
+        newAudioSource.source.volume = effectsVolume;
+        newAudioSource.source.pitch = Random.Range(0.8f, 1.2f);
+        newAudioSource.source.Play();
+    }
+
     public void playPlayerDeath()
     {
         newAudioSource = Instantiate(audioSource);
