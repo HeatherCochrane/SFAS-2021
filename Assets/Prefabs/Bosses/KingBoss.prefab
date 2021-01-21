@@ -273,7 +273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossPattern.Array.data[3].attack
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossPattern.Array.data[5].attack
@@ -281,7 +281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossPattern.Array.data[6].attack
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossPattern.Array.data[7].attack
@@ -313,11 +313,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: range
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossPattern.Array.data[2].attack
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossPattern.Array.data[1].attackLength
@@ -330,7 +330,7 @@ PrefabInstance:
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: data
       value: 
-      objectReference: {fileID: 11400000, guid: da348f01e8e96734e96b8ba923aab9bb, type: 2}
+      objectReference: {fileID: 11400000, guid: 75b052e194172bc41a291d827902799a, type: 2}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossName
       value: 0

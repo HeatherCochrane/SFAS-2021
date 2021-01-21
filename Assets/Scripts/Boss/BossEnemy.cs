@@ -60,7 +60,7 @@ public class BossEnemy : Killable
     int currentDir = 1;
 
     [SerializeField]
-    public BossDrops drop;
+    public BossDrops bossDrop;
 
     [SerializeField]
     public BossScene.BossNames bossName;
