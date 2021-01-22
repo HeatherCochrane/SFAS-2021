@@ -4566,6 +4566,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: AllSceneData.Array.size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: AllSceneData.Array.data[11].bossScene
       value: 1
       objectReference: {fileID: 0}
@@ -4577,6 +4581,62 @@ PrefabInstance:
       propertyPath: AllSceneData.Array.data[13].particleEffect
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: AllSceneData.Array.data[14].scenePath
+      value: JungleCutscene
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: AllSceneData.Array.data[14].particleEffect
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: AllSceneData.Array.data[14].character
+      value: 
+      objectReference: {fileID: 9095588682170101374, guid: 0915fcef6dec278409e5a211b092919d, type: 3}
+    - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: AllSceneData.Array.data[14].switchScene
+      value: JungleBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: AllSceneData.Array.data[14].gate
+      value: 
+      objectReference: {fileID: 8613692889092303264, guid: 236467b070f41374ebd016e1b519a197, type: 3}
+    - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: badFinalBoss
+      value: 
+      objectReference: {fileID: 8891206540565663227, guid: ce772310ff2c25944a58769a3994031e, type: 3}
+    - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: goodFinalBoss
+      value: 
+      objectReference: {fileID: 2440279641444213436, guid: 455bda29516f4c041b75bd5e2b9ad983, type: 3}
+    - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: AllSceneData.Array.data[15].scenePath
+      value: JungleBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: AllSceneData.Array.data[15].particleEffect
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: AllSceneData.Array.data[15].character
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: AllSceneData.Array.data[15].switchScene
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: AllSceneData.Array.data[15].gate
+      value: 
+      objectReference: {fileID: 8613692889092303264, guid: 236467b070f41374ebd016e1b519a197, type: 3}
+    - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: AllSceneData.Array.data[15].bossScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164810880446417542, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: AllSceneData.Array.data[11].boss
+      value: 
+      objectReference: {fileID: 8329799387906204373, guid: 0068702103c90e549ad6d469e427c32c, type: 3}
     - target: {fileID: 9164810880446417784, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -17,7 +17,6 @@ public class BossScene : MonoBehaviour
     [SerializeField]
     GameObject abilityDropScreen;
 
-    [SerializeField]
     GameObject bossCharacter;
 
     GameObject newBoss;
@@ -25,10 +24,16 @@ public class BossScene : MonoBehaviour
     [SerializeField]
     BossNames boss;
 
+
     // Start is called before the first frame update
     void Start()
     {
-        if(!Player.instance.data.hasBossBeenDefeated(boss))
+       
+    }
+
+    public void startScene()
+    {
+        if (!Player.instance.data.hasBossBeenDefeated(boss))
         {
             newBoss = Instantiate(bossCharacter);
             newBoss.GetComponentInChildren<BossEnemy>().setScene(this);
@@ -75,4 +80,9 @@ public class BossScene : MonoBehaviour
         abilityDropScreen.SetActive(set);
     }
 
+    public void setBossSpawn(GameObject b)
+    {
+        Debug.Log("SET BOSS SPAWN CALLED!");
+        bossCharacter = b;
+    }
 }

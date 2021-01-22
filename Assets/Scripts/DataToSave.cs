@@ -8,6 +8,7 @@ public class DataToSave : MonoBehaviour
 
     List<BossScene.BossNames> bossesDefeated = new List<BossScene.BossNames>();
 
+    List<Character> cutSceneCharacters = new List<Character>();
     public bool hasBeenTalkedTo(Character c)
     {
         foreach(Character character in charactersTalkedTo)
@@ -42,5 +43,20 @@ public class DataToSave : MonoBehaviour
     public void addBoss(BossScene.BossNames b)
     {
         bossesDefeated.Add(b);
+    }
+
+    public void cutscenePlayed(Character c)
+    {
+        cutSceneCharacters.Add(c);
+    }
+
+    public bool hasCutscenePlayed(Character c)
+    {
+        if(cutSceneCharacters.Contains(c))
+        {
+            return true;
+        }
+
+        return false;
     }
 }

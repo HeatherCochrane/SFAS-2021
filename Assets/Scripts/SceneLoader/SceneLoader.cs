@@ -64,11 +64,36 @@ public class SceneLoader : MonoBehaviour
 
         if (current.character != null)
         {
-            Player.instance.uiHandler.changeMenu(UIHandler.Menus.DIALOGUE);
-            Player.instance.dialogue.startNewDialogue(current.character.getData().getDialogue(0), current.character.getData().getCharacterSprite(), current.character.getData().getName(), Player.instance.uiHandler.getMenuObject(UIHandler.Menus.DIALOGUE));
-            Player.instance.setInConvo();
-            Player.instance.dialogue.switchSceneOnEnd(current.switchScene, current.gate);
-            current.character = null;
+            if (!Player.instance.data.hasCutscenePlayed(current.character))
+            {
+                Player.instance.uiHandler.changeMenu(UIHandler.Menus.DIALOGUE);
+                Player.instance.dialogue.startNewDialogue(current.character.getData().getDialogue(0), current.character.getData().getCharacterSprite(), current.character.getData().getName(), Player.instance.uiHandler.getMenuObject(UIHandler.Menus.DIALOGUE));
+                Player.instance.setInConvo();
+                Player.instance.dialogue.switchSceneOnEnd(current.switchScene, current.gate);
+
+                //for (int i = 0; i < AllSceneData.Count; i++)
+                //{
+                //    if (AllSceneData[i].character == current.character)
+                //    {
+                //        SceneData data = AllSceneData[i];
+                //        data.character = null;
+                //        AllSceneData[i] = data;
+                //        Debug.Log(AllSceneData[i].character);
+                //        break;
+                //    }
+                //}
+
+                Player.instance.data.cutscenePlayed(current.character);
+            }
+            else
+            {
+                Character c = GameObject.FindObjectOfType<Character>();
+                if(c.getData().getName() == current.character.getData().getName())
+                {
+                    Debug.Log(c);
+                    Destroy(c.gameObject);
+                }
+            }
         }
         else
         {
@@ -88,6 +113,34 @@ public class SceneLoader : MonoBehaviour
             Player.instance.audioHandler.spawnSnowAmbience();
         }
 
+        BossScene boss = GameObject.FindObjectOfType<BossScene>();
+
+        if (boss != null)
+        {
+            if (spawnFinalBoss)
+            {
+                boss.setBossSpawn(finalBoss);
+                spawnFinalBoss = false;
+
+                for(int i =0; i < AllSceneData.Count; i++)
+                {
+                    if(AllSceneData[i].scenePath == current.scenePath)
+                    {
+                        SceneData d = AllSceneData[i];
+                        d.boss = finalBoss;
+                        AllSceneData[i] = d;
+                    }
+                }
+            }
+            else
+            {
+                boss.setBossSpawn(current.boss);
+            }
+
+            boss.startScene();
+
+        }
+
         transitionFromBoss = false;
     }
 
@@ -104,6 +157,7 @@ public class SceneLoader : MonoBehaviour
         public string switchScene;
         public TransitionGate gate;
         public bool bossScene;
+        public GameObject boss;
     }
 
     public enum Particle { GRASS, SNOW, JUNGLE, NONE};
@@ -148,6 +202,15 @@ public class SceneLoader : MonoBehaviour
     TransitionGate gate;
 
     bool transitionFromBoss = false;
+
+    bool spawnFinalBoss = false;
+    [SerializeField]
+    GameObject goodFinalBoss;
+
+    [SerializeField]
+    GameObject badFinalBoss;
+
+    GameObject finalBoss;
     
     // Start is called before the first frame update
     void Start()
@@ -222,7 +285,6 @@ public class SceneLoader : MonoBehaviour
             if(d.scenePath == scene)
             {
                 current = d;
-                Debug.Log(current.scenePath);
                 break;
             }
         }
@@ -258,5 +320,19 @@ public class SceneLoader : MonoBehaviour
     public SceneData getCurrentScene()
     {
         return current;
+    }
+
+    public void spawnBoss(bool good)
+    {
+        spawnFinalBoss = true;
+
+        if(!good)
+        {
+            finalBoss = goodFinalBoss;
+        }
+        else
+        {
+            finalBoss = badFinalBoss;
+        }
     }
 }

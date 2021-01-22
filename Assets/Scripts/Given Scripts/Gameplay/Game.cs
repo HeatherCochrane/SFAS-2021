@@ -170,6 +170,11 @@ public class Game : MonoBehaviour
         StartCoroutine(DoDisplay(data));
         _currentBeat = data;
 
+        if(data.bossPick)
+        {
+            Player.instance.sceneLoader.spawnBoss(data.goodChoice);
+        }
+
         if (data.getChoiceList().Count == 0)
         {
             Invoke("showCloseButton", 1);

@@ -42,6 +42,8 @@ public class BossEnemy : Killable
     [SerializeField]
     float chargeSpeed = 7.5f;
     int chargeDir = 1;
+
+    [SerializeField]
     float chargeTime = 1;
 
     [SerializeField]
@@ -194,7 +196,7 @@ public class BossEnemy : Killable
     {
         newProjectile = Instantiate(projectile);
         newProjectile.GetComponent<Arrow>().setDirection(playerDir, range);
-        newProjectile.transform.position = this.transform.position - new Vector3(0, 1, 0);
+        newProjectile.transform.position = rangedStartPoint.position;
     }
 
     public void setInBattle(bool set)

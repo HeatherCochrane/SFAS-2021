@@ -83,6 +83,9 @@ public class Killable : MonoBehaviour
     GameObject hitAmount;
     GameObject hit;
 
+    [SerializeField]
+    public Transform rangedStartPoint;
+
     // Start is called before the first frame update
     public void Start()
     {

@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf5d5e33bab057c43929a11bc8f25f44, type: 3}
+  m_Name: Guardian
+  m_EditorClassIdentifier: 
+  completeThisQuest: {fileID: 0}
+  _beats:
+  - _choices:
+    - _text: Who are you?
+      _beatId: 2
+      quest: {fileID: 0}
+    _text: You there! You come into my woods, destroy the creatures that call this
+      place home all in the name of your false king.
+    _id: 1
+    bossPick: 0
+    goodChoice: 0
+  - _choices:
+    - _text: False king?
+      _beatId: 4
+      quest: {fileID: 0}
+    - _text: Get out of my way!
+      _beatId: 5
+      quest: {fileID: 0}
+    _text: I am the guardian of these woods, my duty is to protect and uphold these
+      lands against the likes of you. Your false king has no power here, continue
+      to follow his orders and face the consequences.
+    _id: 2
+    bossPick: 0
+    goodChoice: 0
+  - _choices: []
+    _text: New Story Beat
+    _id: 3
+    bossPick: 0
+    goodChoice: 0
+  - _choices:
+    - _text: The king protects us.
+      _beatId: 6
+      quest: {fileID: 0}
+    - _text: Traitor!
+      _beatId: 5
+      quest: {fileID: 0}
+    _text: The one you call 'King' is nothing more than a usurper, they have stolen
+      the birth right of the people and commanded army's in the name of peace to
+      win wars that only cause destruction.
+    _id: 4
+    bossPick: 0
+    goodChoice: 0
+  - _choices: []
+    _text: This will be your undoing!
+    _id: 5
+    bossPick: 1
+    goodChoice: 0
+  - _choices:
+    - _text: You protect the people?
+      _beatId: 8
+      quest: {fileID: 0}
+    - _text: I've heard enough, die traitor!
+      _beatId: 5
+      quest: {fileID: 0}
+    _text: He does nothing of the sort! He seeks my power to destroy these woods
+      and expand his empire for riches and fame. My power keeps the people safe from
+      darkness that would otherwise poison our lands.
+    _id: 6
+    bossPick: 0
+    goodChoice: 0
+  - _choices:
+    - _text: How do I help?
+      _beatId: 10
+      quest: {fileID: 0}
+    - _text: No more talking, this ends now!
+      _beatId: 5
+      quest: {fileID: 0}
+    _text: 'Yes, and I have done so for countless moons. Help me keep the peace between
+      the woods and the kingdom, please I beg of you to help me keep the peace. '
+    _id: 8
+    bossPick: 0
+    goodChoice: 0
+  - _choices:
+    - _text: You can count on me!
+      _beatId: 12
+      quest: {fileID: 0}
+    - _text: Never, die traitor!
+      _beatId: 5
+      quest: {fileID: 0}
+    _text: Slay the false king to stop the darkness. His power of this land will
+      fade and balance wil be restored...will you help me?
+    _id: 10
+    bossPick: 0
+    goodChoice: 0
+  - _choices: []
+    _text: Thank you traveller, may your sword be swift and your arrows fly true!
+    _id: 12
+    bossPick: 1
+    goodChoice: 1
