@@ -391,7 +391,8 @@ public class Player : MonoBehaviour
         if (ctx.performed)
         {
             moveDirection = ctx.ReadValue<Vector2>();
-            if(moveDirection.x <= -0.9f || moveDirection.x >= 0.9f)
+
+            if (moveDirection.x <= -0.5f || moveDirection.x >= 0.5f)
             {
                 isRunning = true;
             }
@@ -439,7 +440,7 @@ public class Player : MonoBehaviour
 
                             playerSprites.transform.localScale = new Vector2(-0.3f, 0.3f);
                         }
-                        else
+                        else if(moveDirection.x < 0)
                         {
                             facingLeft = true;
                             dir = -1;
