@@ -17,11 +17,13 @@ MonoBehaviour:
   - _choices:
     - _text: Continue...
       _beatId: 2
-      quest: {fileID: 11400000, guid: cb4a02d8a237d5448a55f3191fd04001, type: 2}
+      quest: {fileID: 0}
     _text: Ah another adventurer! Such a wonderful looking area wouldn't you say?
       I've been documenting the fauna around here for my research you see but I feel
       as though I should go further.
     _id: 1
+    bossPick: 0
+    goodChoice: 0
   - _choices:
     - _text: Where is the beast?
       _beatId: 3
@@ -33,6 +35,8 @@ MonoBehaviour:
       from here but I still have so much work to do. Would you be up for finding
       this beast and slaying it?
     _id: 2
+    bossPick: 0
+    goodChoice: 0
   - _choices:
     - _text: Okay, thank you!
       _beatId: 5
@@ -40,9 +44,15 @@ MonoBehaviour:
     _text: The beast is somewhere south west within this biome, I hear its lair is
       protected by thorny bushes. Be careful down there!
     _id: 3
+    bossPick: 0
+    goodChoice: 0
   - _choices: []
     _text: Good luck!
     _id: 4
+    bossPick: 0
+    goodChoice: 0
   - _choices: []
     _text: Good luck!
     _id: 5
+    bossPick: 0
+    goodChoice: 0

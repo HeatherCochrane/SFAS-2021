@@ -28660,6 +28660,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8613692889092303264, guid: 236467b070f41374ebd016e1b519a197, type: 3}
+      propertyPath: scene
+      value: Town
+      objectReference: {fileID: 0}
     - target: {fileID: 8613692889092303269, guid: 236467b070f41374ebd016e1b519a197, type: 3}
       propertyPath: m_Name
       value: Gate

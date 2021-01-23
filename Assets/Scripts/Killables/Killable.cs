@@ -130,7 +130,7 @@ public class Killable : MonoBehaviour
     {
         if (!isDead)
         {
-            health -= 1;
+            health -= dam;
 
             //If attacked from the right
             if (dir)

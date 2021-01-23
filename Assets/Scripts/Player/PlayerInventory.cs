@@ -65,7 +65,7 @@ public class PlayerInventory : MonoBehaviour
 
     bool spawnedInventory = false;
 
-    public int playerFunds = 100;
+    public int playerFunds = 50;
 
     Trader currentTrader;
 
