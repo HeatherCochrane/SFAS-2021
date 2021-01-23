@@ -141,8 +141,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.3587551, y: -0.3783939}
-  m_Size: {x: 2.897709, y: 5.1293373}
+  m_Offset: {x: 0.043478012, y: -0.37839383}
+  m_Size: {x: 1.5337181, y: 5.1293373}
   m_Direction: 0
 --- !u!95 &646984893195725998
 Animator:
@@ -303,7 +303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossPattern.Array.data[3].attack
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossPattern.Array.data[5].attack
@@ -347,7 +347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossPattern.Array.data[2].attack
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossPattern.Array.data[1].attackLength
@@ -371,7 +371,7 @@ PrefabInstance:
       objectReference: {fileID: 6421891535616993337}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: chargeTime
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossDrop
@@ -379,11 +379,15 @@ PrefabInstance:
       objectReference: {fileID: 646984893195725999}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossPattern.Array.data[4].attack
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossPattern.Array.data[6].attackLength
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
+      propertyPath: bossPattern.Array.data[1].attack
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480571, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: m_Name

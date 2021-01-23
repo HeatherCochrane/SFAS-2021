@@ -474,6 +474,7 @@ public class Player : MonoBehaviour
 
         if (isDashing)
         {
+            playerStatus.setInvincible(true);
             if (dashTime > 0)
             {
                 if (dir == 1)
@@ -497,6 +498,8 @@ public class Player : MonoBehaviour
                 rb.velocity = new Vector2(0, rb.velocity.y);
                 switchAnimation(AnimationStates.RUN);
                 dashTrail.gameObject.SetActive(false);
+
+                playerStatus.setInvincible(false);
             }
         }
 

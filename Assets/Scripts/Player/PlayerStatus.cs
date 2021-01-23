@@ -137,4 +137,9 @@ public class PlayerStatus : MonoBehaviour
     {
         return recentDamage;
     }
+
+    public void setInvincible(bool set)
+    {
+        recentDamage = set;
+    }
 }

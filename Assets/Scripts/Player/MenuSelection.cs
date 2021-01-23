@@ -86,7 +86,10 @@ public class MenuSelection : MonoBehaviour
             highlightedButton.transform.GetComponent<RectTransform>().localScale = new Vector3(originalScale.x * 1.2f, originalScale.y * 1.2f, 1);
             lastButton = highlightedButton;
 
-            Player.instance.audioHandler.playHighlightButton();
+            if (highlightedButton.activeSelf && highlightedButton != lastButton)
+            {
+                Player.instance.audioHandler.playHighlightButton();
+            }
         }
 
     }

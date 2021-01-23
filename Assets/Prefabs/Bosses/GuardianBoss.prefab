@@ -13,8 +13,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.043433607, y: -0.35826176}
-  m_Size: {x: 1.7702937, y: 4.203244}
+  m_Offset: {x: -0.16460158, y: -0.9823692}
+  m_Size: {x: 1.6226561, y: 4.0824513}
   m_Direction: 0
 --- !u!95 &5928136853186413545
 Animator:
@@ -129,8 +129,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7468099232464582451}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.1499996, y: -1.55, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.13, y: -1.87, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1650571214733518241}
@@ -287,11 +287,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480566, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.8
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480566, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.8
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480567, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: m_Sprite
@@ -303,7 +303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossPattern.Array.data[3].attack
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossPattern.Array.data[5].attack
@@ -347,7 +347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossPattern.Array.data[2].attack
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossPattern.Array.data[1].attackLength
@@ -371,7 +371,7 @@ PrefabInstance:
       objectReference: {fileID: 261578255522613118}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: chargeTime
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossDrop
@@ -379,7 +379,7 @@ PrefabInstance:
       objectReference: {fileID: 5928136853186413544}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossPattern.Array.data[4].attack
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: bossPattern.Array.data[6].attackLength

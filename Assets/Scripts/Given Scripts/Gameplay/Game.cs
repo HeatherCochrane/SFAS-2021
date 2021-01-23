@@ -226,7 +226,7 @@ public class Game : MonoBehaviour
         if(sceneToSwtichTo != null)
         {
             Player.instance.sceneLoader.switchScene(sceneToSwtichTo, gate);
-            sceneToSwtichTo = "";
+            sceneToSwtichTo = null;
         }
     }
 

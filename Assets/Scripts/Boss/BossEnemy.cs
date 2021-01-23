@@ -46,6 +46,8 @@ public class BossEnemy : Killable
     [SerializeField]
     float chargeTime = 1;
 
+    float charge = 0;
+
     [SerializeField]
     int range = 0;
     int choice = 0;
@@ -102,10 +104,10 @@ public class BossEnemy : Killable
     {
         if(isCharging)
         {
-            if (chargeTime <= 0)
+            if (charge <= 0)
             {
                 isCharging = false;
-                chargeTime = 1;
+                charge = chargeTime;
                 rb.velocity = new Vector2(0, 0);
                 changeAnimationStatesBool(AnimationStates.IDLE);
             }
@@ -114,7 +116,7 @@ public class BossEnemy : Killable
                 rb.velocity = new Vector2(chargeDir * chargeSpeed, rb.velocity.y);
             }
 
-            chargeTime -= Time.deltaTime;
+            charge -= Time.deltaTime;
         }      
 
         if(rb.velocity.y < 0)

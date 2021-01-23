@@ -111,8 +111,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.18649603, y: -0.96510327}
-  m_Size: {x: 3.594248, y: 2.6222098}
+  m_Offset: {x: 0.088586465, y: -0.96510327}
+  m_Size: {x: 3.0441017, y: 2.6222098}
   m_Direction: 1
 --- !u!95 &1352139648
 Animator:
@@ -299,7 +299,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 306a1d76195b81e458aa9b9d212d0007, type: 3}
     - target: {fileID: 3978258064048480567, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: m_FlipX
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3978258064048480569, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: m_Offset.y
