@@ -130,6 +130,7 @@ public class SceneLoader : MonoBehaviour
         }
 
         transitionFromBoss = false;
+        sceneToLoad = null;
     }
 
 
@@ -212,29 +213,31 @@ public class SceneLoader : MonoBehaviour
         anim = this.GetComponent<Animator>();
     }
 
-
+    //
     void loadSetScene()
     {
-        SceneManager.LoadScene(sceneToLoad);
-
-        foreach (SceneData scene in AllSceneData)
+        if (sceneToLoad != null)
         {
-            if(scene.scenePath == sceneToLoad)
+            SceneManager.LoadScene(sceneToLoad);
+
+            foreach (SceneData scene in AllSceneData)
             {
-                Player.instance.transform.position = newSpawnPoint;
-                current = scene;
-                break;
+                if (scene.scenePath == sceneToLoad)
+                {
+                    Player.instance.transform.position = newSpawnPoint;
+                    current = scene;
+                    break;
+                }
             }
+
+            StartCoroutine(checkSceneLoaded());
+
+
+            UnityEngine.EventSystems.EventSystem.current = Player.instance.system;
+
+            anim.SetTrigger("FadeIn");
+            Player.instance.setInput(true);
         }
-
-        StartCoroutine(checkSceneLoaded());
-
-
-        UnityEngine.EventSystems.EventSystem.current = Player.instance.system;
-
-        anim.SetTrigger("FadeIn");
-        Player.instance.setInput(true);
-        
     }
 
     public void respawnPlayer()

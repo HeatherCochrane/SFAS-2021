@@ -163,6 +163,7 @@ public class Killable : MonoBehaviour
     {
 
     }
+
     void spawnHitPoint(int d)
     {
         hit = Instantiate(hitAmount);
@@ -193,14 +194,20 @@ public class Killable : MonoBehaviour
             Player.instance.checkBossDrop(GetComponent<BossEnemy>().bossDrop.getAbility());
             quests.bossesKilled(GetComponent<BossEnemy>().bossName);
 
-            Player.instance.audioHandler.playPlayerDeath();
-
-            if(GetComponent<BossEnemy>().transitionToCutscene != null)
+            if (GetComponent<BossEnemy>().bossName == BossScene.BossNames.FINALBOSS)
             {
-                Player.instance.sceneLoader.startGame(GetComponent<BossEnemy>().transitionToCutscene);
+                Player.instance.audioHandler.playPlayerDeath();
+            }
+            else
+            {
+                Player.instance.audioHandler.playBossDeath();
             }
 
-
+            if(GetComponent<BossEnemy>().transitionToCutscene != "")
+            {
+                Debug.Log(GetComponent<BossEnemy>().transitionToCutscene);
+                Player.instance.sceneLoader.startGame(GetComponent<BossEnemy>().transitionToCutscene);
+            }
         }
         else
         {

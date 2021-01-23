@@ -72,7 +72,6 @@ public class BossScene : MonoBehaviour
 
     public void setBossSpawn(GameObject b)
     {
-        Debug.Log("SET BOSS SPAWN CALLED!");
         bossCharacter = b;
     }
 }

@@ -956,6 +956,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Pickup")
         {
             pickUp = collision.gameObject;
+            pickUp.GetComponent<WorldItem>().showInteractIcon(true);
         }
 
         if(collision.gameObject.tag == "Hazard")
@@ -991,6 +992,11 @@ public class Player : MonoBehaviour
         }
         if(collision.tag == "Pickup")
         {
+            if (pickUp != null)
+            {
+                pickUp.GetComponent<WorldItem>().showInteractIcon(false);
+            }
+
             pickUp = null;
         }
 

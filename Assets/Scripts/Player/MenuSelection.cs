@@ -107,7 +107,10 @@ public class MenuSelection : MonoBehaviour
             lastButton = highlightedButton;
 
 
-            Player.instance.audioHandler.playHighlightButton();
+            if (highlightedButton.activeSelf && highlightedButton != lastButton)
+            {
+                Player.instance.audioHandler.playHighlightButton();
+            }
         }
 
     }

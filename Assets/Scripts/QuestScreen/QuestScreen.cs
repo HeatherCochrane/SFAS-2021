@@ -81,7 +81,6 @@ public class QuestScreen : MonoBehaviour
 
     public void addActiveQuest(Quest data)
     {
-
         for (int i = 0; i < avaliableQuestButtons.Count; i++)
         {
             if (!avaliableQuestButtons[i].inUse)
@@ -105,6 +104,8 @@ public class QuestScreen : MonoBehaviour
 
     public void removeQuest(Quest data)
     {
+        Debug.Log(data.questName);
+
         for(int i =0; i < startedQuests.Count; i++)
         {
             if(startedQuests[i].GetComponent<QuestButton>().getData() == data)
@@ -115,14 +116,14 @@ public class QuestScreen : MonoBehaviour
                 avaliableQuestButtons[i] = butt;
 
                 GameObject b = startedQuests[i];
-                startedQuests.RemoveAt(i);
                 b = startedQuests[i];
 
-                Debug.Log(b.name + "  " + data.name);
-
+                startedQuests.RemoveAt(i);
                 break;
             }
         }
+
+        clearInfoBox();
     }
 
     public void showQuestData(Quest data)

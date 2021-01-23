@@ -389,6 +389,10 @@ PrefabInstance:
       propertyPath: transitionToCutscene
       value: BadEnding
       objectReference: {fileID: 0}
+    - target: {fileID: 3978258064048480570, guid: bbc12a455a631c04881d1a9391507707, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 3375012454398133133, guid: a2abbcfafc6420e4db3f31899a394165, type: 3}
     - target: {fileID: 3978258064048480571, guid: bbc12a455a631c04881d1a9391507707, type: 3}
       propertyPath: m_Name
       value: BossEnemy

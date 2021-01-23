@@ -50,7 +50,6 @@ public class PlayerQuests : MonoBehaviour
 
 
         Player.instance.notifications.spawnQuestFinished(c.questName);
-        //questScreen.addCompletedQuest(c);
     }
 
     public void speciesKilled(Killable.Species s)

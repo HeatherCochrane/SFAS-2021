@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa2b106edb01b9478863c1848ea3a3f, type: 3}
   m_Name: FinalBoss
   m_EditorClassIdentifier: 
-  health: 1
+  health: 15
   range: 15
   damage: 1
   force: 4
