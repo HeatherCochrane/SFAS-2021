@@ -31,6 +31,8 @@ public class PlayerQuests : MonoBehaviour
         questsStarted.Add(n);
         questScreen.addActiveQuest(n);
 
+
+        Player.instance.notifications.spawnQuestStarted(n.questName);
     }
 
     public void questCompleted(Quest c)
@@ -46,6 +48,8 @@ public class PlayerQuests : MonoBehaviour
 
         questScreen.removeQuest(c);
 
+
+        Player.instance.notifications.spawnQuestFinished(c.questName);
         //questScreen.addCompletedQuest(c);
     }
 

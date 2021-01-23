@@ -9,14 +9,12 @@ public class DataToSave : MonoBehaviour
     List<BossScene.BossNames> bossesDefeated = new List<BossScene.BossNames>();
 
     List<Character> cutSceneCharacters = new List<Character>();
+
     public bool hasBeenTalkedTo(Character c)
     {
-        foreach(Character character in charactersTalkedTo)
+        if(charactersTalkedTo.Contains(c))
         {
-            if(character == c)
-            {
-                return true;
-            }
+            return true;
         }
 
         return false;
@@ -29,14 +27,11 @@ public class DataToSave : MonoBehaviour
 
     public bool hasBossBeenDefeated(BossScene.BossNames b)
     {
-        foreach(BossScene.BossNames boss in bossesDefeated)
+        if (bossesDefeated.Contains(b))
         {
-            if(boss == b)
-            {
-                return true;
-            }
+            return true;
         }
-
+        
         return false;
     }
 

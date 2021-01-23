@@ -35,6 +35,9 @@ public class Player : MonoBehaviour
     //Audio Handler
     public Audio audioHandler;
 
+    //Notifications for quests
+    public Notifications notifications;
+
     //Event System
     public UnityEngine.EventSystems.EventSystem system;
 

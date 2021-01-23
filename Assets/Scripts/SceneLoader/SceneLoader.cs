@@ -71,26 +71,14 @@ public class SceneLoader : MonoBehaviour
                 Player.instance.setInConvo();
                 Player.instance.dialogue.switchSceneOnEnd(current.switchScene, current.gate);
 
-                //for (int i = 0; i < AllSceneData.Count; i++)
-                //{
-                //    if (AllSceneData[i].character == current.character)
-                //    {
-                //        SceneData data = AllSceneData[i];
-                //        data.character = null;
-                //        AllSceneData[i] = data;
-                //        Debug.Log(AllSceneData[i].character);
-                //        break;
-                //    }
-                //}
-
                 Player.instance.data.cutscenePlayed(current.character);
             }
             else
             {
                 Character c = GameObject.FindObjectOfType<Character>();
+
                 if(c.getData().getName() == current.character.getData().getName())
                 {
-                    Debug.Log(c);
                     Destroy(c.gameObject);
                 }
             }
