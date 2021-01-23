@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: BossKill1
   m_EditorClassIdentifier: 
   questName: Kiwi's Quest
-  questDescription: Slay the beast located within the woods.
+  questDescription: Slay the beast located within the woods. Killing this boss will
+    grant you the dash ability.
   questsCompleted: []
   totalKillsNeeded: []
   bossName: 0

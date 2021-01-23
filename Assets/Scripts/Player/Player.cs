@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
     Vector2 maxVertical;
 
     //Dash Variables
-    bool canDash = true;
+    bool canDash = false;
     float dashAmount = 50f;
     bool isDashing = false;
     bool dashCooldown = false;
@@ -109,7 +109,7 @@ public class Player : MonoBehaviour
     TrailRenderer dashTrail;
 
     //Wall jump variables
-    bool canWallJump = true;
+    bool canWallJump = false;
     bool ignorePlayerDir = false;
 
 

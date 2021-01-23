@@ -14,9 +14,6 @@ public class BossScene : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI battleMessage;
 
-    [SerializeField]
-    GameObject abilityDropScreen;
-
     GameObject bossCharacter;
 
     GameObject newBoss;
@@ -51,7 +48,6 @@ public class BossScene : MonoBehaviour
             battleMessage.gameObject.SetActive(false);
         }
 
-        showAbilityDropScreen(false);
         Player.instance.setCameraControlled(false);
         Player.instance.cam.transform.position = new Vector3(3, 3, -10);
         Player.instance.cam.GetComponent<Camera>().orthographicSize = 10;
@@ -66,18 +62,12 @@ public class BossScene : MonoBehaviour
     public void openBossArea()
     {
         blockingObject.SetActive(false);
-        showAbilityDropScreen(true);
     }
 
     private void OnDisable()
     {
         Player.instance.cam.GetComponent<Camera>().orthographicSize = 5;
         Player.instance.setCameraControlled(true);
-    }
-
-    public void showAbilityDropScreen(bool set)
-    {
-        abilityDropScreen.SetActive(set);
     }
 
     public void setBossSpawn(GameObject b)

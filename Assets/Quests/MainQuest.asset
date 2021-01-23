@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: MainQuest
   m_EditorClassIdentifier: 
   questName: Kings Quest
-  questDescription: Discover the source of the wilds power.
+  questDescription: Discover the source of the wilds power. Kill the boss to receive
+    the wall jump ability.
   questsCompleted: []
   totalKillsNeeded: []
   bossName: 2

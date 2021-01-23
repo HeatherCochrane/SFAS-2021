@@ -159,8 +159,6 @@ public class UIHandler : MonoBehaviour
         //if not switching to playerUI and also not in the UI
         if (n != Menus.PLAYERUI && currentMenu != Menus.PLAYERUI)
         {
-            //DONT
-            Debug.Log("DONT SWITCH ALREADY IN MENU");
         }
         else
         {
