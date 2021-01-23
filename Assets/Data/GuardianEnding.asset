@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf5d5e33bab057c43929a11bc8f25f44, type: 3}
+  m_Name: GuardianEnding
+  m_EditorClassIdentifier: 
+  completeThisQuest: {fileID: 0}
+  _beats:
+  - _choices:
+    - _text: Continue...
+      _beatId: 2
+      quest: {fileID: 0}
+    _text: Thank you traveller! Your bravery has removed the poison from this land,
+      the wilderness can now heal and grow to protect the people of this land.
+    _id: 1
+    bossPick: 0
+    goodChoice: 0
+  - _choices: []
+    _text: May your path be prosperous and may you know peace in the days to come.
+    _id: 2
+    bossPick: 0
+    goodChoice: 0

@@ -18,5 +18,5 @@ MonoBehaviour:
   worldObject: {fileID: 1874821832968600517, guid: 6c492e938e0dc2b449f58b915dda3dcf, type: 3}
   stackable: 0
   damage: 1
-  distance: 3
+  distance: 5
   weaponType: 1

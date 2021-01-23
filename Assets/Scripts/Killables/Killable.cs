@@ -193,7 +193,14 @@ public class Killable : MonoBehaviour
             Player.instance.checkBossDrop(GetComponent<BossEnemy>().bossDrop.getAbility());
             quests.bossesKilled(GetComponent<BossEnemy>().bossName);
 
-            Player.instance.audioHandler.playBossDeath();
+            Player.instance.audioHandler.playPlayerDeath();
+
+            if(GetComponent<BossEnemy>().transitionToCutscene != null)
+            {
+                Player.instance.sceneLoader.startGame(GetComponent<BossEnemy>().transitionToCutscene);
+            }
+
+
         }
         else
         {

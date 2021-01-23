@@ -79,8 +79,8 @@ MonoBehaviour:
     - _text: No more talking, this ends now!
       _beatId: 5
       quest: {fileID: 0}
-    _text: 'Yes, and I have done so for countless moons. Help me keep the peace between
-      the woods and the kingdom, please I beg of you to help me keep the peace. '
+    _text: Yes, and I have done so for countless moons. Help me keep the peace between
+      the woods and the kingdom, please I beg of you.
     _id: 8
     bossPick: 0
     goodChoice: 0
@@ -91,8 +91,8 @@ MonoBehaviour:
     - _text: Never, die traitor!
       _beatId: 5
       quest: {fileID: 0}
-    _text: Slay the false king to stop the darkness. His power of this land will
-      fade and balance wil be restored...will you help me?
+    _text: Slay the false king to stop the darkness. His power over this land will
+      fade and balance will be restored...will you help me?
     _id: 10
     bossPick: 0
     goodChoice: 0

@@ -72,6 +72,8 @@ public class BossEnemy : Killable
     int multipleCount = 0;
 
     float originalScale = 0;
+
+    public string transitionToCutscene;
     // Start is called before the first frame update
     void Start()
     {

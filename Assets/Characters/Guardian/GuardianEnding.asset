@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaa2b106edb01b9478863c1848ea3a3f, type: 3}
-  m_Name: FinalBoss
+  m_Script: {fileID: 11500000, guid: 9fbf489a5fca73e43bd6644e76dd935b, type: 3}
+  m_Name: GuardianEnding
   m_EditorClassIdentifier: 
-  health: 1
-  range: 15
-  damage: 1
-  force: 4
-  drop: []
-  species: 0
+  dialogue:
+  - {fileID: 11400000, guid: f6d942a6ecf5cef4297ce9399391de99, type: 2}
+  characterName: Guardian
+  characterSprite: {fileID: 0}
