@@ -3187,7 +3187,7 @@ PrefabInstance:
       objectReference: {fileID: 2137751214400405300}
     - target: {fileID: 5902577227563476044, guid: 17c02e51c6c4903489bbb0f6750beb30, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: Woods1
+      value: OpeningScene
       objectReference: {fileID: 0}
     - target: {fileID: 8896104596162891312, guid: 17c02e51c6c4903489bbb0f6750beb30, type: 3}
       propertyPath: m_AnchorMin.y
@@ -4384,11 +4384,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7120617889664005598, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 73.28799
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7120617889664005598, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7120617889702621955, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: m_AnchorMin.y
@@ -5062,6 +5062,18 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9164810881104051179, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: questsStarted.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164810881104051179, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: questsStarted.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: b176b21970d75584296c8afe2ce0e85c, type: 2}
+    - target: {fileID: 9164810881104051179, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
+      propertyPath: startingQuest
+      value: 
+      objectReference: {fileID: 11400000, guid: b176b21970d75584296c8afe2ce0e85c, type: 2}
     - target: {fileID: 9164810881104051180, guid: 932c3535ec5ac4540ba74173f2a08f88, type: 3}
       propertyPath: longRangeWeapon
       value: 

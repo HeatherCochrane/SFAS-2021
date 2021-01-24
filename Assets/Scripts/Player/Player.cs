@@ -941,6 +941,7 @@ public class Player : MonoBehaviour
         if(collision.tag == "Character")
         {
             character = collision.GetComponent<Character>();
+            character.showInteractIcon(true);
         }
         if (collision.tag == "Trader")
         {
@@ -983,7 +984,11 @@ public class Player : MonoBehaviour
     {
         if (collision.tag == "Character")
         {
-            character = null;
+            if (character != null)
+            {
+                character.showInteractIcon(false);
+                character = null;
+            }
         }
         if(collision.tag == "Trader")
         {

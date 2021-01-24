@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf5d5e33bab057c43929a11bc8f25f44, type: 3}
+  m_Name: PeridopOpening
+  m_EditorClassIdentifier: 
+  completeThisQuest: {fileID: 11400000, guid: b176b21970d75584296c8afe2ce0e85c, type: 2}
+  _beats:
+  - _choices: []
+    _text: Well done traveller, you found the secret area! Thank you so much for
+      playing my game, it means a lot for people to engage with my content and I
+      hope your experience went well!
+    _id: 1
+    bossPick: 0
+    goodChoice: 0

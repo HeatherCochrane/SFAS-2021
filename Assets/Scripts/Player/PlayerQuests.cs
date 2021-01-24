@@ -19,10 +19,12 @@ public class PlayerQuests : MonoBehaviour
     [SerializeField]
     QuestScreen questScreen;
 
+    [SerializeField]
+    Quest startingQuest;
 
     private void Start()
     {
-        
+        addNewQuest(startingQuest);
     }
 
     public void addNewQuest(Quest n)
@@ -31,8 +33,10 @@ public class PlayerQuests : MonoBehaviour
         questsStarted.Add(n);
         questScreen.addActiveQuest(n);
 
-
-        Player.instance.notifications.spawnQuestStarted(n.questName);
+        if (Player.instance != null)
+        {
+            Player.instance.notifications.spawnQuestStarted(n.questName);
+        }
     }
 
     public void questCompleted(Quest c)
