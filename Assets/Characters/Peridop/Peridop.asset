@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - {fileID: 11400000, guid: 2b2234d08f9694b4ba47ca71f8968295, type: 2}
-  - {fileID: 11400000, guid: 2b2234d08f9694b4ba47ca71f8968295, type: 2}
+  - {fileID: 11400000, guid: 942764c24f8c3a74ba6c7ddc4fe54a02, type: 2}
   characterName: Peridop
   characterSprite: {fileID: 0}

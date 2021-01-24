@@ -30,6 +30,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Woods/Woods3.unity
     guid: 2347f2bc60e38e74b9c12d82637b2cc7
   - enabled: 1
+    path: Assets/Scenes/Jungle/Jungle1.unity
+    guid: 2761246921cb08949acb12f6318b4a50
+  - enabled: 1
     path: Assets/Scenes/Woods/WoodsBoss.unity
     guid: b469130ef6303cb4a81e5eac5911d8b4
   - enabled: 1
@@ -38,9 +41,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WoodsToJungle/WoodsToJungle2.unity
     guid: be27df6cccbe0d446942d8512b64ab92
-  - enabled: 1
-    path: Assets/Scenes/Jungle/Jungle1.unity
-    guid: 2761246921cb08949acb12f6318b4a50
   - enabled: 1
     path: Assets/Scenes/Jungle/JungleBoss.unity
     guid: ce4b8e52c3846684290e25f54f68f007

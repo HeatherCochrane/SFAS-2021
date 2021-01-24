@@ -1097,6 +1097,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StationaryEnemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1713355574466866857, guid: bcc945acfbaf96e49b9883323a96677e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcc945acfbaf96e49b9883323a96677e, type: 3}
 --- !u!1 &171874305
@@ -1460,6 +1464,10 @@ PrefabInstance:
     - target: {fileID: 3233293759340122740, guid: e03861d3ffc8ec54c92f1dbbbb1ba0e3, type: 3}
       propertyPath: m_Name
       value: ObliviousEnemy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233293759340122740, guid: e03861d3ffc8ec54c92f1dbbbb1ba0e3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3233293759340122747, guid: e03861d3ffc8ec54c92f1dbbbb1ba0e3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -25202,6 +25210,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObliviousEnemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3233293759340122740, guid: e03861d3ffc8ec54c92f1dbbbb1ba0e3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3233293759340122747, guid: e03861d3ffc8ec54c92f1dbbbb1ba0e3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.78
@@ -26184,6 +26196,10 @@ PrefabInstance:
     - target: {fileID: 3233293759340122740, guid: e03861d3ffc8ec54c92f1dbbbb1ba0e3, type: 3}
       propertyPath: m_Name
       value: ObliviousEnemy (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233293759340122740, guid: e03861d3ffc8ec54c92f1dbbbb1ba0e3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3233293759340122747, guid: e03861d3ffc8ec54c92f1dbbbb1ba0e3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28052,6 +28068,10 @@ PrefabInstance:
     - target: {fileID: 6038232246697840226, guid: cd3528f6026ba714a9f94482913c6570, type: 3}
       propertyPath: m_Name
       value: ChargeEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038232246697840226, guid: cd3528f6026ba714a9f94482913c6570, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd3528f6026ba714a9f94482913c6570, type: 3}
@@ -30374,6 +30394,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StationaryEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 1713355574466866857, guid: bcc945acfbaf96e49b9883323a96677e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcc945acfbaf96e49b9883323a96677e, type: 3}
 --- !u!1 &2099686007
@@ -30858,6 +30882,10 @@ PrefabInstance:
     - target: {fileID: 3233293759340122740, guid: e03861d3ffc8ec54c92f1dbbbb1ba0e3, type: 3}
       propertyPath: m_Name
       value: ObliviousEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233293759340122740, guid: e03861d3ffc8ec54c92f1dbbbb1ba0e3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3233293759340122747, guid: e03861d3ffc8ec54c92f1dbbbb1ba0e3, type: 3}
       propertyPath: m_LocalPosition.x

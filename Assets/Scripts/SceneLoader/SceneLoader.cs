@@ -221,28 +221,27 @@ public class SceneLoader : MonoBehaviour
     //
     void loadSetScene()
     {
-        if (sceneToLoad != null)
+
+        SceneManager.LoadScene(sceneToLoad);
+
+        foreach (SceneData scene in AllSceneData)
         {
-            SceneManager.LoadScene(sceneToLoad);
-
-            foreach (SceneData scene in AllSceneData)
+            if (scene.scenePath == sceneToLoad)
             {
-                if (scene.scenePath == sceneToLoad)
-                {
-                    Player.instance.transform.position = newSpawnPoint;
-                    current = scene;
-                    break;
-                }
+                Player.instance.transform.position = newSpawnPoint;
+                current = scene;
+                break;
             }
-
-            StartCoroutine(checkSceneLoaded());
-
-
-            UnityEngine.EventSystems.EventSystem.current = Player.instance.system;
-
-            anim.SetTrigger("FadeIn");
-            Player.instance.setInput(true);
         }
+
+        StartCoroutine(checkSceneLoaded());
+
+
+        UnityEngine.EventSystems.EventSystem.current = Player.instance.system;
+
+        anim.SetTrigger("FadeIn");
+        Player.instance.setInput(true);
+
     }
 
     public void respawnPlayer()
@@ -250,9 +249,18 @@ public class SceneLoader : MonoBehaviour
         Player.instance.setInput(true);
         anim.SetTrigger("FadeIn");
 
-        if(current.bossScene)
+        if (current.bossScene)
         {
-            sceneToLoad = GameObject.FindObjectOfType<TransitionGate>().getScene();
+            if (finalBoss.GetComponentInChildren<BossEnemy>().bossName == BossScene.BossNames.FINALBOSS)
+            {
+                sceneToLoad = "Jungle1";
+            }
+            else
+            {
+                sceneToLoad = GameObject.FindObjectOfType<TransitionGate>().getScene();
+               
+            }
+
             transitionFromBoss = true;
             loadSetScene();
         }

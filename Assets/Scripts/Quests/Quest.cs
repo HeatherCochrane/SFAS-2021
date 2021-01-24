@@ -104,7 +104,14 @@ public class Quest : ScriptableObject
         {
             if (Player.instance.data.hasBeenTalkedTo(talkTo))
             {
-                return true;
+                if (Player.instance.playerQuests.getStartedQuests().Contains(this))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
