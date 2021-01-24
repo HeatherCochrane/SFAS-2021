@@ -100,6 +100,10 @@ public class SceneLoader : MonoBehaviour
         {
             Player.instance.audioHandler.spawnSnowAmbience();
         }
+        else
+        {
+            Player.instance.audioHandler.destroyAmbience();
+        }
 
         BossScene boss = GameObject.FindObjectOfType<BossScene>();
 
@@ -211,6 +215,7 @@ public class SceneLoader : MonoBehaviour
 
         instance = this;
         anim = this.GetComponent<Animator>();
+
     }
 
     //

@@ -104,6 +104,19 @@ public class Audio : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI ambienceText;
 
+    [SerializeField]
+    AudioSourceObject startingAmbience;
+    private void Start()
+    {
+        Ambience(startingAmbience.source, woodsAmbience);
+        ambienceSource = startingAmbience;
+    }
+
+    public void destroyAmbience()
+    {
+        Destroy(ambienceSource.gameObject);
+        ambienceSource = null;
+    }
     public void adjustEffectsVolume(float i)
     {
         effectsVolume += i;

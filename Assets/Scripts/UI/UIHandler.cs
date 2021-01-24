@@ -32,6 +32,7 @@ public class UIHandler : MonoBehaviour
     {
         changeMenu(Menus.START);
         inMenu = true;
+        Player.instance.setCameraControlled(false);
     }
 
     public void InGame()

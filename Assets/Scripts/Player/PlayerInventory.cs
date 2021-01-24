@@ -54,10 +54,6 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField]
     GameObject itemSellAll;
 
-
-    [SerializeField]
-    GameObject infoBoxButtons;
-
     InventorySlot activeSlot;
 
     [SerializeField]
@@ -72,11 +68,6 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField]
     Sprite emptySlotImage;
 
-    [SerializeField]
-    Color weaponColour;
-
-    [SerializeField]
-    Color itemColour;
     private void Start()
     {
         if(!spawnedInventory)
@@ -150,16 +141,6 @@ public class PlayerInventory : MonoBehaviour
                 newSlot.slotObject.GetComponent<InventorySlot>().setSlotPos(i);
                 newSlot.slotObject.GetComponent<InventorySlot>().amount = inventoryItems[i].amount;
                 newSlot.slotObject.GetComponent<InventorySlot>().updateStackedUI();
-
-                if(item.GetType() == typeof(Weapon))
-                {
-                    newSlot.slotObject.GetComponent<Image>().color = weaponColour;
-                }
-                else
-                {
-                    newSlot.slotObject.GetComponent<Image>().color = itemColour;
-                }
-
                 slots[i] = newSlot;
 
                 break;
@@ -184,14 +165,6 @@ public class PlayerInventory : MonoBehaviour
                 newSlot.slotObject.GetComponent<InventorySlot>().amount = inventoryItems[i].amount;
                 newSlot.slotObject.GetComponent<InventorySlot>().updateStackedUI();
 
-                if (newSlot.slotObject.GetComponent<InventorySlot>().getItem().GetType() == typeof(Weapon))
-                {
-                    newSlot.slotObject.GetComponent<Image>().color = weaponColour;
-                }
-                else
-                {
-                    newSlot.slotObject.GetComponent<Image>().color = itemColour;
-                }
 
                 slots[i] = newSlot;
             }
