@@ -136,6 +136,11 @@ public class Audio : MonoBehaviour
 
         float visualVolume = ambienceVolume * 10;
         ambienceText.text = Mathf.RoundToInt(visualVolume).ToString();
+
+        if(ambienceSource != null)
+        {
+            ambienceSource.source.volume = ambienceVolume;
+        }
     }
 
     public void Ambience(AudioSource s, AudioClip c)
