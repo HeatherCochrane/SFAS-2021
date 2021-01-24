@@ -181,6 +181,14 @@ public class QuestScreen : MonoBehaviour
             newString.text = descString;
             newString.transform.SetParent(infoBox.transform);
         }
+
+        if(currentQuestToggled.reward != 0)
+        {
+            string rewardString = currentQuestToggled.reward.ToString();
+            TextMeshProUGUI newString = Instantiate(stringPrefab);
+            newString.text = rewardString;
+            newString.transform.SetParent(infoBox.transform);
+        }
     }
 
     void clearInfoBox()

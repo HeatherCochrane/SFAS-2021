@@ -17,5 +17,7 @@ MonoBehaviour:
   - _choices: []
     _text: I really must get back to town but there's something about this place
       that keeps me here. Perhaps its the calm and the quiet, or maybe its the lack
-      of nagging from cardinal.
+      of nagging from woodpecker.
     _id: 1
+    bossPick: 0
+    goodChoice: 0

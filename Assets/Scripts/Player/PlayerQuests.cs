@@ -48,6 +48,7 @@ public class PlayerQuests : MonoBehaviour
 
         questScreen.removeQuest(c);
 
+        Player.instance.inventory.adjustFunds(c.reward);
 
         Player.instance.notifications.spawnQuestFinished(c.questName);
     }
@@ -95,7 +96,6 @@ public class PlayerQuests : MonoBehaviour
             //Check to ensure all requirements have been met
             if (questsStarted[i].checkKills(totalKills) && questsStarted[i].checkCompletedQuests(completedQuests) && questsStarted[i].checkBossKilled())
             {
-                Debug.Log("QUEST COMPLETED!" + questsStarted[i].questName);
                 questCompleted(questsStarted[i]);
             }
         }

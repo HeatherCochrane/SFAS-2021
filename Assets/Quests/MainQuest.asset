@@ -18,3 +18,4 @@ MonoBehaviour:
   questsCompleted: []
   totalKillsNeeded: []
   bossName: 2
+  reward: 50

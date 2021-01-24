@@ -29,7 +29,8 @@ public class Quest : ScriptableObject
     [SerializeField]
     public BossScene.BossNames bossName;
 
-    
+    [SerializeField]
+    public int reward = 0;
 
     public bool checkKills(List<Kills> k)
     {
