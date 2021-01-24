@@ -21,13 +21,6 @@ public class BossScene : MonoBehaviour
     [SerializeField]
     BossNames boss;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-    }
-
     public void startScene()
     {
         if (!Player.instance.data.hasBossBeenDefeated(boss))

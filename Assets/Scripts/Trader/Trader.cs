@@ -6,6 +6,7 @@ using TMPro;
 
 public class Trader : MonoBehaviour
 {
+    //Slot variables needed
     public struct Slot
     {
         public Sprite image;
@@ -15,34 +16,40 @@ public class Trader : MonoBehaviour
 
     }
 
+    //Keep track of all the avaliable clots
     [SerializeField]
     List<Slot> slots = new List<Slot>();
 
+    //keep track of whether to update the slots
     bool spawnedInventory = false;
-
 
     //Trader variables
     int totalMoney = 0;
 
+    //The list of stock for each trader
     [SerializeField]
     List<Item> stock = new List<Item>();
 
-
+    //Trader object within the scene
     GameObject traderInventory;
 
+    //Where the slots are parented to for layouts
     GameObject slotParent;
 
-
+    //The ui that contains the info needed for the player
     GameObject infoBox;
 
+    //The active item
     Item activeItem;
 
+    //Which slot is currently selected
     TraderSlot activeSlot;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        //Set up the gameobjects using the player instance
         slotParent = SceneLoader.instance.traderSlotParent;
         infoBox = SceneLoader.instance.traderInfoBox;
         
@@ -56,6 +63,7 @@ public class Trader : MonoBehaviour
         {
             for (int i = 0; i < stock.Count; i++)
             {
+                //Set up the slot with the appropriate details given from the current trader 
                 Slot newSlot = new Slot();
                 newSlot.slotObject = slotParent.transform.GetChild(i).transform.gameObject;
                 newSlot.slotObject.transform.GetChild(0).GetComponent<Image>().sprite = stock[i].itemSprite;
@@ -73,6 +81,8 @@ public class Trader : MonoBehaviour
 
         startTrading();
     }
+
+    //Make sure the player cant move and the inventory is set up using the correct trader stock
     public void startTrading()
     {
         Player.instance.setMovement(true);
@@ -80,6 +90,7 @@ public class Trader : MonoBehaviour
         traderInventory.SetActive(true);
     }
 
+    //Give the player back control and reset the trader and game objects
     public void stopTrading()
     {
         Player.instance.setMovement(false);
@@ -89,31 +100,11 @@ public class Trader : MonoBehaviour
         Player.instance.uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
     }
 
-    public void addMoney(int amount)
-    {
-        totalMoney += amount;
-    }
-
-    public void takeMoney(int amount)
-    {
-        totalMoney -= amount;
-    }
-
-    public bool checkTraderFunds(int amount)
-    {
-        if(totalMoney - amount >= 0)
-        {
-            return true;
-        }
-
-        return false;
-    }
-
     public void buyItem()
     {
-
         if (activeItem != null)
         {
+            //Chck that the player can afford the item and if so add this to their inventory depending on their type
             if (Player.instance.inventory.checkFunds(activeItem.buyPrice) && Player.instance.inventory.checkInventorySpace())
             {
                 Player.instance.inventory.setTrader(this);
@@ -130,6 +121,7 @@ public class Trader : MonoBehaviour
                 }
                 else if (activeItem.GetType() == typeof(Healing))
                 {
+                    //Healing items can be stacked
                     Player.instance.inventory.addItem(activeItem);
                     Player.instance.inventory.adjustFunds(-activeItem.buyPrice);
                 }
@@ -137,7 +129,7 @@ public class Trader : MonoBehaviour
         }
     }
 
-
+    //Set up the info box with the appropriate info given by the button selected
     public void showItemInfoBox(Sprite s, string name, string damage, string range, string price, TraderSlot slot, Item active)
     {
         infoBox.transform.GetChild(0).gameObject.SetActive(true);
@@ -152,6 +144,7 @@ public class Trader : MonoBehaviour
         activeItem = active;
     }
 
+    //Clear the info box
     public void emptyInfoBox()
     {
         infoBox.transform.GetChild(0).gameObject.SetActive(false);

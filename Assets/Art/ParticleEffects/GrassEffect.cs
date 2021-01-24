@@ -15,6 +15,7 @@ public class GrassEffect : MonoBehaviour
 
     GameObject newGrass;
 
+    //Attatched to the player to either spawn grass particles or effect their attacks (called from animation)
     public void spawnGrass()
     {
         if (Player.instance.sceneLoader.getCurrentScene().particleEffect != SceneLoader.Particle.NONE)

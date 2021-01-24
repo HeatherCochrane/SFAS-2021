@@ -13,10 +13,6 @@ public class Arrow : MonoBehaviour
 
     ParticleSystem e;
 
-    void Start()
-    {
-    }
-
     public void setDirection(int d, float r)
     {
         dir = d;

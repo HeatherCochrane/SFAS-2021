@@ -21,12 +21,6 @@ public class InventorySlot : MonoBehaviour
         stacked.text = amount.ToString();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void setButtonData(Item item)
     {
         slotData = item;

@@ -58,12 +58,6 @@ public class QuestScreen : MonoBehaviour
         questScreen.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
-
     public void toggleQuestScreen()
     {
         if(questScreen.activeSelf)

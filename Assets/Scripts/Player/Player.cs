@@ -6,6 +6,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class Player : MonoBehaviour
 {
+    //Instance
     public static Player instance;
 
     //Quests
@@ -52,6 +53,10 @@ public class Player : MonoBehaviour
     Weapon meleeWeapon;
     Weapon longRangeWeapon;
     bool isAttacking = false;
+
+    float attackCooldown = 0.5f;
+    bool onAttackCooldown = false;
+
 
     [SerializeField]
     LayerMask killables;
@@ -112,6 +117,10 @@ public class Player : MonoBehaviour
     bool canWallJump = false;
     bool ignorePlayerDir = false;
 
+    //Look variabls
+    bool lookDown = false;
+    bool lookUp = false;
+
 
     [SerializeField]
     Animator anim;
@@ -136,11 +145,6 @@ public class Player : MonoBehaviour
     ParticleSystem pickUpEffect;
     ParticleSystem effectParticles;
 
-    float clickTime = 0.25f;
-    float heldTime = 0;
-
-    float attackCooldown = 0.5f;
-    bool onAttackCooldown = false;
 
     bool playerControlled = true;
 
@@ -156,37 +160,44 @@ public class Player : MonoBehaviour
         weapons = GetComponent<PlayerWeapons>();
         playerQuests = GetComponent<PlayerQuests>();
       
+        //Set up the melee and ranged weapons
         meleeWeapon = weapons.getMeleeWeapon();
         longRangeWeapon = weapons.getRangedWeapon();
 
+
+        //Give the player starter weapons
         inventory.addWeapon(meleeWeapon);
         inventory.addWeapon(longRangeWeapon);
 
+        //Set up the camera offset 
         offset = cam.transform.position - this.transform.position;
         camPos = cam.transform.position;
 
-        UnityEngine.EventSystems.EventSystem.current = system;
-
+        //Set up the dash variables
         dashTime = startDashTime;
         dashTrail.gameObject.SetActive(false);
     }
 
+    //Used for when in a menu and the player shouldn't move
     public void setInput(bool set)
     {
         trackInput = set;
     }
 
+    //stop the cooldown
     void stopAttackCooldown()
     {
         onAttackCooldown = false;
     }
 
+    //When te playe presses the interact button a few things could happen
     public void OnInteract(CallbackContext ctx)
     {
         if (ctx.performed)
         {
             if (!stopMovement && trackInput)
             {
+                //If touching a character set up a new dialogue
                 if (character != null)
                 {
                     uiHandler.changeMenu(UIHandler.Menus.DIALOGUE);
@@ -205,29 +216,33 @@ public class Player : MonoBehaviour
                 }
                 else if (trader != null)
                 {
+                    //Begin a new tradign scene
                     beginTrading();
                     trader = null;
                 }
                 else if (pickUp != null)
                 {
+                    //Pick up and add this item to their inventory
                     pickUpItem();
                     pickUp = null;
                 }
                 else if (currentBuilding != null)
                 {
+                    //Enter a building 
                     sceneLoader.switchScene(currentBuilding.getSceneName(), currentBuilding.GetComponent<TransitionGate>());
                 }
             }
         }
     }
 
-
+    //The map is shown if there is a map in the curren area
     public void OnMap(CallbackContext ctx)
     {
         if (ctx.performed)
         {
             if (trackInput)
             {
+                //Toggle the map open and close
                 if (uiHandler.areaHasMap())
                 {
                     if (uiHandler.getInMenu(UIHandler.Menus.MAP))
@@ -247,30 +262,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void onShowAudio(CallbackContext ctx)
-    {
-        if (ctx.performed)
-        {
-            if (trackInput)
-            {
-                if (uiHandler.getInMenu(UIHandler.Menus.AUDIO))
-                {
-                    uiHandler.changeMenu(UIHandler.Menus.PLAYERUI);
-                    stopMovement = false;
-
-                    audioHandler.playInventory(false);
-                }
-                else if(!uiHandler.GetInMenu())
-                {
-                    uiHandler.changeMenu(UIHandler.Menus.AUDIO);
-                    stopMovement = true;
-
-                    audioHandler.playInventory(true);
-                }
-            }
-        }
-    }
-
+    //Toggle the settings menu open and close
     public void onShowSettings(CallbackContext ctx)
     {
         if (ctx.performed)
@@ -295,7 +287,7 @@ public class Player : MonoBehaviour
         }
     }
 
-
+    //Toggle the inventory open and close
     public void OnInventory(CallbackContext ctx)
     {
         if (ctx.performed)
@@ -322,7 +314,7 @@ public class Player : MonoBehaviour
         }
     }
 
-
+    //Toggle the quest menu open and close
     public void OnQuests(CallbackContext ctx)
     {
         if (ctx.performed)
@@ -345,6 +337,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    //Perform a melee attack
     public void OnMeleeAttack(CallbackContext ctx)
     {
         if (!stopMovement && trackInput && !onAttackCooldown)
@@ -354,11 +347,15 @@ public class Player : MonoBehaviour
                 //Melee attack
                 if (meleeWeapon != null && !onAttackCooldown && !playerStatus.getRecentlyDamaged())
                 {
-
                     switchAnimation(AnimationStates.MELEEUP);
+
+                    //Pass in the melee weapons info to a standard attack function
                     Attack(meleeWeapon.distance, meleeWeapon.damage);
+
                     onAttackCooldown = true;
                     Invoke("stopAttackCooldown", attackCooldown);
+
+                    //Move the player forward a bit to imitate weight of the swing
                     rb.velocity += new Vector2(dir * 4, 0);
 
                     audioHandler.playMelee();
@@ -367,6 +364,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    //Perform a ranged attack
     public void OnRangeAttack(CallbackContext ctx)
     {
         if (!stopMovement && trackInput && !onAttackCooldown)
@@ -385,6 +383,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    //Movement left and right
     public void OnMove(CallbackContext ctx)
     {
         if (ctx.performed)
@@ -402,6 +401,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    //Dash ability
     public void OnDash()
     {
         if (!stopMovement && trackInput)
@@ -428,6 +428,7 @@ public class Player : MonoBehaviour
             {
                 if (!ignorePlayerDir)
                 {
+                    //Update the players direction and speed based on input
                     if (isRunning)
                     {
                         rb.velocity += new Vector2(moveDirection.x, 0);
@@ -513,7 +514,7 @@ public class Player : MonoBehaviour
         
     }
 
-
+    //Perform a jump 
     public void OnJump(CallbackContext ctx)
     {
         if (ctx.performed)
@@ -522,8 +523,10 @@ public class Player : MonoBehaviour
             {
                 if ((isGrounded || !hasDoubleJumped))
                 {
+                    //Differenciate between a single/double jump jump and a wall jump
                     if (canWallJump && !isGrounded)
                     {
+                        //Check if the player is close enough to a wall to perform a wall jump
                         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, GetComponent<Collider2D>().bounds.size.x);
                         RaycastHit2D hit2 = Physics2D.Raycast(transform.position, -Vector2.right, GetComponent<Collider2D>().bounds.size.x);
 
@@ -532,6 +535,7 @@ public class Player : MonoBehaviour
                             rb.velocity = new Vector2(-jump * 10, jump);
                             playerSprites.transform.localScale = new Vector2(0.3f, 0.3f);
 
+                            //Stop the player from movign away from the wall when jumping
                             ignorePlayerDir = true;
                             Invoke("stopIgnoringPlayerDir", 4);
                         }
@@ -540,6 +544,7 @@ public class Player : MonoBehaviour
                             rb.velocity = new Vector2(jump * 10, jump);
                             playerSprites.transform.localScale = new Vector2(-0.3f, 0.3f);
 
+                            //Stop the player from movign away from the wall when jumping
                             ignorePlayerDir = true;
                             Invoke("stopIgnoringPlayerDir", 4);
                         }
@@ -581,6 +586,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    //Move the camera down to see more of the area
     public void OnLookDown(CallbackContext ctx)
     {
         if (!stopMovement && trackInput)
@@ -596,6 +602,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    //Move the camera up to see more of the area
     public void OnLookUp(CallbackContext ctx)
     {
         if (!stopMovement && trackInput)
@@ -611,9 +618,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    bool lookDown = false;
-    bool lookUp = false;
-
+    //Update the camera in late update to have smooth movement
     void LateUpdate()
     {
         if (playerControlled)
@@ -638,11 +643,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    //Called from the player collider attacthed to their feet to ensure they are fully grounded
     public void setIsGrounded()
     {
         isGrounded = true;
         ignorePlayerDir = false;
     }
+
+    //Reset all the animations within the controller
     void resetAnimations()
     {
         foreach (AnimatorControllerParameter parameter in anim.parameters)
@@ -654,8 +662,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    //Switch to the appropriate animation when needed
     void switchAnimation(AnimationStates a)
     {     
+        //only switch if new animation
         if (a != previous)
         {
             resetAnimations();
@@ -692,6 +702,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    //Ensure camera doesn'g go too far in the level
     public void setCamBounds(Vector2 h, Vector2 v)
     {
         maxHorizontal = h;
@@ -708,6 +719,7 @@ public class Player : MonoBehaviour
         dashCooldown = set;
     }
 
+    //Start the appropriate dialogue with a character based on whether theyve been talked to or not
     void beginConversation(int index)
     {
         //Pass in the characters dialogue data to begin the conversation
@@ -738,6 +750,7 @@ public class Player : MonoBehaviour
         stopInventoryToggle = true;
     }
 
+    //Hand control back to the player
     public void endConversation()
     {
         stopMovement = false;
@@ -756,18 +769,20 @@ public class Player : MonoBehaviour
         stopInventoryToggle = set;
     }
 
+    //Called from the players ranged animation
     public void spawnArrow()
     {
         newArrow = Instantiate(arrow);
         newArrow.GetComponent<Arrow>().setDirection(dir, longRangeWeapon.distance);
         newArrow.transform.position = arrowPos.position;
     }
+
     public void longRanged()
     {
-        //Attack(longRangeWeapon.distance, longRangeWeapon.damage);
         isAttacking = false;
     }
 
+    //Do damage to whatever killable is infront of the player
     void Attack(float dist, int damage)
     {
         isAttacking = true;
@@ -781,10 +796,6 @@ public class Player : MonoBehaviour
             {
                 hit.collider.gameObject.GetComponent<Killable>().takeDamage(facingLeft, damage);
             }
-        }
-        else
-        {
-            Debug.Log("Collider null");
         }
 
         Invoke("hideAttackAnim", 0.5f);
@@ -800,11 +811,13 @@ public class Player : MonoBehaviour
         meleeWeapon = m;
     }
 
+    //Unlock player abilities
     public void setDash(bool set)
     {
         canDash = set;
     }
 
+    //Unlock player abilities
     public void setWallJump(bool set)
     {
         canWallJump = set;
@@ -815,6 +828,7 @@ public class Player : MonoBehaviour
         return longRangeWeapon.damage;
     }
 
+    //Activate the player abilities from killing bosses
     public void checkBossDrop(BossDrops.PlayerAbilities p)
     {
         switch(p)
@@ -892,6 +906,7 @@ public class Player : MonoBehaviour
         playerControlled = set;
     }
 
+    //Pick up an item and decide how it will be placed within the inventory
     void pickUpItem()
     {
         if (!pickUp.gameObject.GetComponent<WorldItem>().getItemData().stackable)

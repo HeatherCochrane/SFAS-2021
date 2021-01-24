@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class StationaryEnemy : Killable
 {
+    //Cooldown tracker
     bool canAttack = true;
 
+    //Changeable in editor
     [SerializeField]
     float timeBetweenAttacks = 0;
 
-
+    //How close the player has to be before attacking
     [SerializeField]
     int maxDistance = 0;
 
@@ -27,6 +29,7 @@ public class StationaryEnemy : Killable
         {
             if (canAttack)
             {
+                //Check if the player is close enough before attacking
                 if (distX <= maxDistance && distY <= 1)
                 {
                     Attack();
@@ -37,8 +40,10 @@ public class StationaryEnemy : Killable
 
     void Attack()
     {
+        //Safety check for lag times
         if (!isDead)
         {
+            //Attack the player so long as they havnt been attacked recently
             if (!Player.instance.playerStatus.getRecentlyDamaged())
             {
                 canAttack = false;

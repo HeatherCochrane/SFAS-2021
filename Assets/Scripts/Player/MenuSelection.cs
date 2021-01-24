@@ -27,10 +27,10 @@ public class MenuSelection : MonoBehaviour
 
     bool instance = false;
 
-    ScrollRect currentScrollBar;
-
     bool mouseOnButt = false;
     GameObject mouseButton;
+
+
     public void setMenu(List<MenuButtons.Buttons> b)
     {
         if (b.Count >= 1)
@@ -61,10 +61,9 @@ public class MenuSelection : MonoBehaviour
 
         lastButton = null;
         highlightedButton = null;
-
-        currentScrollBar = null;
     }
 
+    //Shiw which button is highlighted by making it bigger
     public void highlightButton()
     {
         if (instance)
@@ -94,6 +93,7 @@ public class MenuSelection : MonoBehaviour
 
     }
 
+    //Shiw which button is highlighted by making it bigger
     public void highlightPointerButton()
     {
         if (instance)
@@ -115,6 +115,8 @@ public class MenuSelection : MonoBehaviour
 
     }
 
+    //Move up and down through the list of buttons avaliable
+    //This function is handled by input from the keyboard or analog stick and allows the player to cycle through the buttons and find the one they are wanting to
     public void OnMoveY(CallbackContext ctx)
     {
         if (instance)
@@ -125,10 +127,12 @@ public class MenuSelection : MonoBehaviour
 
                 if (dir < 0)
                 {
+                    //If only one row, moving down or up will instead move left or right
                     if (rows == 0 && currentButton.x < currentRowButtons.Count - 1)
                     {
                         currentButton += new Vector2(1, 0);
                     }
+                    //If still within the bounds of the button list
                     else if (currentButton.y + 1 <= rows)
                     {
                         currentRowButtons = screenButtons[(int)currentButton.y].buttons;
@@ -136,6 +140,7 @@ public class MenuSelection : MonoBehaviour
                         bool rowHasActive = false;
                         if (currentButton.x < screenButtons[(int)currentButton.y + 1].buttons.Count)
                         {
+                            //If button is avaliable directly below the current button and it is not the last row (as this tends to have more offset buttons)
                             if (screenButtons[(int)currentButton.y + 1].buttons[(int)currentButton.x].activeSelf && (currentButton.y + 1 != rows - 1))
                             {
                                 currentButton = new Vector2(currentButton.x, currentButton.y + 1);
@@ -143,11 +148,11 @@ public class MenuSelection : MonoBehaviour
                             }
                             else
                             {
+                                //Find the active button within that row and set it to active depending on which direction the player is coming from
                                 if (Player.instance.uiHandler.getInMenu(UIHandler.Menus.TRADER))
                                 {
                                     if (currentButton.x >= 3)
                                     {
-                                        Debug.Log("RIGHT");
                                         for (int i = screenButtons[(int)currentButton.y + 1].buttons.Count - 1; i > 0; i--)
                                         {
                                             if (screenButtons[(int)currentButton.y + 1].buttons[i].activeSelf)
@@ -160,7 +165,6 @@ public class MenuSelection : MonoBehaviour
                                     }
                                     else
                                     {
-                                        Debug.Log("LEFT");
                                         for (int i = 0; i < screenButtons[(int)currentButton.y + 1].buttons.Count; i++)
                                         {
                                             if (screenButtons[(int)currentButton.y + 1].buttons[i].activeSelf)
@@ -182,7 +186,6 @@ public class MenuSelection : MonoBehaviour
                             {
                                 if (currentButton.x >= 3)
                                 {
-                                    Debug.Log("RIGHT");
                                     for (int i = screenButtons[(int)currentButton.y + 1].buttons.Count - 1; i > 0; i--)
                                     {
                                         if (screenButtons[(int)currentButton.y + 1].buttons[i].activeSelf)
@@ -195,7 +198,6 @@ public class MenuSelection : MonoBehaviour
                                 }
                                 else
                                 {
-                                    Debug.Log("LEFT");
                                     for (int i = 0; i < screenButtons[(int)currentButton.y + 1].buttons.Count; i++)
                                     {
                                         if (screenButtons[(int)currentButton.y + 1].buttons[i].activeSelf)
@@ -209,7 +211,6 @@ public class MenuSelection : MonoBehaviour
                             }
                             else
                             {
-                                Debug.Log("LEFT");
                                 for (int i = 0; i < screenButtons[(int)currentButton.y + 1].buttons.Count; i++)
                                 {
                                     if (screenButtons[(int)currentButton.y + 1].buttons[i].activeSelf)
@@ -260,7 +261,6 @@ public class MenuSelection : MonoBehaviour
                                 {
                                     if (currentButton.x >= 3)
                                     {
-                                        Debug.Log("RIGHT");
                                         for (int i = screenButtons[(int)currentButton.y - 1].buttons.Count - 1; i > 0; i--)
                                         {
                                             if (screenButtons[(int)currentButton.y - 1].buttons[i].activeSelf)
@@ -273,7 +273,6 @@ public class MenuSelection : MonoBehaviour
                                     }
                                     else
                                     {
-                                        Debug.Log("LEFT");
                                         for (int i = 0; i < screenButtons[(int)currentButton.y - 1].buttons.Count; i++)
                                         {
                                             if (screenButtons[(int)currentButton.y - 1].buttons[i].activeSelf)
@@ -293,7 +292,6 @@ public class MenuSelection : MonoBehaviour
                             {
                                 if (currentButton.x >= 3)
                                 {
-                                    Debug.Log("RIGHT");
                                     for (int i = screenButtons[(int)currentButton.y - 1].buttons.Count - 1; i > 0; i--)
                                     {
                                         if (screenButtons[(int)currentButton.y - 1].buttons[i].activeSelf)
@@ -306,7 +304,6 @@ public class MenuSelection : MonoBehaviour
                                 }
                                 else
                                 {
-                                    Debug.Log("LEFT");
                                     for (int i = 0; i < screenButtons[(int)currentButton.y - 1].buttons.Count; i++)
                                     {
                                         if (screenButtons[(int)currentButton.y - 1].buttons[i].activeSelf)
@@ -341,7 +338,8 @@ public class MenuSelection : MonoBehaviour
     }
 
 
-
+    //Move left and right through the list of buttons avaliable
+    //This function is handled by input from the keyboard or analog stick and allows the player to cycle through the buttons and find the one they are wanting to
     public void OnMoveX(CallbackContext ctx)
     {
         if (instance)
@@ -354,12 +352,13 @@ public class MenuSelection : MonoBehaviour
                 {
                     if (currentButton.x < currentRowButtons.Count - 1)
                     {
+                        //If button to the right is avaliable
                         if (currentRowButtons[(int)currentButton.x + 1].activeSelf)
                         {
                             currentButton += new Vector2(1, 0);
                         }
                         else
-                        {
+                        {//Find the next active button the the next row
                             currentRowButtons = screenButtons[(int)currentButton.y].buttons;
 
                             bool rowHasActive = false;
@@ -510,6 +509,7 @@ public class MenuSelection : MonoBehaviour
         {
             if (ctx.performed)
             {
+                //If the input is specifically fom the mouse, ensure the mouse is still over the button before selecting it
                 if (ctx.control.ToString() is "Button:/Mouse/leftButton")
                 {
                     if (mouseButton == highlightedButton)
@@ -539,6 +539,7 @@ public class MenuSelection : MonoBehaviour
         }
     }
 
+    //Used when the selected button is inactive or no longer avaliable
     public void updateCurrentButton()
     {
         if (highlightedButton == null || !highlightedButton.activeSelf)
@@ -559,6 +560,7 @@ public class MenuSelection : MonoBehaviour
         }
     }
 
+    //Used by the mouse to set the active button
     public void setActiveButton(GameObject b)
     {
         for(int i =0; i < screenButtons.Count; i++)

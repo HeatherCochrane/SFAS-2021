@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad2fa236b9c46ba479847df983cffa8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camPos: {x: 0.75, y: 1.5, z: -10}
+  camPos: {x: 0.75, y: 2, z: -10}
   camSize: 6
 --- !u!4 &286917328
 Transform:

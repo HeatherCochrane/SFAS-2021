@@ -22,11 +22,5 @@ public class MenuButtons : MonoBehaviour
     {
         return menuButtonList;
     }
-
-    private void OnDisable()
-    {
-        //Player.instance.menus.setInstance();
-    }
-
 }
 

@@ -393,8 +393,6 @@ public class PlayerInventory : MonoBehaviour
             {
                 if (activeSlot.removeInventory(interaction))
                 {
-                    Debug.Log("DROPPED");
-
                     InventoryItem o = inventoryItems[pos];
                     o.amount -= 1;
                     inventoryItems[pos] = o;

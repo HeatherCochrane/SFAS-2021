@@ -6,18 +6,6 @@ public class TraderButton : MonoBehaviour
 {
     Trader trader;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void setTrader(Trader t)
     {
         trader = t;

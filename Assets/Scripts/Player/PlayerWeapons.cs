@@ -19,12 +19,6 @@ public class PlayerWeapons : MonoBehaviour
         player = GetComponent<Player>();   
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void changeMelee(Weapon m)
     {
         meleeWeapon = m;

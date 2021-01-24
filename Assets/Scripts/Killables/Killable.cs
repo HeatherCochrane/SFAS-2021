@@ -338,10 +338,6 @@ public class Killable : MonoBehaviour
                 lastArrow = collision.gameObject;
                 Physics2D.IgnoreCollision(collision, GetComponent<Collider2D>());
             }
-            else
-            {
-                Debug.Log("SAME ARROW COLLISION");
-            }
         }
     }
 
