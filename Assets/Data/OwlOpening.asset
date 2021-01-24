@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf5d5e33bab057c43929a11bc8f25f44, type: 3}
+  m_Name: OwlOpening
+  m_EditorClassIdentifier: 
+  completeThisQuest: {fileID: 0}
+  _beats:
+  - _choices:
+    - _text: Just exploring!
+      _beatId: 2
+      quest: {fileID: 0}
+    _text: Hello there little bird, what brings you into the cold?
+    _id: 1
+    bossPick: 0
+    goodChoice: 0
+  - _choices:
+    - _text: Do you face any dangers?
+      _beatId: 4
+      quest: {fileID: 0}
+    - _text: Will do!
+      _beatId: 5
+      quest: {fileID: 0}
+    _text: Be careful on your travels, there's a great many dangers out there.
+    _id: 2
+    bossPick: 0
+    goodChoice: 0
+  - _choices: []
+    _text: 'I hear there are riches to be found west of here at the '
+    _id: 3
+    bossPick: 0
+    goodChoice: 0
+  - _choices:
+    - _text: Farewell!
+      _beatId: 6
+      quest: {fileID: 0}
+    _text: I don't find myself in very many dangerous situations, I tend to keep
+      to myself and the creatures around here seem to do the same.
+    _id: 4
+    bossPick: 0
+    goodChoice: 0
+  - _choices: []
+    _text: Safe travels!
+    _id: 5
+    bossPick: 0
+    goodChoice: 0
+  - _choices: []
+    _text: Safe travels!
+    _id: 6
+    bossPick: 0
+    goodChoice: 0

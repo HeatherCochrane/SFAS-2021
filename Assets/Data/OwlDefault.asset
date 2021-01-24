@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf5d5e33bab057c43929a11bc8f25f44, type: 3}
-  m_Name: HummingbirdDefault
+  m_Name: OwlDefault
   m_EditorClassIdentifier: 
   completeThisQuest: {fileID: 0}
   _beats:
   - _choices: []
-    _text: I really must get back to town but there's something about this place
-      that keeps me here. Perhaps its the calm and the quiet... although I do miss
-      Woodpecker. His nagging grows on you.
+    _text: I think I heard some strange noises west of here, may be worth checking
+      out little bird?
     _id: 1
     bossPick: 0
     goodChoice: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf5d5e33bab057c43929a11bc8f25f44, type: 3}
   m_Name: HummingbirdOpening
   m_EditorClassIdentifier: 
-  completeThisQuest: {fileID: 0}
+  completeThisQuest: {fileID: 11400000, guid: c2031c7f8274ffd418827af375fed705, type: 2}
   _beats:
   - _choices:
     - _text: Continue
@@ -22,7 +22,11 @@ MonoBehaviour:
       seems as though something feirce lives there as even the proudest of adventurers
       have refused entry.
     _id: 1
+    bossPick: 0
+    goodChoice: 0
   - _choices: []
     _text: Perhaps you may prove them wrong and find nothing more than a lost chick
       with a foul temper.
     _id: 2
+    bossPick: 0
+    goodChoice: 0

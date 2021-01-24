@@ -184,7 +184,7 @@ public class QuestScreen : MonoBehaviour
 
         if(currentQuestToggled.reward != 0)
         {
-            string rewardString = currentQuestToggled.reward.ToString();
+            string rewardString = "Reward: " + currentQuestToggled.reward.ToString() + " coins";
             TextMeshProUGUI newString = Instantiate(stringPrefab);
             newString.text = rewardString;
             newString.transform.SetParent(infoBox.transform);

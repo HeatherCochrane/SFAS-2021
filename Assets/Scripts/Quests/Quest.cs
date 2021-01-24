@@ -32,6 +32,9 @@ public class Quest : ScriptableObject
     [SerializeField]
     public int reward = 0;
 
+    [SerializeField]
+    public Character talkTo;
+
     public bool checkKills(List<Kills> k)
     {
         if (k.Count > 0 && totalKillsNeeded.Count > 0)
@@ -94,6 +97,24 @@ public class Quest : ScriptableObject
 
         return false;
     }
+
+    public bool getCharacterTalkedTo()
+    {
+        if (talkTo != null)
+        {
+            if (Player.instance.data.hasBeenTalkedTo(talkTo))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 
     public bool checkBossKilled()
     {

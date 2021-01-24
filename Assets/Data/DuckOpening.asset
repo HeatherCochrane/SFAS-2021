@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf5d5e33bab057c43929a11bc8f25f44, type: 3}
+  m_Name: DuckOpening
+  m_EditorClassIdentifier: 
+  completeThisQuest: {fileID: 0}
+  _beats:
+  - _choices:
+    - _text: Dovecote?
+      _beatId: 2
+      quest: {fileID: 0}
+    _text: Hey there traveller! Are you heading to dovecote too?
+    _id: 1
+    bossPick: 0
+    goodChoice: 0
+  - _choices:
+    - _text: Okay thank you!
+      _beatId: 4
+      quest: {fileID: 0}
+    _text: The town not too far from here, I was headed that way too but I thought
+      i'd rest for a bit before carrying on. If you are headed there be sure to stop
+      in at Cardinals shop.
+    _id: 2
+    bossPick: 0
+    goodChoice: 0
+  - _choices: []
+    _text: New Story Beat
+    _id: 3
+    bossPick: 0
+    goodChoice: 0
+  - _choices: []
+    _text: See yah!
+    _id: 4
+    bossPick: 0
+    goodChoice: 0

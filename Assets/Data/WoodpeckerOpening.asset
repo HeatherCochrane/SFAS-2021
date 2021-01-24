@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf5d5e33bab057c43929a11bc8f25f44, type: 3}
+  m_Name: WoodpeckerOpening
+  m_EditorClassIdentifier: 
+  completeThisQuest: {fileID: 0}
+  _beats:
+  - _choices:
+    - _text: The woods?
+      _beatId: 2
+      quest: {fileID: 0}
+    - _text: Of course!
+      _beatId: 3
+      quest: {fileID: 0}
+    _text: Hello there, would you perhaps be heading into the woods later?
+    _id: 1
+    bossPick: 0
+    goodChoice: 0
+  - _choices:
+    - _text: Of course!
+      _beatId: 6
+      quest: {fileID: 11400000, guid: c2031c7f8274ffd418827af375fed705, type: 2}
+    - _text: Who's Hummingbird?
+      _beatId: 5
+      quest: {fileID: 0}
+    _text: The wilderness just outside of Dovecote. Its home to many scary creatures
+      but it is also a place of beauty. Hummingbird often explores out there, could
+      you keep an eye out for him?
+    _id: 2
+    bossPick: 0
+    goodChoice: 0
+  - _choices:
+    - _text: Who's Hummingbird?
+      _beatId: 5
+      quest: {fileID: 0}
+    - _text: Of course!
+      _beatId: 6
+      quest: {fileID: 11400000, guid: c2031c7f8274ffd418827af375fed705, type: 2}
+    _text: Oh great, could you perhaps keep an eye out for Hummingbird? He tends
+      to lose track of time but I just want to know that he's keeping safe.
+    _id: 3
+    bossPick: 0
+    goodChoice: 0
+  - _choices: []
+    _text: New Story Beat
+    _id: 4
+    bossPick: 0
+    goodChoice: 0
+  - _choices:
+    - _text: Of course!
+      _beatId: 6
+      quest: {fileID: 11400000, guid: c2031c7f8274ffd418827af375fed705, type: 2}
+    _text: He's my my scatterbrained husband, always forgetting to travel home before
+      dark. If you could just make sure he's alright that would be great.
+    _id: 5
+    bossPick: 0
+    goodChoice: 0
+  - _choices: []
+    _text: Safe travels friend!
+    _id: 6
+    bossPick: 0
+    goodChoice: 0

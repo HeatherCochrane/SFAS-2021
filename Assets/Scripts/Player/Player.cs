@@ -201,7 +201,6 @@ public class Player : MonoBehaviour
                     }
 
                     data.addCharacter(character);
-                    character = null;
 
                 }
                 else if (trader != null)

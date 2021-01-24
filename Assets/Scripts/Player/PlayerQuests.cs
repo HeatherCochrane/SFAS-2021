@@ -94,7 +94,7 @@ public class PlayerQuests : MonoBehaviour
         for (int i = 0; i < questsStarted.Count; i++)
         {
             //Check to ensure all requirements have been met
-            if (questsStarted[i].checkKills(totalKills) && questsStarted[i].checkCompletedQuests(completedQuests) && questsStarted[i].checkBossKilled())
+            if (questsStarted[i].checkKills(totalKills) && questsStarted[i].checkCompletedQuests(completedQuests) && questsStarted[i].checkBossKilled() && questsStarted[i].getCharacterTalkedTo())
             {
                 questCompleted(questsStarted[i]);
             }
