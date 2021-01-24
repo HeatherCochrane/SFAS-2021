@@ -251,14 +251,17 @@ public class SceneLoader : MonoBehaviour
 
         if (current.bossScene)
         {
-            if (finalBoss.GetComponentInChildren<BossEnemy>().bossName == BossScene.BossNames.FINALBOSS)
+            if (finalBoss != null)
             {
-                sceneToLoad = "Jungle1";
+                if (finalBoss.GetComponentInChildren<BossEnemy>().bossName == BossScene.BossNames.FINALBOSS)
+                {
+                    sceneToLoad = "Jungle1";
+                }
             }
-            else
+            else if (current.boss.GetComponentInChildren<BossEnemy>().bossName == BossScene.BossNames.GOAT)
             {
-                sceneToLoad = GameObject.FindObjectOfType<TransitionGate>().getScene();
-               
+                sceneToLoad = "Woods3";
+
             }
 
             transitionFromBoss = true;

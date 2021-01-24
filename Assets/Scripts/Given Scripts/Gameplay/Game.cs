@@ -178,6 +178,7 @@ public class Game : MonoBehaviour
         if (data.getChoiceList().Count == 0)
         {
             Invoke("showCloseButton", 1);
+            Player.instance.menus.lockSelection(true);
         }
 
     }
@@ -228,6 +229,8 @@ public class Game : MonoBehaviour
             Player.instance.sceneLoader.switchScene(sceneToSwtichTo, gate);
             sceneToSwtichTo = null;
         }
+
+        Player.instance.menus.lockSelection(false);
     }
 
     public void closeDialogueScreen()

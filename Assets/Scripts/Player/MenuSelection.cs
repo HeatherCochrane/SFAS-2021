@@ -30,7 +30,7 @@ public class MenuSelection : MonoBehaviour
     bool mouseOnButt = false;
     GameObject mouseButton;
 
-
+    bool lockButton = false;
     public void setMenu(List<MenuButtons.Buttons> b)
     {
         if (b.Count >= 1)
@@ -70,7 +70,7 @@ public class MenuSelection : MonoBehaviour
         {
             lastButton.transform.GetComponent<RectTransform>().localScale = originalScale;
 
-            if (currentRowButtons[(int)currentButton.x].activeSelf)
+            if (screenButtons[(int)currentButton.y].buttons[(int)currentButton.x].activeSelf)
             {
                 highlightedButton = currentRowButtons[(int)currentButton.x];
             }
@@ -119,7 +119,7 @@ public class MenuSelection : MonoBehaviour
     //This function is handled by input from the keyboard or analog stick and allows the player to cycle through the buttons and find the one they are wanting to
     public void OnMoveY(CallbackContext ctx)
     {
-        if (instance)
+        if (instance && !lockButton)
         {
             if (ctx.performed)
             {
@@ -342,7 +342,7 @@ public class MenuSelection : MonoBehaviour
     //This function is handled by input from the keyboard or analog stick and allows the player to cycle through the buttons and find the one they are wanting to
     public void OnMoveX(CallbackContext ctx)
     {
-        if (instance)
+        if (instance && !lockButton)
         {
             if (ctx.performed)
             {
@@ -501,6 +501,19 @@ public class MenuSelection : MonoBehaviour
         }
     }
 
+    public void lockSelection(bool set)
+    {
+        if(set)
+        {
+            currentButton = new Vector2(0, 4);
+            lockButton = true;
+        }
+        else
+        {
+            currentButton = new Vector2(0, 0);
+            lockButton = false;
+        }
+    }
 
 
     public void OnButtonSelect(CallbackContext ctx)
